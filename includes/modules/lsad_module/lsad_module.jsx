@@ -39,22 +39,24 @@ class LSAD_Module extends Component {
     const hideCurrentLang = this.props.lsad_current_lang_visibility ? this.props.lsad_current_lang_visibility : 'off';
     const hideUntranslateLang = this.props.lsad_unstranslated_lang_visibility ? this.props.lsad_unstranslated_lang_visibility : 'off';
     const pluginUrl=window.ETBuilderBackendDynamic && window.ETBuilderBackendDynamic.lsadGlobalObj && window.ETBuilderBackendDynamic.lsadGlobalObj.lsadPluginUrl ? window.ETBuilderBackendDynamic.lsadGlobalObj.lsadPluginUrl : '';
-
+ 
     return (
-      <div className={`lsad-wrapper ${style}`}>
+      polylangData && Object.keys(polylangData) && Object.keys(polylangData).length > 0? (
+        <>
+        <div className={`lsad-wrapper ${style}`}>
         {'dropdown' === style &&
           flagDisplay === 'on' && (
-            polylangData &&
+            polylangData && polylangData[currentLang] ? (
             <span>
               {flagDisplay === 'on' && <CountryFlag flagCode={polylangData[currentLang].flagCode} name={polylangData[currentLang].name} url={pluginUrl}/>}
               {nameDisplay === 'on' && <CountryName name={polylangData[currentLang].name} />}
               {codeDisplay === 'on' && <CountryCode code={polylangData[currentLang].slug} />}
             </span>
-          )}
+          ):<>No current available languages</>)}
         {this.props.lsad_visibility === 'on' && (
           <ul>
             {
-              polylangData && Object.keys(polylangData) && Object.keys(polylangData).length > 0 && (
+              polylangData && Object.keys(polylangData) && Object.keys(polylangData).length > 0 ? (
                 <>
                   {Object.keys(polylangData).map((lang, index) => {
                     if (lang === currentLang && 'on' === hideCurrentLang) {
@@ -78,11 +80,13 @@ class LSAD_Module extends Component {
                     );
                   })}
                 </>
-              )
+              ):(<>No available languages</>)
             }
           </ul>
         )}
-      </div>
+      </div></>
+      ):<>No available languages</>
+  
     );
   }
 }

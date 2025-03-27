@@ -38,6 +38,7 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_ADDON_FOR_DIVI' ) ) {
 		public function __construct() {
 			add_action( 'plugins_loaded', array( $this, 'lsad_init' ) );
 			add_action( 'admin_init', array( $this, 'is_divi_theme_exist' ) );
+			add_action( 'init', array( $this, 'lsad_load_textdomain' ) );
 			add_action( 'divi_extensions_init', array( $this, 'initialize_divi_module' ) );
 			add_filter( 'et_fb_backend_helpers', array( $this, 'lsad_localize_polyglang_data' ) );
 		}
@@ -150,9 +151,12 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_ADDON_FOR_DIVI' ) ) {
 			return $data;
 		}
 
+		public function lsad_load_textdomain(){
+			load_plugin_textdomain( 'language-switcher-addon-for-divi', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+		}
+
 		public function initialize_divi_module() {
 			require_once plugin_dir_path( __FILE__ ) . 'includes/LanguageSwitcherAddonForDivi.php';
-			load_plugin_textdomain( 'language-switcher-addon-for-divi', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 		}
 
 		public static function get_instance() {
