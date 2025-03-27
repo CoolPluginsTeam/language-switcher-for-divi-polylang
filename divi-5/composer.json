@@ -1,0 +1,9 @@
+{
+    "name": "divi/language-switcher-module-for-divi",
+    "autoload": {
+      "psr-4": {
+        "LSAD\\Modules\\": "server/Modules/"
+      }
+    },
+    "require": {}
+  }

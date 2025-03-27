@@ -41,6 +41,7 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_ADDON_FOR_DIVI' ) ) {
 			add_action( 'init', array( $this, 'lsad_load_textdomain' ) );
 			add_action( 'divi_extensions_init', array( $this, 'initialize_divi_module' ) );
 			add_filter( 'et_fb_backend_helpers', array( $this, 'lsad_localize_polyglang_data' ) );
+			self::initialize_divi_5_module();
 		}
 
 		public function lsad_init() {
@@ -155,6 +156,12 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_ADDON_FOR_DIVI' ) ) {
 			load_plugin_textdomain( 'language-switcher-addon-for-divi', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 		}
 
+		public function initialize_divi_5_module(){
+			if (wp_get_theme()->get('Version') >= 5) {
+				require_once plugin_dir_path( __FILE__ ) . 'divi-5/divi-5.php';
+				new LSAD_Divi5();
+			}
+		}
 		public function initialize_divi_module() {
 			require_once plugin_dir_path( __FILE__ ) . 'includes/LanguageSwitcherAddonForDivi.php';
 		}
