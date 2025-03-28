@@ -20,17 +20,9 @@ export const LanguageSwitcherModuleEdit = ({
       stylesComponent={ModuleStyles}
       classnamesFunction={moduleClassnames}
     >
-      {elements.styleComponents({
-        attrName: 'module',
-      })}
-      <div className="et_pb_module_inner">
-        {elements.render({
-          attrName: 'title',
-        })}
-        {elements.render({
-          attrName: 'content',
-        })}
-      </div>
+     <div>
+      hi
+     </div>
     </ModuleContainer>
   );
 }

@@ -21,29 +21,5 @@ const {
  */
 export const SettingsDesign = ({ defaultSettingsAttrs }) => (
   <React.Fragment>
-    <TextGroup
-      defaultGroupAttr={defaultSettingsAttrs?.module?.advanced?.text}
-    />
-    <FontGroup
-      attrName="title.decoration.font"
-      groupLabel={__('Title Text', 'd5-tutorial-module-conversion')}
-      fieldLabel={__('Title', 'd5-tutorial-module-conversion')}
-      fields={{
-        headingLevel: {
-          render: true,
-        },
-      }}
-      defaultGroupAttr={defaultSettingsAttrs?.title?.decoration?.font}
-    />
-    <FontBodyGroup
-      attrName="content.decoration.bodyFont"
-    />
-    <SizingGroup />
-    <SpacingGroup />
-    <BorderGroup />
-    <BoxShadowGroup />
-    <FiltersGroup />
-    <TransformGroup />
-    <AnimationGroup />
   </React.Fragment>
 );
