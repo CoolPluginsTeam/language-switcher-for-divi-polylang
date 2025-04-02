@@ -35,28 +35,23 @@ export const ModuleStyles = ({
       attr={attrs.css}
       cssFields={cssFields}
     />
-    <TextStyle
-      selector={`${orderClass} .dtmc_static_module_content`}
-      attr={attrs?.module?.advanced?.text}
-      propertySelectors={{
-        textShadow: {
-          desktop: {
-            value: {
-              'text-shadow': `${orderClass} .dtmc_static_module_content`,
-            },
-          },
-        },
-      }}
-    />
 
-    {/* Element: Title */}
     {elements.style({
-      attrName: 'title',
+      attrName: 'text_style',
     })}
 
-    {/* Element: Content */}
     {elements.style({
-      attrName: 'content',
+      attrName: 'background_style',
     })}
+
+    {elements.style({
+      attrName: 'sizing',
+    })}
+
+    {elements.style({
+      attrName: 'filters',
+    })}
+    
+    
   </StyleContainer>
 );

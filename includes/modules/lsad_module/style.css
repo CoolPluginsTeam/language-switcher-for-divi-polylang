@@ -115,7 +115,7 @@
 }
 
 .lsad-wrapper.dropdown span .lsad-lang-name ~ .lsad-lang-code {
-  display: none;
+  /* display: none; */
 }
 
 .lsad-wrapper.dropdown ul {

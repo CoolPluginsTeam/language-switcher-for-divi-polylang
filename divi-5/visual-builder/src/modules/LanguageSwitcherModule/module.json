@@ -78,6 +78,52 @@
           }
         }
       }
+    },
+    "aspect_ratio": {
+      "type": "object",
+      "default": {
+        "innerContent": {
+          "desktop": {
+            "value": "auto"
+          }
+        }
+      }
+    },
+    "flag_width": {
+      "type": "object",
+      "default": {
+        "innerContent": {
+          "desktop": {
+            "value": "20" 
+          }
+        }
+      }
+    },
+    "flag_border_radius": {
+      "type": "object",
+      "default": {
+        "innerContent": {
+          "desktop": {
+            "value": "0"   
+          }
+        }
+      }
+    },
+    "text_style": {
+      "type": "object",
+      "selector": "{{selector}} .lsad-wrapper ul li.lsad_active_lang.lsad_active_lang div:not(.lsad-lang-image), {{selector}} .lsad-wrapper ul li.lsad_active_lang div:not(.lsad-lang-image) a, {{selector}} .lsad-wrapper ul li:hover.lsad_active_lang div:not(.lsad-lang-image), {{selector}} .lsad-wrapper ul li:hover div:not(.lsad-lang-image) a, {{selector}} .lsad-wrapper ul li div:not(.lsad-lang-image) a"
+    },
+    "background_style": {
+      "type": "object",
+      "selector": "{{selector}} .lsad-wrapper ul li"
+    },
+    "sizing": {
+      "type": "object",
+      "selector": "{{selector}} .lsad-lang-name a"
+    },
+    "filters": {
+      "type": "object",
+      "selector": "{{selector}} .lsad-lang-name a"
     }
   }
 }

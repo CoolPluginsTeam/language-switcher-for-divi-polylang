@@ -7,7 +7,18 @@ require_once LSPAD_DIR . 'divi-5/server/Modules/Modules.php';
 class LSAD_Divi5 {
   public function __construct() {
     add_action( 'divi_visual_builder_assets_before_enqueue_scripts', array( $this, 'enqueue_visual_builder_assets' ) );
+    add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_assets' ) );
   }
+
+  /**
+   * Enqueue Frontend Assets
+   *
+   * @since 1.0.0
+   */
+  function enqueue_frontend_assets() {
+    wp_enqueue_style( 'lsad-divi5-frontend-style', LSPAD_URL . 'includes/modules/lsad_module/style.css', [], LSPAD );
+  }
+
   /**
    * Enqueue Divi 5 Visual Builder Assets
    *
@@ -37,4 +48,3 @@ class LSAD_Divi5 {
 }  
 
 }
-// add_action( 'divi_visual_builder_assets_before_enqueue_scripts', 'lsad_divi5_enqueue_visual_builder_assets' ); // You must use this hook to enqueue your assets for the Divi 5 Visual Builder.
