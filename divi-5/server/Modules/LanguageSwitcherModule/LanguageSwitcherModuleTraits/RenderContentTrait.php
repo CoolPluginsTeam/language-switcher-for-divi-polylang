@@ -59,7 +59,7 @@ trait RenderContentTrait
             $languages_html .= '</li>';
         }
         
-        return '<div class="lsad-dropdown">' . $active_html . '<ul class="lsad-language-list">' . $languages_html . '</ul></div>';
+        return $active_html . '<ul class="lsad-language-list">' . $languages_html . '</ul></div>';
     }
 
     private static function get_active_language_html($lang, $props)

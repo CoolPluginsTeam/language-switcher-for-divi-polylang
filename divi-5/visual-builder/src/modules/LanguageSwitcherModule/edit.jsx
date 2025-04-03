@@ -61,7 +61,7 @@ export const LanguageSwitcherModuleEdit = (props) => {
 
   return (
     <ModuleContainer
-      attrs={attributes}
+      attrs={attrs}
       elements={elements} 
       id={id}
       name={name}

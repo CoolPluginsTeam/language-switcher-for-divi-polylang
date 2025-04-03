@@ -26,8 +26,8 @@ const {
 
 const aspect_ratio = {
   'auto': __('Auto', 'language-switcher-addon-for-divi'),
-  '1:1': __('1:1', 'language-switcher-addon-for-divi'),
-  '4:3': __('4:3', 'language-switcher-addon-for-divi'),
+  '1/1': __('1:1', 'language-switcher-addon-for-divi'),
+  '4/3': __('4:3', 'language-switcher-addon-for-divi'),
 };
 
 /**
@@ -106,16 +106,16 @@ export const SettingsDesign = (props) => (
       />
     </GroupContainer>
 
-    <GroupContainer id="sizing" title={__('Sizing', 'language-switcher-addon-for-divi')}>
+    <GroupContainer id="container_size" title={__('Sizing', 'language-switcher-addon-for-divi')}>
     <SizingGroup
-      attrName="sizing"
+      attrName="container_size.decoration.sizing"
       grouped={false}
     />
     </GroupContainer>
 
-    <GroupContainer id="filters" title={__('Filters', 'language-switcher-addon-for-divi')}>
+    <GroupContainer id="color_filters" title={__('Filters', 'language-switcher-addon-for-divi')}>
     <FiltersGroup
-      attrName="filters"
+      attrName="color_filters.decoration.filters"
       grouped={false}
      />
     </GroupContainer>

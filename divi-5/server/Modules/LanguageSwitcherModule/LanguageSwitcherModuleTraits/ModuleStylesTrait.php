@@ -43,35 +43,11 @@ trait ModuleStylesTrait {
               'cssFields' => self::custom_css(),
             ]
           ),
-          TextStyle::style(
-            [
-              'selector'          => "{$args['orderClass']} .dtmc_static_module_content",
-              'attr'              => $attrs['text'] ?? [],
-              'propertySelectors' => [
-                'textShadow' => [
-                  'desktop' => [
-                    'value' => [
-                      'text-shadow' => "{$args['orderClass']} .dtmc_static_module_content",
-                    ],
-                  ],
-                ],
-              ],
-            ]
-          ),
-
-          // Element: Title.
           $elements->style(
             [
-              'attrName' => 'title',
+                'attrName'   => 'text_style',
             ]
-          ),
-
-          // Element: Content.
-          $elements->style(
-            [
-              'attrName' => 'content',
-            ]
-          ),
+        ),
         ],
       ]
     );
