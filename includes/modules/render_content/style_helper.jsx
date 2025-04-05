@@ -135,6 +135,15 @@ const staticCSS = (props) => {
                 }
             ]
         );
+    } else if ('' !== flagRatio && '4/3' === flagRatio) {
+        customCss.push(
+            [
+                {
+                    selector: selector,
+                    declaration: `--lsad-flag-height: calc(var(--lsad-flag-width) * 0.75);`,
+                }
+            ]
+        );
     }
     if ('' !== flagWidth) {
         customCss.push(

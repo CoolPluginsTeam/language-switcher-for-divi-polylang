@@ -69,7 +69,7 @@
         }
       }
     },
-    "hide_untranslated_languages": {
+    "hide_untranslated_language": {
       "type": "object",
       "default": {
         "innerContent": {
@@ -79,33 +79,26 @@
         }
       }
     },
-    "aspect_ratio": {
+    "flag_style": {
       "type": "object",
       "default": {
         "innerContent": {
-          "desktop": {
-            "value": "auto" 
-          }
-        }
-      }
-    },
-
-    "flag_width": {
-      "type": "object",
-      "default": {
-        "innerContent": {
-          "desktop": {
-            "value": "20" 
-          }
-        }
-      }
-    },
-    "flag_border_radius": {
-      "type": "object",
-      "default": {
-        "innerContent": {
-          "desktop": {
-            "value": "0"   
+          "decoration": {
+            "aspect_ratio": {
+              "desktop": {
+                "value": "auto" 
+              }
+            },
+            "flag_width": {
+              "desktop": {
+                "value": "20" 
+              }
+            },
+            "flag_border_radius": {
+              "desktop": {
+                "value": "0" 
+              }
+            }
           }
         }
       }
@@ -116,11 +109,11 @@
     },
     "background_style": {
       "type": "object",
-      "selector": "{{selector}} .lsad-wrapper ul, {{selector}} .lsad-wrapper.dropdown"
+      "selector": "{{selector}} .lsad-wrapper ul li, {{selector}} .lsad-wrapper.dropdown"
     },
     "container_size": {
       "type": "object",
-      "selector": "{{selector}} .lsad-wrapper"
+      "selector": "{{selector}} .lsad-wrapper ul, {{selector}} .lsad-wrapper.dropdown"
     },
     "color_filters": {
       "type": "object",

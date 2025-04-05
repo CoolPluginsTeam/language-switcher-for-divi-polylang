@@ -37,7 +37,7 @@ export const SettingsDesign = (props) => (
   <React.Fragment>
     <GroupContainer id="flag_style" title={__('Flag', 'language-switcher-addon-for-divi')}>
       <FieldContainer
-        attrName="aspect_ratio"
+        attrName="flag_style.decoration.aspect_ratio"
         label={__('Aspect Ratio', 'language-switcher-addon-for-divi')}
         subName="aspect_ratio"
         description={__('To apply aspect ratio for flag image.', 'language-switcher-addon-for-divi')}
@@ -54,11 +54,11 @@ export const SettingsDesign = (props) => (
       </FieldContainer>
 
       <FieldContainer
-        attrName="flag_width"
+        attrName="flag_style.decoration.flag_width"
         label={__('Flag Width', 'language-switcher-addon-for-divi')}
         subName="flag_width"
         description={__('To apply width for flag.', 'language-switcher-addon-for-divi')}
-        defaultValue={'20'}
+        defaultValue={20}
       >
         <RangeContainer
           defaultUnit="px"
@@ -69,11 +69,11 @@ export const SettingsDesign = (props) => (
       </FieldContainer>
 
       <FieldContainer
-        attrName="flag_border_radius"
+        attrName="flag_style.decoration.flag_border_radius"
         label={__('Flag Border Radius', 'language-switcher-addon-for-divi')}
         subName="flag_border_radius"
         description={__('To apply border radius for flag.', 'language-switcher-addon-for-divi')}
-        defaultValue={'0'}
+        defaultValue={0}
       >
         <RangeContainer
           defaultUnit="px"
@@ -92,9 +92,9 @@ export const SettingsDesign = (props) => (
 
     <GroupContainer id="background_style" title={__('Background', 'language-switcher-addon-for-divi')}>
       <FieldContainer
-      attrName="background_style.decoration.color"
+      attrName="background_style.decoration.background_color"
       label={__('Background Color', 'language-switcher-addon-for-divi')}
-      subName="background_style.decoration.color"
+      subName="background_color"
       description={__('To apply background color.', 'language-switcher-addon-for-divi')}
       > 
       <ColorPickerContainer/>

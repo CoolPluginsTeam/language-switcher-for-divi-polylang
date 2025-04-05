@@ -88,6 +88,7 @@ export const SettingsContent = (props) => (
         <ToggleContainer />
       </FieldContainer>
 
+      {((props?.attrs?.switcher_layouts?.desktop?.value?.switcher_layouts ?? props?.defaultSettingsAttrs?.switcher_layouts?.innerContent?.desktop?.value) !== 'dropdown') && (
       <FieldContainer
         attrName="hide_current_language"
         subName="hide_current_language"
@@ -97,10 +98,10 @@ export const SettingsContent = (props) => (
       >
         <ToggleContainer />
       </FieldContainer>
-
+      )}
       <FieldContainer
-        attrName="hide_untranslated_languages"
-        subName="hide_untranslated_languages"
+        attrName="hide_untranslated_language"
+        subName="hide_untranslated_language"
         label="Hide Untranslated Languages"
         description="Hide Untranslated Languages"
         defaultValue='off'
