@@ -54,6 +54,7 @@ class LSAD_Module extends Component {
             </span>
           ):<>No current available languages</>)}
         {this.props.lsad_visibility === 'on' && (
+          <>
           <ul>
             {
               polylangData && Object.keys(polylangData) && Object.keys(polylangData).length > 0 ? (
@@ -83,6 +84,7 @@ class LSAD_Module extends Component {
               ):(<>No available languages</>)
             }
           </ul>
+          </>
         )}
       </div></>
       ):<>No available languages</>

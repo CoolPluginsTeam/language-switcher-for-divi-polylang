@@ -73,8 +73,9 @@ export const LanguageSwitcherModuleEdit = (props) => {
         <div id="et-fb-app" className="et-fb-page-preloading"></div>
       ) : (
         attributes?.show_language_switcher === 'on' && (
-        polylangData && (Object.keys(polylangData).length > 0)  ? (
-          <div className={`lsad-wrapper ${attributes.switcher_layouts}`}>
+          polylangData && (Object.keys(polylangData).length > 0)  ? (
+            
+            <div className={`lsad-wrapper ${attributes.switcher_layouts}`}>
             {attributes?.switcher_layouts === 'dropdown' && (
               polylangData?.[currentLang] ? (
                 <span>

@@ -1,6 +1,6 @@
 {
-  "name": "lsad/language-sitcher-module-for-divi",
-  "d4Shortcode": "language_switcher_module",
+  "name": "lsad/language-switcher-addon-for-divi",
+  "d4Shortcode": "language-switcher-addon-for-divi",
   "title": "Language Switcher Module",
   "titles": "Language Switcher Modules",
   "category": "module",
@@ -24,7 +24,7 @@
       "default": {
           "innerContent": {
             "desktop": {
-              "value": "vertical"
+              "value": "horizontal"
             }
           }
         }
@@ -113,7 +113,7 @@
     },
     "container_size": {
       "type": "object",
-      "selector": "{{selector}} .lsad-wrapper ul, {{selector}} .lsad-wrapper.dropdown"
+      "selector": "{{selector}} .lsad-wrapper, {{selector}} .lsad-wrapper.dropdown"
     },
     "color_filters": {
       "type": "object",

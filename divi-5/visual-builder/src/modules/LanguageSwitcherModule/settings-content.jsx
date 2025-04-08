@@ -41,11 +41,11 @@ export const SettingsContent = (props) => (
       {((props?.attrs?.show_language_switcher?.desktop?.value?.show_language_switcher ?? props?.defaultSettingsAttrs?.show_language_switcher?.innerContent?.desktop?.value) === 'on') && (
         <>
           <FieldContainer
-            attrName="switcher_layouts"
+          attrName="switcher_layouts"
           subName="switcher_layouts"
           label={__('Layout Options', 'language-switcher-addon-for-divi')}
           description={__('Select your switcher layout', 'language-switcher-addon-for-divi')}
-          defaultValue={'vertical'}
+          defaultValue={'horizontal'}
         >
           <SelectContainer
             options={Object.entries(switcher_layouts).reduce((acc, [key, label]) => {

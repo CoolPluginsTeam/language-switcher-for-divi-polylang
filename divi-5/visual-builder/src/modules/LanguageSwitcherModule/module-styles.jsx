@@ -65,8 +65,9 @@ export const ModuleStyles = (props) => {
         return `--lsad-flag-radius: ${data}`;
       }}
     />
+        {console.log(attrs)}
     <CommonStyle
-        selector={`${orderClass} .lsad-wrapper ul, ${orderClass} .lsad-wrapper.dropdown`}
+        selector={`${orderClass} .lsad-wrapper ul li, ${orderClass} .lsad-wrapper.dropdown`}
         attr={attrs?.background_style?.decoration?.background_color}
         declarationFunction={(attrs) => {
         const data = attrs?.attrValue?.background_color

@@ -16,7 +16,7 @@ trait RenderCallbackTrait {
     // Attributes with default values
     $props = array(
       'show_language_switcher' => ModuleHelper::get_attr_value($attrs, 'show_language_switcher', 'on'),
-      'switcher_layouts' => ModuleHelper::get_attr_value($attrs, 'switcher_layouts', 'vertical'),
+      'switcher_layouts' => ModuleHelper::get_attr_value($attrs, 'switcher_layouts', 'horizontal'),
       'show_language_flag' => ModuleHelper::get_attr_value($attrs, 'show_language_flag', 'on'),
       'show_language_name' => ModuleHelper::get_attr_value($attrs, 'show_language_name', 'on'),
       'show_language_code' => ModuleHelper::get_attr_value($attrs, 'show_language_code', 'off'),

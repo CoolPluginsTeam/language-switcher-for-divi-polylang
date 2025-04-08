@@ -102,7 +102,7 @@ trait ModuleStylesTrait {
             ),
           CommonStyle::style(
             [
-              'selector'            => $order_class . ' .lsad-wrapper .lsad-lang-image',   
+              'selector'            => $order_class . ' .lsad-wrapper .lsad-lang-image', 
               'attr'                => $attrs['flag_style']['decoration']['flag_border_radius'],
               'declarationFunction' => function ( $declaration_function_args ) {
                 $attr_value = $declaration_function_args['attrValue']['flag_border_radius'];
@@ -113,9 +113,9 @@ trait ModuleStylesTrait {
           CommonStyle::style(
             [
               'selector'            => $order_class . ' .lsad-wrapper ul, ' . $order_class . ' .lsad-wrapper.dropdown',   
-              'attr'                => $attrs['background_style']['decoration']['color'],
+              'attr'                => $attrs['background_style']['decoration']['background_color'],
               'declarationFunction' => function ( $declaration_function_args ) {
-                $attr_value = $declaration_function_args['attrValue']['background_style']['decoration']['color'];
+                $attr_value = $declaration_function_args['attrValue']['background_color'];
                 return "--lsad-normal-bg-color: {$attr_value};";
               },
             ]

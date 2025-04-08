@@ -17,7 +17,7 @@ export const getAttrDataValues = (attrs) => {
     };
     return {
         show_language_switcher: getAttrValue(attrs?.show_language_switcher, 'on', 'show_language_switcher'),
-        switcher_layouts: getAttrValue(attrs?.switcher_layouts, 'vertical', 'switcher_layouts'),
+        switcher_layouts: getAttrValue(attrs?.switcher_layouts, 'horizontal', 'switcher_layouts'),
         show_language_flag: getAttrValue(attrs?.show_language_flag, 'on', 'show_language_flag'),
         show_language_name: getAttrValue(attrs?.show_language_name, 'on', 'show_language_name'),
         show_language_code: getAttrValue(attrs?.show_language_code, 'off', 'show_language_code'),
