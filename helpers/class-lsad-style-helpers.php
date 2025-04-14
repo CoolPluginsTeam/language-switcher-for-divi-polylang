@@ -24,15 +24,15 @@ class LSAD_STYLE_HELPERS {
 		$flag_width              = isset( $attr['lsad_flag_width'] ) ? $attr['lsad_flag_width'] : '';
 		$flag_radius             = isset( $attr['lsad_flag_radius'] ) ? $attr['lsad_flag_radius'] : '';
 		$flag_ratio              = isset( $attr['lsad_flag_ratio'] ) ? $attr['lsad_flag_ratio'] : '';
-		$normal_text_font        = isset( $attr['lsad_normal_text_font'] ) ? $attr['lsad_normal_text_font'] : '';
-		$normal_text_color       = isset( $attr['lsad_normal_text_color'] ) ? $attr['lsad_normal_text_color'] : '';
-		$normal_text_size        = isset( $attr['lsad_normal_text_font_size'] ) ? $attr['lsad_normal_text_font_size'] : '';
-		$normal_text_line_height = isset( $attr['lsad_normal_text_line_height'] ) ? $attr['lsad_normal_text_line_height'] : '';
+		$normal_text_font        = isset( $attr['lsad_text_settings_font'] ) ? $attr['lsad_text_settings_font'] : '';
+		$normal_text_color       = isset( $attr['lsad_text_settings_text_color'] ) ? $attr['lsad_text_settings_text_color'] : '';
+		$normal_text_size        = isset( $attr['lsad_text_settings_font_size'] ) ? $attr['lsad_text_settings_font_size'] : '';
+		$normal_text_spacing     = isset( $attr['lsad_text_settings_letter_spacing'] ) ? $attr['lsad_text_settings_letter_spacing'] : '';
+		$normal_text_line_height = isset( $attr['lsad_text_settings_line_height'] ) ? $attr['lsad_text_settings_line_height'] : '';
 		$hover_text_font         = isset( $attr['lsad_hover_text_font'] ) ? $attr['lsad_hover_text_font'] : '';
 		$hover_text_color        = isset( $attr['lsad_hover_text_color'] ) ? $attr['lsad_hover_text_color'] : '';
 		$hover_text_size         = isset( $attr['lsad_hover_text_font_size'] ) ? $attr['lsad_hover_text_font_size'] : '';
 		$hover_text_line_height  = isset( $attr['lsad_hover_text_line_height'] ) ? $attr['lsad_hover_text_line_height'] : '';
-
 		ET_Builder_Element::set_style(
 			$slug,
 			array(
@@ -177,6 +177,15 @@ class LSAD_STYLE_HELPERS {
 				array(
 					'selector'    => $selector,
 					'declaration' => sprintf( '--lsad-normal-text-color: %1$s;', $normal_text_color ),
+				)
+			);
+		}
+		if ( '' !== $normal_text_spacing ) {
+			ET_Builder_Element::set_style(
+				$slug,
+				array(
+					'selector'    => $selector,
+					'declaration' => sprintf( '--lsad-normal-text-letter-spacing: %1$s;', $normal_text_spacing ),
 				)
 			);
 		}

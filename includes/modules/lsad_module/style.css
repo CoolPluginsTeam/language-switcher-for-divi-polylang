@@ -8,12 +8,19 @@
   --lsad-normal-text-transform: initial;
   --lsad-normal-text-decoration: initial;
   --lsad-normal-text-style: initial;
+  --lsad-normal-text-letter-spacing: initial;
   --lsad-normal-text-decoration-color: initial;
   --lsad-normal-text-decoration-style: initial;
   --lsad-normal-text-color: initial;
   --lsad-normal-text-size: 16px;
   --lsad-normal-text-line-height: calc(var(--lsad-normal-text-size) + 8px);
   --lsad-hover-text-line-height: calc(var(--lsad-normal-text-size,var(--lsad-hover-text-size)) + 8px);
+  --lsad-lang-padding-top: 10px;
+  --lsad-lang-padding-right: 0px;
+  --lsad-lang-padding-bottom: 0px;
+  --lsad-lang-padding-left: 0px;
+  --lsad-normal-bg-color: #fff;
+  --lsad-hover-bg-color: #fff;
   overflow: hidden;
 }
 
@@ -21,7 +28,7 @@
   padding: 0px;
 }
 
-.lsad-wrapper ul li {
+.lsad-wrapper ul li, .lsad-wrapper ul li.lsad_active_lang {
   list-style: none;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -42,6 +49,7 @@
   line-height: var(--lsad-normal-text-line-height);
   font-style: var(--lsad-normal-text-style);
   text-transform: var(--lsad-normal-text-transform);
+  letter-spacing: var(--lsad-normal-text-letter-spacing);
   -webkit-text-decoration: var(--lsad-normal-text-decoration);
           text-decoration: var(--lsad-normal-text-decoration);
   -webkit-text-decoration-style: var(--lsad-normal-text-decoration-style);
@@ -50,7 +58,7 @@
           text-decoration-color: var(--lsad-normal-text-decoration-color);
 }
 
-.lsad-wrapper ul li:hover {
+.lsad-wrapper ul li:hover, .lsad-wrapper ul li.lsad_active_lang:hover, .lsad-wrapper.dropdown ul li:hover {
   background-color: var(--lsad-hover-bg-color);
 }
 
@@ -117,10 +125,6 @@
           align-items: center;
 }
 
-.lsad-wrapper.dropdown span .lsad-lang-name ~ .lsad-lang-code {
-  /* display: none; */
-}
-
 .lsad-wrapper.dropdown ul {
   position: absolute;
   top: 100%;
@@ -143,10 +147,6 @@
   padding: 5px 15px;
   -webkit-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
-}
-
-.lsad-wrapper.dropdown ul li:hover {
-  background-color: #dddddd;
 }
 
 .lsad-wrapper.dropdown.active::after, .lsad-wrapper.dropdown:hover::after {

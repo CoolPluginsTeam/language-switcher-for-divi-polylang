@@ -10,6 +10,7 @@
     --lsad-normal-text-style: initial;
     --lsad-normal-text-decoration-color: initial;
     --lsad-normal-text-decoration-style: initial;
+    --lsad-normal-text-letter-spacing: initial;
     --lsad-normal-text-color: initial;
     --lsad-normal-text-size: 16px;
     --lsad-normal-text-line-height: calc(var(--lsad-normal-text-size) + 8px);
@@ -31,6 +32,7 @@
                     font-weight: var(--lsad-normal-text-weight);
                     font-size: var(--lsad-normal-text-size);
                     line-height: var(--lsad-normal-text-line-height);
+                    letter-spacing: var(--lsad-normal-text-letter-spacing);
                     font-style: var(--lsad-normal-text-style);
                     text-transform: var(--lsad-normal-text-transform);
                     text-decoration: var(--lsad-normal-text-decoration);
@@ -39,7 +41,6 @@
                 }
             }
 
-            &.lsad_active_lang,
             &:hover {
                 background-color: var(--lsad-hover-bg-color);
                 &.lsad_active_lang div:not(.lsad-lang-image),
@@ -62,6 +63,7 @@
     &.horizontal {
         ul {
             display: flex;
+            flex-wrap: wrap;
             gap: 1rem;
         }
     }
@@ -76,7 +78,7 @@
         cursor: pointer;
         outline: none;
         padding-right: 3rem;
-
+        background-color: var(--lsad-normal-bg-color);
         &::after {
             content: "";
             width: 0;
@@ -91,13 +93,20 @@
         }
 
         span {
+            color: var(--lsad-hover-text-color,var(--lsad-normal-text-color));
+            font-family: var(--lsad-hover-text-font,var(--lsad-normal-text-font));
+            font-weight: var(--lsad-hover-text-weight,var(--lsad-normal-text-weight));
+            font-size: var(--lsad-hover-text-size,var(--lsad-normal-text-size));
+            letter-spacing: var(--lsad-hover-text-letter-spacing,var(--lsad-normal-text-letter-spacing));
+            line-height: var(--lsad-hover-text-line-height);
+            font-style: var(--lsad-hover-text-style,var(--lsad-normal-text-style));
+            text-transform: var(--lsad-hover-text-transform,var(--lsad-normal-text-transform));
+            text-decoration: var(--lsad-hover-text-decoration,var(--lsad-normal-text-decoration));
+            text-decoration-style: var(--lsad-hover-text-decoration-style,var(--lsad-normal-text-decoration-style));
+            text-decoration-color: var(--lsad-hover-text-decoration-color,var(--lsad-normal-text-decoration-color));
             display: flex;
             gap: .6rem;
             align-items: center;
-
-            .lsad-lang-name~.lsad-lang-code {
-                display: none;
-            }
         }
 
         ul {
@@ -119,9 +128,9 @@
                 color: #333;
                 padding: 5px 15px;
                 transition: all 0.3s ease-out;
-
+                background-color: var(--lsad-normal-bg-color);
                 &:hover {
-                    background-color: #dddddd;
+                    background-color: var(--lsad-hover-bg-color);
                 }
             }
         }

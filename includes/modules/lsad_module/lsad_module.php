@@ -60,23 +60,11 @@ class LSAD_Module extends ET_Builder_Module {
 			'label_prefix'        => esc_html__( 'Text', 'language-switcher-addon-for-divi' ),
 			'tab_slug'            => 'advanced',
 			'toggle_slug'         => 'lsad_text_settings',
-			'hide_text_align'     => true,
-			'hide_line_height'    => true,
-			'hide_letter_spacing' => true,
-			'hide_font_size'      => true,
-			'hide_text_color'     => true,
-			'hide_font'           => true,
-			'hide_text_shadow'    => true,
-		);
-
-		$advanced_fields['fonts']['lsad_text_settings'] = array(
-			'label_prefix'        => esc_html__( 'Text', 'language-switcher-addon-for-divi' ),
-			'tab_slug'            => 'advanced',
-			'toggle_slug'         => 'lsad_text_settings',
 			'css'          => array(
-				'main'      => '%%order_class%% .lsad-wrapper ul li.lsad_active_lang.lsad_active_lang div:not(.lsad-lang-image), %%order_class%% .lsad-wrapper ul li.lsad_active_lang div:not(.lsad-lang-image) a, %%order_class%% .lsad-wrapper ul li:hover.lsad_active_lang div:not(.lsad-lang-image), %%order_class%% .lsad-wrapper ul li:hover div:not(.lsad-lang-image) a, %%order_class%% .lsad-wrapper ul li div:not(.lsad-lang-image) a, %%order_class%% .lsad-wrapper.dropdown span div:not(.lsad-lang-image) a',
+				'main'      => '%%order_class%% .lsad-wrapper ul li.lsad_active_lang .lsad-lang-name, %%order_class%% .lsad-wrapper ul li.lsad_active_lang .lsad-lang-code, %%order_class%% .lsad-wrapper ul li:hover.lsad_active_lang .lsad-lang-name, %%order_class%% .lsad-wrapper ul li:hover.lsad_active_lang .lsad-lang-code, %%order_class%% .lsad-wrapper ul li .lsad-lang-name, %%order_class%% .lsad-wrapper ul li .lsad-lang-code, %%order_class%% .lsad-wrapper.dropdown span .lsad-lang-name a, %%order_class%% .lsad-wrapper.dropdown span .lsad-lang-code , %%order_class%% .lsad-wrapper ul li a',
 				'important' => 'all',
 			),
+			'hide_text_align'     => true,
 		);
 
 		// Configure the margin and padding for the container.
@@ -169,7 +157,7 @@ class LSAD_Module extends ET_Builder_Module {
 				),
 			),
 			'lsad_unstranslated_lang_visibility' => array(
-				'label'       => esc_html__( 'Hide untranslated languages', 'language-switcher-addon-for-divi' ),
+				'label'       => esc_html__( 'Hide Untranslated Languages', 'language-switcher-addon-for-divi' ),
 				'type'        => 'yes_no_button',
 				'options'     => array(
 					'on'  => esc_html__( 'Show', 'language-switcher-addon-for-divi' ),
@@ -226,83 +214,6 @@ class LSAD_Module extends ET_Builder_Module {
 				),
 			),
 
-			// 'lsad_text_style_tab'                => array(
-			// 	'label'               => esc_html__( 'Text Styling', 'language-switcher-addon-for-divi' ),
-			// 	'tab_slug'            => 'advanced',
-			// 	'toggle_slug'         => 'lsad_text_settings',
-			// 	'attr_suffix'         => '',
-			// 	'type'                => 'composite',
-			// 	'composite_type'      => 'default',
-			// 	'show_if'             => array(
-			// 		'lsad_visibility' => 'on',
-			// 	),
-			// 	'composite_structure' => array(
-			// 		'text_normal' => array(
-			// 			'label'    => esc_html( 'Normal', 'language-switcher-addon-for-divi' ),
-			// 			'controls' => array(
-			// 				'lsad_normal_text_font'        => array(
-			// 					'label' => esc_html__( 'Font Family', 'language-switcher-addon-for-divi' ),
-			// 					'type'  => 'font',
-			// 				),
-			// 				'lsad_normal_text_color'       => array(
-			// 					'label' => esc_html__( 'Font Color', 'language-switcher-addon-for-divi' ),
-			// 					'type'  => 'color',
-			// 				),
-			// 				'lsad_normal_text_font_size'   => array(
-			// 					'label'          => esc_html__( 'Font Size', 'language-switcher-addon-for-divi' ),
-			// 					'type'           => 'range',
-			// 					'default'        => '24px',
-			// 					'range_settings' => array(
-			// 						'min'  => '8px',
-			// 						'max'  => '100px',
-			// 						'step' => '2px',
-			// 					),
-			// 				),
-			// 				'lsad_normal_text_line_height' => array(
-			// 					'label'          => esc_html__( 'Line Height', 'language-switcher-addon-for-divi' ),
-			// 					'type'           => 'range',
-			// 					'range_settings' => array(
-			// 						'min'  => '0px',
-			// 						'max'  => '100px',
-			// 						'step' => '2px',
-			// 					),
-			// 				),
-			// 			),
-			// 		),
-			// 		'text_hover'  => array(
-			// 			'label'    => esc_html( 'Hover', 'language-switcher-addon-for-divi' ),
-			// 			'controls' => array(
-			// 				'lsad_hover_text_font'        => array(
-			// 					'label' => esc_html__( 'Font Family', 'language-switcher-addon-for-divi' ),
-			// 					'type'  => 'font',
-			// 				),
-			// 				'lsad_hover_text_color'       => array(
-			// 					'label' => esc_html__( 'Font Color', 'language-switcher-addon-for-divi' ),
-			// 					'type'  => 'color',
-			// 				),
-			// 				'lsad_hover_text_font_size'   => array(
-			// 					'label'          => esc_html__( 'Font Size', 'language-switcher-addon-for-divi' ),
-			// 					'type'           => 'range',
-			// 					'default'        => '16px',
-			// 					'range_settings' => array(
-			// 						'min'  => '8px',
-			// 						'max'  => '100px',
-			// 						'step' => '2px',
-			// 					),
-			// 				),
-			// 				'lsad_hover_text_line_height' => array(
-			// 					'label'          => esc_html__( 'Line Height', 'language-switcher-addon-for-divi' ),
-			// 					'type'           => 'range',
-			// 					'range_settings' => array(
-			// 						'min'  => '0px',
-			// 						'max'  => '100px',
-			// 						'step' => '2px',
-			// 					),
-			// 				),
-			// 			),
-			// 		),
-			// 	),
-			// ),
 			'lsad_background_setting'            => array(
 				'label'               => esc_html__( 'Background', 'language-switcher-addon-for-divi' ),
 				'tab_slug'            => 'advanced',

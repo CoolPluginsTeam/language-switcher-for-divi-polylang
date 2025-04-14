@@ -62,7 +62,7 @@ const staticCSS = (props) => {
     const flagRadius = props.lsad_flag_radius ? props.lsad_flag_radius : '';
     const flagRatio = props.lsad_flag_ratio ? props.lsad_flag_ratio : '';
     const normalTextFont = props.lsad_normal_text_font ? props.lsad_normal_text_font : '';
-    const normalTextColor = props.lsad_normal_text_color ? props.lsad_normal_text_color : '';
+    const normalTextColor = props.lsad_text_settings_text_color ? props.lsad_text_settings_text_color : '';
     const normalTextSize = props.lsad_normal_text_font_size ? props.lsad_normal_text_font_size : '';
     const normalTextLineHeight = props.lsad_normal_text_line_height ? props.lsad_normal_text_line_height : '';
     const hoverTextFont = props.lsad_hover_text_font ? props.lsad_hover_text_font : '';
@@ -225,6 +225,7 @@ const staticCSS = (props) => {
         );
     }
     if ('' !== normalTextColor) {
+        
         customCss.push(
             [
                 {
@@ -256,7 +257,6 @@ const staticCSS = (props) => {
     }
     if ('' !== hoverTextFont) {
         const Font_properties = extractFontProperties(hoverTextFont);
-        console.log(Font_properties);
         customCss.push(
             [
                 {
