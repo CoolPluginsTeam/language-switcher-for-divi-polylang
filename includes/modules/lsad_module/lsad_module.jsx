@@ -22,7 +22,7 @@ class LSAD_Module extends Component {
       const polylangData =window.ETBuilderBackendDynamic &&  window.ETBuilderBackendDynamic.lsadGlobalObj &&  window.ETBuilderBackendDynamic.lsadGlobalObj.lsadLanguangeData ? window.ETBuilderBackendDynamic.lsadGlobalObj.lsadLanguangeData : [];
       const currentLang = window.ETBuilderBackendDynamic && window.ETBuilderBackendDynamic.lsadGlobalObj &&  window.ETBuilderBackendDynamic.lsadGlobalObj.lsadCurrentLang ? window.ETBuilderBackendDynamic.lsadGlobalObj.lsadCurrentLang : '';
       this.setState({ polylangData, currentLang });
-      console.log(polylangData);
+      // console.log(polylangData);
     }, 1000);
   }
 

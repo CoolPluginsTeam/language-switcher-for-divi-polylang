@@ -34,7 +34,7 @@ trait RenderContentTrait
         $languages_html = '';
         
         foreach ($languages as $lang) {
-            var_dump($lang);
+            // var_dump($lang);
             if ($current_lang === $lang['slug'] || ($lang['no_translation'] && $props['hide_untranslated_language'] === 'on')) {
                 continue;
             }
