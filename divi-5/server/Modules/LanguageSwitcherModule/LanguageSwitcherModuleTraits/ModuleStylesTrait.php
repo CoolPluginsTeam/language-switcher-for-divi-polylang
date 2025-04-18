@@ -67,9 +67,9 @@ trait ModuleStylesTrait {
           CommonStyle::style(
             [
               'selector'            => $order_class . ' .lsad-wrapper .lsad-lang-image',   
-              'attr'                => $attrs['flag_style']['decoration']['aspect_ratio'],
+              'attr'                => $attrs['flag_style']['decoration']['aspect_ratio'] ?? [],
               'declarationFunction' => function ( $declaration_function_args ) {
-                $attr_value = $declaration_function_args['attrValue']['aspect_ratio'];
+                $attr_value = $declaration_function_args['attrValue']['aspect_ratio'] ?? [];
                 if($attr_value === '1/1'){
                   return ("--lsad-flag-ratio: {$attr_value}; --lsad-flag-height: var(--lsad-flag-width);");
                 }else{
@@ -78,23 +78,24 @@ trait ModuleStylesTrait {
               },
             ]
           ),
-          (($attrs['flag_style']['decoration']['aspect_ratio']['desktop']['value'] ?? $attrs['flag_style']['decoration']['aspect_ratio']['innerContent']['desktop']['value']) === '1/1') ? (
+          (($attrs['flag_style']['decoration']['aspect_ratio']['desktop']['value']['aspect_ratio'] ?? $attrs['flag_style']['innerContent']['decoration']['aspect_ratio']['desktop']['value']['aspect_ratio']) === '1/1') ? (
             CommonStyle::style(
               [
                 'selector'            => $order_class . ' .lsad-wrapper .lsad-lang-image',   
-                'attr'                => $attrs['flag_style']['decoration']['flag_width'],
+                'attr'                => $attrs['flag_style']['decoration']['flag_width'] ?? [],
                 'declarationFunction' => function ( $declaration_function_args ) {
-                  $attr_value = $declaration_function_args['attrValue']['flag_width'];
+                  $attr_value = $declaration_function_args['attrValue']['flag_width'] ?? [];
                   return ("--lsad-flag-width: {$attr_value}; --lsad-flag-height: {$attr_value};");
                 },
               ]
             ) ): (
+             
               CommonStyle::style(
                 [
                   'selector'            => $order_class . ' .lsad-wrapper .lsad-lang-image',   
-                  'attr'                => $attrs['flag_style']['decoration']['flag_width'],
+                  'attr'                => $attrs['flag_style']['decoration']['flag_width'] ?? [],
                   'declarationFunction' => function ( $declaration_function_args ) {
-                    $attr_value = $declaration_function_args['attrValue']['flag_width'];
+                    $attr_value = $declaration_function_args['attrValue']['flag_width'] ?? [];
                     return ("--lsad-flag-width: {$attr_value}; --lsad-flag-height: calc(var(--lsad-flag-width) * 0.75);");
                   },
                 ]
@@ -103,20 +104,20 @@ trait ModuleStylesTrait {
           CommonStyle::style(
             [
               'selector'            => $order_class . ' .lsad-wrapper .lsad-lang-image', 
-              'attr'                => $attrs['flag_style']['decoration']['flag_border_radius'],
+              'attr'                => $attrs['flag_style']['decoration']['flag_border_radius'] ?? [],
               'declarationFunction' => function ( $declaration_function_args ) {
-                $attr_value = $declaration_function_args['attrValue']['flag_border_radius'];
+                $attr_value = $declaration_function_args['attrValue']['flag_border_radius'] ?? [];
                 return "--lsad-flag-radius: {$attr_value};";
               },
             ]
           ),
           CommonStyle::style(
             [
-              'selector'            => $order_class . ' .lsad-wrapper ul, ' . $order_class . ' .lsad-wrapper.dropdown',   
-              'attr'                => $attrs['background_style']['decoration']['background_color'],
+              'selector'            => $order_class . ' .lsad-wrapper ul li.lsad-lang-item, ' . $order_class . ' .lsad-wrapper.dropdown',   
+              'attr'                => $attrs['background_style']['decoration']['background_color'] ?? [],
               'declarationFunction' => function ( $declaration_function_args ) {
-                $attr_value = $declaration_function_args['attrValue']['background_color'];
-                return "--lsad-normal-bg-color: {$attr_value};";
+                $attr_value = $declaration_function_args['attrValue']['background_color'] ?? [];
+                return "background-color: {$attr_value};";
               },
             ]
           ),

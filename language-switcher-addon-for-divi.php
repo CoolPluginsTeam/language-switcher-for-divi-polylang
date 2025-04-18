@@ -139,7 +139,6 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_ADDON_FOR_DIVI' ) ) {
 								'lsadCurrentLang'   => esc_html( $lang_curr ),
 								'lsadPluginUrl'     => esc_url( LSPAD_URL ),
 							);
-
 							$custom_data_json = $custom_data;
 
 							$data['lsadGlobalObj'] = $custom_data_json;

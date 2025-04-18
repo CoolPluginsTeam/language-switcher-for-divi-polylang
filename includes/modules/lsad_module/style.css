@@ -11,8 +11,10 @@
   --lsad-normal-text-letter-spacing: initial;
   --lsad-normal-text-decoration-color: initial;
   --lsad-normal-text-decoration-style: initial;
+  --lsad-normal-text-letter-spacing: initial;
   --lsad-normal-text-color: initial;
   --lsad-normal-text-size: 16px;
+  --lsad-hover-text-size: var(--lsad-normal-text-size);
   --lsad-normal-text-line-height: calc(var(--lsad-normal-text-size) + 8px);
   --lsad-hover-text-line-height: calc(var(--lsad-normal-text-size,var(--lsad-hover-text-size)) + 8px);
   --lsad-lang-padding-top: 10px;
@@ -21,6 +23,15 @@
   --lsad-lang-padding-left: 0px;
   --lsad-normal-bg-color: #fff;
   --lsad-hover-bg-color: #fff;
+  --lsad-hover-text-color: initial;
+  --lsad-hover-text-font: initial;
+  --lsad-hover-text-weight: initial;
+  --lsad-hover-text-transform: initial;
+  --lsad-hover-text-decoration: initial;
+  --lsad-hover-text-decoration-style: initial;
+  --lsad-hover-text-decoration-color: initial;
+  --lsad-hover-text-letter-spacing: initial;
+  --lsad-hover-text-style: initial;
   overflow: hidden;
 }
 
@@ -85,6 +96,8 @@
   display: -ms-flexbox;
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
+  
 }
 
 .lsad-wrapper.dropdown {
@@ -139,6 +152,7 @@
   padding: 0px;
   z-index: var(--lsad-dropdown-index, 0);
   display: inline-table;
+  width: 100%;
 }
 
 .lsad-wrapper.dropdown ul li {

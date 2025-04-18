@@ -34,7 +34,6 @@ class LanguageSwitcherModuleController extends RESTController {
    */
   public static function index( WP_REST_Request $request ): WP_REST_Response {
     $args = [
-        'show_language_switcher' => $request->get_param('show_language_switcher'),
         'switcher_layouts' => $request->get_param('switcher_layouts'),
         'show_language_flag' => $request->get_param('show_language_flag'),
         'show_language_name' => $request->get_param('show_language_name'),

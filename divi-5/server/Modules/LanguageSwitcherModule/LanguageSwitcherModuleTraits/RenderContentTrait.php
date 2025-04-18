@@ -14,10 +14,6 @@ trait RenderContentTrait
     {
         global $polylang;
         
-        if ($props['show_language_switcher'] !== 'on') {
-            return '';
-        }
-        
         $languages = pll_the_languages(['raw' => 1]);
         $current_lang = strtolower(pll_current_language());
         
@@ -38,6 +34,7 @@ trait RenderContentTrait
         $languages_html = '';
         
         foreach ($languages as $lang) {
+            var_dump($lang);
             if ($current_lang === $lang['slug'] || ($lang['no_translation'] && $props['hide_untranslated_language'] === 'on')) {
                 continue;
             }
@@ -46,9 +43,9 @@ trait RenderContentTrait
             $anchor_open = '<a href="' . esc_url($lang['url']) . '">';
             $anchor_close = '</a>';
 
-            $languages_html .= '<li>';
+            $languages_html .= '<li class="lsad-lang-item">';
             if ($props['show_language_flag'] === 'on') {
-                $languages_html .= '<div class="lsad-lang-image">' .  $flag_icon . '</div>';
+                $languages_html .= '<div class="lsad-lang-image">' . wp_kses_post($anchor_open) . $flag_icon . wp_kses_post($anchor_close) . '</div>';
             }
             if ($props['show_language_name'] === 'on') {
                 $languages_html .= '<div class="lsad-lang-name">' . wp_kses_post($anchor_open . esc_html($lang['name']) . $anchor_close) . '</div>';
@@ -66,13 +63,13 @@ trait RenderContentTrait
     {
         $html = '<span class="lsad-active-language">';
         if ($props['show_language_flag'] === 'on') {
-            $html .= '<div class="lsad-lang-image">' . \LSAD_HELPERS::get_country_flag($lang['flag'], $lang['name']) . '</div>';
+            $html .= '<div class="lsad-lang-image"><a href="' . esc_url($lang['url']) . '">' . \LSAD_HELPERS::get_country_flag($lang['flag'], $lang['name']) . '</a></div>';
         }
         if ($props['show_language_name'] === 'on') {
-            $html .= '<div class="lsad-lang-name">' . esc_html($lang['name']) . '</div>';
+            $html .= '<div class="lsad-lang-name"><a href="' . esc_url($lang['url']) . '">' . esc_html($lang['name']) . '</a></div>';
         }
         if ($props['show_language_code'] === 'on') {
-            $html .= '<div class="lsad-lang-code">' . esc_html($lang['slug']) . '</div>';
+            $html .= '<div class="lsad-lang-code"><a href="' . esc_url($lang['url']) . '">' . esc_html($lang['slug']) . '</a></div>';
         }
         $html .= '</span>';
         return $html;
@@ -91,9 +88,9 @@ trait RenderContentTrait
             $anchor_open = '<a href="' . esc_url($lang['url']) . '">';
             $anchor_close = '</a>';
 
-            $html .= '<li>';
+            $html .= '<li class="lsad-lang-item">';
             if ($props['show_language_flag'] === 'on') {
-                $html .= '<div class="lsad-lang-image">' . $flag_icon . '</div>';
+                $html .= '<div class="lsad-lang-image">' . wp_kses_post($anchor_open) . $flag_icon . wp_kses_post($anchor_close) . '</div>';
             }
             if ($props['show_language_name'] === 'on') {
                 $html .= '<div class="lsad-lang-name">' . wp_kses_post($anchor_open . esc_html($lang['name']) . $anchor_close) . '</div>';

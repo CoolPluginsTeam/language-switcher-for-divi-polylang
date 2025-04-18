@@ -49,7 +49,6 @@ export const conversionOutline = {
     content:      'css.*.content',
   },
   module: {
-    lsad_visibility:        'show_language_switcher.*.show_language_switcher',
     lsad_style:             'switcher_layouts.*.switcher_layouts',
     lsad_flag_visibility:   'show_language_flag.*.show_language_flag',
     lsad_language_name_visibility: 'show_language_name.*.show_language_name',

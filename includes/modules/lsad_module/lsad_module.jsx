@@ -22,6 +22,7 @@ class LSAD_Module extends Component {
       const polylangData =window.ETBuilderBackendDynamic &&  window.ETBuilderBackendDynamic.lsadGlobalObj &&  window.ETBuilderBackendDynamic.lsadGlobalObj.lsadLanguangeData ? window.ETBuilderBackendDynamic.lsadGlobalObj.lsadLanguangeData : [];
       const currentLang = window.ETBuilderBackendDynamic && window.ETBuilderBackendDynamic.lsadGlobalObj &&  window.ETBuilderBackendDynamic.lsadGlobalObj.lsadCurrentLang ? window.ETBuilderBackendDynamic.lsadGlobalObj.lsadCurrentLang : '';
       this.setState({ polylangData, currentLang });
+      console.log(polylangData);
     }, 1000);
   }
 
@@ -44,7 +45,7 @@ class LSAD_Module extends Component {
         <>
         <div className={`lsad-wrapper ${style}`}>
         {'dropdown' === style &&
-          this.props.lsad_visibility === 'on' && (
+          (
             polylangData && polylangData[currentLang] ? (
             <span>
               {flagDisplay === 'on' && <CountryFlag flagCode={polylangData[currentLang].flagCode} name={polylangData[currentLang].name} url={pluginUrl}/>}
@@ -52,7 +53,7 @@ class LSAD_Module extends Component {
               {codeDisplay === 'on' && <CountryCode code={polylangData[currentLang].slug} />}
             </span>
           ):<>No current available languages</>)}
-        {this.props.lsad_visibility === 'on' && (
+        {(
           <>
           <ul>
             {

@@ -1,23 +1,13 @@
 {
   "name": "lsad/language-switcher-addon-for-divi",
   "d4Shortcode": "language-switcher-addon-for-divi",
-  "title": "Language Switcher Module",
-  "titles": "Language Switcher Modules",
+  "title": "Language Switcher",
+  "titles": "Language Switchers",
   "category": "module",
   "attributes": {
     "module": {
       "type": "object",
       "selector": "{{selector}}"
-    },
-    "show_language_switcher": {
-      "type": "object",
-      "default": {
-          "innerContent": {
-            "desktop": {
-              "value": "on"
-            }
-          }
-        }
     },
     "switcher_layouts": {
       "type": "object",
@@ -105,7 +95,7 @@
     },
     "text_style": {
       "type": "object",
-      "selector": "{{selector}} .lsad-wrapper ul li.lsad_active_lang.lsad_active_lang div:not(.lsad-lang-image), {{selector}} .lsad-wrapper ul li.lsad_active_lang div:not(.lsad-lang-image) a, {{selector}} .lsad-wrapper ul li:hover.lsad_active_lang div:not(.lsad-lang-image), {{selector}} .lsad-wrapper ul li:hover div:not(.lsad-lang-image) a, {{selector}} .lsad-wrapper ul li div:not(.lsad-lang-image) a, {{selector}} .lsad-wrapper.dropdown span div:not(.lsad-lang-image) a"
+      "selector": "{{selector}} .lsad-wrapper ul li.lsad_active_lang.lsad_active_lang div:not(.lsad-lang-image), {{selector}} .lsad-wrapper ul li.lsad_active_lang div:not(.lsad-lang-image) a, {{selector}} .lsad-wrapper ul li:hover.lsad_active_lang div:not(.lsad-lang-image), {{selector}} .lsad-wrapper ul li:hover div:not(.lsad-lang-image) a, {{selector}} .lsad-wrapper ul li div:not(.lsad-lang-image) a, {{selector}} .lsad-wrapper.dropdown span div:not(.lsad-lang-image) a, .lsad-wrapper.dropdown span"
     },
     "background_style": {
       "type": "object",

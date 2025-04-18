@@ -61,7 +61,7 @@ class LSAD_Module extends ET_Builder_Module {
 			'tab_slug'            => 'advanced',
 			'toggle_slug'         => 'lsad_text_settings',
 			'css'          => array(
-				'main'      => '%%order_class%% .lsad-wrapper ul li.lsad_active_lang .lsad-lang-name, %%order_class%% .lsad-wrapper ul li.lsad_active_lang .lsad-lang-code, %%order_class%% .lsad-wrapper ul li:hover.lsad_active_lang .lsad-lang-name, %%order_class%% .lsad-wrapper ul li:hover.lsad_active_lang .lsad-lang-code, %%order_class%% .lsad-wrapper ul li .lsad-lang-name, %%order_class%% .lsad-wrapper ul li .lsad-lang-code, %%order_class%% .lsad-wrapper.dropdown span .lsad-lang-name a, %%order_class%% .lsad-wrapper.dropdown span .lsad-lang-code , %%order_class%% .lsad-wrapper ul li a',
+				'main'      => '%%order_class%% .lsad-wrapper ul li.lsad_active_lang .lsad-lang-name, %%order_class%% .lsad-wrapper ul li.lsad_active_lang .lsad-lang-code, %%order_class%% .lsad-wrapper ul li:hover.lsad_active_lang .lsad-lang-name, %%order_class%% .lsad-wrapper ul li:hover.lsad_active_lang .lsad-lang-code, %%order_class%% .lsad-wrapper ul li .lsad-lang-name, %%order_class%% .lsad-wrapper ul li .lsad-lang-code, %%order_class%% .lsad-wrapper.dropdown span .lsad-lang-name a, %%order_class%% .lsad-wrapper.dropdown span .lsad-lang-code a, %%order_class%% .lsad-wrapper ul li a',
 				'important' => 'all',
 			),
 			'hide_text_align'     => true,
@@ -82,15 +82,6 @@ class LSAD_Module extends ET_Builder_Module {
 
 	public function get_fields() {
 		return array(
-			'lsad_visibility'                    => array(
-				'label'       => esc_html__( 'Enable Language Switcher', 'language-switcher-addon-for-divi' ),
-				'type'        => 'yes_no_button',
-				'options'     => array(
-					'on'  => esc_html__( 'Show', 'language-switcher-addon-for-divi' ),
-					'off' => esc_html__( 'Hide', 'language-switcher-addon-for-divi' ),
-				),
-				'toggle_slug' => 'main_content',
-			),
 			'lsad_style'                         => array(
 				'label'       => esc_html__( 'Layout Options', 'language-switcher-addon-for-divi' ),
 				'type'        => 'select',
@@ -101,72 +92,41 @@ class LSAD_Module extends ET_Builder_Module {
 					'dropdown'   => esc_html__( 'Dropdown', 'language-switcher-addon-for-divi' ),
 				),
 				'toggle_slug' => 'main_content',
-				'show_if'     => array(
-					'lsad_visibility' => 'on',
-				),
 			),
 			'lsad_flag_visibility'               => array(
 				'label'       => esc_html__( 'Display Flag', 'language-switcher-addon-for-divi' ),
 				'type'        => 'yes_no_button',
 				'default'     => 'on',
-				'options'     => array(
-					'on'  => esc_html__( 'Show', 'language-switcher-addon-for-divi' ),
-					'off' => esc_html__( 'Hide', 'language-switcher-addon-for-divi' ),
-				),
-				'toggle_slug' => 'main_content',
-				'show_if'     => array(
-					'lsad_visibility' => 'on',
-				),
+				'options'     => array('on','off'),
+				'toggle_slug' => 'main_content'
 			),
 			'lsad_language_name_visibility'      => array(
 				'label'       => esc_html__( 'Show Language Name', 'language-switcher-addon-for-divi' ),
 				'type'        => 'yes_no_button',
-				'options'     => array(
-					'on'  => esc_html__( 'Show', 'language-switcher-addon-for-divi' ),
-					'off' => esc_html__( 'Hide', 'language-switcher-addon-for-divi' ),
-				),
+				'options'     => array('on','off'),
 				'default'     => 'on',
-				'toggle_slug' => 'main_content',
-				'show_if'     => array(
-					'lsad_visibility' => 'on',
-				),
+				'toggle_slug' => 'main_content'
 			),
 			'lsad_language_code_visibility'      => array(
 				'label'       => esc_html__( 'Show Language Code', 'language-switcher-addon-for-divi' ),
 				'type'        => 'yes_no_button',
-				'options'     => array(
-					'on'  => esc_html__( 'Show', 'language-switcher-addon-for-divi' ),
-					'off' => esc_html__( 'Hide', 'language-switcher-addon-for-divi' ),
-				),
-				'toggle_slug' => 'main_content',
-				'show_if'     => array(
-					'lsad_visibility' => 'on',
-				),
+				'options'     => array('on','off'),
+				'toggle_slug' => 'main_content'
 			),
 			'lsad_current_lang_visibility'       => array(
 				'label'       => esc_html__( 'Hide Current Language', 'language-switcher-addon-for-divi' ),
 				'type'        => 'yes_no_button',
-				'options'     => array(
-					'on'  => esc_html__( 'Show', 'language-switcher-addon-for-divi' ),
-					'off' => esc_html__( 'Hide', 'language-switcher-addon-for-divi' ),
-				),
+				'options'     => array('on','off'),
 				'toggle_slug' => 'main_content',
 				'show_if'     => array(
-					'lsad_visibility' => 'on',
 					'lsad_style' => array( 'horizontal', 'vertical' ),
 				),
 			),
 			'lsad_unstranslated_lang_visibility' => array(
 				'label'       => esc_html__( 'Hide Untranslated Languages', 'language-switcher-addon-for-divi' ),
 				'type'        => 'yes_no_button',
-				'options'     => array(
-					'on'  => esc_html__( 'Show', 'language-switcher-addon-for-divi' ),
-					'off' => esc_html__( 'Hide', 'language-switcher-addon-for-divi' ),
-				),
-				'toggle_slug' => 'main_content',
-				'show_if'     => array(
-					'lsad_visibility' => 'on',
-				),
+				'options'     => array('on','off'),
+				'toggle_slug' => 'main_content'
 			),
 			'lsad_flag_ratio'                    => array(
 				'label'       => esc_html__( 'Aspect Ratio', 'language-switcher-addon-for-divi' ),
@@ -178,10 +138,7 @@ class LSAD_Module extends ET_Builder_Module {
 					'4/3'  => esc_html__( '4:3', 'language-switcher-addon-for-divi' ),
 				),
 				'toggle_slug' => 'lsad_flag_settings',
-				'tab_slug'    => 'advanced',
-				'show_if'     => array(
-					'lsad_visibility' => 'on',
-				),
+				'tab_slug'    => 'advanced'
 			),
 			'lsad_flag_width'                    => array(
 				'label'          => esc_html__( 'Flag Width', 'language-switcher-addon-for-divi' ),
@@ -193,10 +150,7 @@ class LSAD_Module extends ET_Builder_Module {
 					'step' => '1px',
 				),
 				'toggle_slug'    => 'lsad_flag_settings',
-				'tab_slug'       => 'advanced',
-				'show_if'        => array(
-					'lsad_visibility' => 'on',
-				),
+				'tab_slug'       => 'advanced'
 			),
 			'lsad_flag_radius'                   => array(
 				'label'          => esc_html__( 'Flag Border Radius', 'language-switcher-addon-for-divi' ),
@@ -208,10 +162,7 @@ class LSAD_Module extends ET_Builder_Module {
 					'step' => '1px',
 				),
 				'toggle_slug'    => 'lsad_flag_settings',
-				'tab_slug'       => 'advanced',
-				'show_if'        => array(
-					'lsad_visibility' => 'on',
-				),
+				'tab_slug'       => 'advanced'
 			),
 
 			'lsad_background_setting'            => array(
@@ -221,9 +172,6 @@ class LSAD_Module extends ET_Builder_Module {
 				'attr_suffix'         => '',
 				'type'                => 'composite',
 				'composite_type'      => 'default',
-				'show_if'             => array(
-					'lsad_visibility' => 'on',
-				),
 				'composite_structure' => array(
 					'lsad_background_normal' => array(
 						'label'    => esc_html__( 'Normal', 'language-switcher-addon-for-divi' ),
@@ -245,23 +193,10 @@ class LSAD_Module extends ET_Builder_Module {
 					),
 				),
 			),
-			// 'lsad_bg_normal_padding'             => array(
-			// 	'label'       => esc_html__( 'Padding', 'language-switcher-addon-for-divi' ),
-			// 	'type'        => 'custom_padding',
-			// 	'tab_slug'    => 'advanced',
-			// 	'toggle_slug' => 'lsad_background',
-			// ),
-			// 'lsad_bg_normal_margin'              => array(
-			// 	'label'       => esc_html__( 'Margin', 'language-switcher-addon-for-divi' ),
-			// 	'type'        => 'custom_padding',
-			// 	'tab_slug'    => 'advanced',
-			// 	'toggle_slug' => 'lsad_background',
-			// ),
 		);
 	}
 
 	public function render( $attrs, $content = null, $render_slug = null ) {
-		if ( isset( $attrs['lsad_visibility'] ) && 'on' === $attrs['lsad_visibility'] ) {
 			$static_style_loader = new LSAD_STYLE_HELPERS( $attrs, $render_slug, self::$language_index );
 			self::$language_index++;
 			$style                 = ! isset( $attrs['lsad_style'] ) ? 'horizontal' : $attrs['lsad_style'];
@@ -293,14 +228,16 @@ class LSAD_Module extends ET_Builder_Module {
 
 					if ( 'on' === $name_display ) {
 						$active_span .= sprintf(
-							'<div class="lsad-lang-name">%s</div>',
+							'<div class="lsad-lang-name"><a href="%s">%s</a></div>',
+							esc_url( $languages[ $lang_curr ]['url'] ),
 							esc_html( $languages[ $lang_curr ]['name'] )
 						);
 					}
 
 					if ( 'on' === $code_display ) {
 						$active_span .= sprintf(
-							'<div class="lsad-lang-code">%s</div>',
+							'<div class="lsad-lang-code"><a href="%s">%s</a></div>',
+							esc_url( $languages[ $lang_curr ]['url'] ),
 							esc_html( $languages[ $lang_curr ]['slug'] )
 						);
 					}
@@ -370,8 +307,6 @@ class LSAD_Module extends ET_Builder_Module {
 
 				return $output;
 			}
-		}
-		return '';
 	}
 }
 

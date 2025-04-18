@@ -29,16 +29,6 @@ export const SettingsContent = (props) => (
 
   <>
     <GroupContainer id="toggle_content" title={__("Language Switcher Settings", "language-switcher-addon-for-divi")}>
-      <FieldContainer
-        attrName="show_language_switcher"
-        subName="show_language_switcher"
-        label="Show Language Switcher"
-        description="Show Language Switcher"
-        defaultValue='on'
-      >
-        <ToggleContainer />
-      </FieldContainer>
-      {((props?.attrs?.show_language_switcher?.desktop?.value?.show_language_switcher ?? props?.defaultSettingsAttrs?.show_language_switcher?.innerContent?.desktop?.value) === 'on') && (
         <>
           <FieldContainer
           attrName="switcher_layouts"
@@ -108,9 +98,8 @@ export const SettingsContent = (props) => (
       >
           <ToggleContainer />
         </FieldContainer>
+        <div className="lsad-settings-description" style={{color: 'red'}}><strong>Note:</strong> This setting only affects the frontend. Please check your site's frontend to see it in action.</div>
       </>
-      )}
-      
     </GroupContainer>
   </>
 );

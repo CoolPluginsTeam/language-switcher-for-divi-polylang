@@ -41,7 +41,6 @@ export const LanguageSwitcherModuleEdit = (props) => {
       method: 'GET',
       restRoute: '/lsad/v1/module-data/language-switcher-module',
       data: {
-        show_language_switcher: attributes?.show_language_switcher,
         switcher_layouts: attributes?.switcher_layouts,
         show_language_flag: attributes?.show_language_flag,
         show_language_name: attributes?.show_language_name,
@@ -57,7 +56,7 @@ export const LanguageSwitcherModuleEdit = (props) => {
 
   useEffect(() => {
     language_switcher_module_data();
-  }, [attributes?.show_language_switcher, attributes?.switcher_layouts, attributes?.show_language_flag, attributes?.show_language_name, attributes?.show_language_code, attributes?.hide_current_language, attributes?.hide_untranslated_language]);
+  }, [attributes?.switcher_layouts, attributes?.show_language_flag, attributes?.show_language_name, attributes?.show_language_code, attributes?.hide_current_language, attributes?.hide_untranslated_language]);
 
   return (
     <ModuleContainer
@@ -71,8 +70,8 @@ export const LanguageSwitcherModuleEdit = (props) => {
     >
       {isLoading ? (
         <div id="et-fb-app" className="et-fb-page-preloading"></div>
-      ) : (
-        attributes?.show_language_switcher === 'on' && (
+        ) : (
+         (
           polylangData && (Object.keys(polylangData).length > 0)  ? (
             
             <div className={`lsad-wrapper ${attributes.switcher_layouts}`}>
@@ -87,7 +86,7 @@ export const LanguageSwitcherModuleEdit = (props) => {
                 <>No current available languages</>
               )
             )}
-            {attributes?.show_language_switcher === 'on' && (
+            { (
               <ul>
               {
               polylangData && Object.keys(polylangData) && Object.keys(polylangData).length > 0 ? (
@@ -97,9 +96,9 @@ export const LanguageSwitcherModuleEdit = (props) => {
                       return null;
                     }
 
-                    if (polylangData[lang].no_translation && 'on' === attributes?.hide_untranslated_language) {
-                      return null;
-                    }
+                    // if (polylangData[lang].no_translation && 'on' === attributes?.hide_untranslated_language) {
+                    //   return null;
+                    // }
 
                     if (lang === currentLang && 'dropdown' === attributes?.switcher_layouts) {
                       return null;
