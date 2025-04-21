@@ -78,7 +78,7 @@ trait ModuleStylesTrait {
               },
             ]
           ),
-          (($attrs['flag_style']['decoration']['aspect_ratio']['desktop']['value']['aspect_ratio'] ?? $attrs['flag_style']['innerContent']['decoration']['aspect_ratio']['desktop']['value']['aspect_ratio']) === '1/1') ? (
+          (($attrs['flag_style']['decoration']['aspect_ratio']['desktop']['value']['aspect_ratio'] ?? $attrs['flag_style']['innerContent']['decoration']['aspect_ratio']['desktop']['value']) === '1/1') ? (
             CommonStyle::style(
               [
                 'selector'            => $order_class . ' .lsad-wrapper .lsad-lang-image',   

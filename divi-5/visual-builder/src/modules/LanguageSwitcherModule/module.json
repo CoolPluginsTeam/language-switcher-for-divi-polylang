@@ -95,7 +95,7 @@
     },
     "text_style": {
       "type": "object",
-      "selector": "{{selector}} .lsad-wrapper ul li.lsad_active_lang.lsad_active_lang div:not(.lsad-lang-image), {{selector}} .lsad-wrapper ul li.lsad_active_lang div:not(.lsad-lang-image) a, {{selector}} .lsad-wrapper ul li:hover.lsad_active_lang div:not(.lsad-lang-image), {{selector}} .lsad-wrapper ul li:hover div:not(.lsad-lang-image) a, {{selector}} .lsad-wrapper ul li div:not(.lsad-lang-image) a, {{selector}} .lsad-wrapper.dropdown span div:not(.lsad-lang-image) a, .lsad-wrapper.dropdown span"
+      "selector": "{{selector}} .lsad-wrapper ul li.lsad_active_lang.lsad_active_lang div:not(.lsad-lang-image), {{selector}} .lsad-wrapper ul li.lsad_active_lang div:not(.lsad-lang-image) a, {{selector}} .lsad-wrapper ul li:hover.lsad_active_lang div:not(.lsad-lang-image), {{selector}} .lsad-wrapper ul li:hover div:not(.lsad-lang-image) a, {{selector}} .lsad-wrapper ul li div:not(.lsad-lang-image) a, {{selector}} .lsad-wrapper.dropdown span div:not(.lsad-lang-image) a"
     },
     "background_style": {
       "type": "object",

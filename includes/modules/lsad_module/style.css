@@ -17,10 +17,10 @@
   --lsad-hover-text-size: var(--lsad-normal-text-size);
   --lsad-normal-text-line-height: calc(var(--lsad-normal-text-size) + 8px);
   --lsad-hover-text-line-height: calc(var(--lsad-normal-text-size,var(--lsad-hover-text-size)) + 8px);
-  --lsad-lang-padding-top: 10px;
-  --lsad-lang-padding-right: 0px;
-  --lsad-lang-padding-bottom: 0px;
-  --lsad-lang-padding-left: 0px;
+  --lsad-lang-pading-top: 10px;
+  --lsad-lang-pading-right: 0px;
+  --lsad-lang-pading-bottom: 0px;
+  --lsad-lang-pading-left: 0px;
   --lsad-normal-bg-color: #fff;
   --lsad-hover-bg-color: #fff;
   --lsad-hover-text-color: initial;
@@ -49,7 +49,7 @@
       -ms-flex-align: center;
           align-items: center;
   background-color: var(--lsad-normal-bg-color);
-  padding: var(--lsad-lang-padding-top) var(--lsad-lang-padding-right) var(--lsad-lang-padding-bottom) var(--lsad-lang-padding-left);
+  padding: var(--lsad-lang-pading-top) var(--lsad-lang-pading-right) var(--lsad-lang-pading-bottom) var(--lsad-lang-pading-left);
 }
 
 .lsad-wrapper ul li div:not(.lsad-lang-image) a {
