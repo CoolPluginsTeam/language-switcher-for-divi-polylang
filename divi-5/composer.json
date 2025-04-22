@@ -1,8 +1,8 @@
 {
-    "name": "divi/language-switcher-module-for-divi",
+    "name": "divi/connect-polylang-for-divi",
     "autoload": {
       "psr-4": {
-        "LSAD\\Modules\\": "server/Modules/"
+        "CPFD\\Modules\\": "server/Modules/"
       }
     },
     "require": {}

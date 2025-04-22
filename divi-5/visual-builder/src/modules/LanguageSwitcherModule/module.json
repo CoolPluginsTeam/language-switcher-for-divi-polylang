@@ -1,6 +1,6 @@
 {
-  "name": "lsad/language-switcher-addon-for-divi",
-  "d4Shortcode": "language-switcher-addon-for-divi",
+  "name": "cpfd/connect-polylang-for-divi",
+  "d4Shortcode": "connect-polylang-for-divi",
   "title": "Language Switcher",
   "titles": "Language Switchers",
   "category": "module",
@@ -95,19 +95,19 @@
     },
     "text_style": {
       "type": "object",
-      "selector": "{{selector}} .lsad-wrapper ul li.lsad_active_lang.lsad_active_lang div:not(.lsad-lang-image), {{selector}} .lsad-wrapper ul li.lsad_active_lang div:not(.lsad-lang-image) a, {{selector}} .lsad-wrapper ul li:hover.lsad_active_lang div:not(.lsad-lang-image), {{selector}} .lsad-wrapper ul li:hover div:not(.lsad-lang-image) a, {{selector}} .lsad-wrapper ul li div:not(.lsad-lang-image) a, {{selector}} .lsad-wrapper.dropdown span div:not(.lsad-lang-image) a"
+      "selector": "{{selector}} .cpfd-wrapper ul li.cpfd_active_lang.cpfd_active_lang div:not(.cpfd-lang-image), {{selector}} .cpfd-wrapper ul li.cpfd_active_lang div:not(.cpfd-lang-image) a, {{selector}} .cpfd-wrapper ul li:hover.cpfd_active_lang div:not(.cpfd-lang-image), {{selector}} .cpfd-wrapper ul li:hover div:not(.cpfd-lang-image) a, {{selector}} .cpfd-wrapper ul li div:not(.cpfd-lang-image) a, {{selector}} .cpfd-wrapper.dropdown span div:not(.cpfd-lang-image) a"
     },
     "background_style": {
       "type": "object",
-      "selector": "{{selector}} .lsad-wrapper ul li, {{selector}} .lsad-wrapper.dropdown"
+      "selector": "{{selector}} .cpfd-wrapper ul li, {{selector}} .cpfd-wrapper.dropdown"
     },
     "container_size": {
       "type": "object",
-      "selector": "{{selector}} .lsad-wrapper, {{selector}} .lsad-wrapper.dropdown"
+      "selector": "{{selector}} .cpfd-wrapper, {{selector}} .cpfd-wrapper.dropdown"
     },
     "color_filters": {
       "type": "object",
-      "selector": "{{selector}} .lsad-wrapper ul li, {{selector}} .lsad-wrapper.dropdown span"
+      "selector": "{{selector}} .cpfd-wrapper ul li, {{selector}} .cpfd-wrapper.dropdown span"
     }
   }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace LSAD\Modules\LanguageSwitcherModule\LanguageSwitcherModuleTraits;
+namespace CPFD\Modules\LanguageSwitcherModule\LanguageSwitcherModuleTraits;
 
 if ( ! defined( 'ABSPATH' ) ) {
   die( 'Direct access forbidden.' );
@@ -7,6 +7,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 trait CustomCssTrait {
   public static function custom_css() {
-    return \WP_Block_Type_Registry::get_instance()->get_registered( 'lsad/language-sitcher-module-for-divi' )->customCssFields;
+    return \WP_Block_Type_Registry::get_instance()->get_registered( 'cpfd/connect-polylang-for-divi' )->customCssFields;
   }
 }

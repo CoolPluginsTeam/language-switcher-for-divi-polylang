@@ -1,6 +1,6 @@
 <?php
 
-class LSAD_LanguageSwitcherAddonForDivi extends DiviExtension {
+class CPFD_ConnectPolylangForDivi extends DiviExtension {
 
 	/**
 	 * The gettext domain for the extension's translations.
@@ -9,7 +9,7 @@ class LSAD_LanguageSwitcherAddonForDivi extends DiviExtension {
 	 *
 	 * @var string
 	 */
-	public $gettext_domain = 'language-switcher-addon-for-divi';
+	public $gettext_domain = 'cpfd';
 
 	/**
 	 * The extension's WP Plugin name.
@@ -18,7 +18,7 @@ class LSAD_LanguageSwitcherAddonForDivi extends DiviExtension {
 	 *
 	 * @var string
 	 */
-	public $name = 'language-switcher-addon-for-divi';
+	public $name = 'connect-polylang-for-divi';
 
 	/**
 	 * The extension's version
@@ -27,15 +27,15 @@ class LSAD_LanguageSwitcherAddonForDivi extends DiviExtension {
 	 *
 	 * @var string
 	 */
-	public $version = LSPAD;
+	public $version = CPFD;
 
 	/**
-	 * LSAD_LanguageSwitcherAddonForDivi constructor.
+	 * CPFD_ConnectPolylangForDivi constructor.
 	 *
 	 * @param string $name
 	 * @param array  $args
 	 */
-	public function __construct( $name = 'language-switcher-addon-for-divi', $args = array() ) {
+	public function __construct( $name = 'connect-polylang-for-divi', $args = array() ) {
 		$this->plugin_dir     = plugin_dir_path( __FILE__ );
 		$this->plugin_dir_url = plugin_dir_url( $this->plugin_dir );
 
@@ -43,4 +43,4 @@ class LSAD_LanguageSwitcherAddonForDivi extends DiviExtension {
 	}
 }
 
-new LSAD_LanguageSwitcherAddonForDivi();
+new CPFD_ConnectPolylangForDivi();

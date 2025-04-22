@@ -2,26 +2,26 @@
 /**
  * Language Switcher Module Controller.
  *
- * @package LSAD\Modules\LanguageSwitcherModule;
+ * @package CPFD\Modules\LanguageSwitcherModule;
  */
 
-namespace LSAD\Modules\LanguageSwitcherModule;
+namespace CPFD\Modules\LanguageSwitcherModule;
 
 if ( ! defined( 'ABSPATH' ) ) {
   die( 'Direct access forbidden.' );
 }
 
-use LSAD\Modules\Modules;
+use CPFD\Modules\Modules;
 use ET\Builder\Framework\Controllers\RESTController;
-use LSAD\Modules\LanguageSwitcherModule\LanguageSwitcherModule;
-use LSAD\Modules\LanguageSwitcherModule\LanguageSwitcherModuleTraits\ModuleHelper;
+use CPFD\Modules\LanguageSwitcherModule\LanguageSwitcherModule;
+use CPFD\Modules\LanguageSwitcherModule\LanguageSwitcherModuleTraits\ModuleHelper;
 use WP_REST_Request;
 use WP_REST_Response;
 
 /**
  * Class LanguageSwitcherModuleController
  *
- * @package LSAD\Modules\LanguageSwitcherModule
+ * @package CPFD\Modules\LanguageSwitcherModule
  */
 class LanguageSwitcherModuleController extends RESTController {
 
@@ -42,7 +42,7 @@ class LanguageSwitcherModuleController extends RESTController {
         'hide_untranslated_language' => $request->get_param('hide_untranslated_language'),
     ];
     $response = array(
-        'language_switcher_data' => ModuleHelper::lsad_localize_polyglang_data_divi_5($args),
+        'language_switcher_data' => ModuleHelper::cpfd_localize_polyglang_data_divi_5($args),
     );
     return rest_ensure_response($response);
   }

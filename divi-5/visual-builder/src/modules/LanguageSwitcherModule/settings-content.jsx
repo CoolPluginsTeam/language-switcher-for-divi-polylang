@@ -28,19 +28,19 @@ const switcher_layouts = {
 export const SettingsContent = (props) => (
 
   <>
-    <GroupContainer id="toggle_content" title={__("Language Switcher Settings", "language-switcher-addon-for-divi")}>
+    <GroupContainer id="toggle_content" title={__("Language Switcher Settings", "cpfd")}>
         <>
           <FieldContainer
           attrName="switcher_layouts"
           subName="switcher_layouts"
-          label={__('Layout Options', 'language-switcher-addon-for-divi')}
-          description={__('Select your switcher layout', 'language-switcher-addon-for-divi')}
+          label={__('Layout Options', 'cpfd')}
+          description={__('Select your switcher layout', 'cpfd')}
           defaultValue={'horizontal'}
         >
           <SelectContainer
             options={Object.entries(switcher_layouts).reduce((acc, [key, label]) => {
               acc[key] = {
-                label: __(label, 'ecmd-events-calendar-modules-for-divi-pro'),
+                label: __(label, 'cpfd'),
                 value: key,
               };
               return acc;
@@ -98,7 +98,7 @@ export const SettingsContent = (props) => (
       >
           <ToggleContainer />
         </FieldContainer>
-        <div className="lsad-settings-description" style={{color: 'red'}}><strong>Note:</strong> This setting only affects the frontend. Please check your site's frontend to see it in action.</div>
+        <div className="cpfd-settings-description" style={{color: 'red'}}><strong>Note:</strong> This setting only affects the frontend. Please check your site's frontend to see it in action.</div>
       </>
     </GroupContainer>
   </>

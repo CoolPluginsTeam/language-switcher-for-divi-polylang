@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { cssFields } from './custom-css';
-
 const {
   CssStyle,
   StyleContainer,
@@ -25,52 +23,52 @@ export const ModuleStyles = (props) => {
   return (
     <StyleContainer mode={mode} state={state} noStyleTag={noStyleTag}>
      <CommonStyle
-        selector={`${orderClass} .lsad-wrapper .lsad-lang-image`}
+        selector={`${orderClass} .cpfd-wrapper .cpfd-lang-image`}
         attr={attrs?.flag_style?.decoration?.aspect_ratio}
         declarationFunction={(attrs) => {
           const data = attrs.attrValue.aspect_ratio
           if(data === '1/1'){
-            return (`--lsad-flag-ratio: ${data}; --lsad-flag-height: var(--lsad-flag-width);`);
+            return (`--cpfd-flag-ratio: ${data}; --cpfd-flag-height: var(--cpfd-flag-width);`);
           }else{
-            return (`--lsad-flag-ratio: ${data}; --lsad-flag-height: calc(var(--lsad-flag-width) * 0.75);`);
+            return (`--cpfd-flag-ratio: ${data}; --cpfd-flag-height: calc(var(--cpfd-flag-width) * 0.75);`);
           }
         }}
       />
         {((attrs?.flag_style?.decoration?.aspect_ratio?.desktop?.value?.aspect_ratio ?? attrs?.flag_style?.innerContent?.decoration?.aspect_ratio?.desktop?.value) === '1/1') ? (
           <>
           <CommonStyle
-            selector={`${orderClass} .lsad-wrapper .lsad-lang-image`}
+            selector={`${orderClass} .cpfd-wrapper .cpfd-lang-image`}
             attr={attrs?.flag_style?.decoration?.flag_width}
             declarationFunction={(attrs) => {
               const data = attrs.attrValue?.flag_width
-              return (`--lsad-flag-width: ${data}; --lsad-flag-height: ${data};`);
+              return (`--cpfd-flag-width: ${data}; --cpfd-flag-height: ${data};`);
             }}
           />
           </>
         ):(
           <CommonStyle
-            selector={`${orderClass} .lsad-wrapper .lsad-lang-image`}
+            selector={`${orderClass} .cpfd-wrapper .cpfd-lang-image`}
             attr={attrs?.flag_style?.decoration?.flag_width}
             declarationFunction={(attrs) => {
             const data = attrs?.attrValue?.flag_width
-            return (`--lsad-flag-width: ${data}; --lsad-flag-height: calc(var(--lsad-flag-width) * 0.75);`);
+            return (`--cpfd-flag-width: ${data}; --cpfd-flag-height: calc(var(--cpfd-flag-width) * 0.75);`);
             }}
           />
         )}
      <CommonStyle
-        selector={`${orderClass} .lsad-wrapper .lsad-lang-image`}
+        selector={`${orderClass} .cpfd-wrapper .cpfd-lang-image`}
         attr={attrs?.flag_style?.decoration?.flag_border_radius}
         declarationFunction={(attrs) => {
         const data = attrs?.attrValue?.flag_border_radius
-        return `--lsad-flag-radius: ${data}`;
+        return `--cpfd-flag-radius: ${data}`;
       }}
     />
     <CommonStyle
-        selector={`${orderClass} .lsad-wrapper ul li, ${orderClass} .lsad-wrapper.dropdown`}
+        selector={`${orderClass} .cpfd-wrapper ul li, ${orderClass} .cpfd-wrapper.dropdown`}
         attr={attrs?.background_style?.decoration?.background_color}
         declarationFunction={(attrs) => {
         const data = attrs?.attrValue?.background_color
-        return `--lsad-normal-bg-color: ${data} !important`;
+        return `--cpfd-normal-bg-color: ${data} !important`;
       }}
     />
     {elements.style({

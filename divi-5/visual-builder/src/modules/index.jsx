@@ -4,6 +4,6 @@ import { LanguageSwitcherModule, LanguageSwitcherModuleMetadata } from "./Langua
 
 const { registerModule } = window?.divi?.moduleLibrary;
 
-addAction('divi.moduleLibrary.registerModuleLibraryStore.after', 'lsad', () => {
+addAction('divi.moduleLibrary.registerModuleLibraryStore.after', 'cpfd', () => {
   registerModule(LanguageSwitcherModuleMetadata, LanguageSwitcherModule);
 });

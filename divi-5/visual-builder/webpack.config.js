@@ -89,7 +89,7 @@ module.exports = {
   // Determine where the created bundles will be outputted.
   // @see https://webpack.js.org/concepts/#output
   output: {
-    filename: 'language-switcher-build.js',
+    filename: 'connect-polylang-for-divi-build.js',
     path: path.resolve(__dirname, 'build'),
   },
   stats: {

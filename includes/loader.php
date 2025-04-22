@@ -4,8 +4,8 @@ if ( ! class_exists( 'ET_Builder_Element' ) ) {
 	return;
 }
 
-require_once LSPAD_DIR . 'helpers/class-lsad-helpers.php';
-require_once LSPAD_DIR . 'helpers/class-lsad-style-helpers.php';
+require_once CPFD_DIR . 'helpers/class-cpfd-helpers.php';
+require_once CPFD_DIR . 'helpers/class-cpfd-style-helpers.php';
 
 $module_files = glob( __DIR__ . '/modules/*/*.php' );
 

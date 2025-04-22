@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'LSAD\\Modules\\' => array($baseDir . '/server/Modules'),
+    'CPFD\\Modules\\' => array($baseDir . '/server/Modules'),
 );

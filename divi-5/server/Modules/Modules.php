@@ -2,16 +2,16 @@
 /**
  * All modules.
  *
- * @package LSAD\Modules;
+ * @package CPFD\Modules;
  */
 
-namespace LSAD\Modules;
+namespace CPFD\Modules;
 
 if ( ! defined( 'ABSPATH' ) ) {
   die( 'Direct access forbidden.' );
 }
 
-use LSAD\Modules\LanguageSwitcherModule\LanguageSwitcherModule;
+use CPFD\Modules\LanguageSwitcherModule\LanguageSwitcherModule;
 add_action(
   'init',
   function() {

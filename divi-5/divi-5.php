@@ -1,10 +1,10 @@
 <?php
 // Require php files.
-require_once LSPAD_DIR . 'divi-5/vendor/autoload.php';
-require_once LSPAD_DIR . 'divi-5/server/Modules/Modules.php';
+require_once CPFD_DIR . 'divi-5/vendor/autoload.php';
+require_once CPFD_DIR . 'divi-5/server/Modules/Modules.php';
 
 
-class LSAD_Divi5 {
+class CPFD_Divi5 {
   public function __construct() {
     add_action( 'divi_visual_builder_assets_before_enqueue_scripts', array( $this, 'enqueue_visual_builder_assets' ) );
     add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_assets' ) );
@@ -16,7 +16,7 @@ class LSAD_Divi5 {
    * @since 1.0.0
    */
   function enqueue_frontend_assets() {
-    wp_enqueue_style( 'lsad-divi5-frontend-style', LSPAD_URL . 'includes/modules/lsad_module/style.css', [], LSPAD );
+    wp_enqueue_style( 'cpfd-divi5-frontend-style', CPFD_URL . 'includes/modules/cpfd_module/style.css', [], CPFD );
   }
 
   /**
@@ -25,13 +25,13 @@ class LSAD_Divi5 {
    * @since 1.0.0
    */
   function enqueue_visual_builder_assets() {
-    // wp_enqueue_script('lsad-divi5-visual-builder-script', LSPAD_URL . 'divi-5/visual-builder/build/language-switcher-build.js',[], LSPAD, true);
+    // wp_enqueue_script('cpfd-divi5-visual-builder-script', CPFD_URL . 'divi-5/visual-builder/build/connect-polylang-for-divi-build.js',[], CPFD, true);
     \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build(
       [
-        'name'   => 'lsad-divi5-visual-builder-script',
-        'version' => 'LSPAD',
+        'name'   => 'cpfd-divi5-visual-builder-script',
+        'version' => 'CPFD',
         'script' => [
-          'src' => LSPAD_URL . 'divi-5/visual-builder/build/language-switcher-build.js',
+          'src' => CPFD_URL . 'divi-5/visual-builder/build/connect-polylang-for-divi-build.js',
           'deps'               => [
             'divi-module-library',
             'divi-vendor-wp-hooks',

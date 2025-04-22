@@ -1,7 +1,7 @@
 {
-    "name": "language-sitcher-module-for-divi",
+    "name": "connect-polylang-for-divi",
     "version": "1.0.0",
-    "description": "Language switcher addon for divi to use added language switcher in your page or divi header menu",
+    "description": "Connect Polylang for divi to use added language switcher in your page or divi header menu",
     "main": "src/index.js",
     "author": "Elegant Themes",
     "license": "GPL2",

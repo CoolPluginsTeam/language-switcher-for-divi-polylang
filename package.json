@@ -1,5 +1,5 @@
 {
-  "name": "language-switcher-addon-for-divi",
+  "name": "connect-polylang-for-divi",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -27,7 +27,7 @@
     ]
   },
   "cde": {
-    "gettext": "language-switcher-addon-for-divi",
-    "prefix": "lsad"
+    "gettext": "connect-polylang-for-divi",
+    "prefix": "cpfd"
   }
 }

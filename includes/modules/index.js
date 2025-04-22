@@ -1,3 +1,3 @@
-import LSAD_Module from './lsad_module/lsad_module';
+import CPFD_Module from './cpfd_module/cpfd_module';
 
-export default [LSAD_Module];
+export default [CPFD_Module];

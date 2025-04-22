@@ -1,4 +1,4 @@
-input.lsad-input {
+input.cpfd-input {
   background: #f1f5f9;
   max-height: 30px;
   border: 0;
@@ -15,27 +15,27 @@ input.lsad-input {
   width: 100%;
 }
 
-input.lsad-input:focus {
+input.cpfd-input:focus {
   background: #e6ecf2;
 }
 
-input.lsad-input::-webkit-input-placeholder {
+input.cpfd-input::-webkit-input-placeholder {
   color: #98a7b8;
 }
 
-input.lsad-input:-moz-placeholder {
+input.cpfd-input:-moz-placeholder {
   color: #98a7b8;
 }
 
-input.lsad-input::-moz-placeholder {
+input.cpfd-input::-moz-placeholder {
   color: #98a7b8;
 }
 
-input.lsad-input:-ms-input-placeholder {
+input.cpfd-input:-ms-input-placeholder {
   color: #98a7b8;
 }
 
-input.lsad-input[readonly] {
+input.cpfd-input[readonly] {
   background: #ffffff !important;
   border: 1px solid #eaedf0 !important;
   cursor: not-allowed;

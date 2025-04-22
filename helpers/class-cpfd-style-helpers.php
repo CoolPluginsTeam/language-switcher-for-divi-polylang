@@ -1,6 +1,6 @@
 <?php
 
-class LSAD_STYLE_HELPERS {
+class CPFD_STYLE_HELPERS {
 	private $redner_slug = '';
 	private $props       = '';
 	private $order       = 0;
@@ -10,34 +10,34 @@ class LSAD_STYLE_HELPERS {
 		$this->props       = $props;
 		$this->order       = $order;
 		$this->generate_divi_styles();
-	}
+	} 
 
 	private function generate_divi_styles() {
-		$selector = '%%order_class%% .lsad-wrapper';
+		$selector = '%%order_class%% .cpfd-wrapper';
 
 		$slug                    = $this->redner_slug;
 		$attr                    = $this->props;
-		$lang_padding            = isset( $attr['lsad_bg_normal_padding'] ) ? $attr['lsad_bg_normal_padding'] : '';
-		$lang_margin             = isset( $attr['lsad_bg_normal_margin'] ) ? $attr['lsad_bg_normal_margin'] : '';
-		$lang_normal_bg_color    = isset( $attr['lsad_bg_normal_color'] ) ? $attr['lsad_bg_normal_color'] : '';
-		$lang_hover_bg_color     = isset( $attr['lsad_bg_hover_color'] ) ? $attr['lsad_bg_hover_color'] : '';
-		$flag_width              = isset( $attr['lsad_flag_width'] ) ? $attr['lsad_flag_width'] : '';
-		$flag_radius             = isset( $attr['lsad_flag_radius'] ) ? $attr['lsad_flag_radius'] : '';
-		$flag_ratio              = isset( $attr['lsad_flag_ratio'] ) ? $attr['lsad_flag_ratio'] : '';
-		$normal_text_font        = isset( $attr['lsad_text_settings_font'] ) ? $attr['lsad_text_settings_font'] : '';
-		$normal_text_color       = isset( $attr['lsad_text_settings_text_color'] ) ? $attr['lsad_text_settings_text_color'] : '';
-		$normal_text_size        = isset( $attr['lsad_text_settings_font_size'] ) ? $attr['lsad_text_settings_font_size'] : '';
-		$normal_text_spacing     = isset( $attr['lsad_text_settings_letter_spacing'] ) ? $attr['lsad_text_settings_letter_spacing'] : '';
-		$normal_text_line_height = isset( $attr['lsad_text_settings_line_height'] ) ? $attr['lsad_text_settings_line_height'] : '';
-		$hover_text_font         = isset( $attr['lsad_hover_text_font'] ) ? $attr['lsad_hover_text_font'] : '';
-		$hover_text_color        = isset( $attr['lsad_hover_text_color'] ) ? $attr['lsad_hover_text_color'] : '';
-		$hover_text_size         = isset( $attr['lsad_hover_text_font_size'] ) ? $attr['lsad_hover_text_font_size'] : '';
-		$hover_text_line_height  = isset( $attr['lsad_hover_text_line_height'] ) ? $attr['lsad_hover_text_line_height'] : '';
+		$lang_padding            = isset( $attr['cpfd_bg_normal_padding'] ) ? $attr['cpfd_bg_normal_padding'] : '';
+		$lang_margin             = isset( $attr['cpfd_bg_normal_margin'] ) ? $attr['cpfd_bg_normal_margin'] : '';
+		$lang_normal_bg_color    = isset( $attr['cpfd_bg_normal_color'] ) ? $attr['cpfd_bg_normal_color'] : '';
+		$lang_hover_bg_color     = isset( $attr['cpfd_bg_hover_color'] ) ? $attr['cpfd_bg_hover_color'] : '';
+		$flag_width              = isset( $attr['cpfd_flag_width'] ) ? $attr['cpfd_flag_width'] : '';
+		$flag_radius             = isset( $attr['cpfd_flag_radius'] ) ? $attr['cpfd_flag_radius'] : '';
+		$flag_ratio              = isset( $attr['cpfd_flag_ratio'] ) ? $attr['cpfd_flag_ratio'] : '';
+		$normal_text_font        = isset( $attr['cpfd_text_settings_font'] ) ? $attr['cpfd_text_settings_font'] : '';
+		$normal_text_color       = isset( $attr['cpfd_text_settings_text_color'] ) ? $attr['cpfd_text_settings_text_color'] : '';
+		$normal_text_size        = isset( $attr['cpfd_text_settings_font_size'] ) ? $attr['cpfd_text_settings_font_size'] : '';
+		$normal_text_spacing     = isset( $attr['cpfd_text_settings_letter_spacing'] ) ? $attr['cpfd_text_settings_letter_spacing'] : '';
+		$normal_text_line_height = isset( $attr['cpfd_text_settings_line_height'] ) ? $attr['cpfd_text_settings_line_height'] : '';
+		$hover_text_font         = isset( $attr['cpfd_hover_text_font'] ) ? $attr['cpfd_hover_text_font'] : '';
+		$hover_text_color        = isset( $attr['cpfd_hover_text_color'] ) ? $attr['cpfd_hover_text_color'] : '';
+		$hover_text_size         = isset( $attr['cpfd_hover_text_font_size'] ) ? $attr['cpfd_hover_text_font_size'] : '';
+		$hover_text_line_height  = isset( $attr['cpfd_hover_text_line_height'] ) ? $attr['cpfd_hover_text_line_height'] : '';
 		ET_Builder_Element::set_style(
 			$slug,
 			array(
 				'selector'    => $selector.'.dropdown',
-				'declaration' => sprintf( '--lsad-dropdown-index: %1$s;', ( 99 + $this->order ) ),
+				'declaration' => sprintf( '--cpfd-dropdown-index: %1$s;', ( 99 + $this->order ) ),
 			)
 		);
 
@@ -50,7 +50,7 @@ class LSAD_STYLE_HELPERS {
 						$slug,
 						array(
 							'selector'    => $selector,
-							'declaration' => sprintf( '--lsad-lang-padding-%1$s: %2$s;', $key, $value ),
+							'declaration' => sprintf( '--cpfd-lang-padding-%1$s: %2$s;', $key, $value ),
 						)
 					);
 				}
@@ -64,7 +64,7 @@ class LSAD_STYLE_HELPERS {
 						$slug,
 						array(
 							'selector'    => $selector,
-							'declaration' => sprintf( '--lsad-lang-padding-%1$s: %2$s;', $key, $value ),
+							'declaration' => sprintf( '--cpfd-lang-padding-%1$s: %2$s;', $key, $value ),
 						)
 					);
 				}
@@ -76,7 +76,7 @@ class LSAD_STYLE_HELPERS {
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--lsad-normal-bg-color: %1$s;', $lang_normal_bg_color ),
+					'declaration' => sprintf( '--cpfd-normal-bg-color: %1$s;', $lang_normal_bg_color ),
 				)
 			);
 		}
@@ -86,7 +86,7 @@ class LSAD_STYLE_HELPERS {
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--lsad-hover-bg-color: %1$s;', $lang_hover_bg_color ),
+					'declaration' => sprintf( '--cpfd-hover-bg-color: %1$s;', $lang_hover_bg_color ),
 				)
 			);
 		}
@@ -96,7 +96,7 @@ class LSAD_STYLE_HELPERS {
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => '--lsad-flag-height: var(--lsad-flag-width);',
+					'declaration' => '--cpfd-flag-height: var(--cpfd-flag-width);',
 				)
 			);
 		}
@@ -105,7 +105,7 @@ class LSAD_STYLE_HELPERS {
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--lsad-flag-width: %1$s;', $flag_width ),
+					'declaration' => sprintf( '--cpfd-flag-width: %1$s;', $flag_width ),
 				)
 			);
 		}
@@ -114,7 +114,7 @@ class LSAD_STYLE_HELPERS {
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--lsad-flag-radius: %1$s;', $flag_radius ),
+					'declaration' => sprintf( '--cpfd-flag-radius: %1$s;', $flag_radius ),
 				)
 			);
 		}
@@ -125,49 +125,49 @@ class LSAD_STYLE_HELPERS {
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--lsad-normal-text-font: %1$s;', $Font_properties['fontFamily'] ),
+					'declaration' => sprintf( '--cpfd-normal-text-font: %1$s;', $Font_properties['fontFamily'] ),
 				)
 			);
 			ET_Builder_Element::set_style(
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--lsad-normal-text-weight: %1$s;', $Font_properties['fontWeight'] ),
+					'declaration' => sprintf( '--cpfd-normal-text-weight: %1$s;', $Font_properties['fontWeight'] ),
 				)
 			);
 			ET_Builder_Element::set_style(
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--lsad-normal-text-transform: %1$s;', $Font_properties['textTransform'] ),
+					'declaration' => sprintf( '--cpfd-normal-text-transform: %1$s;', $Font_properties['textTransform'] ),
 				)
 			);
 			ET_Builder_Element::set_style(
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--lsad-normal-text-decoration: %1$s;', $Font_properties['textDecoration'] ),
+					'declaration' => sprintf( '--cpfd-normal-text-decoration: %1$s;', $Font_properties['textDecoration'] ),
 				)
 			);
 			ET_Builder_Element::set_style(
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--lsad-normal-text-style: %1$s;', $Font_properties['fontStyle'] ),
+					'declaration' => sprintf( '--cpfd-normal-text-style: %1$s;', $Font_properties['fontStyle'] ),
 				)
 			);
 			ET_Builder_Element::set_style(
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--lsad-normal-text-decoration-color: %1$s;', $Font_properties['textDecorationLineColor'] ),
+					'declaration' => sprintf( '--cpfd-normal-text-decoration-color: %1$s;', $Font_properties['textDecorationLineColor'] ),
 				)
 			);
 			ET_Builder_Element::set_style(
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--lsad-normal-text-decoration-style: %1$s;', $Font_properties['textDecorationStyle'] ),
+					'declaration' => sprintf( '--cpfd-normal-text-decoration-style: %1$s;', $Font_properties['textDecorationStyle'] ),
 				)
 			);
 		}
@@ -176,7 +176,7 @@ class LSAD_STYLE_HELPERS {
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--lsad-normal-text-color: %1$s;', $normal_text_color ),
+					'declaration' => sprintf( '--cpfd-normal-text-color: %1$s;', $normal_text_color ),
 				)
 			);
 		}
@@ -185,7 +185,7 @@ class LSAD_STYLE_HELPERS {
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--lsad-normal-text-letter-spacing: %1$s;', $normal_text_spacing ),
+					'declaration' => sprintf( '--cpfd-normal-text-letter-spacing: %1$s;', $normal_text_spacing ),
 				)
 			);
 		}
@@ -194,7 +194,7 @@ class LSAD_STYLE_HELPERS {
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--lsad-normal-text-size: %1$s;', $normal_text_size ),
+					'declaration' => sprintf( '--cpfd-normal-text-size: %1$s;', $normal_text_size ),
 				)
 			);
 		}
@@ -203,7 +203,7 @@ class LSAD_STYLE_HELPERS {
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--lsad-normal-text-line-height: %1$s;', $normal_text_line_height ),
+					'declaration' => sprintf( '--cpfd-normal-text-line-height: %1$s;', $normal_text_line_height ),
 				)
 			);
 		}
@@ -214,49 +214,49 @@ class LSAD_STYLE_HELPERS {
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--lsad-hover-text-font: %1$s;', $Font_properties['fontFamily'] ),
+					'declaration' => sprintf( '--cpfd-hover-text-font: %1$s;', $Font_properties['fontFamily'] ),
 				)
 			);
 			ET_Builder_Element::set_style(
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--lsad-hover-text-weight: %1$s;', $Font_properties['fontWeight'] ),
+					'declaration' => sprintf( '--cpfd-hover-text-weight: %1$s;', $Font_properties['fontWeight'] ),
 				)
 			);
 			ET_Builder_Element::set_style(
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--lsad-hover-text-transform: %1$s;', $Font_properties['textTransform'] ),
+					'declaration' => sprintf( '--cpfd-hover-text-transform: %1$s;', $Font_properties['textTransform'] ),
 				)
 			);
 			ET_Builder_Element::set_style(
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--lsad-hover-text-decoration: %1$s;', $Font_properties['textDecoration'] ),
+					'declaration' => sprintf( '--cpfd-hover-text-decoration: %1$s;', $Font_properties['textDecoration'] ),
 				)
 			);
 			ET_Builder_Element::set_style(
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--lsad-hover-text-style: %1$s;', $Font_properties['fontStyle'] ),
+					'declaration' => sprintf( '--cpfd-hover-text-style: %1$s;', $Font_properties['fontStyle'] ),
 				)
 			);
 			ET_Builder_Element::set_style(
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--lsad-hover-text-decoration-color: %1$s;', $Font_properties['textDecorationLineColor'] ),
+					'declaration' => sprintf( '--cpfd-hover-text-decoration-color: %1$s;', $Font_properties['textDecorationLineColor'] ),
 				)
 			);
 			ET_Builder_Element::set_style(
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--lsad-hover-text-decoration-style: %1$s;', $Font_properties['textDecorationStyle'] ),
+					'declaration' => sprintf( '--cpfd-hover-text-decoration-style: %1$s;', $Font_properties['textDecorationStyle'] ),
 				)
 			);
 		}
@@ -265,7 +265,7 @@ class LSAD_STYLE_HELPERS {
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--lsad-hover-text-color: %1$s;', $hover_text_color ),
+					'declaration' => sprintf( '--cpfd-hover-text-color: %1$s;', $hover_text_color ),
 				)
 			);
 		}
@@ -274,7 +274,7 @@ class LSAD_STYLE_HELPERS {
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--lsad-hover-text-size: %1$s;', $hover_text_size ),
+					'declaration' => sprintf( '--cpfd-hover-text-size: %1$s;', $hover_text_size ),
 				)
 			);
 		}
@@ -283,7 +283,7 @@ class LSAD_STYLE_HELPERS {
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--lsad-hover-text-line-height: %1$s;', $hover_text_line_height ),
+					'declaration' => sprintf( '--cpfd-hover-text-line-height: %1$s;', $hover_text_line_height ),
 				)
 			);
 		}
@@ -294,7 +294,7 @@ class LSAD_STYLE_HELPERS {
 		$font_parts       = explode( '|', $font_family );
 		$font_family_name = $font_parts[0];
 		if ( $font_family_name ) {
-			wp_enqueue_style( 'lsad-gfonts-' . $font_family_name, "https://fonts.googleapis.com/css2?family=$font_family_name&display=swap", array(), null );
+			wp_enqueue_style( 'cpfd-gfonts-' . $font_family_name, "https://fonts.googleapis.com/css2?family=$font_family_name&display=swap", array(), null );
 		}
 	}
 

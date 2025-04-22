@@ -28,10 +28,10 @@ export const LanguageSwitcherModuleEdit = (props) => {
   } = useFetch({ language_switcher_data: '' });
 
   useEffect(() => {
-    if (response?.language_switcher_data?.lsadGlobalObj) {
-      setPolylangData(response?.language_switcher_data?.lsadGlobalObj?.lsadLanguangeData);
-      setCurrentLang(response?.language_switcher_data?.lsadGlobalObj?.lsadCurrentLang);
-      setPluginUrl(response?.language_switcher_data?.lsadGlobalObj?.lsadPluginUrl);
+    if (response?.language_switcher_data?.cpfdGlobalObj) {
+      setPolylangData(response?.language_switcher_data?.cpfdGlobalObj?.cpfdLanguageData);
+      setCurrentLang(response?.language_switcher_data?.cpfdGlobalObj?.cpfdCurrentLang);
+      setPluginUrl(response?.language_switcher_data?.cpfdGlobalObj?.cpfdPluginUrl);
     }
   }, [response]);
 
@@ -39,7 +39,7 @@ export const LanguageSwitcherModuleEdit = (props) => {
   const language_switcher_module_data = () => {
     fetch({
       method: 'GET',
-      restRoute: '/lsad/v1/module-data/language-switcher-module',
+      restRoute: '/cpfd/v1/module-data/language-switcher-module',
       data: {
         switcher_layouts: attributes?.switcher_layouts,
         show_language_flag: attributes?.show_language_flag,
@@ -74,7 +74,7 @@ export const LanguageSwitcherModuleEdit = (props) => {
          (
           polylangData && (Object.keys(polylangData).length > 0)  ? (
             
-            <div className={`lsad-wrapper ${attributes.switcher_layouts}`}>
+            <div className={`cpfd-wrapper ${attributes.switcher_layouts}`}>
             {attributes?.switcher_layouts === 'dropdown' && (
               polylangData?.[currentLang] ? (
                 <span>
@@ -105,7 +105,7 @@ export const LanguageSwitcherModuleEdit = (props) => {
                     }
 
                     return (
-                      <li key={index} className={lang === currentLang ? 'lsad_active_lang' : ''}>
+                      <li key={index} className={lang === currentLang ? 'cpfd_active_lang' : ''}>
                         {attributes?.show_language_flag === 'on' && <CountryFlag flagCode={polylangData?.[lang]?.flagCode} name={polylangData?.[lang]?.name} url={pluginUrl}/>}
                         {attributes?.show_language_name === 'on' && <CountryName name={polylangData?.[lang]?.name} />}
                         {attributes?.show_language_code === 'on' && <CountryCode code={polylangData?.[lang]?.slug} />}
