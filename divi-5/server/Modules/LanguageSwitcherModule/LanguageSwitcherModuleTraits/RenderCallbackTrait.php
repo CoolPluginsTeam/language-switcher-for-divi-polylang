@@ -23,7 +23,7 @@ trait RenderCallbackTrait {
       'hide_untranslated_language' => ModuleHelper::get_attr_value($attrs, 'hide_untranslated_language', 'off'),
     );
     
-    $module_inner = HTMLUtility::render(
+    $module_inner_container = HTMLUtility::render(
       [
                 'tag'               => 'div',
                 'attributes'        => [
@@ -34,7 +34,17 @@ trait RenderCallbackTrait {
                 'children'          => LanguageSwitcherModule::render_content($props),
               ]
     );
-
+    
+    $module_inner = HTMLUtility::render(
+      [
+                'tag'               => 'div',
+                'attributes'        => [
+                  'class' => 'cpfd-main-wrapper ',
+                ],
+                'childrenSanitizer' => 'et_core_esc_previously',
+                'children'          => $module_inner_container,
+              ]
+    );
     // This are the module elements that will be rendered in the frontend.
     $module_elements = $elements->style_components(
       [

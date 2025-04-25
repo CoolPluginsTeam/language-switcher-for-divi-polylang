@@ -20,8 +20,16 @@ export const ModuleStyles = (props) => {
     state,
     noStyleTag
   } = props;
+
   return (
     <StyleContainer mode={mode} state={state} noStyleTag={noStyleTag}>
+      <CommonStyle
+        selector={`${orderClass} .cpfd-wrapper.dropdown ul`}
+        attr={attrs?.switcher_layouts}
+        declarationFunction={(attrs) => {
+          return `--cpfd-dropdown-index: 99`;
+        }}
+      />
      <CommonStyle
         selector={`${orderClass} .cpfd-wrapper .cpfd-lang-image`}
         attr={attrs?.flag_style?.decoration?.aspect_ratio}

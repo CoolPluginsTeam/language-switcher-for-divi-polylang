@@ -33,14 +33,7 @@ class LanguageSwitcherModuleController extends RESTController {
    * @return WP_REST_Response|WP_Error
    */
   public static function index( WP_REST_Request $request ): WP_REST_Response {
-    $args = [
-        'switcher_layouts' => $request->get_param('switcher_layouts'),
-        'show_language_flag' => $request->get_param('show_language_flag'),
-        'show_language_name' => $request->get_param('show_language_name'),
-        'show_language_code' => $request->get_param('show_language_code'),
-        'hide_current_language' => $request->get_param('hide_current_language'),
-        'hide_untranslated_language' => $request->get_param('hide_untranslated_language'),
-    ];
+    $args = [];
     $response = array(
         'language_switcher_data' => ModuleHelper::cpfd_localize_polyglang_data_divi_5($args),
     );

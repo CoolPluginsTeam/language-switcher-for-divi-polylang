@@ -52,7 +52,7 @@
   padding: var(--cpfd-lang-pading-top) var(--cpfd-lang-pading-right) var(--cpfd-lang-pading-bottom) var(--cpfd-lang-pading-left);
 }
 
-.cpfd-wrapper ul li div:not(.cpfd-lang-image) a {
+.cpfd-wrapper ul li div:not(.cpfd-lang-image) a, .cpfd-wrapper span a {
   color: var(--cpfd-normal-text-color);
   font-family: var(--cpfd-normal-text-font);
   font-weight: var(--cpfd-normal-text-weight);
@@ -151,6 +151,7 @@
   pointer-events: none;
   padding: 0px;
   z-index: var(--cpfd-dropdown-index, 0);
+  /* overflow-wrap: anywhere; */
   display: inline-table;
   width: 100%;
 }

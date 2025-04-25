@@ -20,7 +20,6 @@ class CPFD_STYLE_HELPERS {
 		$lang_padding            = isset( $attr['cpfd_bg_normal_padding'] ) ? $attr['cpfd_bg_normal_padding'] : '';
 		$lang_margin             = isset( $attr['cpfd_bg_normal_margin'] ) ? $attr['cpfd_bg_normal_margin'] : '';
 		$lang_normal_bg_color    = isset( $attr['cpfd_bg_normal_color'] ) ? $attr['cpfd_bg_normal_color'] : '';
-		$lang_hover_bg_color     = isset( $attr['cpfd_bg_hover_color'] ) ? $attr['cpfd_bg_hover_color'] : '';
 		$flag_width              = isset( $attr['cpfd_flag_width'] ) ? $attr['cpfd_flag_width'] : '';
 		$flag_radius             = isset( $attr['cpfd_flag_radius'] ) ? $attr['cpfd_flag_radius'] : '';
 		$flag_ratio              = isset( $attr['cpfd_flag_ratio'] ) ? $attr['cpfd_flag_ratio'] : '';
@@ -29,10 +28,6 @@ class CPFD_STYLE_HELPERS {
 		$normal_text_size        = isset( $attr['cpfd_text_settings_font_size'] ) ? $attr['cpfd_text_settings_font_size'] : '';
 		$normal_text_spacing     = isset( $attr['cpfd_text_settings_letter_spacing'] ) ? $attr['cpfd_text_settings_letter_spacing'] : '';
 		$normal_text_line_height = isset( $attr['cpfd_text_settings_line_height'] ) ? $attr['cpfd_text_settings_line_height'] : '';
-		$hover_text_font         = isset( $attr['cpfd_hover_text_font'] ) ? $attr['cpfd_hover_text_font'] : '';
-		$hover_text_color        = isset( $attr['cpfd_hover_text_color'] ) ? $attr['cpfd_hover_text_color'] : '';
-		$hover_text_size         = isset( $attr['cpfd_hover_text_font_size'] ) ? $attr['cpfd_hover_text_font_size'] : '';
-		$hover_text_line_height  = isset( $attr['cpfd_hover_text_line_height'] ) ? $attr['cpfd_hover_text_line_height'] : '';
 		ET_Builder_Element::set_style(
 			$slug,
 			array(
@@ -77,16 +72,6 @@ class CPFD_STYLE_HELPERS {
 				array(
 					'selector'    => $selector,
 					'declaration' => sprintf( '--cpfd-normal-bg-color: %1$s;', $lang_normal_bg_color ),
-				)
-			);
-		}
-
-		if ( '' !== $lang_hover_bg_color ) {
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--cpfd-hover-bg-color: %1$s;', $lang_hover_bg_color ),
 				)
 			);
 		}
@@ -207,86 +192,6 @@ class CPFD_STYLE_HELPERS {
 				)
 			);
 		}
-		if ( '' !== $hover_text_font ) {
-			$this->load_google_fonts( $hover_text_font );
-			$Font_properties = $this->get_font_properties( $hover_text_font );
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--cpfd-hover-text-font: %1$s;', $Font_properties['fontFamily'] ),
-				)
-			);
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--cpfd-hover-text-weight: %1$s;', $Font_properties['fontWeight'] ),
-				)
-			);
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--cpfd-hover-text-transform: %1$s;', $Font_properties['textTransform'] ),
-				)
-			);
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--cpfd-hover-text-decoration: %1$s;', $Font_properties['textDecoration'] ),
-				)
-			);
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--cpfd-hover-text-style: %1$s;', $Font_properties['fontStyle'] ),
-				)
-			);
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--cpfd-hover-text-decoration-color: %1$s;', $Font_properties['textDecorationLineColor'] ),
-				)
-			);
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--cpfd-hover-text-decoration-style: %1$s;', $Font_properties['textDecorationStyle'] ),
-				)
-			);
-		}
-		if ( '' !== $hover_text_color ) {
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--cpfd-hover-text-color: %1$s;', $hover_text_color ),
-				)
-			);
-		}
-		if ( '' !== $hover_text_size ) {
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--cpfd-hover-text-size: %1$s;', $hover_text_size ),
-				)
-			);
-		}
-		if ( '' !== $hover_text_line_height ) {
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--cpfd-hover-text-line-height: %1$s;', $hover_text_line_height ),
-				)
-			);
-		}
 		// Code for generating Divi styles goes here
 	}
 
@@ -303,20 +208,19 @@ class CPFD_STYLE_HELPERS {
 		$fontFamily = $fontParts[0];
 		$fontWeight = $fontParts[1];
 		$fontStyle  = ! empty( $fontParts[2] ) ? 'italic' : 'normal';
-
 		// Determine text transform
 		if ( ! empty( $fontParts[3] ) ) {
 			$textTransform = 'uppercase';
-		} elseif ( ! empty( $fontParts[4] ) ) {
+		} elseif ( ! empty( $fontParts[5] ) ) {
 			$textTransform = 'capitalize';
 		} else {
 			$textTransform = 'none';
 		}
 
 		// Determine text decoration
-		if ( ! empty( $fontParts[5] ) && ! empty( $fontParts[6] ) ) {
+		if ( ! empty( $fontParts[4] ) && ! empty( $fontParts[6] ) ) {
 			$textDecoration = 'line-through';
-		} elseif ( ! empty( $fontParts[5] ) ) {
+		} elseif ( ! empty( $fontParts[4] ) ) {
 			$textDecoration = 'underline';
 		} elseif ( ! empty( $fontParts[6] ) ) {
 			$textDecoration = 'line-through';

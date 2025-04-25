@@ -15,7 +15,7 @@ export const conversionOutline = {
     transform:      'module.decoration.transform',
     transition:     'module.decoration.transition',
     z_index:        'module.decoration.zIndex',
-    max_width:      'module.decoration.sizing',
+    max_width:      'container_size.decoration.sizing',
     height:         'module.decoration.sizing',
     link_options:   'module.advanced.link',
     fonts:      {
@@ -38,7 +38,7 @@ export const conversionOutline = {
       default: 'module.decoration.border',
     },
     filters:   {
-      default: 'module.decoration.filters',
+      default: 'color_filters.decoration.filters',
     },
   },
   css: {

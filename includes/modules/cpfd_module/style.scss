@@ -140,6 +140,7 @@
             padding: 0px;
             z-index: var(--cpfd-dropdown-index,0);
             display: inline-table;
+            // overflow-wrap: anywhere;
             
 
             li {

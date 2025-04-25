@@ -103,7 +103,7 @@
     },
     "container_size": {
       "type": "object",
-      "selector": "{{selector}} .cpfd-wrapper, {{selector}} .cpfd-wrapper.dropdown"
+      "selector": "{{selector}} .cpfd-main-wrapper"
     },
     "color_filters": {
       "type": "object",

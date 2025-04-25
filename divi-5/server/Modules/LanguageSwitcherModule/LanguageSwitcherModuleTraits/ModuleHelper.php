@@ -24,7 +24,7 @@ class ModuleHelper {
         return is_array($value) ? array_map('esc_html', $value) : esc_html($value);
     }
 
-    static function cpfd_localize_polyglang_data_divi_5( $data ) {
+    static function cpfd_localize_polyglang_data_divi_5($data) {
     
         global $polylang;
         $cpfd_polylang = $polylang;
@@ -37,7 +37,7 @@ class ModuleHelper {
                     
                     // Ensure $languages is an array
                     if ( !is_array( $languages ) || empty( $languages ) ) {
-                        return $data; // Exit early if languages are not available
+                        return; // Exit early if languages are not available
                     }
                     $lang_curr = strtolower( pll_current_language() ? pll_current_language() : pll_default_language() );
                     // Correct array_map function

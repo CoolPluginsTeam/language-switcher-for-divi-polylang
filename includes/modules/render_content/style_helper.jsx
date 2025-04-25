@@ -57,19 +57,14 @@ const staticCSS = (props) => {
     const langPadding = props.cpfd_bg_normal_padding ? props.cpfd_bg_normal_padding : '';
     const langMargin = props.cpfd_bg_normal_margin ? props.cpfd_bg_normal_margin : '';
     const langNormalBgColor = props.cpfd_bg_normal_color ? props.cpfd_bg_normal_color : '';
-    const langHoverBgColor = props.cpfd_bg_hover_color ? props.cpfd_bg_hover_color : '';
     const flagWidth = props.cpfd_flag_width ? props.cpfd_flag_width : '';
     const flagRadius = props.cpfd_flag_radius ? props.cpfd_flag_radius : '';
     const flagRatio = props.cpfd_flag_ratio ? props.cpfd_flag_ratio : '';
-    const normalTextFont = props.cpfd_normal_text_font ? props.cpfd_normal_text_font : '';
+    const normalTextFont = props.cpfd_text_settings_font ? props.cpfd_text_settings_font : '';
     const normalTextColor = props.cpfd_text_settings_text_color ? props.cpfd_text_settings_text_color : '';
-    const normalTextSize = props.cpfd_normal_text_font_size ? props.cpfd_normal_text_font_size : '';
-    const normalTextLineHeight = props.cpfd_normal_text_line_height ? props.cpfd_normal_text_line_height : '';
-    const hoverTextFont = props.cpfd_hover_text_font ? props.cpfd_hover_text_font : '';
-    const hoverTextColor = props.cpfd_hover_text_color ? props.cpfd_hover_text_color : '';
-    const hoverTextSize = props.cpfd_hover_text_font_size ? props.cpfd_hover_text_font_size : '';
-    const hoverTextLineHeight = props.cpfd_hover_text_line_height ? props.cpfd_hover_text_line_height : '';
-
+    const normalTextSize = props.cpfd_text_settings_font_size ? props.cpfd_text_settings_font_size : '';
+    const normalTextLineHeight = props.cpfd_text_settings_line_height ? props.cpfd_text_settings_line_height : '';
+    const normal_text_spacing = props.cpfd_text_settings_letter_spacing ? props.cpfd_text_settings_letter_spacing : '';
     if ('' !== langPadding) {
         const padding = getUnitValue(langPadding);
         Object.keys(padding).forEach((key) => {
@@ -110,17 +105,6 @@ const staticCSS = (props) => {
                 {
                     selector: selector,
                     declaration: `--cpfd-normal-bg-color: ${langNormalBgColor};`,
-                }
-            ]
-        );
-    }
-
-    if ('' !== langHoverBgColor) {
-        customCss.push(
-            [
-                {
-                    selector: selector,
-                    declaration: `--cpfd-hover-bg-color: ${langHoverBgColor};`,
                 }
             ]
         );
@@ -255,91 +239,12 @@ const staticCSS = (props) => {
             ]
         );
     }
-    if ('' !== hoverTextFont) {
-        const Font_properties = extractFontProperties(hoverTextFont);
+    if ('' !== normal_text_spacing) {
         customCss.push(
             [
                 {
                     selector: selector,
-                    declaration: `--cpfd-hover-text-font: ${Font_properties['fontFamily']}`,
-                }
-            ]
-        );
-        customCss.push(
-            [
-                {
-                    selector: selector,
-                    declaration: `--cpfd-hover-text-weight: ${Font_properties['fontWeight']}`,
-                }
-            ]
-        );
-        customCss.push(
-            [
-                {
-                    selector: selector,
-                    declaration: `--cpfd-hover-text-transform: ${Font_properties['textTransform']}`,
-                }
-            ]
-        );
-        customCss.push(
-            [
-                {
-                    selector: selector,
-                    declaration: `--cpfd-hover-text-decoration: ${Font_properties['textDecoration']}`,
-                }
-            ]
-        );
-        customCss.push(
-            [
-                {
-                    selector: selector,
-                    declaration: `--cpfd-hover-text-style: ${Font_properties['fontStyle']}`,
-                }
-            ]
-        );
-        customCss.push(
-            [
-                {
-                    selector: selector,
-                    declaration: `--cpfd-hover-text-decoration-color: ${Font_properties['textDecorationLineColor']}`,
-                }
-            ]
-        );
-        customCss.push(
-            [
-                {
-                    selector: selector,
-                    declaration: `--cpfd-hover-text-decoration-style: ${Font_properties['textDecorationStyle']}`,
-                }
-            ]
-        );
-    }
-    if ('' !== hoverTextColor) {
-        customCss.push(
-            [
-                {
-                    selector: selector,
-                    declaration: `--cpfd-hover-text-color: ${hoverTextColor}`,
-                }
-            ]
-        );
-    }
-    if ('' !== hoverTextSize) {
-        customCss.push(
-            [
-                {
-                    selector: selector,
-                    declaration: `--cpfd-hover-text-size: ${hoverTextSize}`,
-                }
-            ]
-        );
-    }
-    if ('' !== hoverTextLineHeight) {
-        customCss.push(
-            [
-                {
-                    selector: selector,
-                    declaration: `--cpfd-hover-text-line-height: ${hoverTextLineHeight}`,
+                    declaration: `--cpfd-normal-text-letter-spacing: ${normal_text_spacing}`,
                 }
             ]
         );

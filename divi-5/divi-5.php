@@ -29,7 +29,7 @@ class CPFD_Divi5 {
     \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build(
       [
         'name'   => 'cpfd-divi5-visual-builder-script',
-        'version' => 'CPFD',
+        'version' => CPFD,
         'script' => [
           'src' => CPFD_URL . 'divi-5/visual-builder/build/connect-polylang-for-divi-build.js',
           'deps'               => [

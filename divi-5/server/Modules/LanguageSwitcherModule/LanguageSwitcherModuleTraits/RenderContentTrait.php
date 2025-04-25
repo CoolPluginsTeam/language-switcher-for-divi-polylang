@@ -34,7 +34,6 @@ trait RenderContentTrait
         $languages_html = '';
         
         foreach ($languages as $lang) {
-            // var_dump($lang);
             if ($current_lang === $lang['slug'] || ($lang['no_translation'] && $props['hide_untranslated_language'] === 'on')) {
                 continue;
             }
@@ -43,7 +42,7 @@ trait RenderContentTrait
             $anchor_open = '<a href="' . esc_url($lang['url']) . '">';
             $anchor_close = '</a>';
 
-            $languages_html .= '<li class="cpfd-lang-item">';
+            $languages_html .= '<li class="cpfd-lang-item" >';
             if ($props['show_language_flag'] === 'on') {
                 $languages_html .= '<div class="cpfd-lang-image">' . wp_kses_post($anchor_open) . $flag_icon . wp_kses_post($anchor_close) . '</div>';
             }
@@ -56,7 +55,7 @@ trait RenderContentTrait
             $languages_html .= '</li>';
         }
         
-        return $active_html . '<ul class="cpfd-language-list">' . $languages_html . '</ul></div>';
+        return $active_html . '<ul class="cpfd-language-list">' . $languages_html . '</ul>';
     }
 
     private static function get_active_language_html($lang, $props)

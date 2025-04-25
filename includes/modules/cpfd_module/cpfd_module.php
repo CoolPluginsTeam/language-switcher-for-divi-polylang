@@ -52,21 +52,21 @@ class CPFD_Module extends ET_Builder_Module {
 		$advanced_fields['text']           = false;
 		$advanced_fields['margin_padding'] = false;
 		$advanced_fields['transform']      = false;
-		$advanced_fields['filter']         = false;
+		// $advanced_fields['filters']         = false;
 		$advanced_fields['box_shadow']     = false;
-		$advanced_fields['border']     = false;
-
+		$advanced_fields['border']     	   = false;
+		// $advanced_fields['max_width'] 	   = false;
 		$advanced_fields['fonts']['cpfd_text_settings'] = array(
 			'label_prefix'        => esc_html__( 'Text', 'cpfd' ),
 			'tab_slug'            => 'advanced',
 			'toggle_slug'         => 'cpfd_text_settings',
 			'css'          => array(
-				'main'      => '%%order_class%% .cpfd-wrapper ul li.cpfd_active_lang .cpfd-lang-name, %%order_class%% .cpfd-wrapper ul li.cpfd_active_lang .cpfd-lang-code, %%order_class%% .cpfd-wrapper ul li:hover.cpfd_active_lang .cpfd-lang-name, %%order_class%% .cpfd-wrapper ul li:hover.cpfd_active_lang .cpfd-lang-code, %%order_class%% .cpfd-wrapper ul li .cpfd-lang-name, %%order_class%% .cpfd-wrapper ul li .cpfd-lang-code, %%order_class%% .cpfd-wrapper.dropdown span .cpfd-lang-name a, %%order_class%% .cpfd-wrapper.dropdown span .cpfd-lang-code a, %%order_class%% .cpfd-wrapper ul li a',
+				'main'      => '%%order_class%% .cpfd-wrapper ul li.cpfd_active_lang .cpfd-lang-name, %%order_class%% .cpfd-wrapper ul li.cpfd_active_lang .cpfd-lang-code, %%order_class%% .cpfd-wrapper ul li:hover.cpfd_active_lang .cpfd-lang-name, %%order_class%% .cpfd-wrapper ul li:hover.cpfd_active_lang .cpfd-lang-code, %%order_class%% .cpfd-wrapper ul li .cpfd-lang-name, %%order_class%% .cpfd-wrapper ul li .cpfd-lang-code, %%order_class%% .cpfd-wrapper.dropdown span .cpfd-lang-name a, %%order_class%% .cpfd-wrapper.dropdown span .cpfd-lang-code a, %%order_class%% .cpfd-wrapper ul li a,',
 				'important' => 'all',
 			),
 			'hide_text_align'     => true,
+			'hide_text_shadow'    => true,
 		);
-
 		// Configure the margin and padding for the container.
 		$advanced_fields['margin_padding'] = array(
 			'css'          => array(
@@ -165,33 +165,11 @@ class CPFD_Module extends ET_Builder_Module {
 				'tab_slug'       => 'advanced'
 			),
 
-			'cpfd_background_setting'            => array(
-				'label'               => esc_html__( 'Background', 'cpfd' ),
-				'tab_slug'            => 'advanced',
-				'toggle_slug'         => 'cpfd_background',
-				'attr_suffix'         => '',
-				'type'                => 'composite',
-				'composite_type'      => 'default',
-				'composite_structure' => array(
-					'cpfd_background_normal' => array(
-						'label'    => esc_html__( 'Normal', 'cpfd' ),
-						'controls' => array(
-							'cpfd_bg_normal_color' => array(
-								'label' => esc_html__( 'Background Color', 'cpfd' ),
-								'type'  => 'color',
-							),
-						),
-					),
-					'cpfd_background_hover'  => array(
-						'label'    => esc_html__( 'Hover', 'cpfd' ),
-						'controls' => array(
-							'cpfd_bg_hover_color' => array(
-								'label' => esc_html__( 'Background Color', 'cpfd' ),
-								'type'  => 'color',
-							),
-						),
-					),
-				),
+			'cpfd_bg_normal_color' => array(
+				'label'       => esc_html__( 'Background', 'cpfd' ),
+				'tab_slug'    => 'advanced',
+				'toggle_slug' => 'cpfd_background',
+				'type'        => 'color',
 			),
 		);
 	}

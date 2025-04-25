@@ -40,14 +40,6 @@ export const LanguageSwitcherModuleEdit = (props) => {
     fetch({
       method: 'GET',
       restRoute: '/cpfd/v1/module-data/language-switcher-module',
-      data: {
-        switcher_layouts: attributes?.switcher_layouts,
-        show_language_flag: attributes?.show_language_flag,
-        show_language_name: attributes?.show_language_name,
-        show_language_code: attributes?.show_language_code,
-        hide_current_language: attributes?.hide_current_language,
-        hide_untranslated_language: attributes?.hide_untranslated_language,
-      },
     })
     .catch((error) => {
       console.error('Error fetching data:', error);
@@ -56,7 +48,7 @@ export const LanguageSwitcherModuleEdit = (props) => {
 
   useEffect(() => {
     language_switcher_module_data();
-  }, [attributes?.switcher_layouts, attributes?.show_language_flag, attributes?.show_language_name, attributes?.show_language_code, attributes?.hide_current_language, attributes?.hide_untranslated_language]);
+  }, [attributes?.switcher_layouts]);
 
   return (
     <ModuleContainer
@@ -73,50 +65,51 @@ export const LanguageSwitcherModuleEdit = (props) => {
         ) : (
          (
           polylangData && (Object.keys(polylangData).length > 0)  ? (
-            
-            <div className={`cpfd-wrapper ${attributes.switcher_layouts}`}>
-            {attributes?.switcher_layouts === 'dropdown' && (
-              polylangData?.[currentLang] ? (
-                <span>
-                  {attributes?.show_language_flag === 'on' && <CountryFlag flagCode={polylangData?.[currentLang]?.flagCode} name={polylangData?.[currentLang]?.name} url={pluginUrl} />}
-                  {attributes?.show_language_name === 'on' && <CountryName name={polylangData?.[currentLang]?.name} />}
-                  {attributes?.show_language_code === 'on' && <CountryCode code={polylangData?.[currentLang]?.slug} />}
-                </span>
-              ) : (
-                <>No current available languages</>
-              )
-            )}
-            { (
-              <ul>
-              {
-              polylangData && Object.keys(polylangData) && Object.keys(polylangData).length > 0 ? (
-                <>
-                  {Object.keys(polylangData).map((lang, index) => {
-                    if (lang === currentLang && 'on' === attributes?.hide_current_language) {
-                      return null;
-                    }
+            <div className='cpfd-main-wrapper'>
+              <div className={`cpfd-wrapper ${attributes.switcher_layouts}`}>
+              {attributes?.switcher_layouts === 'dropdown' && (
+                polylangData?.[currentLang] ? (
+                  <span>
+                    {attributes?.show_language_flag === 'on' && <CountryFlag flagCode={polylangData?.[currentLang]?.flagCode} name={polylangData?.[currentLang]?.name} url={pluginUrl} />}
+                    {attributes?.show_language_name === 'on' && <CountryName name={polylangData?.[currentLang]?.name} />}
+                    {attributes?.show_language_code === 'on' && <CountryCode code={polylangData?.[currentLang]?.slug} />}
+                  </span>
+                ) : (
+                  <>No current available languages</>
+                )
+              )}
+              { (
+                <ul>
+                {
+                polylangData && Object.keys(polylangData) && Object.keys(polylangData).length > 0 ? (
+                  <>
+                    {Object.keys(polylangData).map((lang, index) => {
+                      if (lang === currentLang && 'on' === attributes?.hide_current_language) {
+                        return null;
+                      }
 
-                    // if (polylangData[lang].no_translation && 'on' === attributes?.hide_untranslated_language) {
-                    //   return null;
-                    // }
+                      // if (polylangData[lang].no_translation && 'on' === attributes?.hide_untranslated_language) {
+                      //   return null;
+                      // }
 
-                    if (lang === currentLang && 'dropdown' === attributes?.switcher_layouts) {
-                      return null;
-                    }
+                      if (lang === currentLang && 'dropdown' === attributes?.switcher_layouts) {
+                        return null;
+                      }
 
-                    return (
-                      <li key={index} className={lang === currentLang ? 'cpfd_active_lang' : ''}>
-                        {attributes?.show_language_flag === 'on' && <CountryFlag flagCode={polylangData?.[lang]?.flagCode} name={polylangData?.[lang]?.name} url={pluginUrl}/>}
-                        {attributes?.show_language_name === 'on' && <CountryName name={polylangData?.[lang]?.name} />}
-                        {attributes?.show_language_code === 'on' && <CountryCode code={polylangData?.[lang]?.slug} />}
-                      </li>
-                    );
-                  })}
-                </>
-              ):(<>No available languages</>)
-            }
-            </ul>            
-            )}
+                      return (
+                        <li key={index} className={lang === currentLang ? 'cpfd_active_lang' : ''}>
+                          {attributes?.show_language_flag === 'on' && <CountryFlag flagCode={polylangData?.[lang]?.flagCode} name={polylangData?.[lang]?.name} url={pluginUrl}/>}
+                          {attributes?.show_language_name === 'on' && <CountryName name={polylangData?.[lang]?.name} />}
+                          {attributes?.show_language_code === 'on' && <CountryCode code={polylangData?.[lang]?.slug} />}
+                        </li>
+                      );
+                    })}
+                  </>
+                ):(<>No available languages</>)
+              }
+              </ul>            
+              )}
+            </div>
           </div>
         ) : (
           <>No available languages</>
