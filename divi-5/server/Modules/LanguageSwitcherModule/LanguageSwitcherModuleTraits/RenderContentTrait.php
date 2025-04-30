@@ -39,20 +39,19 @@ trait RenderContentTrait
             }
 
             $flag_icon = \CPFD_HELPERS::get_country_flag($lang['flag'], $lang['name']);
-            $anchor_open = '<a href="' . esc_url($lang['url']) . '">';
-            $anchor_close = '</a>';
 
             $languages_html .= '<li class="cpfd-lang-item" >';
-            if ($props['show_language_flag'] === 'on') {
-                $languages_html .= '<div class="cpfd-lang-image">' . wp_kses_post($anchor_open) . $flag_icon . wp_kses_post($anchor_close) . '</div>';
+            $languages_html .= '<a href="' . esc_url($lang['url']) . '">';
+            if (!empty($props['show_language_flag']) && $props['show_language_flag'] === 'on') {
+                $languages_html .= '<div class="cpfd-lang-image">' . $flag_icon . '</div>';
             }
-            if ($props['show_language_name'] === 'on') {
-                $languages_html .= '<div class="cpfd-lang-name">' . wp_kses_post($anchor_open . esc_html($lang['name']) . $anchor_close) . '</div>';
+            if (!empty($props['show_language_name']) && $props['show_language_name'] === 'on') {
+                $languages_html .= '<div class="cpfd-lang-name">' . esc_html($lang['name']) . '</div>';
             }
-            if ($props['show_language_code'] === 'on') {
-                $languages_html .= '<div class="cpfd-lang-code">' . wp_kses_post($anchor_open . esc_html($lang['slug']) . $anchor_close) . '</div>';
+            if (!empty($props['show_language_code']) && $props['show_language_code'] === 'on') {
+                $languages_html .= '<div class="cpfd-lang-code">' . esc_html($lang['slug']) . '</div>';
             }
-            $languages_html .= '</li>';
+            $languages_html .= '</a></li>';
         }
         
         return $active_html . '<ul class="cpfd-language-list">' . $languages_html . '</ul>';
@@ -61,16 +60,17 @@ trait RenderContentTrait
     private static function get_active_language_html($lang, $props)
     {
         $html = '<span class="cpfd-active-language">';
-        if ($props['show_language_flag'] === 'on') {
-            $html .= '<div class="cpfd-lang-image"><a href="' . esc_url($lang['url']) . '">' . \CPFD_HELPERS::get_country_flag($lang['flag'], $lang['name']) . '</a></div>';
+        $html .= '<a href="' . esc_url($lang['url']) . '">';
+        if (!empty($props['show_language_flag']) && $props['show_language_flag'] === 'on') {
+            $html .= '<div class="cpfd-lang-image">' . \CPFD_HELPERS::get_country_flag($lang['flag'], $lang['name']) . '</div>';
         }
-        if ($props['show_language_name'] === 'on') {
-            $html .= '<div class="cpfd-lang-name"><a href="' . esc_url($lang['url']) . '">' . esc_html($lang['name']) . '</a></div>';
+        if (!empty($props['show_language_name']) && $props['show_language_name'] === 'on') {
+            $html .= '<div class="cpfd-lang-name">' . esc_html($lang['name']) . '</div>';
         }
-        if ($props['show_language_code'] === 'on') {
-            $html .= '<div class="cpfd-lang-code"><a href="' . esc_url($lang['url']) . '">' . esc_html($lang['slug']) . '</a></div>';
+        if (!empty($props['show_language_code']) && $props['show_language_code'] === 'on') {
+            $html .= '<div class="cpfd-lang-code">' . esc_html($lang['slug']) . '</div>';
         }
-        $html .= '</span>';
+        $html .= '</a></span>';
         return $html;
     }
 
@@ -88,15 +88,17 @@ trait RenderContentTrait
             $anchor_close = '</a>';
 
             $html .= '<li class="cpfd-lang-item">';
+            $html .= $anchor_open;
             if ($props['show_language_flag'] === 'on') {
-                $html .= '<div class="cpfd-lang-image">' . wp_kses_post($anchor_open) . $flag_icon . wp_kses_post($anchor_close) . '</div>';
+                $html .= '<div class="cpfd-lang-image">' .$flag_icon .'</div>';
             }
             if ($props['show_language_name'] === 'on') {
-                $html .= '<div class="cpfd-lang-name">' . wp_kses_post($anchor_open . esc_html($lang['name']) . $anchor_close) . '</div>';
+                $html .= '<div class="cpfd-lang-name">' . wp_kses_post(esc_html($lang['name'])) . '</div>';
             }
             if ($props['show_language_code'] === 'on') {
-                $html .= '<div class="cpfd-lang-code">' . wp_kses_post($anchor_open . esc_html($lang['slug']) . $anchor_close) . '</div>';
+                $html .= '<div class="cpfd-lang-code">' . wp_kses_post(esc_html($lang['slug'])) . '</div>';
             }
+            $html .= $anchor_close;
             $html .= '</li>';
         }
         return '<ul class="cpfd-language-list">' . $html . '</ul>';

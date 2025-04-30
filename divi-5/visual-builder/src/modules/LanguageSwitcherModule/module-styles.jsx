@@ -1,10 +1,8 @@
 import React from 'react';
 
 const {
-  CssStyle,
   StyleContainer,
   CommonStyle,
-  TextStyle,
 } = window?.divi?.module;
 
 /**
@@ -14,20 +12,18 @@ export const ModuleStyles = (props) => {
   const {
     attrs,
     elements,
-    settings,
     orderClass,
     mode,
     state,
     noStyleTag
   } = props;
-
   return (
     <StyleContainer mode={mode} state={state} noStyleTag={noStyleTag}>
       <CommonStyle
         selector={`${orderClass} .cpfd-wrapper.dropdown ul`}
         attr={attrs?.switcher_layouts}
         declarationFunction={(attrs) => {
-          return `--cpfd-dropdown-index: 99`;
+          return `--cpfd-dropdown-index: 999;`;
         }}
       />
      <CommonStyle

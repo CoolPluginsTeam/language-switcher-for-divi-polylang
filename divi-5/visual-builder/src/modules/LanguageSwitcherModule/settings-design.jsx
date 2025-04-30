@@ -6,22 +6,15 @@ const {
   ColorPickerContainer,
   SelectContainer,
   RangeContainer,
-  SpacingContainer,
  
 } = window?.divi?.fieldLibrary;
 const {
-  AnimationGroup,
-  BorderGroup,
-  BoxShadowGroup,
   FiltersGroup,
   FontGroup,
-  FontBodyGroup,
   GroupContainer,
   FieldContainer,
   SizingGroup,
   SpacingGroup,
-  TextGroup,
-  TransformGroup,
 } = window?.divi?.module;
 
 const aspect_ratio = {

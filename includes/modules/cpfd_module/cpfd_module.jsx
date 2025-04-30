@@ -22,7 +22,6 @@ class CPFD_Module extends Component {
       const polylangData =window.ETBuilderBackendDynamic &&  window.ETBuilderBackendDynamic.cpfdGlobalObj &&  window.ETBuilderBackendDynamic.cpfdGlobalObj.cpfdLanguageData ? window.ETBuilderBackendDynamic.cpfdGlobalObj.cpfdLanguageData : [];
       const currentLang = window.ETBuilderBackendDynamic && window.ETBuilderBackendDynamic.cpfdGlobalObj &&  window.ETBuilderBackendDynamic.cpfdGlobalObj.cpfdCurrentLang ? window.ETBuilderBackendDynamic.cpfdGlobalObj.cpfdCurrentLang : '';
       this.setState({ polylangData, currentLang });
-      // console.log(polylangData);
     }, 1000);
   }
 
@@ -32,7 +31,7 @@ class CPFD_Module extends Component {
 
   render() {
     const { polylangData, currentLang } = this.state;
-    const style = this.props.cpfd_style ? this.props.cpfd_style : 'horizontal';
+    const style = this.props.cpfd_style ? this.props.cpfd_style : 'dropdown';
     const flagDisplay = this.props.cpfd_flag_visibility ? this.props.cpfd_flag_visibility : 'on';
     const nameDisplay = this.props.cpfd_language_name_visibility ? this.props.cpfd_language_name_visibility : 'on';
     const codeDisplay = this.props.cpfd_language_code_visibility ? this.props.cpfd_language_code_visibility : 'off';
@@ -48,9 +47,11 @@ class CPFD_Module extends Component {
           (
             polylangData && polylangData[currentLang] ? (
             <span>
-              {flagDisplay === 'on' && <CountryFlag flagCode={polylangData[currentLang].flagCode} name={polylangData[currentLang].name} url={pluginUrl}/>}
-              {nameDisplay === 'on' && <CountryName name={polylangData[currentLang].name} />}
-              {codeDisplay === 'on' && <CountryCode code={polylangData[currentLang].slug} />}
+              <a href={polylangData[currentLang].url}>
+                {flagDisplay === 'on' && <CountryFlag flagCode={polylangData[currentLang].flagCode} name={polylangData[currentLang].name} url={pluginUrl}/>}
+                {nameDisplay === 'on' && <CountryName name={polylangData[currentLang].name} />}
+                {codeDisplay === 'on' && <CountryCode code={polylangData[currentLang].slug} />}
+              </a>
             </span>
           ):<>No current available languages</>)}
         {(
@@ -74,9 +75,11 @@ class CPFD_Module extends Component {
 
                     return (
                       <li key={index} className={lang === currentLang ? 'cpfd_active_lang' : ''}>
-                        {flagDisplay === 'on' && <CountryFlag flagCode={polylangData[lang].flagCode} name={polylangData[lang].name} url={pluginUrl}/>}
-                        {nameDisplay === 'on' && <CountryName name={polylangData[lang].name} />}
-                        {codeDisplay === 'on' && <CountryCode code={polylangData[lang].slug} />}
+                        <a href={polylangData[lang].url}>
+                          {flagDisplay === 'on' && <CountryFlag flagCode={polylangData[lang].flagCode} name={polylangData[lang].name} url={pluginUrl}/>}
+                          {nameDisplay === 'on' && <CountryName name={polylangData[lang].name} />}
+                          {codeDisplay === 'on' && <CountryCode code={polylangData[lang].slug} />}
+                        </a>
                       </li>
                     );
                   })}

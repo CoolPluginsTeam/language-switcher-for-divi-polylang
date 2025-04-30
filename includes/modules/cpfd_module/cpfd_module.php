@@ -61,7 +61,7 @@ class CPFD_Module extends ET_Builder_Module {
 			'tab_slug'            => 'advanced',
 			'toggle_slug'         => 'cpfd_text_settings',
 			'css'          => array(
-				'main'      => '%%order_class%% .cpfd-wrapper ul li.cpfd_active_lang .cpfd-lang-name, %%order_class%% .cpfd-wrapper ul li.cpfd_active_lang .cpfd-lang-code, %%order_class%% .cpfd-wrapper ul li:hover.cpfd_active_lang .cpfd-lang-name, %%order_class%% .cpfd-wrapper ul li:hover.cpfd_active_lang .cpfd-lang-code, %%order_class%% .cpfd-wrapper ul li .cpfd-lang-name, %%order_class%% .cpfd-wrapper ul li .cpfd-lang-code, %%order_class%% .cpfd-wrapper.dropdown span .cpfd-lang-name a, %%order_class%% .cpfd-wrapper.dropdown span .cpfd-lang-code a, %%order_class%% .cpfd-wrapper ul li a,',
+				'main'      => '%%order_class%% .cpfd-wrapper ul li.cpfd_active_lang .cpfd-lang-name, %%order_class%% .cpfd-wrapper ul li.cpfd_active_lang .cpfd-lang-code,   %%order_class%% .cpfd-wrapper ul li .cpfd-lang-name, %%order_class%% .cpfd-wrapper ul li .cpfd-lang-code, %%order_class%% .cpfd-wrapper.dropdown span .cpfd-lang-name, %%order_class%% .cpfd-wrapper.dropdown span .cpfd-lang-code, %%order_class%% .cpfd-wrapper ul li a,',
 				'important' => 'all',
 			),
 			'hide_text_align'     => true,
@@ -70,7 +70,7 @@ class CPFD_Module extends ET_Builder_Module {
 		// Configure the margin and padding for the container.
 		$advanced_fields['margin_padding'] = array(
 			'css'          => array(
-				'main'      => '%%order_class%% .cpfd-wrapper ul li, %%order_class%% .cpfd-wrapper.dropdown',
+				'main'      => '%%order_class%% .cpfd-wrapper ul li a, %%order_class%% .cpfd-wrapper.dropdown',
 				'important' => true,
 			),
 			'toggle_slug'  => 'cpfd_background',
@@ -85,7 +85,7 @@ class CPFD_Module extends ET_Builder_Module {
 			'cpfd_style'                         => array(
 				'label'       => esc_html__( 'Layout Options', 'cpfd' ),
 				'type'        => 'select',
-				'default'     => 'horizontal',
+				'default'     => 'dropdown',
 				'options'     => array(
 					'vertical'   => esc_html__( 'Vertical', 'cpfd' ),
 					'horizontal' => esc_html__( 'Horizontal', 'cpfd' ),
@@ -131,7 +131,7 @@ class CPFD_Module extends ET_Builder_Module {
 			'cpfd_flag_ratio'                    => array(
 				'label'       => esc_html__( 'Aspect Ratio', 'cpfd' ),
 				'type'        => 'select',
-				'default'     => 'horizontal',
+				'default'     => 'auto',
 				'options'     => array(
 					'auto' => esc_html__( 'auto', 'cpfd' ),
 					'1/1'  => esc_html__( '1:1', 'cpfd' ),
@@ -170,6 +170,9 @@ class CPFD_Module extends ET_Builder_Module {
 				'tab_slug'    => 'advanced',
 				'toggle_slug' => 'cpfd_background',
 				'type'        => 'color',
+				'responsive'      => true,
+				'mobile_options'  => true,
+				'hover'           => 'tabs'
 			),
 		);
 	}
@@ -177,7 +180,7 @@ class CPFD_Module extends ET_Builder_Module {
 	public function render( $attrs, $content = null, $render_slug = null ) {
 			$static_style_loader = new CPFD_STYLE_HELPERS( $attrs, $render_slug, self::$language_index );
 			self::$language_index++;
-			$style                 = ! isset( $attrs['cpfd_style'] ) ? 'horizontal' : $attrs['cpfd_style'];
+			$style                 = ! isset( $attrs['cpfd_style'] ) ? 'dropdown' : $attrs['cpfd_style'];
 			$flag_display          = ! isset( $attrs['cpfd_flag_visibility'] ) ? 'on' : $attrs['cpfd_flag_visibility'];
 			$name_display          = ! isset( $attrs['cpfd_language_name_visibility'] ) ? 'on' : $attrs['cpfd_language_name_visibility'];
 			$code_display          = ! isset( $attrs['cpfd_language_code_visibility'] ) ? 'off' : $attrs['cpfd_language_code_visibility'];
@@ -195,7 +198,7 @@ class CPFD_Module extends ET_Builder_Module {
 
 				if ( $style === 'dropdown' ) {
 					$active_flag_icon = CPFD_HELPERS::get_country_flag( $languages[ $lang_curr ]['flag'], $languages[ $lang_curr ]['name'] );
-					$active_span      = '<span>';
+					$active_span       = '<span><a href="' . esc_url( $languages[ $lang_curr ]['url'] ) . '">';
 					if ( 'on' === $flag_display ) {
 						$active_span .= sprintf(
 							'<div class="cpfd-lang-image">%s</div>',
@@ -206,20 +209,18 @@ class CPFD_Module extends ET_Builder_Module {
 
 					if ( 'on' === $name_display ) {
 						$active_span .= sprintf(
-							'<div class="cpfd-lang-name"><a href="%s">%s</a></div>',
-							esc_url( $languages[ $lang_curr ]['url'] ),
+							'<div class="cpfd-lang-name">%s</div>',
 							esc_html( $languages[ $lang_curr ]['name'] )
 						);
 					}
 
 					if ( 'on' === $code_display ) {
 						$active_span .= sprintf(
-							'<div class="cpfd-lang-code"><a href="%s">%s</a></div>',
-							esc_url( $languages[ $lang_curr ]['url'] ),
+							'<div class="cpfd-lang-code">%s</div>',
 							esc_html( $languages[ $lang_curr ]['slug'] )
 						);
 					}
-					$active_span .= '</span>';
+					$active_span .= '</a></span>';
 				}
 
 				foreach ( $languages as $lang ) {
@@ -236,39 +237,30 @@ class CPFD_Module extends ET_Builder_Module {
 						continue;
 					}
 					$flag_icon    = CPFD_HELPERS::get_country_flag( $lang['flag'], $lang['name'] );
-					$anchor_open  = $lang_curr === $lang['slug'] ? '' : '<a href="' . esc_url( $lang['url'] ) . '">';
-					$anchor_close = $lang_curr === $lang['slug'] ? '' : '</a>';
 					$active_class = $lang_curr === $lang['slug'] ? 'cpfd_active_lang' : '';
-					$html        .= '<li class="' . esc_attr( $active_class ) . '">';
-
+					$html        .= '<li class="' . esc_attr( $active_class ) . '"><a href="' . esc_url( $lang['url'] ) . '">';
 					if ( 'on' === $flag_display ) {
 						$html .= sprintf(
-							'<div class="cpfd-lang-image">%s%s%s</div>',
-							wp_kses_post( $anchor_open ),
+							'<div class="cpfd-lang-image">%s</div>',
 							$flag_icon,
-							wp_kses_post( $anchor_close )
+							
 						);
 					}
 
 					if ( 'on' === $name_display ) {
 						$html .= sprintf(
-							'<div class="cpfd-lang-name">%s%s%s</div>',
-							wp_kses_post( $anchor_open ),
+							'<div class="cpfd-lang-name">%s</div>',
 							esc_html( $lang['name'] ),
-							wp_kses_post( $anchor_close ),
 						);
 					}
 
 					if ( 'on' === $code_display ) {
 						$html .= sprintf(
-							'<div class="cpfd-lang-code">%s%s%s</div>',
-							wp_kses_post( $anchor_open ),
+							'<div class="cpfd-lang-code">%s</div>',
 							esc_html( $lang['slug'] ),
-							wp_kses_post( $anchor_close ),
 						);
 					}
-
-					$html .= '</li>';
+					$html .='</a></li>';
 				}
 
 				$output = sprintf(

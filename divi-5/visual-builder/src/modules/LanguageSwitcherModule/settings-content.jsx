@@ -3,17 +3,12 @@ import React from 'react';
 import { __ } from '@wordpress/i18n';
 
 const {
-  RichTextContainer,
-  TextContainer,
   SelectContainer,
   ToggleContainer,
 } = window?.divi?.fieldLibrary;
 const { GroupContainer } = window?.divi?.modal;
 const {
-  AdminLabelGroup,
-  BackgroundGroup,
   FieldContainer,
-  LinkGroup,
 } = window?.divi?.module;
 
 const switcher_layouts = {
@@ -35,7 +30,7 @@ export const SettingsContent = (props) => (
           subName="switcher_layouts"
           label={__('Layout Options', 'cpfd')}
           description={__('Select your switcher layout', 'cpfd')}
-          defaultValue={'horizontal'}
+          defaultValue={'dropdown'}
         >
           <SelectContainer
             options={Object.entries(switcher_layouts).reduce((acc, [key, label]) => {

@@ -20,11 +20,13 @@ class CPFD_STYLE_HELPERS {
 		$lang_padding            = isset( $attr['cpfd_bg_normal_padding'] ) ? $attr['cpfd_bg_normal_padding'] : '';
 		$lang_margin             = isset( $attr['cpfd_bg_normal_margin'] ) ? $attr['cpfd_bg_normal_margin'] : '';
 		$lang_normal_bg_color    = isset( $attr['cpfd_bg_normal_color'] ) ? $attr['cpfd_bg_normal_color'] : '';
+		$lang_normal_bg_color_hover = isset( $attr['cpfd_bg_normal_color__hover'] ) ? $attr['cpfd_bg_normal_color__hover'] : '';
 		$flag_width              = isset( $attr['cpfd_flag_width'] ) ? $attr['cpfd_flag_width'] : '';
 		$flag_radius             = isset( $attr['cpfd_flag_radius'] ) ? $attr['cpfd_flag_radius'] : '';
 		$flag_ratio              = isset( $attr['cpfd_flag_ratio'] ) ? $attr['cpfd_flag_ratio'] : '';
 		$normal_text_font        = isset( $attr['cpfd_text_settings_font'] ) ? $attr['cpfd_text_settings_font'] : '';
 		$normal_text_color       = isset( $attr['cpfd_text_settings_text_color'] ) ? $attr['cpfd_text_settings_text_color'] : '';
+		$normal_text_color_hover = isset( $attr['cpfd_text_settings_text_color__hover'] ) ? $attr['cpfd_text_settings_text_color__hover'] : '';
 		$normal_text_size        = isset( $attr['cpfd_text_settings_font_size'] ) ? $attr['cpfd_text_settings_font_size'] : '';
 		$normal_text_spacing     = isset( $attr['cpfd_text_settings_letter_spacing'] ) ? $attr['cpfd_text_settings_letter_spacing'] : '';
 		$normal_text_line_height = isset( $attr['cpfd_text_settings_line_height'] ) ? $attr['cpfd_text_settings_line_height'] : '';
@@ -32,7 +34,7 @@ class CPFD_STYLE_HELPERS {
 			$slug,
 			array(
 				'selector'    => $selector.'.dropdown',
-				'declaration' => sprintf( '--cpfd-dropdown-index: %1$s;', ( 99 + $this->order ) ),
+				'declaration' => sprintf( '--cpfd-dropdown-index: %1$s;', ( 999 + $this->order ) ),
 			)
 		);
 
@@ -72,6 +74,15 @@ class CPFD_STYLE_HELPERS {
 				array(
 					'selector'    => $selector,
 					'declaration' => sprintf( '--cpfd-normal-bg-color: %1$s;', $lang_normal_bg_color ),
+				)
+			);
+		}
+		if ( '' !== $lang_normal_bg_color_hover ) {
+			ET_Builder_Element::set_style(
+				$slug,
+				array(
+					'selector'    => $selector,
+					'declaration' => sprintf( '--cpfd-hover-bg-color: %1$s;', $lang_normal_bg_color_hover ),
 				)
 			);
 		}
@@ -162,6 +173,15 @@ class CPFD_STYLE_HELPERS {
 				array(
 					'selector'    => $selector,
 					'declaration' => sprintf( '--cpfd-normal-text-color: %1$s;', $normal_text_color ),
+				)
+			);
+		}
+		if ( '' !== $normal_text_color_hover ) {
+			ET_Builder_Element::set_style(
+				$slug,
+				array(
+					'selector'    => $selector,
+					'declaration' => sprintf( '--cpfd-hover-text-color: %1$s;', $normal_text_color_hover ),
 				)
 			);
 		}

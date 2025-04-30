@@ -57,14 +57,26 @@ const staticCSS = (props) => {
     const langPadding = props.cpfd_bg_normal_padding ? props.cpfd_bg_normal_padding : '';
     const langMargin = props.cpfd_bg_normal_margin ? props.cpfd_bg_normal_margin : '';
     const langNormalBgColor = props.cpfd_bg_normal_color ? props.cpfd_bg_normal_color : '';
+    const langNormalBgColorHover = props.cpfd_bg_normal_color__hover ? props.cpfd_bg_normal_color__hover : '';
     const flagWidth = props.cpfd_flag_width ? props.cpfd_flag_width : '';
     const flagRadius = props.cpfd_flag_radius ? props.cpfd_flag_radius : '';
     const flagRatio = props.cpfd_flag_ratio ? props.cpfd_flag_ratio : '';
     const normalTextFont = props.cpfd_text_settings_font ? props.cpfd_text_settings_font : '';
     const normalTextColor = props.cpfd_text_settings_text_color ? props.cpfd_text_settings_text_color : '';
+    const normalTextColorHover = props.cpfd_text_settings_text_color__hover ? props.cpfd_text_settings_text_color__hover : '';
     const normalTextSize = props.cpfd_text_settings_font_size ? props.cpfd_text_settings_font_size : '';
     const normalTextLineHeight = props.cpfd_text_settings_line_height ? props.cpfd_text_settings_line_height : '';
     const normal_text_spacing = props.cpfd_text_settings_letter_spacing ? props.cpfd_text_settings_letter_spacing : '';
+
+    customCss.push(
+        [
+            {
+                selector: selector + '.dropdown',
+                declaration: `--cpfd-dropdown-index: 999;`,
+            }
+        ]
+    );
+
     if ('' !== langPadding) {
         const padding = getUnitValue(langPadding);
         Object.keys(padding).forEach((key) => {
@@ -105,6 +117,17 @@ const staticCSS = (props) => {
                 {
                     selector: selector,
                     declaration: `--cpfd-normal-bg-color: ${langNormalBgColor};`,
+                }
+            ]
+        );
+    }
+    
+    if ('' !== langNormalBgColorHover) {
+        customCss.push(
+            [
+                {
+                    selector: selector,
+                    declaration: `--cpfd-hover-bg-color: ${langNormalBgColorHover};`,
                 }
             ]
         );
@@ -219,6 +242,17 @@ const staticCSS = (props) => {
             ]
         );
     }
+    if ('' !== normalTextColorHover) {
+        customCss.push(
+            [
+                {
+                    selector: selector,
+                    declaration: `--cpfd-hover-text-color: ${normalTextColorHover}`,
+                }
+            ]
+        );
+    }
+    
     if ('' !== normalTextSize) {
         customCss.push(
             [

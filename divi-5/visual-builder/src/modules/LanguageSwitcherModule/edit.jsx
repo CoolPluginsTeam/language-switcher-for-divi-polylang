@@ -20,7 +20,6 @@ export const LanguageSwitcherModuleEdit = (props) => {
     id,
     name,
   } = props;
-  
   const {
     fetch,
     response,
@@ -70,16 +69,18 @@ export const LanguageSwitcherModuleEdit = (props) => {
               {attributes?.switcher_layouts === 'dropdown' && (
                 polylangData?.[currentLang] ? (
                   <span>
-                    {attributes?.show_language_flag === 'on' && <CountryFlag flagCode={polylangData?.[currentLang]?.flagCode} name={polylangData?.[currentLang]?.name} url={pluginUrl} />}
-                    {attributes?.show_language_name === 'on' && <CountryName name={polylangData?.[currentLang]?.name} />}
-                    {attributes?.show_language_code === 'on' && <CountryCode code={polylangData?.[currentLang]?.slug} />}
+                    <a href={polylangData?.[currentLang]?.url}>
+                      {attributes?.show_language_flag === 'on' && <CountryFlag flagCode={polylangData?.[currentLang]?.flagCode} name={polylangData?.[currentLang]?.name} url={pluginUrl} />}
+                      {attributes?.show_language_name === 'on' && <CountryName name={polylangData?.[currentLang]?.name} />}
+                      {attributes?.show_language_code === 'on' && <CountryCode code={polylangData?.[currentLang]?.slug} />}
+                    </a>
                   </span>
                 ) : (
                   <>No current available languages</>
                 )
               )}
               { (
-                <ul>
+                <ul style={{zIndex: 999}}>
                 {
                 polylangData && Object.keys(polylangData) && Object.keys(polylangData).length > 0 ? (
                   <>
@@ -98,9 +99,11 @@ export const LanguageSwitcherModuleEdit = (props) => {
 
                       return (
                         <li key={index} className={lang === currentLang ? 'cpfd_active_lang' : ''}>
-                          {attributes?.show_language_flag === 'on' && <CountryFlag flagCode={polylangData?.[lang]?.flagCode} name={polylangData?.[lang]?.name} url={pluginUrl}/>}
-                          {attributes?.show_language_name === 'on' && <CountryName name={polylangData?.[lang]?.name} />}
-                          {attributes?.show_language_code === 'on' && <CountryCode code={polylangData?.[lang]?.slug} />}
+                          <a href={polylangData?.[lang]?.url}>
+                            {attributes?.show_language_flag === 'on' && <CountryFlag flagCode={polylangData?.[lang]?.flagCode} name={polylangData?.[lang]?.name} url={pluginUrl}/>}
+                            {attributes?.show_language_name === 'on' && <CountryName name={polylangData?.[lang]?.name} />}
+                            {attributes?.show_language_code === 'on' && <CountryCode code={polylangData?.[lang]?.slug} />}
+                          </a>
                         </li>
                       );
                     })}

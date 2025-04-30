@@ -12,7 +12,7 @@
   --cpfd-normal-text-decoration-color: initial;
   --cpfd-normal-text-decoration-style: initial;
   --cpfd-normal-text-letter-spacing: initial;
-  --cpfd-normal-text-color: initial;
+  --cpfd-normal-text-color: #333;
   --cpfd-normal-text-size: 16px;
   --cpfd-hover-text-size: var(--cpfd-normal-text-size);
   --cpfd-normal-text-line-height: calc(var(--cpfd-normal-text-size) + 8px);
@@ -21,17 +21,9 @@
   --cpfd-lang-pading-right: 0px;
   --cpfd-lang-pading-bottom: 0px;
   --cpfd-lang-pading-left: 0px;
-  --cpfd-normal-bg-color: #fff;
-  --cpfd-hover-bg-color: #fff;
+  --cpfd-normal-bg-color: initial;
+  --cpfd-hover-bg-color: initial;
   --cpfd-hover-text-color: initial;
-  --cpfd-hover-text-font: initial;
-  --cpfd-hover-text-weight: initial;
-  --cpfd-hover-text-transform: initial;
-  --cpfd-hover-text-decoration: initial;
-  --cpfd-hover-text-decoration-style: initial;
-  --cpfd-hover-text-decoration-color: initial;
-  --cpfd-hover-text-letter-spacing: initial;
-  --cpfd-hover-text-style: initial;
   overflow: hidden;
 }
 
@@ -39,8 +31,12 @@
   padding: 0px;
 }
 
-.cpfd-wrapper ul li, .cpfd-wrapper ul li.cpfd_active_lang {
+.cpfd-wrapper ul li{
   list-style: none;
+  display: flex;
+}
+
+.cpfd-wrapper ul li a, .cpfd-wrapper ul li.cpfd_active_lang a{
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -52,7 +48,7 @@
   padding: var(--cpfd-lang-pading-top) var(--cpfd-lang-pading-right) var(--cpfd-lang-pading-bottom) var(--cpfd-lang-pading-left);
 }
 
-.cpfd-wrapper ul li div:not(.cpfd-lang-image) a, .cpfd-wrapper span a {
+.cpfd-wrapper ul li a div:not(.cpfd-lang-image), .cpfd-wrapper span a {
   color: var(--cpfd-normal-text-color);
   font-family: var(--cpfd-normal-text-font);
   font-weight: var(--cpfd-normal-text-weight);
@@ -69,28 +65,16 @@
           text-decoration-color: var(--cpfd-normal-text-decoration-color);
 }
 
-.cpfd-wrapper ul li:hover, .cpfd-wrapper ul li.cpfd_active_lang:hover, .cpfd-wrapper.dropdown ul li:hover {
+.cpfd-wrapper ul li a:hover, .cpfd-wrapper ul li.cpfd_active_lang a:hover, .cpfd-wrapper.dropdown ul li a:hover, .cpfd-wrapper.dropdown:hover {
   background-color: var(--cpfd-hover-bg-color);
 }
 
-.cpfd-wrapper ul li.cpfd_active_lang.cpfd_active_lang div:not(.cpfd-lang-image),
-.cpfd-wrapper ul li.cpfd_active_lang div:not(.cpfd-lang-image) a, .cpfd-wrapper ul li:hover.cpfd_active_lang div:not(.cpfd-lang-image),
-.cpfd-wrapper ul li:hover div:not(.cpfd-lang-image) a {
-  color: var(--cpfd-hover-text-color, var(--cpfd-normal-text-color));
-  font-family: var(--cpfd-hover-text-font, var(--cpfd-normal-text-font));
-  font-weight: var(--cpfd-hover-text-weight, var(--cpfd-normal-text-weight));
-  font-size: var(--cpfd-hover-text-size, var(--cpfd-normal-text-size));
-  line-height: var(--cpfd-hover-text-line-height);
-  font-style: var(--cpfd-hover-text-style, var(--cpfd-normal-text-style));
-  text-transform: var(--cpfd-hover-text-transform, var(--cpfd-normal-text-transform));
-  -webkit-text-decoration: var(--cpfd-hover-text-decoration, var(--cpfd-normal-text-decoration));
-          text-decoration: var(--cpfd-hover-text-decoration, var(--cpfd-normal-text-decoration));
-  -webkit-text-decoration-style: var(--cpfd-hover-text-decoration-style, var(--cpfd-normal-text-decoration-style));
-          text-decoration-style: var(--cpfd-hover-text-decoration-style, var(--cpfd-normal-text-decoration-style));
-  -webkit-text-decoration-color: var(--cpfd-hover-text-decoration-color, var(--cpfd-normal-text-decoration-color));
-          text-decoration-color: var(--cpfd-hover-text-decoration-color, var(--cpfd-normal-text-decoration-color));
+/* .cpfd-wrapper ul li a:hover div:not(.cpfd-lang-image) a {
+  color: var(--cpfd-hover-text-color);
+}  */
+.cpfd-wrapper ul li a:hover div:not(.cpfd-lang-image), .cpfd-wrapper ul li.cpfd_active_lang a:hover div:not(.cpfd-lang-image), .cpfd-wrapper.dropdown ul li a:hover div:not(.cpfd-lang-image), .cpfd-wrapper.dropdown:hover span a div:not(.cpfd-lang-image) {
+  color: var(--cpfd-hover-text-color);
 }
-
 .cpfd-wrapper.horizontal ul {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -110,28 +94,27 @@
   background: #fff;
   cursor: pointer;
   outline: none;
-  padding-right: 3rem;
   background-color: var(--cpfd-normal-bg-color);
   overflow: visible;
+  align-items: center;
 }
 
 .cpfd-wrapper.dropdown::after {
   content: "";
   width: 0;
   height: 0;
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  margin-top: -3px;
+  display: inline-block;
+  margin-left: 0.5rem;
   border-width: 6px 6px 0 6px;
   border-style: solid;
   border-color: grey transparent;
 }
 
-.cpfd-wrapper.dropdown span {
+.cpfd-wrapper.dropdown span a{
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  flex-wrap: wrap;
   gap: .6rem;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -156,12 +139,16 @@
   width: 100%;
 }
 
-.cpfd-wrapper.dropdown ul li {
+.cpfd-wrapper.dropdown ul li{
   text-decoration: none;
+  display: block
+}
+.cpfd-wrapper.dropdown li a{
   color: #333;
   padding: 5px 15px;
   -webkit-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
+  white-space: nowrap;
 }
 
 .cpfd-wrapper.dropdown.active::after, .cpfd-wrapper.dropdown:hover::after {

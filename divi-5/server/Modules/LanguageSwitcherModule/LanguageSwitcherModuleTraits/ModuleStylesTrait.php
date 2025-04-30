@@ -70,7 +70,7 @@ trait ModuleStylesTrait {
               'selector'            => $order_class . ' .cpfd-wrapper.dropdown ul.cpfd-language-list',
               'attr'                => $attrs['switcher_layouts'],
               'declarationFunction' => function ( $declaration_function_args ) {
-                return "--cpfd-dropdown-index: 99;";
+                return "--cpfd-dropdown-index: 999;";
               },
             ]
           ),
