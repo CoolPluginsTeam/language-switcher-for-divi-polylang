@@ -12,10 +12,13 @@ class CPFD_Module extends ET_Builder_Module {
 		'author_uri' => 'http://coolplugins.net/',
 	);
 
-
+	protected function cpfd_icon_path( $icon ) {
+		return  ''.CPFD_DIR.'/assets/images/'. $icon .'.svg';
+	}	
+	
 	public function init() {
 		$this->name = esc_html__( 'Language Switcher', 'cpfd' );
-
+		$this->icon_path = $this->cpfd_icon_path( 'lang_switcher' );
 		 // Toggle settings
 		 $this->settings_modal_toggles = array(
 			 'general'  => array(

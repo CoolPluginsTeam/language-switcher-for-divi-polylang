@@ -17,6 +17,7 @@ class CPFD_Divi5 {
    */
   function enqueue_frontend_assets() {
     wp_enqueue_style( 'cpfd-divi5-frontend-style', CPFD_URL . 'includes/modules/cpfd_module/style.css', [], CPFD );
+    wp_enqueue_style( 'cpfd-divi5-frontend-helper', CPFD_URL . 'assets/css/cpfdhelper.css', [], CPFD );
   }
 
   /**
