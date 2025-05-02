@@ -57,17 +57,21 @@ const staticCSS = (props) => {
     const langPadding = props.cpfd_bg_normal_padding ? props.cpfd_bg_normal_padding : '';
     const langMargin = props.cpfd_bg_normal_margin ? props.cpfd_bg_normal_margin : '';
     const langNormalBgColor = props.cpfd_bg_normal_color ? props.cpfd_bg_normal_color : '';
-    const langNormalBgColorHover = props.cpfd_bg_normal_color__hover ? props.cpfd_bg_normal_color__hover : '';
+    const langHoverBgColor = props.cpfd_bg_normal_color__hover ? props.cpfd_bg_normal_color__hover : '';
     const flagWidth = props.cpfd_flag_width ? props.cpfd_flag_width : '';
     const flagRadius = props.cpfd_flag_radius ? props.cpfd_flag_radius : '';
     const flagRatio = props.cpfd_flag_ratio ? props.cpfd_flag_ratio : '';
     const normalTextFont = props.cpfd_text_settings_font ? props.cpfd_text_settings_font : '';
     const normalTextColor = props.cpfd_text_settings_text_color ? props.cpfd_text_settings_text_color : '';
-    const normalTextColorHover = props.cpfd_text_settings_text_color__hover ? props.cpfd_text_settings_text_color__hover : '';
+    const hoverTextColor = props.cpfd_text_settings_text_color__hover ? props.cpfd_text_settings_text_color__hover : '';
     const normalTextSize = props.cpfd_text_settings_font_size ? props.cpfd_text_settings_font_size : '';
+    const hoverTextSize = props.cpfd_text_settings_font_size__hover ? props.cpfd_text_settings_font_size__hover : '';
     const normalTextLineHeight = props.cpfd_text_settings_line_height ? props.cpfd_text_settings_line_height : '';
+    const hoverTextLineHeight = props.cpfd_text_settings_line_height__hover ? props.cpfd_text_settings_line_height__hover : '';
     const normal_text_spacing = props.cpfd_text_settings_letter_spacing ? props.cpfd_text_settings_letter_spacing : '';
-
+    const hover_text_spacing = props.cpfd_text_settings_letter_spacing__hover ? props.cpfd_text_settings_letter_spacing__hover : '';
+    const hover_bg_margin = props.custom_margin__hover ? props.custom_margin__hover : '';
+    const hover_bg_padding = props.custom_padding__hover ? props.custom_padding__hover : '';
     customCss.push(
         [
             {
@@ -122,16 +126,51 @@ const staticCSS = (props) => {
         );
     }
     
-    if ('' !== langNormalBgColorHover) {
+    if ('' !== langHoverBgColor) {
         customCss.push(
             [
                 {
                     selector: selector,
-                    declaration: `--cpfd-hover-bg-color: ${langNormalBgColorHover};`,
+                    declaration: `--cpfd-hover-bg-color: ${langHoverBgColor};`,
                 }
             ]
         );
     }
+
+    if ('' !== hover_bg_margin) {
+        const margin = getUnitValue(hover_bg_margin);
+        Object.keys(margin).forEach((key) => {
+            const value = margin[key];
+            if ('' !== value) {
+                customCss.push(
+                    [
+                        {
+                            selector: selector,
+                            declaration: `--cpfd-hover-bg-mrgn-${key}: ${value};`,
+                        }
+                    ]
+                );
+            }
+        })
+    }
+
+    if ('' !== hover_bg_padding) {
+        const padding = getUnitValue(hover_bg_padding);
+        Object.keys(padding).forEach((key) => {
+            const value = padding[key];
+            if ('' !== value) {
+                customCss.push(
+                    [
+                        {
+                            selector: selector,
+                            declaration: `--cpfd-hover-bg-pading-${key}: ${value};`,
+                        }
+                    ]
+                );
+            }
+        })
+    }   
+    
 
     if ('' !== flagRatio && '1/1' === flagRatio) {
         customCss.push(
@@ -242,12 +281,12 @@ const staticCSS = (props) => {
             ]
         );
     }
-    if ('' !== normalTextColorHover) {
+    if ('' !== hoverTextColor) {
         customCss.push(
             [
                 {
                     selector: selector,
-                    declaration: `--cpfd-hover-text-color: ${normalTextColorHover}`,
+                    declaration: `--cpfd-hover-text-color: ${hoverTextColor}`,
                 }
             ]
         );
@@ -263,6 +302,16 @@ const staticCSS = (props) => {
             ]
         );
     }
+    if ('' !== hoverTextSize) {
+        customCss.push(
+            [
+                {
+                    selector: selector,
+                    declaration: `--cpfd-hover-text-size: ${hoverTextSize}`,
+                }
+            ]
+        );
+    }
     if ('' !== normalTextLineHeight) {
         customCss.push(
             [
@@ -273,12 +322,32 @@ const staticCSS = (props) => {
             ]
         );
     }
+    if ('' !== hoverTextLineHeight) {
+        customCss.push(
+            [
+                {
+                    selector: selector,
+                    declaration: `--cpfd-hover-text-line-height: ${hoverTextLineHeight}`,
+                }
+            ]
+        );
+    }
     if ('' !== normal_text_spacing) {
         customCss.push(
             [
                 {
                     selector: selector,
                     declaration: `--cpfd-normal-text-letter-spacing: ${normal_text_spacing}`,
+                }
+            ]
+        );
+    }
+    if ('' !== hover_text_spacing) {
+        customCss.push(
+            [
+                {
+                    selector: selector,
+                    declaration: `--cpfd-hover-text-letter-spacing: ${hover_text_spacing}`,
                 }
             ]
         );

@@ -14,22 +14,27 @@ class CPFD_STYLE_HELPERS {
 
 	private function generate_divi_styles() {
 		$selector = '%%order_class%% .cpfd-wrapper';
-
 		$slug                    = $this->redner_slug;
 		$attr                    = $this->props;
 		$lang_padding            = isset( $attr['cpfd_bg_normal_padding'] ) ? $attr['cpfd_bg_normal_padding'] : '';
 		$lang_margin             = isset( $attr['cpfd_bg_normal_margin'] ) ? $attr['cpfd_bg_normal_margin'] : '';
 		$lang_normal_bg_color    = isset( $attr['cpfd_bg_normal_color'] ) ? $attr['cpfd_bg_normal_color'] : '';
-		$lang_normal_bg_color_hover = isset( $attr['cpfd_bg_normal_color__hover'] ) ? $attr['cpfd_bg_normal_color__hover'] : '';
+		$lang_hover_bg_color_hover = isset( $attr['cpfd_bg_normal_color__hover'] ) ? $attr['cpfd_bg_normal_color__hover'] : '';
 		$flag_width              = isset( $attr['cpfd_flag_width'] ) ? $attr['cpfd_flag_width'] : '';
 		$flag_radius             = isset( $attr['cpfd_flag_radius'] ) ? $attr['cpfd_flag_radius'] : '';
 		$flag_ratio              = isset( $attr['cpfd_flag_ratio'] ) ? $attr['cpfd_flag_ratio'] : '';
 		$normal_text_font        = isset( $attr['cpfd_text_settings_font'] ) ? $attr['cpfd_text_settings_font'] : '';
+		$hover_text_font         = isset( $attr['cpfd_text_settings_font__hover'] ) ? $attr['cpfd_text_settings_font__hover'] : '';
 		$normal_text_color       = isset( $attr['cpfd_text_settings_text_color'] ) ? $attr['cpfd_text_settings_text_color'] : '';
-		$normal_text_color_hover = isset( $attr['cpfd_text_settings_text_color__hover'] ) ? $attr['cpfd_text_settings_text_color__hover'] : '';
+		$hover_text_color 		 = isset( $attr['cpfd_text_settings_text_color__hover'] ) ? $attr['cpfd_text_settings_text_color__hover'] : '';
 		$normal_text_size        = isset( $attr['cpfd_text_settings_font_size'] ) ? $attr['cpfd_text_settings_font_size'] : '';
+		$hover_text_size		 = isset( $attr['cpfd_text_settings_font_size__hover'] ) ? $attr['cpfd_text_settings_font_size__hover'] : '';
 		$normal_text_spacing     = isset( $attr['cpfd_text_settings_letter_spacing'] ) ? $attr['cpfd_text_settings_letter_spacing'] : '';
+		$hover_text_spacing      = isset( $attr['cpfd_text_settings_letter_spacing__hover'] ) ? $attr['cpfd_text_settings_letter_spacing__hover'] : '';
 		$normal_text_line_height = isset( $attr['cpfd_text_settings_line_height'] ) ? $attr['cpfd_text_settings_line_height'] : '';
+		$hover_text_line_height  = isset( $attr['cpfd_text_settings_line_height__hover'] ) ? $attr['cpfd_text_settings_line_height__hover'] : '';
+		$hover_bg_margin         = isset( $attr['custom_margin__hover'] ) ? $attr['custom_margin__hover'] : '';
+		$hover_bg_padding        = isset( $attr['custom_padding__hover'] ) ? $attr['custom_padding__hover'] : '';
 		ET_Builder_Element::set_style(
 			$slug,
 			array(
@@ -61,7 +66,7 @@ class CPFD_STYLE_HELPERS {
 						$slug,
 						array(
 							'selector'    => $selector,
-							'declaration' => sprintf( '--cpfd-lang-padding-%1$s: %2$s;', $key, $value ),
+							'declaration' => sprintf( '--cpfd-lang-margin-%1$s: %2$s;', $key, $value ),
 						)
 					);
 				}
@@ -77,14 +82,43 @@ class CPFD_STYLE_HELPERS {
 				)
 			);
 		}
-		if ( '' !== $lang_normal_bg_color_hover ) {
+		if ( '' !== $lang_hover_bg_color_hover ) {
 			ET_Builder_Element::set_style(
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--cpfd-hover-bg-color: %1$s;', $lang_normal_bg_color_hover ),
+					'declaration' => sprintf( '--cpfd-hover-bg-color: %1$s;', $lang_hover_bg_color_hover ),
 				)
 			);
+		}
+
+		if ( '' !== $hover_bg_margin ) {
+			$margin = $this->get_unit_value( $hover_bg_margin );
+			foreach ( $margin as $key => $value ) {
+				if ( ! empty( $value ) ) {
+					ET_Builder_Element::set_style(
+						$slug,
+						array(
+							'selector'    => $selector,
+							'declaration' => sprintf( '--cpfd-hover-bg-mrgn-%1$s: %2$s;', $key, $value ),
+						)
+					);
+				}
+			}
+		}
+		if ( '' !== $hover_bg_padding ) {
+			$padding = $this->get_unit_value( $hover_bg_padding );
+			foreach ( $padding as $key => $value ) {
+				if ( ! empty( $value ) ) {
+					ET_Builder_Element::set_style(
+						$slug,
+						array(
+							'selector'    => $selector,
+							'declaration' => sprintf( '--cpfd-hover-bg-pading-%1$s: %2$s;', $key, $value ),
+						)
+					);
+				}
+			}
 		}
 
 		if ( '' !== $flag_ratio && '1/1' === $flag_ratio ) {
@@ -176,12 +210,12 @@ class CPFD_STYLE_HELPERS {
 				)
 			);
 		}
-		if ( '' !== $normal_text_color_hover ) {
+		if ( '' !== $hover_text_color ) {
 			ET_Builder_Element::set_style(
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--cpfd-hover-text-color: %1$s;', $normal_text_color_hover ),
+					'declaration' => sprintf( '--cpfd-hover-text-color: %1$s;', $hover_text_color ),
 				)
 			);
 		}
@@ -194,6 +228,15 @@ class CPFD_STYLE_HELPERS {
 				)
 			);
 		}
+		if ( '' !== $hover_text_spacing ) {
+			ET_Builder_Element::set_style(
+				$slug,
+				array(
+					'selector'    => $selector,
+					'declaration' => sprintf( '--cpfd-hover-text-letter-spacing: %1$s;', $hover_text_spacing ),
+				)
+			);
+		}
 		if ( '' !== $normal_text_size ) {
 			ET_Builder_Element::set_style(
 				$slug,
@@ -203,12 +246,30 @@ class CPFD_STYLE_HELPERS {
 				)
 			);
 		}
+		if( '' !== $hover_text_size){
+			ET_Builder_Element::set_style(
+				$slug,
+				array(
+					'selector'    => $selector,
+					'declaration' => sprintf( '--cpfd-hover-text-size: %1$s;', $hover_text_size ),
+				)
+			);
+		}
 		if ( '' !== $normal_text_line_height ) {
 			ET_Builder_Element::set_style(
 				$slug,
 				array(
 					'selector'    => $selector,
 					'declaration' => sprintf( '--cpfd-normal-text-line-height: %1$s;', $normal_text_line_height ),
+				)
+			);
+		}
+		if ( '' !== $hover_text_line_height ) {
+			ET_Builder_Element::set_style(
+				$slug,
+				array(
+					'selector'    => $selector,
+					'declaration' => sprintf( '--cpfd-hover-text-line-height: %1$s;', $hover_text_line_height ),
 				)
 			);
 		}

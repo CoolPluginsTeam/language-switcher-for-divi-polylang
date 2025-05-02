@@ -68,11 +68,11 @@ export const ModuleStyles = (props) => {
       }}
     />
     <CommonStyle
-        selector={`${orderClass} .cpfd-wrapper ul li, ${orderClass} .cpfd-wrapper.dropdown`}
+        selector={`${orderClass} .cpfd-wrapper ul li a, ${orderClass} .cpfd-wrapper.dropdown`}
         attr={attrs?.background_style?.decoration?.background_color}
         declarationFunction={(attrs) => {
         const data = attrs?.attrValue?.background_color
-        return `--cpfd-normal-bg-color: ${data} !important`;
+        return `background-color: ${data}`;
       }}
     />
     {elements.style({

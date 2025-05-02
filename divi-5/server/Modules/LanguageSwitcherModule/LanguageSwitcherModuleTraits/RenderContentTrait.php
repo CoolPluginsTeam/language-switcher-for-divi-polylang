@@ -40,7 +40,7 @@ trait RenderContentTrait
 
             $flag_icon = \CPFD_HELPERS::get_country_flag($lang['flag'], $lang['name']);
 
-            $languages_html .= '<li class="cpfd-lang-item" >';
+            $languages_html .= '<li class="cpfd-lang-item" style="z-index: 999;">';
             $languages_html .= '<a href="' . esc_url($lang['url']) . '">';
             if (!empty($props['show_language_flag']) && $props['show_language_flag'] === 'on') {
                 $languages_html .= '<div class="cpfd-lang-image">' . $flag_icon . '</div>';
@@ -54,7 +54,7 @@ trait RenderContentTrait
             $languages_html .= '</a></li>';
         }
         
-        return $active_html . '<ul class="cpfd-language-list">' . $languages_html . '</ul>';
+        return $active_html . '<ul class="cpfd-language-list" style="z-index: 999;">' . $languages_html . '</ul>';
     }
 
     private static function get_active_language_html($lang, $props)
@@ -87,7 +87,7 @@ trait RenderContentTrait
             $anchor_open = '<a href="' . esc_url($lang['url']) . '">';
             $anchor_close = '</a>';
 
-            $html .= '<li class="cpfd-lang-item">';
+            $html .= '<li class="cpfd-lang-item" style="z-index: 999;">';
             $html .= $anchor_open;
             if ($props['show_language_flag'] === 'on') {
                 $html .= '<div class="cpfd-lang-image">' .$flag_icon .'</div>';
@@ -101,7 +101,7 @@ trait RenderContentTrait
             $html .= $anchor_close;
             $html .= '</li>';
         }
-        return '<ul class="cpfd-language-list">' . $html . '</ul>';
+        return '<ul class="cpfd-language-list" style="z-index: 999;">' . $html . '</ul>';
     }
 
     public static function render_content($props)

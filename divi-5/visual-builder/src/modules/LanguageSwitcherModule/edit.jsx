@@ -47,12 +47,25 @@ export const LanguageSwitcherModuleEdit = (props) => {
 
   useEffect(() => {
     language_switcher_module_data();
+    setTimeout(() => {
+    const thisModule = document.querySelector('.cpfd_connect_polylang_for_divi');
+
+    const parentRow = thisModule.parentNode;
+    console.log(parentRow);
+    if (parentRow) {
+      if(parentRow.style.getPropertyValue('z-index') !== '999'){
+        parentRow.style.setProperty('z-index', '999');
+      }
+    }
+    }, 1000);
   }, [attributes?.switcher_layouts]);
 
   return (
+    <>
     <ModuleContainer
       attrs={attrs}
       elements={elements} 
+      moduleClassName = 'cpfd_connect_polylang_for_divi'
       id={id}
       name={name}
       scriptDataComponent={ModuleScriptData}
@@ -119,5 +132,6 @@ export const LanguageSwitcherModuleEdit = (props) => {
         ))
       )}
     </ModuleContainer>
+    </>
   );
 }

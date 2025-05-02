@@ -5,7 +5,6 @@ class CPFD_Module extends ET_Builder_Module {
 	public $slug                   = 'connect-polylang-for-divi';
 	public $vb_support             = 'on';
 	private static $language_index = 0;
-
 	protected $module_credits = array(
 		'module_uri' => '',
 		'author'     => 'Coolplugins',
@@ -17,6 +16,10 @@ class CPFD_Module extends ET_Builder_Module {
 	}	
 	
 	public function init() {
+		if(!et_core_is_fb_enabled()){
+			wp_enqueue_script( 'cpfd-module-js', CPFD_URL . 'assets/js/cpfd_module_frontend.js', [], CPFD);
+		}
+		
 		$this->name = esc_html__( 'Language Switcher', 'cpfd' );
 		$this->icon_path = $this->cpfd_icon_path( 'lang_switcher' );
 		 // Toggle settings
@@ -73,8 +76,9 @@ class CPFD_Module extends ET_Builder_Module {
 		// Configure the margin and padding for the container.
 		$advanced_fields['margin_padding'] = array(
 			'css'          => array(
-				'main'      => '%%order_class%% .cpfd-wrapper ul li a, %%order_class%% .cpfd-wrapper.dropdown',
+				'main'      => '%%order_class%% .cpfd-wrapper ul li a, %%order_class%% .cpfd-wrapper.dropdown, %%order_class%% .cpfd-wrapper.dropdown ul li',
 				'important' => true,
+				
 			),
 			'toggle_slug'  => 'cpfd_background',
 			'tab_slug'     => 'advanced',
@@ -172,7 +176,7 @@ class CPFD_Module extends ET_Builder_Module {
 				'label'       => esc_html__( 'Background', 'cpfd' ),
 				'tab_slug'    => 'advanced',
 				'toggle_slug' => 'cpfd_background',
-				'type'        => 'color',
+				'type'        => 'color-alpha',
 				'responsive'      => true,
 				'mobile_options'  => true,
 				'hover'           => 'tabs'
@@ -241,7 +245,7 @@ class CPFD_Module extends ET_Builder_Module {
 					}
 					$flag_icon    = CPFD_HELPERS::get_country_flag( $lang['flag'], $lang['name'] );
 					$active_class = $lang_curr === $lang['slug'] ? 'cpfd_active_lang' : '';
-					$html        .= '<li class="' . esc_attr( $active_class ) . '"><a href="' . esc_url( $lang['url'] ) . '">';
+					$html        .= '<li class="' . esc_attr( $active_class ) . '" style="z-index: 999;"><a href="' . esc_url( $lang['url'] ) . '">';
 					if ( 'on' === $flag_display ) {
 						$html .= sprintf(
 							'<div class="cpfd-lang-image">%s</div>',
@@ -269,7 +273,7 @@ class CPFD_Module extends ET_Builder_Module {
 				$output = sprintf(
 					' <div id="cpfd-wrapper" class="cpfd-wrapper %1$s">
 				%3$s
-				<ul>
+				<ul class="cpfd-language-list" style="z-index: 999;">
 				%2$s
 				</ul>
 				</div>',

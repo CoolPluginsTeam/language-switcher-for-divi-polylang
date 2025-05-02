@@ -22,12 +22,20 @@ class CPFD_Module extends Component {
       const polylangData =window.ETBuilderBackendDynamic &&  window.ETBuilderBackendDynamic.cpfdGlobalObj &&  window.ETBuilderBackendDynamic.cpfdGlobalObj.cpfdLanguageData ? window.ETBuilderBackendDynamic.cpfdGlobalObj.cpfdLanguageData : [];
       const currentLang = window.ETBuilderBackendDynamic && window.ETBuilderBackendDynamic.cpfdGlobalObj &&  window.ETBuilderBackendDynamic.cpfdGlobalObj.cpfdCurrentLang ? window.ETBuilderBackendDynamic.cpfdGlobalObj.cpfdCurrentLang : '';
       this.setState({ polylangData, currentLang });
+      const thisModule = document.querySelector('.cpfd-wrapper.dropdown');
+      const parentRow = thisModule.closest('.et_pb_row');
+      console.log(parentRow);
+      if (parentRow) {
+        parentRow.style.setProperty('z-index', '999');
+      }
     }, 1000);
   }
+
 
   static css(props) {
     return staticCSS(props);
   }
+
 
   render() {
     const { polylangData, currentLang } = this.state;
@@ -56,7 +64,7 @@ class CPFD_Module extends Component {
           ):<>No current available languages</>)}
         {(
           <>
-          <ul>
+          <ul className="cpfd-language-list" style={{zIndex: 999}}>
             {
               polylangData && Object.keys(polylangData) && Object.keys(polylangData).length > 0 ? (
                 <>
@@ -74,7 +82,7 @@ class CPFD_Module extends Component {
                     }
 
                     return (
-                      <li key={index} className={lang === currentLang ? 'cpfd_active_lang' : ''}>
+                      <li key={index} className={lang === currentLang ? 'cpfd_active_lang' : ''} style={{zIndex: 999}}>
                         <a href={polylangData[lang].url}>
                           {flagDisplay === 'on' && <CountryFlag flagCode={polylangData[lang].flagCode} name={polylangData[lang].name} url={pluginUrl}/>}
                           {nameDisplay === 'on' && <CountryName name={polylangData[lang].name} />}

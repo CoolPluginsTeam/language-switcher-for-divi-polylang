@@ -123,7 +123,7 @@ trait ModuleStylesTrait {
           ),
           CommonStyle::style(
             [
-              'selector'            => $order_class . ' .cpfd-wrapper ul li.cpfd-lang-item, ' . $order_class . ' .cpfd-wrapper.dropdown',   
+              'selector'            => $order_class . ' .cpfd-wrapper ul li.cpfd-lang-item a, ' . $order_class . ' .cpfd-wrapper.dropdown',   
               'attr'                => $attrs['background_style']['decoration']['background_color'] ?? [],
               'declarationFunction' => function ( $declaration_function_args ) {
                 $attr_value = $declaration_function_args['attrValue']['background_color'] ?? [];
