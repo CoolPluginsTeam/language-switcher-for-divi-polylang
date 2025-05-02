@@ -74,10 +74,10 @@ if ( ! class_exists( 'CONNECT_POLYLANG_FOR_DIVI' ) ) {
 				$message = sprintf(
 					esc_html__(
 						'%1$s requires %2$s to be installed and activated.',
-						'cpfd'
+						'connect-polylang-for-divi'
 					),
-					esc_html__( 'Connect Polylang for Divi', 'cpfd' ),
-					esc_html__( 'Divi (Theme)', 'cpfd' )
+					esc_html__( 'Connect Polylang for Divi', 'connect-polylang-for-divi' ),
+					esc_html__( 'Divi (Theme)', 'connect-polylang-for-divi' )
 				);
 				sprintf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', esc_html( $message ) );
 			}
@@ -93,7 +93,7 @@ if ( ! class_exists( 'CONNECT_POLYLANG_FOR_DIVI' ) ) {
 					// translators: 1: Plugin Name, 2: Plugin URL
 					esc_html__(
 						'In order to use %1$s plugin, please install and activate the latest version  of %2$s',
-						'cpfd'
+						'connect-polylang-for-divi'
 					),
 					wp_kses( '<strong>' . esc_html( $plugin_info['Name'] ) . '</strong>', 'strong' ),
 					wp_kses( '<a href="' . esc_url( $url ) . '" class="thickbox" title="' . esc_attr( $title ) . '">' . esc_html( $title ) . '</a>', 'a' )
@@ -152,7 +152,7 @@ if ( ! class_exists( 'CONNECT_POLYLANG_FOR_DIVI' ) ) {
 		}
 
 		public function cpfd_load_textdomain(){
-			load_plugin_textdomain( 'cpfd', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+			load_plugin_textdomain( 'connect-polylang-for-divi', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 		}
 
 		public function initialize_divi_5_module(){

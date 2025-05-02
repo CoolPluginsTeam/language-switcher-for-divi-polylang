@@ -20,30 +20,30 @@ class CPFD_Module extends ET_Builder_Module {
 			wp_enqueue_script( 'cpfd-module-js', CPFD_URL . 'assets/js/cpfd_module_frontend.js', [], CPFD);
 		}
 		
-		$this->name = esc_html__( 'Language Switcher', 'cpfd' );
+		$this->name = esc_html__( 'Language Switcher', 'connect-polylang-for-divi' );
 		$this->icon_path = $this->cpfd_icon_path( 'lang_switcher' );
 		 // Toggle settings
 		 $this->settings_modal_toggles = array(
 			 'general'  => array(
 				 'toggles' => array(
 					 'main_content' => array(
-						 'title' => esc_html__( 'Language Switcher', 'cpfd' ),
+						 'title' => esc_html__( 'Language Switcher', 'connect-polylang-for-divi' ),
 					 ),
 				 ),
 			 ),
 			 'advanced' => array(
 				 'toggles' => array(
 					 'cpfd_flag_settings'       => array(
-						 'title' => esc_html__( 'Flag', 'cpfd' ),
+						 'title' => esc_html__( 'Flag', 'connect-polylang-for-divi' ),
 					 ),
 					 'cpfd_text_settings'       => array(
-						 'title' => esc_html__( 'Text', 'cpfd' ),
+						 'title' => esc_html__( 'Text', 'connect-polylang-for-divi' ),
 					 ),
 					 'cpfd_background'          => array(
-						 'title' => esc_html__( 'Background', 'cpfd' ),
+						 'title' => esc_html__( 'Background', 'connect-polylang-for-divi' ),
 					 ),
 					 'cpfd_dropdown_background' => array(
-						 'title' => esc_html__( 'Dropwdown Background', 'cpfd' ),
+						 'title' => esc_html__( 'Dropwdown Background', 'connect-polylang-for-divi' ),
 					 ),
 				 ),
 			 ),
@@ -63,7 +63,7 @@ class CPFD_Module extends ET_Builder_Module {
 		$advanced_fields['border']     	   = false;
 		// $advanced_fields['max_width'] 	   = false;
 		$advanced_fields['fonts']['cpfd_text_settings'] = array(
-			'label_prefix'        => esc_html__( 'Text', 'cpfd' ),
+			'label_prefix'        => esc_html__( 'Text', 'connect-polylang-for-divi' ),
 			'tab_slug'            => 'advanced',
 			'toggle_slug'         => 'cpfd_text_settings',
 			'css'          => array(
@@ -90,38 +90,38 @@ class CPFD_Module extends ET_Builder_Module {
 	public function get_fields() {
 		return array(
 			'cpfd_style'                         => array(
-				'label'       => esc_html__( 'Layout Options', 'cpfd' ),
+				'label'       => esc_html__( 'Layout Options', 'connect-polylang-for-divi' ),
 				'type'        => 'select',
 				'default'     => 'dropdown',
 				'options'     => array(
-					'vertical'   => esc_html__( 'Vertical', 'cpfd' ),
-					'horizontal' => esc_html__( 'Horizontal', 'cpfd' ),
-					'dropdown'   => esc_html__( 'Dropdown', 'cpfd' ),
+					'vertical'   => esc_html__( 'Vertical', 'connect-polylang-for-divi' ),
+					'horizontal' => esc_html__( 'Horizontal', 'connect-polylang-for-divi' ),
+					'dropdown'   => esc_html__( 'Dropdown', 'connect-polylang-for-divi' ),
 				),
 				'toggle_slug' => 'main_content',
 			),
 			'cpfd_flag_visibility'               => array(
-				'label'       => esc_html__( 'Display Flag', 'cpfd' ),
+				'label'       => esc_html__( 'Display Flag', 'connect-polylang-for-divi' ),
 				'type'        => 'yes_no_button',
 				'default'     => 'on',
 				'options'     => array('on','off'),
 				'toggle_slug' => 'main_content'
 			),
 			'cpfd_language_name_visibility'      => array(
-				'label'       => esc_html__( 'Show Language Name', 'cpfd' ),
+				'label'       => esc_html__( 'Show Language Name', 'connect-polylang-for-divi' ),
 				'type'        => 'yes_no_button',
 				'options'     => array('on','off'),
 				'default'     => 'on',
 				'toggle_slug' => 'main_content'
 			),
 			'cpfd_language_code_visibility'      => array(
-				'label'       => esc_html__( 'Show Language Code', 'cpfd' ),
+				'label'       => esc_html__( 'Show Language Code', 'connect-polylang-for-divi' ),
 				'type'        => 'yes_no_button',
 				'options'     => array('on','off'),
 				'toggle_slug' => 'main_content'
 			),
 			'cpfd_current_lang_visibility'       => array(
-				'label'       => esc_html__( 'Hide Current Language', 'cpfd' ),
+				'label'       => esc_html__( 'Hide Current Language', 'connect-polylang-for-divi' ),
 				'type'        => 'yes_no_button',
 				'options'     => array('on','off'),
 				'toggle_slug' => 'main_content',
@@ -130,25 +130,25 @@ class CPFD_Module extends ET_Builder_Module {
 				),
 			),
 			'cpfd_unstranslated_lang_visibility' => array(
-				'label'       => esc_html__( 'Hide Untranslated Languages', 'cpfd' ),
+				'label'       => esc_html__( 'Hide Untranslated Languages', 'connect-polylang-for-divi' ),
 				'type'        => 'yes_no_button',
 				'options'     => array('on','off'),
 				'toggle_slug' => 'main_content'
 			),
 			'cpfd_flag_ratio'                    => array(
-				'label'       => esc_html__( 'Aspect Ratio', 'cpfd' ),
+				'label'       => esc_html__( 'Aspect Ratio', 'connect-polylang-for-divi' ),
 				'type'        => 'select',
 				'default'     => 'auto',
 				'options'     => array(
-					'auto' => esc_html__( 'auto', 'cpfd' ),
-					'1/1'  => esc_html__( '1:1', 'cpfd' ),
-					'4/3'  => esc_html__( '4:3', 'cpfd' ),
+					'auto' => esc_html__( 'auto', 'connect-polylang-for-divi' ),
+					'1/1'  => esc_html__( '1:1', 'connect-polylang-for-divi' ),
+					'4/3'  => esc_html__( '4:3', 'connect-polylang-for-divi' ),
 				),
 				'toggle_slug' => 'cpfd_flag_settings',
 				'tab_slug'    => 'advanced'
 			),
 			'cpfd_flag_width'                    => array(
-				'label'          => esc_html__( 'Flag Width', 'cpfd' ),
+				'label'          => esc_html__( 'Flag Width', 'connect-polylang-for-divi' ),
 				'type'           => 'range',
 				'default'        => '20px',
 				'range_settings' => array(
@@ -160,7 +160,7 @@ class CPFD_Module extends ET_Builder_Module {
 				'tab_slug'       => 'advanced'
 			),
 			'cpfd_flag_radius'                   => array(
-				'label'          => esc_html__( 'Flag Border Radius', 'cpfd' ),
+				'label'          => esc_html__( 'Flag Border Radius', 'connect-polylang-for-divi' ),
 				'type'           => 'range',
 				'default'        => '0px',
 				'range_settings' => array(
@@ -173,7 +173,7 @@ class CPFD_Module extends ET_Builder_Module {
 			),
 
 			'cpfd_bg_normal_color' => array(
-				'label'       => esc_html__( 'Background', 'cpfd' ),
+				'label'       => esc_html__( 'Background', 'connect-polylang-for-divi' ),
 				'tab_slug'    => 'advanced',
 				'toggle_slug' => 'cpfd_background',
 				'type'        => 'color-alpha',

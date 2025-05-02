@@ -9,7 +9,7 @@ class CPFD_ConnectPolylangForDivi extends DiviExtension {
 	 *
 	 * @var string
 	 */
-	public $gettext_domain = 'cpfd';
+	public $gettext_domain = 'connect-polylang-for-divi';
 
 	/**
 	 * The extension's WP Plugin name.

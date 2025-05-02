@@ -28,14 +28,14 @@ export const SettingsContent = (props) => (
           <FieldContainer
           attrName="switcher_layouts"
           subName="switcher_layouts"
-          label={__('Layout Options', 'cpfd')}
-          description={__('Select your switcher layout', 'cpfd')}
+          label={__('Layout Options', 'connect-polylang-for-divi')}
+          description={__('Select your switcher layout', 'connect-polylang-for-divi')}
           defaultValue={'dropdown'}
         >
           <SelectContainer
             options={Object.entries(switcher_layouts).reduce((acc, [key, label]) => {
               acc[key] = {
-                label: __(label, 'cpfd'),
+                label: __(label, 'connect-polylang-for-divi'),
                 value: key,
               };
               return acc;
