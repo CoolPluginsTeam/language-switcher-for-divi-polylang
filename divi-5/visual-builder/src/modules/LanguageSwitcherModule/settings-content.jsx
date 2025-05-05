@@ -93,7 +93,9 @@ export const SettingsContent = (props) => (
       >
           <ToggleContainer />
         </FieldContainer>
+        {((props?.attrs?.hide_untranslated_language?.desktop?.value?.hide_untranslated_language ?? props?.defaultSettingsAttrs?.hide_untranslated_language?.innerContent?.desktop?.value) === 'on') && (
         <div className="cpfd-settings-description" style={{color: 'red'}}><strong>Note:</strong> This setting only affects the frontend. Please check your site's frontend to see it in action.</div>
+        )}
       </>
     </GroupContainer>
   </>
