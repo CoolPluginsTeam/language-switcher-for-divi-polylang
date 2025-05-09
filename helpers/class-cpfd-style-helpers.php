@@ -16,25 +16,25 @@ class CPFD_STYLE_HELPERS {
 		$selector = '%%order_class%% .cpfd-wrapper';
 		$slug                    = $this->redner_slug;
 		$attr                    = $this->props;
-		$lang_padding            = isset( $attr['cpfd_bg_normal_padding'] ) ? $attr['cpfd_bg_normal_padding'] : '';
-		$lang_margin             = isset( $attr['cpfd_bg_normal_margin'] ) ? $attr['cpfd_bg_normal_margin'] : '';
-		$lang_normal_bg_color    = isset( $attr['cpfd_bg_normal_color'] ) ? $attr['cpfd_bg_normal_color'] : '';
-		$lang_hover_bg_color_hover = isset( $attr['cpfd_bg_normal_color__hover'] ) ? $attr['cpfd_bg_normal_color__hover'] : '';
-		$flag_width              = isset( $attr['cpfd_flag_width'] ) ? $attr['cpfd_flag_width'] : '';
-		$flag_radius             = isset( $attr['cpfd_flag_radius'] ) ? $attr['cpfd_flag_radius'] : '';
-		$flag_ratio              = isset( $attr['cpfd_flag_ratio'] ) ? $attr['cpfd_flag_ratio'] : '';
-		$normal_text_font        = isset( $attr['cpfd_text_settings_font'] ) ? $attr['cpfd_text_settings_font'] : '';
-		$hover_text_font         = isset( $attr['cpfd_text_settings_font__hover'] ) ? $attr['cpfd_text_settings_font__hover'] : '';
-		$normal_text_color       = isset( $attr['cpfd_text_settings_text_color'] ) ? $attr['cpfd_text_settings_text_color'] : '';
-		$hover_text_color 		 = isset( $attr['cpfd_text_settings_text_color__hover'] ) ? $attr['cpfd_text_settings_text_color__hover'] : '';
-		$normal_text_size        = isset( $attr['cpfd_text_settings_font_size'] ) ? $attr['cpfd_text_settings_font_size'] : '';
-		$hover_text_size		 = isset( $attr['cpfd_text_settings_font_size__hover'] ) ? $attr['cpfd_text_settings_font_size__hover'] : '';
-		$normal_text_spacing     = isset( $attr['cpfd_text_settings_letter_spacing'] ) ? $attr['cpfd_text_settings_letter_spacing'] : '';
-		$hover_text_spacing      = isset( $attr['cpfd_text_settings_letter_spacing__hover'] ) ? $attr['cpfd_text_settings_letter_spacing__hover'] : '';
-		$normal_text_line_height = isset( $attr['cpfd_text_settings_line_height'] ) ? $attr['cpfd_text_settings_line_height'] : '';
-		$hover_text_line_height  = isset( $attr['cpfd_text_settings_line_height__hover'] ) ? $attr['cpfd_text_settings_line_height__hover'] : '';
-		$hover_bg_margin         = isset( $attr['custom_margin__hover'] ) ? $attr['custom_margin__hover'] : '';
-		$hover_bg_padding        = isset( $attr['custom_padding__hover'] ) ? $attr['custom_padding__hover'] : '';
+		$lang_padding            = isset( $attr['cpfd_bg_normal_padding'] ) ? esc_attr($attr['cpfd_bg_normal_padding']) : '';
+		$lang_margin             = isset( $attr['cpfd_bg_normal_margin'] ) ? esc_attr($attr['cpfd_bg_normal_margin']) : '';
+		$lang_normal_bg_color    = isset( $attr['cpfd_bg_normal_color'] ) ? esc_attr($attr['cpfd_bg_normal_color']) : '';
+		$lang_hover_bg_color_hover = isset( $attr['cpfd_bg_normal_color__hover'] ) ? esc_attr($attr['cpfd_bg_normal_color__hover']) : '';
+		$flag_width              = isset( $attr['cpfd_flag_width'] ) ? esc_attr($attr['cpfd_flag_width']) : '';
+		$flag_radius             = isset( $attr['cpfd_flag_radius'] ) ? esc_attr($attr['cpfd_flag_radius']) : '';
+		$flag_ratio              = isset( $attr['cpfd_flag_ratio'] ) ? esc_attr($attr['cpfd_flag_ratio']) : '';
+		$normal_text_font        = isset( $attr['cpfd_text_settings_font'] ) ? esc_attr($attr['cpfd_text_settings_font']) : '';
+		$hover_text_font         = isset( $attr['cpfd_text_settings_font__hover'] ) ? esc_attr($attr['cpfd_text_settings_font__hover']) : '';
+		$normal_text_color       = isset( $attr['cpfd_text_settings_text_color'] ) ? esc_attr($attr['cpfd_text_settings_text_color']) : '';
+		$hover_text_color 		 = isset( $attr['cpfd_text_settings_text_color__hover'] ) ? esc_attr($attr['cpfd_text_settings_text_color__hover']) : '';
+		$normal_text_size        = isset( $attr['cpfd_text_settings_font_size'] ) ? esc_attr($attr['cpfd_text_settings_font_size']) : '';
+		$hover_text_size		 = isset( $attr['cpfd_text_settings_font_size__hover'] ) ? esc_attr($attr['cpfd_text_settings_font_size__hover']) : '';
+		$normal_text_spacing     = isset( $attr['cpfd_text_settings_letter_spacing'] ) ? esc_attr($attr['cpfd_text_settings_letter_spacing']) : '';
+		$hover_text_spacing      = isset( $attr['cpfd_text_settings_letter_spacing__hover'] ) ? esc_attr($attr['cpfd_text_settings_letter_spacing__hover']) : '';
+		$normal_text_line_height = isset( $attr['cpfd_text_settings_line_height'] ) ? esc_attr($attr['cpfd_text_settings_line_height']) : '';
+		$hover_text_line_height  = isset( $attr['cpfd_text_settings_line_height__hover'] ) ? esc_attr($attr['cpfd_text_settings_line_height__hover']) : '';
+		$hover_bg_margin         = isset( $attr['custom_margin__hover'] ) ? esc_attr($attr['custom_margin__hover']) : '';
+		$hover_bg_padding        = isset( $attr['custom_padding__hover'] ) ? esc_attr($attr['custom_padding__hover']) : '';
 		ET_Builder_Element::set_style(
 			$slug,
 			array(
@@ -280,7 +280,7 @@ class CPFD_STYLE_HELPERS {
 		$font_parts       = explode( '|', $font_family );
 		$font_family_name = $font_parts[0];
 		if ( $font_family_name ) {
-			wp_enqueue_style( 'cpfd-gfonts-' . $font_family_name, "https://fonts.googleapis.com/css2?family=$font_family_name&display=swap", array(), null );
+			wp_enqueue_style( 'cpfd-gfonts-' . $font_family_name, "https://fonts.googleapis.com/css2?family=$font_family_name&display=swap", [], CPFD );
 		}
 	}
 

@@ -17,7 +17,7 @@ class CPFD_Module extends ET_Builder_Module {
 	
 	public function init() {
 		if(!et_core_is_fb_enabled()){
-			wp_enqueue_script( 'cpfd-module-js', CPFD_URL . 'assets/js/cpfd_module_frontend.js', [], CPFD);
+			wp_enqueue_script( 'cpfd-module-js', CPFD_URL . 'assets/js/cpfd_module_frontend.js', [], CPFD, true);
 		}
 		
 		$this->name = esc_html__( 'Language Switcher', 'connect-polylang-for-divi' );

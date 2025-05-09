@@ -59,13 +59,4 @@ class CPFD_HELPERS {
 		return array_merge_recursive( $exists, $helpers );
 	}
 
-	public function static_content_helper( $content ) {
-		$helpers = $this->static_content();
-
-		return $content . sprintf(
-			';window.DCLBuilderBackend=%1$s; jQuery.extend(true, window.ETBuilderBackend, %1$s);',
-			et_fb_remove_site_url_protocol( wp_json_encode( $helpers ) )
-		);
-	}
-
 }

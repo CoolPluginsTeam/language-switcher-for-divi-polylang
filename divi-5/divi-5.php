@@ -19,7 +19,7 @@ class CPFD_Divi5 {
     wp_enqueue_style( 'cpfd-divi5-frontend-style', CPFD_URL . 'includes/modules/cpfd_module/style.css', [], CPFD );
     wp_enqueue_style( 'cpfd-divi5-frontend-helper', CPFD_URL . 'assets/css/cpfdhelper.css', [], CPFD );
     if(!et_core_is_fb_enabled()){
-			wp_enqueue_script( 'cpfd-module-js', CPFD_URL . 'assets/js/cpfd_module_frontend.js', [], CPFD);
+			wp_enqueue_script( 'cpfd-module-js', CPFD_URL . 'assets/js/cpfd_module_frontend.js', [], CPFD, true );
 		}
   }
 

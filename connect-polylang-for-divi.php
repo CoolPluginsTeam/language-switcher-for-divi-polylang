@@ -8,7 +8,7 @@ Author:      Coolplugins
 Author URI:  http://coolplugins.net/
 License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: cpfd
+Text Domain: connect-polylang-for-divi
 Domain Path: /languages
 
 Connect Polylang for Divi is free software: you can redistribute it and/or modify
@@ -72,6 +72,7 @@ if ( ! class_exists( 'CONNECT_POLYLANG_FOR_DIVI' ) ) {
 		public function admin_notice_missing_divi_theme() {
 			if ( current_user_can( 'activate_plugins' ) ) {
 				$message = sprintf(
+					// translators: 1: Plugin Name, 2: Theme Name
 					esc_html__(
 						'%1$s requires %2$s to be installed and activated.',
 						'connect-polylang-for-divi'
@@ -111,7 +112,7 @@ if ( ! class_exists( 'CONNECT_POLYLANG_FOR_DIVI' ) ) {
 			$cpfd_polylang = $polylang;
 
 			if ( isset( $cpfd_polylang ) ) {
-				if ( function_exists( 'et_fb_enabled' ) && et_fb_enabled() ) {
+				if ( function_exists( 'et_core_is_fb_enabled' ) && et_core_is_fb_enabled() ) {
 					try {
 						require_once CPFD_DIR . 'helpers/class-cpfd-helpers.php';
 						if ( function_exists( 'pll_the_languages' ) && function_exists( 'pll_current_language' ) ) {
