@@ -1,5 +1,5 @@
 <?php
-namespace CPFD\Modules\LanguageSwitcherModule\LanguageSwitcherModuleTraits;
+namespace LSDP\Modules\LanguageSwitcherModule\LanguageSwitcherModuleTraits;
 
 if ( ! defined( 'ABSPATH' ) ) {
     die( 'Direct access forbidden.' );
@@ -67,23 +67,23 @@ trait ModuleStylesTrait {
 
           CommonStyle::style(
             [
-              'selector'            => $order_class . ' .cpfd-wrapper.dropdown ul.cpfd-language-list',
+              'selector'            => $order_class . ' .lsdp-wrapper.dropdown ul.lsdp-language-list',
               'attr'                => $attrs['switcher_layouts'],
               'declarationFunction' => function ( $declaration_function_args ) {
-                return "--cpfd-dropdown-index: 999;";
+                return "--lsdp-dropdown-index: 999;";
               },
             ]
           ),
           CommonStyle::style(
             [
-              'selector'            => $order_class . ' .cpfd-wrapper .cpfd-lang-image',   
+              'selector'            => $order_class . ' .lsdp-wrapper .lsdp-lang-image',   
               'attr'                => $attrs['flag_style']['decoration']['aspect_ratio'] ?? [],
               'declarationFunction' => function ( $declaration_function_args ) {
                 $attr_value = $declaration_function_args['attrValue']['aspect_ratio'] ?? [];
                 if($attr_value === '1/1'){
-                  return ("--cpfd-flag-ratio: {$attr_value}; --cpfd-flag-height: var(--cpfd-flag-width);");
+                  return ("--lsdp-flag-ratio: {$attr_value}; --lsdp-flag-height: var(--lsdp-flag-width);");
                 }else{
-                  return ("--cpfd-flag-ratio: {$attr_value}; --cpfd-flag-height: calc(var(--cpfd-flag-width) * 0.75);");
+                  return ("--lsdp-flag-ratio: {$attr_value}; --lsdp-flag-height: calc(var(--lsdp-flag-width) * 0.75);");
                 }
               },
             ]
@@ -91,39 +91,39 @@ trait ModuleStylesTrait {
           (($attrs['flag_style']['decoration']['aspect_ratio']['desktop']['value']['aspect_ratio'] ?? $attrs['flag_style']['innerContent']['decoration']['aspect_ratio']['desktop']['value']) === '1/1') ? (
             CommonStyle::style(
               [ 
-                'selector'            => $order_class . ' .cpfd-wrapper .cpfd-lang-image',   
+                'selector'            => $order_class . ' .lsdp-wrapper .lsdp-lang-image',   
                 'attr'                => $attrs['flag_style']['decoration']['flag_width'] ?? [],
                 'declarationFunction' => function ( $declaration_function_args ) {
                   $attr_value = $declaration_function_args['attrValue']['flag_width'] ?? [];
-                  return ("--cpfd-flag-width: {$attr_value}; --cpfd-flag-height: {$attr_value};");
+                  return ("--lsdp-flag-width: {$attr_value}; --lsdp-flag-height: {$attr_value};");
                 },
               ]
             ) ): (
              
               CommonStyle::style(
                 [
-                  'selector'            => $order_class . ' .cpfd-wrapper .cpfd-lang-image',   
+                  'selector'            => $order_class . ' .lsdp-wrapper .lsdp-lang-image',   
                   'attr'                => $attrs['flag_style']['decoration']['flag_width'] ?? [],
                   'declarationFunction' => function ( $declaration_function_args ) {
                     $attr_value = $declaration_function_args['attrValue']['flag_width'] ?? [];
-                    return ("--cpfd-flag-width: {$attr_value}; --cpfd-flag-height: calc(var(--cpfd-flag-width) * 0.75);");
+                    return ("--lsdp-flag-width: {$attr_value}; --lsdp-flag-height: calc(var(--lsdp-flag-width) * 0.75);");
                   },
                 ]
               )
             ),
           CommonStyle::style(
             [
-              'selector'            => $order_class . ' .cpfd-wrapper .cpfd-lang-image', 
+              'selector'            => $order_class . ' .lsdp-wrapper .lsdp-lang-image', 
               'attr'                => $attrs['flag_style']['decoration']['flag_border_radius'] ?? [],
               'declarationFunction' => function ( $declaration_function_args ) {
                 $attr_value = $declaration_function_args['attrValue']['flag_border_radius'] ?? [];
-                return "--cpfd-flag-radius: {$attr_value};";
+                return "--lsdp-flag-radius: {$attr_value};";
               },
             ]
           ),
           CommonStyle::style(
             [
-              'selector'            => $order_class . ' .cpfd-wrapper ul li.cpfd-lang-item a, ' . $order_class . ' .cpfd-wrapper.dropdown',   
+              'selector'            => $order_class . ' .lsdp-wrapper ul li.lsdp-lang-item a, ' . $order_class . ' .lsdp-wrapper.dropdown',   
               'attr'                => $attrs['background_style']['decoration']['background_color'] ?? [],
               'declarationFunction' => function ( $declaration_function_args ) {
                 $attr_value = $declaration_function_args['attrValue']['background_color'] ?? [];

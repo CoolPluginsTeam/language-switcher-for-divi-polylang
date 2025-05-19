@@ -1,4 +1,4 @@
-input.cpfd-input {
+input.lsdp-input {
   background: #f1f5f9;
   max-height: 30px;
   border: 0;
@@ -15,27 +15,27 @@ input.cpfd-input {
   width: 100%;
 }
 
-input.cpfd-input:focus {
+input.lsdp-input:focus {
   background: #e6ecf2;
 }
 
-input.cpfd-input::-webkit-input-placeholder {
+input.lsdp-input::-webkit-input-placeholder {
   color: #98a7b8;
 }
 
-input.cpfd-input:-moz-placeholder {
+input.lsdp-input:-moz-placeholder {
   color: #98a7b8;
 }
 
-input.cpfd-input::-moz-placeholder {
+input.lsdp-input::-moz-placeholder {
   color: #98a7b8;
 }
 
-input.cpfd-input:-ms-input-placeholder {
+input.lsdp-input:-ms-input-placeholder {
   color: #98a7b8;
 }
 
-input.cpfd-input[readonly] {
+input.lsdp-input[readonly] {
   background: #ffffff !important;
   border: 1px solid #eaedf0 !important;
   cursor: not-allowed;

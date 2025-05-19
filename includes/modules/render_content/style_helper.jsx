@@ -52,31 +52,31 @@ const getUnitValue = (unitString) => {
 
 const staticCSS = (props) => {
     const customCss = [];
-    const selector = '%%order_class%% .cpfd-wrapper';
+    const selector = '%%order_class%% .lsdp-wrapper';
 
-    const langPadding = props.cpfd_bg_normal_padding ? props.cpfd_bg_normal_padding : '';
-    const langMargin = props.cpfd_bg_normal_margin ? props.cpfd_bg_normal_margin : '';
-    const langNormalBgColor = props.cpfd_bg_normal_color ? props.cpfd_bg_normal_color : '';
-    const langHoverBgColor = props.cpfd_bg_normal_color__hover ? props.cpfd_bg_normal_color__hover : '';
-    const flagWidth = props.cpfd_flag_width ? props.cpfd_flag_width : '';
-    const flagRadius = props.cpfd_flag_radius ? props.cpfd_flag_radius : '';
-    const flagRatio = props.cpfd_flag_ratio ? props.cpfd_flag_ratio : '';
-    const normalTextFont = props.cpfd_text_settings_font ? props.cpfd_text_settings_font : '';
-    const normalTextColor = props.cpfd_text_settings_text_color ? props.cpfd_text_settings_text_color : '';
-    const hoverTextColor = props.cpfd_text_settings_text_color__hover ? props.cpfd_text_settings_text_color__hover : '';
-    const normalTextSize = props.cpfd_text_settings_font_size ? props.cpfd_text_settings_font_size : '';
-    const hoverTextSize = props.cpfd_text_settings_font_size__hover ? props.cpfd_text_settings_font_size__hover : '';
-    const normalTextLineHeight = props.cpfd_text_settings_line_height ? props.cpfd_text_settings_line_height : '';
-    const hoverTextLineHeight = props.cpfd_text_settings_line_height__hover ? props.cpfd_text_settings_line_height__hover : '';
-    const normal_text_spacing = props.cpfd_text_settings_letter_spacing ? props.cpfd_text_settings_letter_spacing : '';
-    const hover_text_spacing = props.cpfd_text_settings_letter_spacing__hover ? props.cpfd_text_settings_letter_spacing__hover : '';
+    const langPadding = props.lsdp_bg_normal_padding ? props.lsdp_bg_normal_padding : '';
+    const langMargin = props.lsdp_bg_normal_margin ? props.lsdp_bg_normal_margin : '';
+    const langNormalBgColor = props.lsdp_bg_normal_color ? props.lsdp_bg_normal_color : '';
+    const langHoverBgColor = props.lsdp_bg_normal_color__hover ? props.lsdp_bg_normal_color__hover : '';
+    const flagWidth = props.lsdp_flag_width ? props.lsdp_flag_width : '';
+    const flagRadius = props.lsdp_flag_radius ? props.lsdp_flag_radius : '';
+    const flagRatio = props.lsdp_flag_ratio ? props.lsdp_flag_ratio : '';
+    const normalTextFont = props.lsdp_text_settings_font ? props.lsdp_text_settings_font : '';
+    const normalTextColor = props.lsdp_text_settings_text_color ? props.lsdp_text_settings_text_color : '';
+    const hoverTextColor = props.lsdp_text_settings_text_color__hover ? props.lsdp_text_settings_text_color__hover : '';
+    const normalTextSize = props.lsdp_text_settings_font_size ? props.lsdp_text_settings_font_size : '';
+    const hoverTextSize = props.lsdp_text_settings_font_size__hover ? props.lsdp_text_settings_font_size__hover : '';
+    const normalTextLineHeight = props.lsdp_text_settings_line_height ? props.lsdp_text_settings_line_height : '';
+    const hoverTextLineHeight = props.lsdp_text_settings_line_height__hover ? props.lsdp_text_settings_line_height__hover : '';
+    const normal_text_spacing = props.lsdp_text_settings_letter_spacing ? props.lsdp_text_settings_letter_spacing : '';
+    const hover_text_spacing = props.lsdp_text_settings_letter_spacing__hover ? props.lsdp_text_settings_letter_spacing__hover : '';
     const hover_bg_margin = props.custom_margin__hover ? props.custom_margin__hover : '';
     const hover_bg_padding = props.custom_padding__hover ? props.custom_padding__hover : '';
     customCss.push(
         [
             {
                 selector: selector + '.dropdown',
-                declaration: `--cpfd-dropdown-index: 999;`,
+                declaration: `--lsdp-dropdown-index: 999;`,
             }
         ]
     );
@@ -90,7 +90,7 @@ const staticCSS = (props) => {
                     [
                         {
                             selector: selector,
-                            declaration: `--cpfd-lang-padding-${key}: ${value};`,
+                            declaration: `--lsdp-lang-padding-${key}: ${value};`,
                         }
                     ]
                 );
@@ -107,7 +107,7 @@ const staticCSS = (props) => {
                     [
                         {
                             selector: selector,
-                            declaration: `--cpfd-lang-margin-${key}: ${value};`,
+                            declaration: `--lsdp-lang-margin-${key}: ${value};`,
                         }
                     ]
                 );
@@ -120,7 +120,7 @@ const staticCSS = (props) => {
             [
                 {
                     selector: selector,
-                    declaration: `--cpfd-normal-bg-color: ${langNormalBgColor};`,
+                    declaration: `--lsdp-normal-bg-color: ${langNormalBgColor};`,
                 }
             ]
         );
@@ -131,7 +131,7 @@ const staticCSS = (props) => {
             [
                 {
                     selector: selector,
-                    declaration: `--cpfd-hover-bg-color: ${langHoverBgColor};`,
+                    declaration: `--lsdp-hover-bg-color: ${langHoverBgColor};`,
                 }
             ]
         );
@@ -146,7 +146,7 @@ const staticCSS = (props) => {
                     [
                         {
                             selector: selector,
-                            declaration: `--cpfd-hover-bg-mrgn-${key}: ${value};`,
+                            declaration: `--lsdp-hover-bg-mrgn-${key}: ${value};`,
                         }
                     ]
                 );
@@ -163,7 +163,7 @@ const staticCSS = (props) => {
                     [
                         {
                             selector: selector,
-                            declaration: `--cpfd-hover-bg-pading-${key}: ${value};`,
+                            declaration: `--lsdp-hover-bg-pading-${key}: ${value};`,
                         }
                     ]
                 );
@@ -177,7 +177,7 @@ const staticCSS = (props) => {
             [
                 {
                     selector: selector,
-                    declaration: `--cpfd-flag-height: var(--cpfd-flag-width);`,
+                    declaration: `--lsdp-flag-height: var(--lsdp-flag-width);`,
                 }
             ]
         );
@@ -186,7 +186,7 @@ const staticCSS = (props) => {
             [
                 {
                     selector: selector,
-                    declaration: `--cpfd-flag-height: calc(var(--cpfd-flag-width) * 0.75);`,
+                    declaration: `--lsdp-flag-height: calc(var(--lsdp-flag-width) * 0.75);`,
                 }
             ]
         );
@@ -196,7 +196,7 @@ const staticCSS = (props) => {
             [
                 {
                     selector: selector,
-                    declaration: `--cpfd-flag-width: ${flagWidth}`,
+                    declaration: `--lsdp-flag-width: ${flagWidth}`,
                 }
             ]
         );
@@ -206,7 +206,7 @@ const staticCSS = (props) => {
             [
                 {
                     selector: selector,
-                    declaration: `--cpfd-flag-radius: ${flagRadius}`,
+                    declaration: `--lsdp-flag-radius: ${flagRadius}`,
                 }
             ]
         );
@@ -217,7 +217,7 @@ const staticCSS = (props) => {
             [
                 {
                     selector: selector,
-                    declaration: `--cpfd-normal-text-font: ${Font_properties['fontFamily']}`,
+                    declaration: `--lsdp-normal-text-font: ${Font_properties['fontFamily']}`,
                 }
             ]
         );
@@ -225,7 +225,7 @@ const staticCSS = (props) => {
             [
                 {
                     selector: selector,
-                    declaration: `--cpfd-normal-text-weight: ${Font_properties['fontWeight']}`,
+                    declaration: `--lsdp-normal-text-weight: ${Font_properties['fontWeight']}`,
                 }
             ]
         );
@@ -233,7 +233,7 @@ const staticCSS = (props) => {
             [
                 {
                     selector: selector,
-                    declaration: `--cpfd-normal-text-transform: ${Font_properties['textTransform']}`,
+                    declaration: `--lsdp-normal-text-transform: ${Font_properties['textTransform']}`,
                 }
             ]
         );
@@ -241,7 +241,7 @@ const staticCSS = (props) => {
             [
                 {
                     selector: selector,
-                    declaration: `--cpfd-normal-text-decoration: ${Font_properties['textDecoration']}`,
+                    declaration: `--lsdp-normal-text-decoration: ${Font_properties['textDecoration']}`,
                 }
             ]
         );
@@ -249,7 +249,7 @@ const staticCSS = (props) => {
             [
                 {
                     selector: selector,
-                    declaration: `--cpfd-normal-text-style: ${Font_properties['fontStyle']}`,
+                    declaration: `--lsdp-normal-text-style: ${Font_properties['fontStyle']}`,
                 }
             ]
         );
@@ -257,7 +257,7 @@ const staticCSS = (props) => {
             [
                 {
                     selector: selector,
-                    declaration: `--cpfd-normal-text-decoration-color: ${Font_properties['textDecorationLineColor']}`,
+                    declaration: `--lsdp-normal-text-decoration-color: ${Font_properties['textDecorationLineColor']}`,
                 }
             ]
         );
@@ -265,7 +265,7 @@ const staticCSS = (props) => {
             [
                 {
                     selector: selector,
-                    declaration: `--cpfd-normal-text-decoration-style: ${Font_properties['textDecorationStyle']}`,
+                    declaration: `--lsdp-normal-text-decoration-style: ${Font_properties['textDecorationStyle']}`,
                 }
             ]
         );
@@ -276,7 +276,7 @@ const staticCSS = (props) => {
             [
                 {
                     selector: selector,
-                    declaration: `--cpfd-normal-text-color: ${normalTextColor}`,
+                    declaration: `--lsdp-normal-text-color: ${normalTextColor}`,
                 }
             ]
         );
@@ -286,7 +286,7 @@ const staticCSS = (props) => {
             [
                 {
                     selector: selector,
-                    declaration: `--cpfd-hover-text-color: ${hoverTextColor}`,
+                    declaration: `--lsdp-hover-text-color: ${hoverTextColor}`,
                 }
             ]
         );
@@ -297,7 +297,7 @@ const staticCSS = (props) => {
             [
                 {
                     selector: selector,
-                    declaration: `--cpfd-normal-text-size: ${normalTextSize}`,
+                    declaration: `--lsdp-normal-text-size: ${normalTextSize}`,
                 }
             ]
         );
@@ -307,7 +307,7 @@ const staticCSS = (props) => {
             [
                 {
                     selector: selector,
-                    declaration: `--cpfd-hover-text-size: ${hoverTextSize}`,
+                    declaration: `--lsdp-hover-text-size: ${hoverTextSize}`,
                 }
             ]
         );
@@ -317,7 +317,7 @@ const staticCSS = (props) => {
             [
                 {
                     selector: selector,
-                    declaration: `--cpfd-normal-text-line-height: ${normalTextLineHeight}`,
+                    declaration: `--lsdp-normal-text-line-height: ${normalTextLineHeight}`,
                 }
             ]
         );
@@ -327,7 +327,7 @@ const staticCSS = (props) => {
             [
                 {
                     selector: selector,
-                    declaration: `--cpfd-hover-text-line-height: ${hoverTextLineHeight}`,
+                    declaration: `--lsdp-hover-text-line-height: ${hoverTextLineHeight}`,
                 }
             ]
         );
@@ -337,7 +337,7 @@ const staticCSS = (props) => {
             [
                 {
                     selector: selector,
-                    declaration: `--cpfd-normal-text-letter-spacing: ${normal_text_spacing}`,
+                    declaration: `--lsdp-normal-text-letter-spacing: ${normal_text_spacing}`,
                 }
             ]
         );
@@ -347,7 +347,7 @@ const staticCSS = (props) => {
             [
                 {
                     selector: selector,
-                    declaration: `--cpfd-hover-text-letter-spacing: ${hover_text_spacing}`,
+                    declaration: `--lsdp-hover-text-letter-spacing: ${hover_text_spacing}`,
                 }
             ]
         );

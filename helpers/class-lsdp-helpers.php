@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
   die( 'Direct access forbidden.' );
 }
 
-class CPFD_HELPERS {
+class LSDP_HELPERS {
 	public static function get_flag_code( $flag_url ) {
 		$flag_code = preg_match( '/polylang\/flags\/([a-z]+)\.(png|svg|jpg|jpeg)$/i', $flag_url, $matches ) ? $matches[1] : false;
 		return $flag_code;
@@ -15,8 +15,8 @@ class CPFD_HELPERS {
 		$flag         = array();
 		if ( $country_code && class_exists( 'PLL_Language' ) && method_exists( 'PLL_Language', 'get_flag_html' ) ) {
 
-			$flag['path'] = CPFD_DIR . 'assets/flags/' . esc_html( $country_code ) . '.svg';
-			$flag['url']  = esc_url( CPFD_URL . 'assets/flags/' . esc_html( $country_code ) . '.svg' );
+			$flag['path'] = LSDP_DIR . 'assets/flags/' . esc_html( $country_code ) . '.svg';
+			$flag['url']  = esc_url( LSDP_URL . 'assets/flags/' . esc_html( $country_code ) . '.svg' );
 
 			if ( ! defined( 'PLL_ENCODED_FLAGS' ) || PLL_ENCODED_FLAGS ) {
 				$svg_icon = file_get_contents( $flag['path'] ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Ignore WordPress alternative function for file_get_contents
@@ -54,7 +54,7 @@ class CPFD_HELPERS {
 	public function static_content( $exists = array() ) {
 		$helpers = array(
 			'defaults' => array(
-				'connect-polylang-for-divi' => array(
+				'language-switcher-for-divi-polylang' => array(
 					'z_index' => 99,
 				),
 			),

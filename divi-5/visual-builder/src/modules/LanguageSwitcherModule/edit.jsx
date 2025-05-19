@@ -27,10 +27,10 @@ export const LanguageSwitcherModuleEdit = (props) => {
   } = useFetch({ language_switcher_data: '' });
 
   useEffect(() => {
-    if (response?.language_switcher_data?.cpfdGlobalObj) {
-      setPolylangData(response?.language_switcher_data?.cpfdGlobalObj?.cpfdLanguageData);
-      setCurrentLang(response?.language_switcher_data?.cpfdGlobalObj?.cpfdCurrentLang);
-      setPluginUrl(response?.language_switcher_data?.cpfdGlobalObj?.cpfdPluginUrl);
+    if (response?.language_switcher_data?.lsdpGlobalObj) {
+      setPolylangData(response?.language_switcher_data?.lsdpGlobalObj?.lsdpLanguageData);
+      setCurrentLang(response?.language_switcher_data?.lsdpGlobalObj?.lsdpCurrentLang);
+      setPluginUrl(response?.language_switcher_data?.lsdpGlobalObj?.lsdpPluginUrl);
     }
   }, [response]);
 
@@ -38,7 +38,7 @@ export const LanguageSwitcherModuleEdit = (props) => {
   const language_switcher_module_data = () => {
     fetch({
       method: 'GET',
-      restRoute: '/cpfd/v1/module-data/language-switcher-module',
+      restRoute: '/lsdp/v1/module-data/language-switcher-module',
     })
     .catch((error) => {
       console.error('Error fetching data:', error);
@@ -48,13 +48,16 @@ export const LanguageSwitcherModuleEdit = (props) => {
   useEffect(() => {
     language_switcher_module_data();
     setTimeout(() => {
-    const thisModule = document.querySelector('.cpfd_connect_polylang_for_divi');
+    const thisModule = document.querySelector('.lsdp_language_switcher_for_divi_polylang');
 
     const parentRow = thisModule.parentNode;
     if (parentRow) {
       if(parentRow.style.getPropertyValue('z-index') !== '999'){
         parentRow.style.setProperty('z-index', '999');
       }
+    }
+    if (thisModule) {
+      thisModule.style.setProperty('z-index', '999'); 
     }
     }, 1000);
   }, [attributes?.switcher_layouts]);
@@ -64,7 +67,7 @@ export const LanguageSwitcherModuleEdit = (props) => {
     <ModuleContainer
       attrs={attrs}
       elements={elements} 
-      moduleClassName = 'cpfd_connect_polylang_for_divi'
+      moduleClassName = 'lsdp_language_switcher_for_divi_polylang'
       id={id}
       name={name}
       scriptDataComponent={ModuleScriptData}
@@ -76,8 +79,8 @@ export const LanguageSwitcherModuleEdit = (props) => {
         ) : (
          (
           polylangData && (Object.keys(polylangData).length > 0)  ? (
-            <div className='cpfd-main-wrapper'>
-              <div className={`cpfd-wrapper ${attributes.switcher_layouts}`}>
+            <div className='lsdp-main-wrapper'>
+              <div className={`lsdp-wrapper ${attributes.switcher_layouts}`}>
               {attributes?.switcher_layouts === 'dropdown' && (
                 polylangData?.[currentLang] ? (
                   <span>
@@ -110,7 +113,7 @@ export const LanguageSwitcherModuleEdit = (props) => {
                       }
 
                       return (
-                        <li key={index} className={lang === currentLang ? 'cpfd_active_lang' : ''}>
+                        <li key={index} className={lang === currentLang ? 'lsdp_active_lang' : ''}>
                           <a href={polylangData?.[lang]?.url}>
                             {attributes?.show_language_flag === 'on' && <CountryFlag flagCode={polylangData?.[lang]?.flagCode} name={polylangData?.[lang]?.name} url={pluginUrl}/>}
                             {attributes?.show_language_name === 'on' && <CountryName name={polylangData?.[lang]?.name} />}

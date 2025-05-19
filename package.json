@@ -1,5 +1,5 @@
 {
-  "name": "connect-polylang-for-divi",
+  "name": "language-switcher-for-divi-polylang",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -27,7 +27,7 @@
     ]
   },
   "cde": {
-    "gettext": "connect-polylang-for-divi",
-    "prefix": "cpfd"
+    "gettext": "language-switcher-for-divi-polylang",
+    "prefix": "lsdp"
   }
 }

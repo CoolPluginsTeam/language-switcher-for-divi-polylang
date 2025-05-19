@@ -1,5 +1,5 @@
 <?php
-namespace CPFD\Modules\LanguageSwitcherModule\LanguageSwitcherModuleTraits;
+namespace LSDP\Modules\LanguageSwitcherModule\LanguageSwitcherModuleTraits;
 
 if ( ! defined( 'ABSPATH' ) ) {
     die( 'Direct access forbidden.' );

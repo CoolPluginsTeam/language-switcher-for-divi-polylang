@@ -1,6 +1,6 @@
 <?php
 
-namespace CPFD\Modules\LanguageSwitcherModule\LanguageSwitcherModuleTraits;
+namespace LSDP\Modules\LanguageSwitcherModule\LanguageSwitcherModuleTraits;
 
 if ( ! defined( 'ABSPATH' ) ) {
     die( 'Direct access forbidden.' );
@@ -24,13 +24,13 @@ class ModuleHelper {
         return is_array($value) ? array_map('esc_html', $value) : esc_html($value);
     }
 
-    static function cpfd_localize_polyglang_data_divi_5($data) {
+    static function lsdp_localize_polyglang_data_divi_5($data) {
     
         global $polylang;
-        $cpfd_polylang = $polylang;
-        if ( isset( $cpfd_polylang ) ) {
+        $lsdp_polylang = $polylang;
+        if ( isset( $lsdp_polylang ) ) {
             try {
-                require_once CPFD_DIR . 'helpers/class-cpfd-helpers.php';
+                require_once LSDP_DIR . 'helpers/class-lsdp-helpers.php';
       
                 if ( function_exists( 'pll_the_languages' ) && function_exists( 'pll_current_language' ) ) {
                     $languages = pll_the_languages( array( 'raw' => 1 ) );
@@ -44,7 +44,7 @@ class ModuleHelper {
                     $languages = array_map(
                         function( $language ) {
                             return array(
-                                'flagCode'       => esc_html( \CPFD_HELPERS::get_flag_code( $language['flag'] ) ),
+                                'flagCode'       => esc_html( \LSDP_HELPERS::get_flag_code( $language['flag'] ) ),
                                 'slug'           => esc_html( $language['slug'] ),
                                 'name'           => esc_html( $language['name'] ),
                                 'no_translation' => esc_html( $language['no_translation'] ),
@@ -54,11 +54,11 @@ class ModuleHelper {
                         $languages
                     );
                     $custom_data = array(
-                        'cpfdLanguageData' => $languages,
-                        'cpfdCurrentLang'   => esc_html( $lang_curr ),
-                        'cpfdPluginUrl'     => esc_url( CPFD_URL ),
+                        'lsdpLanguageData' => $languages,
+                        'lsdpCurrentLang'   => esc_html( $lang_curr ),
+                        'lsdpPluginUrl'     => esc_url( LSDP_URL ),
                     );
-                    $data['cpfdGlobalObj'] = $custom_data;
+                    $data['lsdpGlobalObj'] = $custom_data;
                 }
             } catch ( Exception $e ) {
                 // Handle exception if needed

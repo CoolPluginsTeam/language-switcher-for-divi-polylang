@@ -1,3 +1,3 @@
-import CPFD_Module from './cpfd_module/cpfd_module';
+import LSDP_Module from './lsdp_module/lsdp_module';
 
-export default [CPFD_Module];
+export default [LSDP_Module];

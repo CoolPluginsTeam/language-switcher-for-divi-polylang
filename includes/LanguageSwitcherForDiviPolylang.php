@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
   die( 'Direct access forbidden.' );
 }
 
-class CPFD_ConnectPolylangForDivi extends DiviExtension {
+class LSDP_LanguageSwitcherForDiviPolylang extends DiviExtension {
 
 	/**
 	 * The gettext domain for the extension's translations.
@@ -13,7 +13,7 @@ class CPFD_ConnectPolylangForDivi extends DiviExtension {
 	 *
 	 * @var string
 	 */
-	public $gettext_domain = 'connect-polylang-for-divi';
+	public $gettext_domain = 'language-switcher-for-divi-polylang';
 
 	/**
 	 * The extension's WP Plugin name.
@@ -22,7 +22,7 @@ class CPFD_ConnectPolylangForDivi extends DiviExtension {
 	 *
 	 * @var string
 	 */
-	public $name = 'connect-polylang-for-divi';
+	public $name = 'language-switcher-for-divi-polylang';
 
 	/**
 	 * The extension's version
@@ -31,15 +31,15 @@ class CPFD_ConnectPolylangForDivi extends DiviExtension {
 	 *
 	 * @var string
 	 */
-	public $version = CPFD;
+	public $version = LSDP;
 
 	/**
-	 * CPFD_ConnectPolylangForDivi constructor.
+	 * LSDP_LanguageSwitcherForDiviPolylang constructor.
 	 *
 	 * @param string $name
 	 * @param array  $args
 	 */
-	public function __construct( $name = 'connect-polylang-for-divi', $args = array() ) {
+	public function __construct( $name = 'language-switcher-for-divi-polylang', $args = array() ) {
 		$this->plugin_dir     = plugin_dir_path( __FILE__ );
 		$this->plugin_dir_url = plugin_dir_url( $this->plugin_dir );
 
@@ -47,4 +47,4 @@ class CPFD_ConnectPolylangForDivi extends DiviExtension {
 	}
 }
 
-new CPFD_ConnectPolylangForDivi();
+new LSDP_LanguageSwitcherForDiviPolylang();

@@ -4,9 +4,9 @@ import React, { Component } from 'react';
 // Internal Dependencies
 import './style.css';
 
-class cpfd_field extends Component {
+class lsdp_field extends Component {
 
-  static slug = 'cpfd_field';
+  static slug = 'lsdp_field';
 
   /**
    * Handle input value change.
@@ -20,11 +20,11 @@ class cpfd_field extends Component {
   render() {
     return(
       <input
-        id={`cpfd-field-${this.props.name}`}
+        id={`lsdp-field-${this.props.name}`}
         name={this.props.name}
         value={this.props.value}
         type='text'
-        className='cpfd-input'
+        className='lsdp-input'
         onChange={this._onChange}
         placeholder='Your text here ...'
       />
@@ -32,4 +32,4 @@ class cpfd_field extends Component {
   }
 }
 
-export default cpfd_field;
+export default lsdp_field;

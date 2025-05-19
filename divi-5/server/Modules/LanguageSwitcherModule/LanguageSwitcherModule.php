@@ -2,10 +2,10 @@
 /**
  * Language Switcher Module class.
  *
- * @package CPFD\Modules\LanguageSwitcherModule;
+ * @package LSDP\Modules\LanguageSwitcherModule;
  */
 
-namespace CPFD\Modules\LanguageSwitcherModule;
+namespace LSDP\Modules\LanguageSwitcherModule;
 
 if ( ! defined( 'ABSPATH' ) ) {
     die( 'Direct access forbidden.' );
@@ -13,12 +13,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use ET\Builder\Framework\DependencyManagement\Interfaces\DependencyInterface;
 use ET\Builder\Packages\ModuleLibrary\ModuleRegistration;
-use CPFD\Modules\LanguageSwitcherModule\LanguageSwitcherModuleTraits;
+use LSDP\Modules\LanguageSwitcherModule\LanguageSwitcherModuleTraits;
 
 /**
  * Class LanguageSwitcherModule
  *
- * @package CPFD\Modules\LanguageSwitcherModule
+ * @package LSDP\Modules\LanguageSwitcherModule
  */
 class LanguageSwitcherModule implements DependencyInterface {
   

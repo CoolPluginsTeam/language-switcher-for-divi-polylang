@@ -23,19 +23,19 @@ const switcher_layouts = {
 export const SettingsContent = (props) => (
 
   <>
-    <GroupContainer id="toggle_content" title={__("Language Switcher Settings", "cpfd")}>
+    <GroupContainer id="toggle_content" title={__("Language Switcher Settings", "lsdp")}>
         <>
           <FieldContainer
           attrName="switcher_layouts"
           subName="switcher_layouts"
-          label={__('Layout Options', 'connect-polylang-for-divi')}
-          description={__('Select your switcher layout', 'connect-polylang-for-divi')}
+          label={__('Layout Options', 'language-switcher-for-divi-polylang')}
+          description={__('Select your switcher layout', 'language-switcher-for-divi-polylang')}
           defaultValue={'dropdown'}
         >
           <SelectContainer
             options={Object.entries(switcher_layouts).reduce((acc, [key, label]) => {
               acc[key] = {
-                label: __(label, 'connect-polylang-for-divi'),
+                label: __(label, 'language-switcher-for-divi-polylang'),
                 value: key,
               };
               return acc;
@@ -94,7 +94,7 @@ export const SettingsContent = (props) => (
           <ToggleContainer />
         </FieldContainer>
         {((props?.attrs?.hide_untranslated_language?.desktop?.value?.hide_untranslated_language ?? props?.defaultSettingsAttrs?.hide_untranslated_language?.innerContent?.desktop?.value) === 'on') && (
-        <div className="cpfd-settings-description" style={{color: 'red'}}><strong>Note:</strong> This setting only affects the frontend. Please check your site's frontend to see it in action.</div>
+        <div className="lsdp-settings-description" style={{color: 'red'}}><strong>Note:</strong> This setting only affects the frontend. Please check your site's frontend to see it in action.</div>
         )}
       </>
     </GroupContainer>

@@ -1,3 +1,3 @@
-import cpfd_field from './cpfd_field/cpfd_field';
+import lsdp_field from './lsdp_field/lsdp_field';
 
-export default [cpfd_field];
+export default [lsdp_field];

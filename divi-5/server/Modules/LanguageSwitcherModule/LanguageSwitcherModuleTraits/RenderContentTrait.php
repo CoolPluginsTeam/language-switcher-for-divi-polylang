@@ -1,8 +1,8 @@
 <?php
 
-namespace CPFD\Modules\LanguageSwitcherModule\LanguageSwitcherModuleTraits;
+namespace LSDP\Modules\LanguageSwitcherModule\LanguageSwitcherModuleTraits;
 
-require_once CPFD_DIR . 'helpers/class-cpfd-helpers.php';
+require_once LSDP_DIR . 'helpers/class-lsdp-helpers.php';
 
 if (!defined('ABSPATH')) {
     die('Direct access forbidden.');
@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
 
 trait RenderContentTrait
 {
-    public static function cpfd_render_content($props)
+    public static function lsdp_render_content($props)
     {
         global $polylang;
         
@@ -38,37 +38,37 @@ trait RenderContentTrait
                 continue;
             }
 
-            $flag_icon = \CPFD_HELPERS::get_country_flag($lang['flag'], $lang['name']);
+            $flag_icon = \LSDP_HELPERS::get_country_flag($lang['flag'], $lang['name']);
 
-            $languages_html .= '<li class="cpfd-lang-item" style="z-index: 999;">';
+            $languages_html .= '<li class="lsdp-lang-item">';
             $languages_html .= '<a href="' . esc_url($lang['url']) . '">';
             if (!empty($props['show_language_flag']) && $props['show_language_flag'] === 'on') {
-                $languages_html .= '<div class="cpfd-lang-image">' . $flag_icon . '</div>';
+                $languages_html .= '<div class="lsdp-lang-image">' . $flag_icon . '</div>';
             }
             if (!empty($props['show_language_name']) && $props['show_language_name'] === 'on') {
-                $languages_html .= '<div class="cpfd-lang-name">' . esc_html($lang['name']) . '</div>';
+                $languages_html .= '<div class="lsdp-lang-name">' . esc_html($lang['name']) . '</div>';
             }
             if (!empty($props['show_language_code']) && $props['show_language_code'] === 'on') {
-                $languages_html .= '<div class="cpfd-lang-code">' . esc_html($lang['slug']) . '</div>';
+                $languages_html .= '<div class="lsdp-lang-code">' . esc_html($lang['slug']) . '</div>';
             }
             $languages_html .= '</a></li>';
         }
         
-        return $active_html . '<ul class="cpfd-language-list" style="z-index: 999;">' . $languages_html . '</ul>';
+        return $active_html . '<ul class="lsdp-language-list">' . $languages_html . '</ul>';
     }
 
     private static function get_active_language_html($lang, $props)
     {
-        $html = '<span class="cpfd-active-language">';
+        $html = '<span class="lsdp-active-language">';
         $html .= '<a href="' . esc_url($lang['url']) . '">';
         if (!empty($props['show_language_flag']) && $props['show_language_flag'] === 'on') {
-            $html .= '<div class="cpfd-lang-image">' . \CPFD_HELPERS::get_country_flag($lang['flag'], $lang['name']) . '</div>';
+            $html .= '<div class="lsdp-lang-image">' . \LSDP_HELPERS::get_country_flag($lang['flag'], $lang['name']) . '</div>';
         }
         if (!empty($props['show_language_name']) && $props['show_language_name'] === 'on') {
-            $html .= '<div class="cpfd-lang-name">' . esc_html($lang['name']) . '</div>';
+            $html .= '<div class="lsdp-lang-name">' . esc_html($lang['name']) . '</div>';
         }
         if (!empty($props['show_language_code']) && $props['show_language_code'] === 'on') {
-            $html .= '<div class="cpfd-lang-code">' . esc_html($lang['slug']) . '</div>';
+            $html .= '<div class="lsdp-lang-code">' . esc_html($lang['slug']) . '</div>';
         }
         $html .= '</a></span>';
         return $html;
@@ -83,29 +83,29 @@ trait RenderContentTrait
                 continue;
             }
 
-            $flag_icon = \CPFD_HELPERS::get_country_flag($lang['flag'], $lang['name']);
+            $flag_icon = \LSDP_HELPERS::get_country_flag($lang['flag'], $lang['name']);
             $anchor_open = '<a href="' . esc_url($lang['url']) . '">';
             $anchor_close = '</a>';
 
-            $html .= '<li class="cpfd-lang-item" style="z-index: 999;">';
+            $html .= '<li class="lsdp-lang-item">';
             $html .= $anchor_open;
             if ($props['show_language_flag'] === 'on') {
-                $html .= '<div class="cpfd-lang-image">' .$flag_icon .'</div>';
+                $html .= '<div class="lsdp-lang-image">' .$flag_icon .'</div>';
             }
             if ($props['show_language_name'] === 'on') {
-                $html .= '<div class="cpfd-lang-name">' . wp_kses_post(esc_html($lang['name'])) . '</div>';
+                $html .= '<div class="lsdp-lang-name">' . wp_kses_post(esc_html($lang['name'])) . '</div>';
             }
             if ($props['show_language_code'] === 'on') {
-                $html .= '<div class="cpfd-lang-code">' . wp_kses_post(esc_html($lang['slug'])) . '</div>';
+                $html .= '<div class="lsdp-lang-code">' . wp_kses_post(esc_html($lang['slug'])) . '</div>';
             }
             $html .= $anchor_close;
             $html .= '</li>';
         }
-        return '<ul class="cpfd-language-list" style="z-index: 999;">' . $html . '</ul>';
+        return '<ul class="lsdp-language-list">' . $html . '</ul>';
     }
 
     public static function render_content($props)
     {
-        return self::cpfd_render_content($props);
+        return self::lsdp_render_content($props);
     }
 }

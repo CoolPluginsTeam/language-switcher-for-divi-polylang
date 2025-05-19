@@ -2,16 +2,16 @@
 /**
  * All modules.
  *
- * @package CPFD\Modules;
+ * @package LSDP\Modules;
  */
 
-namespace CPFD\Modules;
+namespace LSDP\Modules;
 
 if ( ! defined( 'ABSPATH' ) ) {
   die( 'Direct access forbidden.' );
 }
 
-use CPFD\Modules\LanguageSwitcherModule\LanguageSwitcherModule;
+use LSDP\Modules\LanguageSwitcherModule\LanguageSwitcherModule;
 add_action(
   'init',
   function() {

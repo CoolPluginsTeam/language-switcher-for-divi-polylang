@@ -1,7 +1,7 @@
 {
-    "name": "connect-polylang-for-divi",
+    "name": "language-switcher-for-divi-polylang",
     "version": "1.0.0",
-    "description": "Connect Polylang for divi to use added language switcher in your page or divi header menu",
+    "description": "Language Switcher for Divi & Polylang to use added language switcher in your page or divi header menu",
     "main": "src/index.js",
     "author": "Elegant Themes",
     "license": "GPL2",

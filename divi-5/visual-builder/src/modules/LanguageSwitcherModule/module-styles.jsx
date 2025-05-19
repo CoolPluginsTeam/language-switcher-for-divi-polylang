@@ -20,55 +20,55 @@ export const ModuleStyles = (props) => {
   return (
     <StyleContainer mode={mode} state={state} noStyleTag={noStyleTag}>
       <CommonStyle
-        selector={`${orderClass} .cpfd-wrapper.dropdown ul`}
+        selector={`${orderClass} .lsdp-wrapper.dropdown ul`}
         attr={attrs?.switcher_layouts}
         declarationFunction={(attrs) => {
-          return `--cpfd-dropdown-index: 999;`;
+          return `--lsdp-dropdown-index: 999;`;
         }}
       />
      <CommonStyle
-        selector={`${orderClass} .cpfd-wrapper .cpfd-lang-image`}
+        selector={`${orderClass} .lsdp-wrapper .lsdp-lang-image`}
         attr={attrs?.flag_style?.decoration?.aspect_ratio}
         declarationFunction={(attrs) => {
           const data = attrs.attrValue.aspect_ratio
           if(data === '1/1'){
-            return (`--cpfd-flag-ratio: ${data}; --cpfd-flag-height: var(--cpfd-flag-width);`);
+            return (`--lsdp-flag-ratio: ${data}; --lsdp-flag-height: var(--lsdp-flag-width);`);
           }else{
-            return (`--cpfd-flag-ratio: ${data}; --cpfd-flag-height: calc(var(--cpfd-flag-width) * 0.75);`);
+            return (`--lsdp-flag-ratio: ${data}; --lsdp-flag-height: calc(var(--lsdp-flag-width) * 0.75);`);
           }
         }}
       />
         {((attrs?.flag_style?.decoration?.aspect_ratio?.desktop?.value?.aspect_ratio ?? attrs?.flag_style?.innerContent?.decoration?.aspect_ratio?.desktop?.value) === '1/1') ? (
           <>
           <CommonStyle
-            selector={`${orderClass} .cpfd-wrapper .cpfd-lang-image`}
+            selector={`${orderClass} .lsdp-wrapper .lsdp-lang-image`}
             attr={attrs?.flag_style?.decoration?.flag_width}
             declarationFunction={(attrs) => {
               const data = attrs.attrValue?.flag_width
-              return (`--cpfd-flag-width: ${data}; --cpfd-flag-height: ${data};`);
+              return (`--lsdp-flag-width: ${data}; --lsdp-flag-height: ${data};`);
             }}
           />
           </>
         ):(
           <CommonStyle
-            selector={`${orderClass} .cpfd-wrapper .cpfd-lang-image`}
+            selector={`${orderClass} .lsdp-wrapper .lsdp-lang-image`}
             attr={attrs?.flag_style?.decoration?.flag_width}
             declarationFunction={(attrs) => {
             const data = attrs?.attrValue?.flag_width
-            return (`--cpfd-flag-width: ${data}; --cpfd-flag-height: calc(var(--cpfd-flag-width) * 0.75);`);
+            return (`--lsdp-flag-width: ${data}; --lsdp-flag-height: calc(var(--lsdp-flag-width) * 0.75);`);
             }}
           />
         )}
      <CommonStyle
-        selector={`${orderClass} .cpfd-wrapper .cpfd-lang-image`}
+        selector={`${orderClass} .lsdp-wrapper .lsdp-lang-image`}
         attr={attrs?.flag_style?.decoration?.flag_border_radius}
         declarationFunction={(attrs) => {
         const data = attrs?.attrValue?.flag_border_radius
-        return `--cpfd-flag-radius: ${data}`;
+        return `--lsdp-flag-radius: ${data}`;
       }}
     />
     <CommonStyle
-        selector={`${orderClass} .cpfd-wrapper ul li a, ${orderClass} .cpfd-wrapper.dropdown`}
+        selector={`${orderClass} .lsdp-wrapper ul li a, ${orderClass} .lsdp-wrapper.dropdown`}
         attr={attrs?.background_style?.decoration?.background_color}
         declarationFunction={(attrs) => {
         const data = attrs?.attrValue?.background_color

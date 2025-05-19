@@ -1,6 +1,6 @@
 {
-  "name": "cpfd/connect-polylang-for-divi",
-  "d4Shortcode": "connect-polylang-for-divi",
+  "name": "lsdp/language-switcher-for-divi-polylang",
+  "d4Shortcode": "language-switcher-for-divi-polylang",
   "title": "Language Switcher",
   "titles": "Language Switchers",
   "category": "module",
@@ -95,19 +95,19 @@
     },
     "text_style": {
       "type": "object",
-      "selector": "{{selector}} .cpfd-wrapper ul li.cpfd_active_lang.cpfd_active_lang div:not(.cpfd-lang-image), {{selector}} .cpfd-wrapper ul li.cpfd_active_lang a div:not(.cpfd-lang-image), {{selector}} .cpfd-wrapper ul li a div:not(.cpfd-lang-image), {{selector}} .cpfd-wrapper.dropdown span a div:not(.cpfd-lang-image)"
+      "selector": "{{selector}} .lsdp-wrapper ul li.lsdp_active_lang.lsdp_active_lang div:not(.lsdp-lang-image), {{selector}} .lsdp-wrapper ul li.lsdp_active_lang a div:not(.lsdp-lang-image), {{selector}} .lsdp-wrapper ul li a div:not(.lsdp-lang-image), {{selector}} .lsdp-wrapper.dropdown span a div:not(.lsdp-lang-image)"
     },
     "background_style": {
       "type": "object",
-      "selector": "{{selector}} .cpfd-wrapper ul li a, {{selector}} .cpfd-wrapper.dropdown, {{selector}} .cpfd-wrapper.dropdown ul li a"
+      "selector": "{{selector}} .lsdp-wrapper ul li a, {{selector}} .lsdp-wrapper.dropdown, {{selector}} .lsdp-wrapper.dropdown ul li a"
     },
     "container_size": {
       "type": "object",
-      "selector": "{{selector}} .cpfd-main-wrapper"
+      "selector": "{{selector}} .lsdp-main-wrapper"
     },
     "color_filters": {
       "type": "object",
-      "selector": "{{selector}} .cpfd-wrapper ul li, {{selector}} .cpfd-wrapper.dropdown span"
+      "selector": "{{selector}} .lsdp-wrapper ul li, {{selector}} .lsdp-wrapper.dropdown span"
     }
   }
 }

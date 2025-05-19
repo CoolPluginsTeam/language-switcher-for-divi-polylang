@@ -1,15 +1,15 @@
 <?php
-namespace CPFD\Modules\LanguageSwitcherModule\LanguageSwitcherModuleTraits;
+namespace LSDP\Modules\LanguageSwitcherModule\LanguageSwitcherModuleTraits;
 
 if ( ! defined( 'ABSPATH' ) ) {
     die( 'Direct access forbidden.' );
 }
 
-use CPFD\Modules\LanguageSwitcherModule\LanguageSwitcherModule;
+use LSDP\Modules\LanguageSwitcherModule\LanguageSwitcherModule;
 use ET\Builder\FrontEnd\BlockParser\BlockParserStore;
 use ET\Builder\Framework\Utility\HTMLUtility;
 use ET\Builder\Packages\Module\Module;
-use CPFD\Modules\LanguageSwitcherModule\LanguageSwitcherModuleTraits\ModuleHelper;
+use LSDP\Modules\LanguageSwitcherModule\LanguageSwitcherModuleTraits\ModuleHelper;
 
 trait RenderCallbackTrait {
   public static function render_callback( $attrs, $content, $block, $elements ) {
@@ -27,8 +27,8 @@ trait RenderCallbackTrait {
       [
                 'tag'               => 'div',
                 'attributes'        => [
-                  'class' => 'cpfd-wrapper ' . $props['switcher_layouts'],
-                  'id' => 'cpfd-wrapper',
+                  'class' => 'lsdp-wrapper ' . $props['switcher_layouts'],
+                  'id' => 'lsdp-wrapper',
                 ],
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'children'          => LanguageSwitcherModule::render_content($props),
@@ -39,7 +39,7 @@ trait RenderCallbackTrait {
       [
                 'tag'               => 'div',
                 'attributes'        => [
-                  'class' => 'cpfd-main-wrapper ',
+                  'class' => 'lsdp-main-wrapper ',
                 ],
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'children'          => $module_inner_container,

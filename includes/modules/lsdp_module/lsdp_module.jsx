@@ -5,9 +5,9 @@ import { CountryFlag, CountryName, CountryCode, staticCSS } from '../render_cont
 // Internal Dependencies
 import './style.css';
 
-class CPFD_Module extends Component {
+class LSDP_Module extends Component {
 
-  static slug = 'connect-polylang-for-divi';
+  static slug = 'language-switcher-for-divi-polylang';
 
   constructor(props) {
     super(props);
@@ -19,10 +19,10 @@ class CPFD_Module extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      const polylangData =window.ETBuilderBackendDynamic &&  window.ETBuilderBackendDynamic.cpfdGlobalObj &&  window.ETBuilderBackendDynamic.cpfdGlobalObj.cpfdLanguageData ? window.ETBuilderBackendDynamic.cpfdGlobalObj.cpfdLanguageData : [];
-      const currentLang = window.ETBuilderBackendDynamic && window.ETBuilderBackendDynamic.cpfdGlobalObj &&  window.ETBuilderBackendDynamic.cpfdGlobalObj.cpfdCurrentLang ? window.ETBuilderBackendDynamic.cpfdGlobalObj.cpfdCurrentLang : '';
+      const polylangData =window.ETBuilderBackendDynamic &&  window.ETBuilderBackendDynamic.lsdpGlobalObj &&  window.ETBuilderBackendDynamic.lsdpGlobalObj.lsdpLanguageData ? window.ETBuilderBackendDynamic.lsdpGlobalObj.lsdpLanguageData : [];
+      const currentLang = window.ETBuilderBackendDynamic && window.ETBuilderBackendDynamic.lsdpGlobalObj &&  window.ETBuilderBackendDynamic.lsdpGlobalObj.lsdpCurrentLang ? window.ETBuilderBackendDynamic.lsdpGlobalObj.lsdpCurrentLang : '';
       this.setState({ polylangData, currentLang });
-      const thisModule = document.querySelector('.cpfd-wrapper.dropdown');
+      const thisModule = document.querySelector('.lsdp-wrapper.dropdown');
       const parentRow = thisModule.closest('.et_pb_row');
       if (parentRow) {
         parentRow.style.setProperty('z-index', '999');
@@ -38,18 +38,18 @@ class CPFD_Module extends Component {
 
   render() {
     const { polylangData, currentLang } = this.state;
-    const style = this.props.cpfd_style ? this.props.cpfd_style : 'dropdown';
-    const flagDisplay = this.props.cpfd_flag_visibility ? this.props.cpfd_flag_visibility : 'on';
-    const nameDisplay = this.props.cpfd_language_name_visibility ? this.props.cpfd_language_name_visibility : 'on';
-    const codeDisplay = this.props.cpfd_language_code_visibility ? this.props.cpfd_language_code_visibility : 'off';
-    const hideCurrentLang = this.props.cpfd_current_lang_visibility ? this.props.cpfd_current_lang_visibility : 'off';
-    const hideUntranslateLang = this.props.cpfd_unstranslated_lang_visibility ? this.props.cpfd_unstranslated_lang_visibility : 'off';
-    const pluginUrl=window.ETBuilderBackendDynamic && window.ETBuilderBackendDynamic.cpfdGlobalObj && window.ETBuilderBackendDynamic.cpfdGlobalObj.cpfdPluginUrl ? window.ETBuilderBackendDynamic.cpfdGlobalObj.cpfdPluginUrl : '';
+    const style = this.props.lsdp_style ? this.props.lsdp_style : 'dropdown';
+    const flagDisplay = this.props.lsdp_flag_visibility ? this.props.lsdp_flag_visibility : 'on';
+    const nameDisplay = this.props.lsdp_language_name_visibility ? this.props.lsdp_language_name_visibility : 'on';
+    const codeDisplay = this.props.lsdp_language_code_visibility ? this.props.lsdp_language_code_visibility : 'off';
+    const hideCurrentLang = this.props.lsdp_current_lang_visibility ? this.props.lsdp_current_lang_visibility : 'off';
+    const hideUntranslateLang = this.props.lsdp_unstranslated_lang_visibility ? this.props.lsdp_unstranslated_lang_visibility : 'off';
+    const pluginUrl=window.ETBuilderBackendDynamic && window.ETBuilderBackendDynamic.lsdpGlobalObj && window.ETBuilderBackendDynamic.lsdpGlobalObj.lsdpPluginUrl ? window.ETBuilderBackendDynamic.lsdpGlobalObj.lsdpPluginUrl : '';
  
     return (
       polylangData && Object.keys(polylangData) && Object.keys(polylangData).length > 0? (
         <>
-        <div className={`cpfd-wrapper ${style}`}>
+        <div className={`lsdp-wrapper ${style}`}>
         {'dropdown' === style &&
           (
             polylangData && polylangData[currentLang] ? (
@@ -63,7 +63,7 @@ class CPFD_Module extends Component {
           ):<>No current available languages</>)}
         {(
           <>
-          <ul className="cpfd-language-list" style={{zIndex: 999}}>
+          <ul className="lsdp-language-list">
             {
               polylangData && Object.keys(polylangData) && Object.keys(polylangData).length > 0 ? (
                 <>
@@ -81,7 +81,7 @@ class CPFD_Module extends Component {
                     }
 
                     return (
-                      <li key={index} className={lang === currentLang ? 'cpfd_active_lang' : ''} style={{zIndex: 999}}>
+                      <li key={index} className={lang === currentLang ? 'lsdp_active_lang' : ''}>
                         <a href={polylangData[lang].url}>
                           {flagDisplay === 'on' && <CountryFlag flagCode={polylangData[lang].flagCode} name={polylangData[lang].name} url={pluginUrl}/>}
                           {nameDisplay === 'on' && <CountryName name={polylangData[lang].name} />}
@@ -103,4 +103,4 @@ class CPFD_Module extends Component {
   }
 }
 
-export default CPFD_Module;
+export default LSDP_Module;
