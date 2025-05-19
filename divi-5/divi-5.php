@@ -1,4 +1,8 @@
 <?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+  die( 'Direct access forbidden.' );
+}
 // Require php files.
 require_once CPFD_DIR . 'divi-5/vendor/autoload.php';
 require_once CPFD_DIR . 'divi-5/server/Modules/Modules.php';

@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+  die( 'Direct access forbidden.' );
+}
+
 if ( ! class_exists( 'ET_Builder_Element' ) ) {
 	return;
 }

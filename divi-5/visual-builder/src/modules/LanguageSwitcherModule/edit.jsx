@@ -51,7 +51,6 @@ export const LanguageSwitcherModuleEdit = (props) => {
     const thisModule = document.querySelector('.cpfd_connect_polylang_for_divi');
 
     const parentRow = thisModule.parentNode;
-    console.log(parentRow);
     if (parentRow) {
       if(parentRow.style.getPropertyValue('z-index') !== '999'){
         parentRow.style.setProperty('z-index', '999');

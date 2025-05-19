@@ -24,7 +24,6 @@ class CPFD_Module extends Component {
       this.setState({ polylangData, currentLang });
       const thisModule = document.querySelector('.cpfd-wrapper.dropdown');
       const parentRow = thisModule.closest('.et_pb_row');
-      console.log(parentRow);
       if (parentRow) {
         parentRow.style.setProperty('z-index', '999');
       }

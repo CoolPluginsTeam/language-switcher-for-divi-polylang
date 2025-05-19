@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+  die( 'Direct access forbidden.' );
+}
+
 class CPFD_HELPERS {
 	public static function get_flag_code( $flag_url ) {
 		$flag_code = preg_match( '/polylang\/flags\/([a-z]+)\.(png|svg|jpg|jpeg)$/i', $flag_url, $matches ) ? $matches[1] : false;

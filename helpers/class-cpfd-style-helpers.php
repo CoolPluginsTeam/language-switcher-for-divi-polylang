@@ -1,5 +1,8 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+  die( 'Direct access forbidden.' );
+}
 class CPFD_STYLE_HELPERS {
 	private $redner_slug = '';
 	private $props       = '';

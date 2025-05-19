@@ -1,5 +1,8 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+  die( 'Direct access forbidden.' );
+}
 class CPFD_Module extends ET_Builder_Module {
 
 	public $slug                   = 'connect-polylang-for-divi';

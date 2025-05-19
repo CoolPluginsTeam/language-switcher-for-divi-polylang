@@ -24,6 +24,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Connect Polylang For Divi. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
 */
+if ( ! defined( 'ABSPATH' ) ) {
+  die( 'Direct access forbidden.' );
+}
 
 define( 'CPFD', '1.0.0' );
 define( 'CPFD_DIR', plugin_dir_path( __FILE__ ) );
