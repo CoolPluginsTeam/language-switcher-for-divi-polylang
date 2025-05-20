@@ -83,7 +83,10 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
 					esc_html__( 'Language Switcher for Divi & Polylang', 'language-switcher-for-divi-polylang' ),
 					esc_html__( 'Divi (Theme)', 'language-switcher-for-divi-polylang' )
 				);
-				sprintf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', esc_html( $message ) );
+				echo sprintf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', esc_html( $message ) );
+				if ( function_exists( 'deactivate_plugins' ) ) {
+					deactivate_plugins( __FILE__ );
+			  	}
 			}
 		}
 

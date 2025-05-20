@@ -13,10 +13,6 @@ class LSDP_Module extends ET_Builder_Module {
 		'author'     => 'Coolplugins',
 		'author_uri' => 'http://coolplugins.net/',
 	);
-
-	protected function lsdp_icon_path( $icon ) {
-		return  ''.LSDP_DIR.'/assets/images/'. $icon .'.svg';
-	}	
 	
 	public function init() {
 		if(!et_core_is_fb_enabled()){
@@ -24,7 +20,7 @@ class LSDP_Module extends ET_Builder_Module {
 		}
 		
 		$this->name = esc_html__( 'Language Switcher', 'language-switcher-for-divi-polylang' );
-		$this->icon_path = $this->lsdp_icon_path( 'lang_switcher' );
+		$this->icon_path = LSDP_DIR . 'assets/images/lang_switcher.svg';
 		 // Toggle settings
 		 $this->settings_modal_toggles = array(
 			 'general'  => array(
