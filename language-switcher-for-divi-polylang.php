@@ -39,6 +39,8 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
 		public static $instance;
 
 		public function __construct() {
+			
+			register_activation_hook( __FILE__, array( $this, 'lsdp_activate' ) );
 			add_action( 'plugins_loaded', array( $this, 'lsdp_init' ) );
 			add_action( 'admin_init', array( $this, 'is_divi_theme_exist' ) );
 			add_action( 'init', array( $this, 'lsdp_load_textdomain' ) );
@@ -47,10 +49,28 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
 			self::initialize_divi_5_module();
 		}
 
+		public function lsdp_activate() {
+			update_option( 'lsdp-v', LSDP );
+			update_option( 'lsdp-type', 'FREE' );
+			update_option( 'lsdp-installDate', gmdate( 'Y-m-d h:i:s' ) );
+			update_option( 'lsdp-ratingDiv', 'no' );
+			if (!get_option( 'lsdp_initial_save_version' ) ) {
+                add_option( 'lsdp_initial_save_version', LSDP );
+            }
+		}
+
 		public function lsdp_init() {
 			global $polylang;
 			if ( ! isset( $polylang ) ) {
 				add_action( 'admin_notices', array( self::$instance, 'lsdp_plugin_required_admin_notice' ) );
+			}
+			if ( is_admin() && !defined( LSDP ) ) {
+				
+				/** Feedback form after deactivation */
+				require_once __DIR__ . '/admin/feedback/admin-feedback-form.php';
+				/*** Plugin review notice file */
+				require_once __DIR__ . '/admin/lsdp-feedback-notice.php';
+				new LSDPFeedbackNotice();
 			}
 		}
 
