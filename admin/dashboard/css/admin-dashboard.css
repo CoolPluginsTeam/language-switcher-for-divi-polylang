@@ -1,16 +1,16 @@
-.tab-pane {
+.lsdp-tab-pane {
     display: none;
     padding: 20px 0;
 }
-.tab-pane.active {
+.lsdp-tab-pane.active {
     display: block;
 }
-.nav-tab-wrapper {
+.lsdp-nav-tab-wrapper {
     margin-bottom: 20px;
 }
-.lsep-get-started-content,
-.lsep-features-content,
-.lsep-support-content {
+.lsdp-get-started-content,
+.lsdp-features-content,
+.lsdp-support-content {
     background: #fff;
     padding: 20px;
     border-radius: 5px;

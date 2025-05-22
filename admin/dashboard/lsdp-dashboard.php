@@ -24,7 +24,6 @@ class LSDP_Get_Started {
      */
     public function __construct() {
         add_action('admin_menu', array($this, 'lsdp_add_get_started_page'), 100);
-        wp_enqueue_script( 'lsdp-dashboard-script', plugin_dir_url( __FILE__ ) . '/js/admin-dashboard.js', array( 'jquery' ), LSDP );
 		wp_enqueue_style( 'lsdp-dashboard-style', plugin_dir_url( __FILE__ ) . '/css/admin-dashboard.css', null, LSDP );
     }
 
@@ -52,13 +51,11 @@ class LSDP_Get_Started {
             
             <h2 class="nav-tab-wrapper">
                 <a href="#getting-started" class="nav-tab nav-tab-active"><?php echo esc_html__('Getting Started', 'language-switcher-for-divi-polylang'); ?></a>
-                <a href="#features" class="nav-tab"><?php echo esc_html__('Features', 'language-switcher-for-divi-polylang'); ?></a>
-                <a href="#support" class="nav-tab"><?php echo esc_html__('Support', 'language-switcher-for-divi-polylang'); ?></a>
             </h2>
 
-            <div class="tab-content">
-                <div id="getting-started" class="tab-pane active">
-                    <div class="lsep-get-started-content">
+            <div class="lsdp-tab-content">
+                <div id="getting-started" class="lsdp-tab-pane active">
+                    <div class="lsdp-get-started-content">
                         <h3><?php echo esc_html__('Quick Start Guide', 'language-switcher-for-divi-polylang'); ?></h3>
                         <p><?php echo esc_html__('Thank you for installing Language Switcher for Divi & Polylang. This plugin allows you to add a language switcher to your Divi pages and menus.', 'language-switcher-for-divi-polylang'); ?></p>
                         
@@ -69,30 +66,6 @@ class LSDP_Get_Started {
                             <li><?php echo esc_html__('Search for "Language Switcher" in the Divi modules panel', 'language-switcher-for-divi-polylang'); ?></li>
                             <li><?php echo esc_html__('Drag and drop the widget where you want to display the language switcher', 'language-switcher-for-divi-polylang'); ?></li>
                         </ol>
-                    </div>
-                </div>
-
-                <div id="features" class="tab-pane">
-                    <div class="lsep-features-content">
-                        <h3><?php echo esc_html__('Key Features', 'language-switcher-for-divi-polylang'); ?></h3>
-                        <ul>
-                            <li><?php echo esc_html__('Easy integration with Divi Builder', 'language-switcher-for-divi-polylang'); ?></li>
-                            <li><?php echo esc_html__('Customizable language switcher design', 'language-switcher-for-divi-polylang'); ?></li>
-                            <li><?php echo esc_html__('Support for all Polylang languages', 'language-switcher-for-divi-polylang'); ?></li>
-                            <li><?php echo esc_html__('Mobile-friendly responsive design', 'language-switcher-for-divi-polylang'); ?></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div id="support" class="tab-pane">
-                    <div class="lsep-support-content">
-                        <h3><?php echo esc_html__('Need Help?', 'language-switcher-for-divi-polylang'); ?></h3>
-                        <p><?php echo esc_html__('If you need any assistance or have questions about the plugin, please:', 'language-switcher-for-divi-polylang'); ?></p>
-                        <ul>
-                            <li><?php echo esc_html__('Check our documentation', 'language-switcher-for-divi-polylang'); ?></li>
-                            <li><?php echo esc_html__('Visit our support forum', 'language-switcher-for-divi-polylang'); ?></li>
-                            <li><?php echo esc_html__('Contact our support team', 'language-switcher-for-divi-polylang'); ?></li>
-                        </ul>
                     </div>
                 </div>
             </div>
