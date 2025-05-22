@@ -24,7 +24,7 @@ class LSDP_Get_Started {
      */
     public function __construct() {
         add_action('admin_menu', array($this, 'lsdp_add_get_started_page'), 100);
-		wp_enqueue_style( 'lsdp-dashboard-style', plugin_dir_url( __FILE__ ) . '/css/admin-dashboard.css', null, LSDP );
+        add_action('admin_enqueue_scripts', array($this, 'lsdp_enqueue_dashboard_scripts'));
     }
 
     /**
@@ -39,6 +39,13 @@ class LSDP_Get_Started {
             'lsdp-get-started',
             array($this, 'lsdp_get_started_page_content')
         );
+    }
+
+    /**
+     * Enqueue dashboard scripts
+     */
+    public function lsdp_enqueue_dashboard_scripts(){
+        wp_enqueue_style( 'lsdp-dashboard-style', plugin_dir_url( __FILE__ ) . '/css/admin-dashboard.css', null, LSDP );
     }
 
     /**
@@ -62,9 +69,9 @@ class LSDP_Get_Started {
                         <h4><?php echo esc_html__('How to Use', 'language-switcher-for-divi-polylang'); ?></h4>
                         <ol>
                             <li><?php echo esc_html__('Make sure Polylang is installed and configured with your languages', 'language-switcher-for-divi-polylang'); ?></li>
-                            <li><?php echo esc_html__('Edit your page with Divi', 'language-switcher-for-divi-polylang'); ?></li>
+                            <li><?php echo esc_html__('Edit your page or template with Divi', 'language-switcher-for-divi-polylang'); ?></li>
                             <li><?php echo esc_html__('Search for "Language Switcher" in the Divi modules panel', 'language-switcher-for-divi-polylang'); ?></li>
-                            <li><?php echo esc_html__('Drag and drop the widget where you want to display the language switcher', 'language-switcher-for-divi-polylang'); ?></li>
+                            <li><?php echo esc_html__('Add the module where you want to display the language switcher', 'language-switcher-for-divi-polylang'); ?></li>
                         </ol>
                     </div>
                 </div>
