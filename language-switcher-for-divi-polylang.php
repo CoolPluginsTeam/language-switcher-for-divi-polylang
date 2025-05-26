@@ -1,15 +1,16 @@
 <?php
 /*
 Plugin Name: Language Switcher for Divi & Polylang
-Plugin URI:
+Plugin URI:  https://wordpress.org/plugins/language-switcher-for-divi-polylang
 Description: Language Switcher for Divi & Polylang to use added language switcher in your page or divi header menu
-Version:     1.0.0
+Version:     1.0.2
+Requires at least: 5.0
+Requires PHP: 7.2
 Author:      Coolplugins
 Author URI:  http://coolplugins.net/
 License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: language-switcher-for-divi-polylang
-Domain Path: /languages
 
 Language Switcher for Divi & Polylang is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -28,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
   die( 'Direct access forbidden.' );
 }
 
-define( 'LSDP', '1.0.0' );
+define( 'LSDP', '1.0.2' );
 define( 'LSDP_DIR', plugin_dir_path( __FILE__ ) );
 define( 'LSDP_URL', plugin_dir_url( __FILE__ ) );
 define( 'LSDP_MODULE_URL', plugin_dir_url( __FILE__ ) . 'includes/modules' );
@@ -43,7 +44,6 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
 			register_activation_hook( __FILE__, array( $this, 'lsdp_activate' ) );
 			add_action( 'plugins_loaded', array( $this, 'lsdp_init' ) );
 			add_action( 'admin_init', array( $this, 'is_divi_theme_exist' ) );
-			add_action( 'init', array( $this, 'lsdp_load_textdomain' ) );
 			add_action( 'admin_init', array( $this, 'lsdp_redirect_to_settings' ) );
             add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'lsdp_settings_page' ) );
 			add_action( 'divi_extensions_init', array( $this, 'initialize_divi_module' ) );
@@ -203,10 +203,6 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
 				}
 			}
 			return $data;
-		}
-
-		public function lsdp_load_textdomain(){
-			load_plugin_textdomain( 'language-switcher-for-divi-polylang', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 		}
 
 		public function initialize_divi_5_module(){
