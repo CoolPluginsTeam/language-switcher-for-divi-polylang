@@ -1,4 +1,4 @@
-﻿=== Language Switcher for Divi & Polylang ===
+﻿=== Language Switcher – Polylang for Divi ===
 Contributors: coolplugins, narinder-singh, satinder singh
 Tags: divi, language switcher, polylang, multilingual, languages
 Requires at least: 5.0
@@ -7,13 +7,13 @@ Requires PHP: 7.2
 Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Language Switcher for Divi & Polylang – Easily add a customizable language switcher to your Divi pages using Polylang.
+Language Switcher – Polylang for Divi – Easily add a customizable language switcher to your Divi pages using Polylang.
 == Description ==
-**Language Switcher for Divi & Polylang** is a WordPress plugin that helps you add a language switcher to your website using the Divi Builder. This plugin connects the Polylang multilingual plugin with the Divi theme, making it easier to build a multilingual website.
-Normally, **Polylang** and **Divi** don't work smoothly together when it comes to showing a language switcher inside your pages. You need to create different WordPress menus for each language, and then assign a menu to each language page manually, which is a time-consuming and tiring task. That's where **Language Switcher for Divi & Polylang** helps.
+**Language Switcher – Polylang for Divi** is a WordPress plugin that helps you add a language switcher to your website using the Divi Builder. This plugin connects the Polylang multilingual plugin with the Divi theme, making it easier to build a multilingual website.
+Normally, **Polylang** and **Divi** don't work smoothly together when it comes to showing a language switcher inside your pages. You need to create different WordPress menus for each language, and then assign a menu to each language page manually, which is a time-consuming and tiring task. That's where **Language Switcher – Polylang for Divi** helps.
 With this plugin, you can place a customizable language switcher on your Divi pages using a dedicated Divi module.
 ### Why use this Plugin?
-**Language Switcher for Divi & Polylang** is a simple and easy way to add a language switcher to any Divi page. Here's why you should use this plugin:
+**Language Switcher – Polylang for Divi** is a simple and easy way to add a language switcher to any Divi page. Here's why you should use this plugin:
 ✅ **Language Switcher module**
 ✅ **No Separate Menus for Each Language**
 ✅ **Add Anywhere on the Page**
@@ -50,7 +50,18 @@ You can choose from 3 layout styles: Dropdown, Horizontal, and Vertical.
 =  Is this plugin compatible with Polylang Pro? =
 Yes. It works with both the free and Pro versions of Polylang.
 == Changelog ==
-<strong>Version 1.0.0 | 05 May 2025</strong>
+
+<strong>Version 1.0.2</strong>
+<pre>
+Fixed: Minor issues.
+</pre>
+
+<strong>Version 1.0.1</strong>
+<pre>
+Fixed: Minor issues.
+</pre>
+
+<strong>Version 1.0.0</strong>
 <pre>
 New: Initial plugin release.
 </pre>

@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: Language Switcher for Divi & Polylang
+Plugin Name: Language Switcher – Polylang for Divi
 Plugin URI:  https://wordpress.org/plugins/language-switcher-for-divi-polylang
-Description: Language Switcher for Divi & Polylang to use added language switcher in your page or divi header menu
+Description: Language Switcher – Polylang for Divi to use added language switcher in your page or divi header menu
 Version:     1.0.2
 Requires at least: 5.0
 Requires PHP: 7.2
@@ -12,18 +12,18 @@ License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: language-switcher-for-divi-polylang
 
-Language Switcher for Divi & Polylang is free software: you can redistribute it and/or modify
+Language Switcher – Polylang for Divi is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 2 of the License, or
 any later version.
 
-Language Switcher for Divi & Polylang is distributed in the hope that it will be useful,
+Language Switcher – Polylang for Divi is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with Language Switcher for Divi & Polylang. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
+along with Language Switcher – Polylang for Divi. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
 */
 if ( ! defined( 'ABSPATH' ) ) {
   die( 'Direct access forbidden.' );
@@ -104,7 +104,7 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
 						'%1$s requires %2$s to be installed and activated.',
 						'language-switcher-for-divi-polylang'
 					),
-					esc_html__( 'Language Switcher for Divi & Polylang', 'language-switcher-for-divi-polylang' ),
+					esc_html__( 'Language Switcher – Polylang for Divi', 'language-switcher-for-divi-polylang' ),
 					esc_html__( 'Divi (Theme)', 'language-switcher-for-divi-polylang' )
 				);
 				echo sprintf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', esc_html( $message ) );

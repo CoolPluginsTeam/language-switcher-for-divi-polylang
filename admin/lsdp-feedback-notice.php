@@ -63,9 +63,9 @@ if ( ! class_exists( 'LSDPFeedbackNotice' ) ) {
 			$img_path           = LSDP_URL . 'assets/images/lsdp-icon.png';
 			$p_name             = 'Language Switcher for Divi & Polylang';
 			$like_it_text       = 'Rate Now! ★★★★★';
-			$already_rated_text = esc_html__( 'I already rated it', 'LSDP' );
-			$not_interested     = esc_html__( 'Not Interested', 'LSDP' );
-			$not_like_it_text   = esc_html__( 'No, not good enough, i do not like to rate it!', 'LSDP' );
+			$already_rated_text = esc_html__( 'I already rated it', 'language-switcher-for-divi-polylang' );
+			$not_interested     = esc_html__( 'Not Interested', 'language-switcher-for-divi-polylang' );
+			$not_like_it_text   = esc_html__( 'No, not good enough, i do not like to rate it!', 'language-switcher-for-divi-polylang' );
 			$p_link             = esc_url( 'https://wordpress.org/support/plugin/language-switcher-for-divi-polylang/reviews/#new-post' );
 			$pro_url            = esc_url( 'https://1.envato.market/calendar' );
 
