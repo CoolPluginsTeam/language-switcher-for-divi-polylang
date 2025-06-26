@@ -11,6 +11,7 @@ Author URI:  http://coolplugins.net/
 License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: language-switcher-for-divi-polylang
+Requires Plugins: polylang
 
 Language Switcher – Polylang for Divi is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -56,9 +57,9 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
 			update_option( 'lsdp-type', 'FREE' );
 			update_option( 'lsdp-installDate', gmdate( 'Y-m-d h:i:s' ) );
 			update_option( 'lsdp-ratingDiv', 'no' );
-			update_option( 'lsdp_plugin_activation_redirect', true );
 			if (!get_option( 'lsdp_initial_save_version' ) ) {
                 add_option( 'lsdp_initial_save_version', LSDP );
+				add_option( 'lsdp_plugin_activation_redirect', true );
             }
 		}
 
@@ -76,10 +77,10 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
 				new LSDPFeedbackNotice();
 			}
 			require_once __DIR__ . '/admin/dashboard/lsdp-dashboard.php';
-			cool_plugins_polylang_addon_settings_page( 'polylang-addons', 'cool-plugins-polylang-addons', 'Polylang Addons' );
+			cool_plugins_lsdp_polylang_addon_settings_page( 'polylang-addons', 'cool-plugins-polylang-addons', 'Polylang Addons' );
 		}
 
-		public function is_divi_theme_exist() {
+		public function is_divi_theme_exist() {	
 			if ( ! self::is_theme_activate( 'Divi' ) ) {
 				// Divi theme is not activated, display admin notice
 				add_action( 'admin_notices', array( $this, 'admin_notice_missing_divi_theme' ) );
