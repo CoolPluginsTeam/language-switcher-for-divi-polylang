@@ -76,6 +76,7 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
 				new LSDPFeedbackNotice();
 			}
 			require_once __DIR__ . '/admin/dashboard/lsdp-dashboard.php';
+			cool_plugins_polylang_addon_settings_page( 'polylang-addons', 'cool-plugins-polylang-addons', 'Polylang Addons' );
 		}
 
 		public function is_divi_theme_exist() {
