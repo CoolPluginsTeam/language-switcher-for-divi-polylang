@@ -66,7 +66,7 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
 			if ( ! isset( $polylang ) ) {
 				add_action( 'admin_notices', array( self::$instance, 'lsdp_plugin_required_admin_notice' ) );
 			}
-			if ( is_admin() && !defined( LSDP ) ) {
+			if ( is_admin() ) {
 				
 				/** Feedback form after deactivation */
 				require_once __DIR__ . '/admin/feedback/admin-feedback-form.php';

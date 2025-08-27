@@ -1,6 +1,6 @@
 (function($){
     $(document).ready(function(){
-        let plugin_slug = 'language-switcher-polylang-for-divi';
+        let plugin_slug = 'language-switcher-for-divi-polylang';
 		let text_domain = 'LSDP';
         $target = $('#the-list').find('[data-slug="'+plugin_slug+'"] span.deactivate a');
 

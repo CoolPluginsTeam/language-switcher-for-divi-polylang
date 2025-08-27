@@ -19,10 +19,12 @@ if ( ! class_exists( 'LSDPFeedbackNotice' ) ) {
 		/**
 		 *  Ajax callback for review notice.
 		 */
-		public function lsdp_dismiss_review_notice() {
-			$rs = update_option( 'lsdp-ratingDiv', 'yes' );
-			echo json_encode( array( 'success' => 'true' ) );
-			exit;
+			public function lsdp_dismiss_review_notice() {
+		// Verify nonce for security
+		check_ajax_referer( 'lsdp_dismiss_notice', '_wpnonce' );
+		
+		$rs = update_option( 'lsdp-ratingDiv', 'yes' );
+		wp_send_json_success( array( 'success' => 'true' ) );
 		}
 		/**
 		 * Admin notice.
@@ -50,15 +52,18 @@ if ( ! class_exists( 'LSDPFeedbackNotice' ) ) {
 
 			// Check if installation days is greator then week.
 			if ( isset( $diff_days ) && $diff_days >= 3 ) {
-				echo $this->create_notice_content();
+				$notice_content = $this->create_notice_content();
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Content is properly escaped within create_notice_content()
+				printf( '%s', $notice_content );
 			}
 		}
 		/**
 		 * Generated review notice HTML.
 		 */
 		public function create_notice_content() {
-			$ajax_url           = admin_url( 'admin-ajax.php' );
-			$ajax_callback      = 'lsdp_dismiss_notice';
+            $ajax_url           = admin_url( 'admin-ajax.php' );
+            $ajax_callback      = 'lsdp_dismiss_notice';
+            $nonce              = wp_create_nonce( 'lsdp_dismiss_notice' );
 			$wrap_cls           = 'notice notice-info is-dismissible';
 			$img_path           = LSDP_URL . 'assets/images/lsdp-icon.png';
 			$p_name             = 'Language Switcher for Divi & Polylang';
@@ -69,111 +74,113 @@ if ( ! class_exists( 'LSDPFeedbackNotice' ) ) {
 			$p_link             = esc_url( 'https://wordpress.org/support/plugin/language-switcher-for-divi-polylang/reviews/#new-post' );
 			$pro_url            = esc_url( 'https://1.envato.market/calendar' );
 
-			$message = "Thanks for using <b>$p_name</b>. We hope it meets your expectations! <br/>Please give us a quick rating, it works as a boost for us to keep working on more <a href='https://coolplugins.net/?utm_source=plugin_dashboard&utm_medium=reviewbox' target='_blank'><strong>Cool Plugins</strong></a>!<br/>";
+			$message = wp_kses_post( "Thanks for using <b>$p_name</b>. We hope it meets your expectations! <br/>Please give us a quick rating, it works as a boost for us to keep working on more <a href='https://coolplugins.net/?utm_source=plugin_dashboard&utm_medium=reviewbox' target='_blank'><strong>Cool Plugins</strong></a>!<br/>" );
 
-			$html       = '<div data-ajax-url="%8$s"  data-ajax-callback="%9$s" class="lsdp-feedback-notice-wrapper %1$s">
-        <div class="logo_container"><a href="%5$s"><img src="%2$s" alt="%3$s"></a></div>
-        <div class="message_container">%4$s
-        <div class="callto_action">
-        <ul>
-            <li class="love_it"><a href="%5$s" class="like_it_btn button button-primary" target="_new" title="%6$s">%6$s</a></li>
-            <li class="already_rated"><a href="javascript:void(0);" class="already_rated_btn button lsdp_dismiss_notice" title="%7$s">%7$s</a></li>
-            <li class="already_rated"><a href="javascript:void(0);" class="already_rated_btn button lsdp_dismiss_notice" title="%11$s">%11$s</a></li>
-           
-        </ul>
-        <div class="clrfix"></div>
-        </div>
-        </div>
-        </div>';
-			$inline_css = '<style>.lsdp-feedback-notice-wrapper.notice.notice-info.is-dismissible {
-            padding: 5px;
-            display: table;
-            width: 100%;
-            max-width: 820px;
-            clear: both;
-            border-radius: 5px;
-            border: 2px solid #b7bfc7;
-        }
-        .lsdp-feedback-notice-wrapper .logo_container {
-            width: 100px;
-            display: table-cell;
-            padding: 5px;
-            vertical-align: middle;
-        }
-        .lsdp-feedback-notice-wrapper .logo_container a,
-        .lsdp-feedback-notice-wrapper .logo_container img {
-            width:100%;
-            height:auto;
-            display:inline-block;
-        }
-        .lsdp-feedback-notice-wrapper .message_container {
-            display: table-cell;
-            padding: 5px 20px 5px 5px;
-            vertical-align: middle;
-        }
-        .lsdp-feedback-notice-wrapper ul li {
-            float: left;
-            margin: 0px 10px 0 0;
-        }
-        .lsdp-feedback-notice-wrapper ul li.already_rated a:before {
-            color: #f12945;
-            content: "\f153";
-            font: normal 18px/22px dashicons;
-            display: inline-block;
-            vertical-align: middle;
-            margin-right: 3px;
-        }
-        .lsdp-feedback-notice-wrapper ul li .button-primary {
-            background: #008bff;
-        }
-        .lsdp-feedback-notice-wrapper ul li .button-primary:hover {
-            background: #0f1031;
-            border-color: transparent;
-        }
-        .lsdp-feedback-notice-wrapper a {
-            color: #008bff;
-        }
-        
-        /* This css is for license registration page */
-        .lsdp-notice-red.uninstall {
-            max-width: 700px;
-            display: block;
-            padding: 8px;
-            border: 2px solid #157d0f;
-            margin: 10px 0;
-            background: #13a50b;
-            font-weight: bold;
-            font-size: 13px;
-            color: #ffffff;
-        }
-        .clrfix{
-            clear:both;
-        }</style>';
-			$inline_js  = "<script>jQuery(document).ready(function ($) {
-            $('.lsdp_dismiss_notice').on('click', function (event) {
-                var thisE = $(this);
-                var wrapper=thisE.parents('.lsdp-feedback-notice-wrapper');
-                var ajaxURL=wrapper.data('ajax-url');
-                var ajaxCallback=wrapper.data('ajax-callback');
-                $.post(ajaxURL, { 'action':ajaxCallback }, function( data ) {
-                    wrapper.slideUp('fast');
-                  }, 'json');
-            });
-        });</script>";
+			$html       = '<div data-ajax-url="%8$s"  data-ajax-callback="%9$s" data-nonce="%12$s" class="lsdp-feedback-notice-wrapper %1$s">
+            <div class="logo_container"><a href="%5$s"><img src="%2$s" alt="%3$s"></a></div>
+            <div class="message_container">%4$s
+            <div class="callto_action">
+            <ul>
+                <li class="love_it"><a href="%5$s" class="like_it_btn button button-primary" target="_new" title="%6$s">%6$s</a></li>
+                <li class="already_rated"><a href="javascript:void(0);" class="already_rated_btn button lsdp_dismiss_notice" title="%7$s">%7$s</a></li>
+                <li class="already_rated"><a href="javascript:void(0);" class="already_rated_btn button lsdp_dismiss_notice" title="%11$s">%11$s</a></li>
+            
+            </ul>
+            <div class="clrfix"></div>
+            </div>
+            </div>
+            </div>';
+                $inline_css = '<style>.lsdp-feedback-notice-wrapper.notice.notice-info.is-dismissible {
+                padding: 5px;
+                display: table;
+                width: 100%;
+                max-width: 820px;
+                clear: both;
+                border-radius: 5px;
+                border: 2px solid #b7bfc7;
+            }
+            .lsdp-feedback-notice-wrapper .logo_container {
+                width: 100px;
+                display: table-cell;
+                padding: 5px;
+                vertical-align: middle;
+            }
+            .lsdp-feedback-notice-wrapper .logo_container a,
+            .lsdp-feedback-notice-wrapper .logo_container img {
+                width:100%;
+                height:auto;
+                display:inline-block;
+            }
+            .lsdp-feedback-notice-wrapper .message_container {
+                display: table-cell;
+                padding: 5px 20px 5px 5px;
+                vertical-align: middle;
+            }
+            .lsdp-feedback-notice-wrapper ul li {
+                float: left;
+                margin: 0px 10px 0 0;
+            }
+            .lsdp-feedback-notice-wrapper ul li.already_rated a:before {
+                color: #f12945;
+                content: "\f153";
+                font: normal 18px/22px dashicons;
+                display: inline-block;
+                vertical-align: middle;
+                margin-right: 3px;
+            }
+            .lsdp-feedback-notice-wrapper ul li .button-primary {
+                background: #008bff;
+            }
+            .lsdp-feedback-notice-wrapper ul li .button-primary:hover {
+                background: #0f1031;
+                border-color: transparent;
+            }
+            .lsdp-feedback-notice-wrapper a {
+                color: #008bff;
+            }
+            
+            /* This css is for license registration page */
+            .lsdp-notice-red.uninstall {
+                max-width: 700px;
+                display: block;
+                padding: 8px;
+                border: 2px solid #157d0f;
+                margin: 10px 0;
+                background: #13a50b;
+                font-weight: bold;
+                font-size: 13px;
+                color: #ffffff;
+            }
+            .clrfix{
+                clear:both;
+            }</style>';
+                $inline_js  = "<script>jQuery(document).ready(function ($) {
+                $('.lsdp_dismiss_notice').on('click', function (event) {
+                    var thisE = $(this);
+                    var wrapper=thisE.parents('.lsdp-feedback-notice-wrapper');
+                    var ajaxURL=wrapper.data('ajax-url');
+                    var ajaxCallback=wrapper.data('ajax-callback');
+                    var nonce=wrapper.data('nonce');
+                    $.post(ajaxURL, { 'action':ajaxCallback, '_wpnonce':nonce }, function( data ) {
+                        wrapper.slideUp('fast');
+                    }, 'json');
+                });
+            });</script>";
 			$output     = sprintf(
-				$html,
-				$wrap_cls,
-				$img_path,
-				$p_name,
-				$message,
-				$p_link,
-				$like_it_text,
-				$already_rated_text,
-				$ajax_url, // 8
-				$ajax_callback, // 9
-				$pro_url, // 10
-				$not_interested
-			);
+                $html,
+                $wrap_cls,
+                $img_path,
+                $p_name,
+                $message,
+                $p_link,
+                $like_it_text,
+                $already_rated_text,
+                $ajax_url, // 8
+                $ajax_callback, // 9
+                $pro_url, // 10
+                $not_interested, // 11
+                $nonce // 12
+            );
 			$output    .= $inline_css . ' ' . $inline_js;
 			return $output;
 		}
