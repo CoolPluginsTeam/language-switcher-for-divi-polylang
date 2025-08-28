@@ -11,7 +11,7 @@ class LSDP_Module extends ET_Builder_Module {
 	protected $module_credits = array(
 		'module_uri' => '',
 		'author'     => 'Coolplugins',
-		'author_uri' => 'http://coolplugins.net/',
+		'author_uri' => 'https://coolplugins.net/?utm_source=lspd_plugin&utm_medium=inside&utm_campaign=author_page&utm_content=dashboard',
 	);
 	
 	public function init() {

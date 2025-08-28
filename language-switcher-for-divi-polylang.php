@@ -7,7 +7,7 @@ Version:     1.0.2
 Requires at least: 5.0
 Requires PHP: 7.2
 Author:      Coolplugins
-Author URI:  http://coolplugins.net/
+Author URI:  https://coolplugins.net/?utm_source=lspd_plugin&utm_medium=inside&utm_campaign=author_page&utm_content=plugins_list
 License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: language-switcher-for-divi-polylang
