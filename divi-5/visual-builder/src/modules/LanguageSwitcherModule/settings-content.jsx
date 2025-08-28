@@ -1,0 +1,102 @@
+import React from 'react';
+
+import { __ } from '@wordpress/i18n';
+
+const {
+  SelectContainer,
+  ToggleContainer,
+} = window?.divi?.fieldLibrary;
+const { GroupContainer } = window?.divi?.modal;
+const {
+  FieldContainer,
+} = window?.divi?.module;
+
+const switcher_layouts = {
+  'vertical': 'Vertical',
+  'horizontal': 'Horizontal',
+  'dropdown': 'Dropdown',
+};
+
+/**
+ * Content Settings panel for the Static Module.
+ */
+export const SettingsContent = (props) => (
+
+  <>
+    <GroupContainer id="toggle_content" title={__("Language Switcher Settings", "lsdp")}>
+        <>
+          <FieldContainer
+          attrName="switcher_layouts"
+          subName="switcher_layouts"
+          label={__('Layout Options', 'language-switcher-for-divi-polylang')}
+          description={__('Select your switcher layout', 'language-switcher-for-divi-polylang')}
+          defaultValue={'dropdown'}
+        >
+          <SelectContainer
+            options={Object.entries(switcher_layouts).reduce((acc, [key, label]) => {
+              acc[key] = {
+                label: __(label, 'language-switcher-for-divi-polylang'),
+                value: key,
+              };
+              return acc;
+            }, {})}
+          />
+        </FieldContainer>
+      
+        <FieldContainer
+        attrName="show_language_flag"
+        subName="show_language_flag"
+        label="Show Language Flag"
+        description="Show Language Flag"
+        defaultValue='on'
+      >
+        <ToggleContainer />
+      </FieldContainer>
+
+      <FieldContainer
+        attrName="show_language_name"
+        subName="show_language_name"
+        label="Show Language Name"
+        description="Show Language Name"
+        defaultValue='on'
+      >
+        <ToggleContainer />
+      </FieldContainer>
+
+      <FieldContainer
+        attrName="show_language_code"
+        subName="show_language_code"
+        label="Show Language Code"
+        description="Show Language Code"
+        defaultValue='off'
+      >
+        <ToggleContainer />
+      </FieldContainer>
+
+      {((props?.attrs?.switcher_layouts?.desktop?.value?.switcher_layouts ?? props?.defaultSettingsAttrs?.switcher_layouts?.innerContent?.desktop?.value) !== 'dropdown') && (
+      <FieldContainer
+        attrName="hide_current_language"
+        subName="hide_current_language"
+        label="Hide Current Language"
+        description="Hide Current Language"
+        defaultValue='off'
+      >
+        <ToggleContainer />
+      </FieldContainer>
+      )}
+      <FieldContainer
+        attrName="hide_untranslated_language"
+        subName="hide_untranslated_language"
+        label="Hide Untranslated Languages"
+        description="Hide Untranslated Languages"
+        defaultValue='off'
+      >
+          <ToggleContainer />
+        </FieldContainer>
+        {((props?.attrs?.hide_untranslated_language?.desktop?.value?.hide_untranslated_language ?? props?.defaultSettingsAttrs?.hide_untranslated_language?.innerContent?.desktop?.value) === 'on') && (
+        <div className="lsdp-settings-description" style={{color: 'red'}}><strong>Note:</strong> This setting only affects the frontend. Please check your site's frontend to see it in action.</div>
+        )}
+      </>
+    </GroupContainer>
+  </>
+);

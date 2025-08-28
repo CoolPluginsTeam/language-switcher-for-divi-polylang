@@ -1,11 +1,12 @@
 {
-  "name": "language-switcher-addon-for-divi",
+  "name": "language-switcher-for-divi-polylang",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "divi-scripts": "1.0.3",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "sass": "^1.91.0"
   },
   "scripts": {
     "start": "divi-scripts start",
@@ -27,7 +28,10 @@
     ]
   },
   "cde": {
-    "gettext": "language-switcher-addon-for-divi",
-    "prefix": "lsad"
+    "gettext": "language-switcher-for-divi-polylang",
+    "prefix": "lsdp"
+  },
+  "overrides": {
+    "node-sass": "npm:sass@^1.70.0"
   }
 }

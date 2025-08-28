@@ -1,11 +1,15 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+  die( 'Direct access forbidden.' );
+}
+
 if ( ! class_exists( 'ET_Builder_Element' ) ) {
 	return;
 }
 
-require_once LSPAD_DIR . 'helpers/class-lsad-helpers.php';
-require_once LSPAD_DIR . 'helpers/class-lsad-style-helpers.php';
+require_once LSDP_DIR . 'helpers/class-lsdp-helpers.php';
+require_once LSDP_DIR . 'helpers/class-lsdp-style-helpers.php';
 
 $module_files = glob( __DIR__ . '/modules/*/*.php' );
 

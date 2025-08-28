@@ -1,3 +1,3 @@
-import lsad_field from './lsad_field/lsad_field';
+import lsdp_field from './lsdp_field/lsdp_field';
 
-export default [lsad_field];
+export default [lsdp_field];

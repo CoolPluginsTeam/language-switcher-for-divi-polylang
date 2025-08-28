@@ -1,3 +1,3 @@
-import LSAD_Module from './lsad_module/lsad_module';
+import LSDP_Module from './lsdp_module/lsdp_module';
 
-export default [LSAD_Module];
+export default [LSDP_Module];
