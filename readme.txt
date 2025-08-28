@@ -4,7 +4,7 @@ Tags: divi, language switcher, polylang, multilingual, languages
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.2
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -137,6 +137,10 @@ No, you don’t need to write any code. The plugin integrates directly with the 
 You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities.[Report a security vulnerability](https://patchstack.com/database/wordpress/plugin/language-switcher-for-divi-polylang/vdp)
 
 == Changelog ==
+
+= Version 1.0.3 | 28 August 2025 =
+- **Fixed:** Addressed security vulnerabilities.
+- **Improved:** Enhanced overall code quality.
 
 = Version 1.0.2 | 26 May 2025 =
 - **Fixed:** Minor issues.
