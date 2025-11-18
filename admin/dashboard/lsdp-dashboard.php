@@ -364,6 +364,7 @@ if (!defined('ABSPATH')) {
             'language-switcher-for-divi-polylang' => 'language-switcher-for-divi-polylang.png',
             'automatic-translations-for-polylang' => 'automatic-translations-for-polylang.png',
             'duplicate-content-addon-for-polylang' => 'duplicate-content-addon-for-polylang.png',
+            'autopoly-ai-translation-for-polylang-pro' => 'autopoly-ai-translation-for-polylang-pro.png',
         ];
         if(isset($logos_arr[$slug])){
             return $logo_url= plugin_dir_url( __FILE__ ).'assets/images/'.$logos_arr[$slug];
