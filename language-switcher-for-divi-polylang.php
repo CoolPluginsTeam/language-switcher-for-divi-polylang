@@ -45,6 +45,8 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
 			register_activation_hook( __FILE__, array( $this, 'lsdp_activate' ) );
 			add_action( 'plugins_loaded', array( $this, 'lsdp_init' ) );
 			add_action( 'admin_init', array( $this, 'is_divi_theme_exist' ) );
+			add_action( 'admin_init', array( $this, 'lsdp_redirect_to_settings' ) );
+            add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'lsdp_settings_page' ) );
 			add_action( 'divi_extensions_init', array( $this, 'initialize_divi_module' ) );
 			add_filter( 'et_fb_backend_helpers', array( $this, 'lsdp_localize_polyglang_data' ) );
 			self::initialize_divi_5_module();
@@ -74,6 +76,8 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
 				require_once __DIR__ . '/admin/lsdp-feedback-notice.php';
 				new LSDPFeedbackNotice();
 			}
+			require_once __DIR__ . '/admin/dashboard/lsdp-dashboard.php';
+			cool_plugins_lsdp_polylang_addon_settings_page( 'polylang-addons', 'cool-plugins-polylang-addons', 'Polylang Addons' );
 		}
 
 		public function is_divi_theme_exist() {	
@@ -133,6 +137,29 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
 				}
 			}
 		}
+
+		/**
+         * Redirect to settings page on plugin activation.
+         *
+         * @since 1.0.0
+         */
+        public function lsdp_redirect_to_settings() {
+            if ( get_option( 'lsdp_plugin_activation_redirect', false ) ) {
+                delete_option( 'lsdp_plugin_activation_redirect' );
+                wp_redirect( admin_url( 'admin.php?page=lsdp-get-started' ) );
+                exit;
+            }
+        }
+
+        /**
+         * Description  Add links in plugin list page
+         *
+         * @param array $links  The Links you want to add.
+         */
+        	public function lsdp_settings_page( $links ) {
+            $links[] = '<a style="font-weight:bold" href="' . esc_url( admin_url( 'admin.php?page=lsdp-get-started' ) ) . '">' . __( 'Get Started', 'language-switcher-for-divi-polylang' ) . '</a>';
+            return $links;
+        }
 
 		public function lsdp_localize_polyglang_data( $data ) {
 			// return $data;
