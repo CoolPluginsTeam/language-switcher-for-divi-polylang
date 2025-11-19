@@ -138,6 +138,9 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 
+= Version 1.0.4 | 19 November 2025 =
+- **Integrated:** Get Started Dashboard.
+
 = Version 1.0.3 | 28 August 2025 =
 - **Fixed:** Addressed security vulnerabilities.
 - **Improved:** Enhanced overall code quality.
