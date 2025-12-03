@@ -138,7 +138,7 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 
-= Version 1.0.6 | 01 December 2025 =
+= Version 1.0.6 | 03 December 2025 =
 - Tested Upto WordPress Version 6.9.
 
 = Version 1.0.5 | 19 November 2025 =
