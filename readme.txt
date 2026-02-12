@@ -69,7 +69,9 @@ With this plugin, you can place a customizable language switcher on your Divi pa
 * **[Language Switcher for Elementor & Polylang](https://wordpress.org/plugins/language-switcher-for-elementor-polylang/)**  is a WordPress plugin that helps you add a language switcher to your website and translate Elementor Templates. This plugin connects the Polylang multilingual plugin with Elementor, making it easier to build and manage a multilingual website visually.
 
 * **[Polylang Duplicate Content ](https://wordpress.org/plugins/duplicate-content-addon-for-polylang/)** addon effortlessly duplicate your original or default language post content into other languages of the same post, making the translation process easier.
- 
+
+**Use of 3rd Party Services:** This plugin connects to the Cool Plugins API to display information about related plugins inside the dashboard. It also offers optional usage tracking and optional feedback submission on deactivation. Data is sent only after explicit user consent. No hidden tracking is performed, and no frontend visitor or site user data is collected. For more details, please review our [Data Usage Policy](https://my.coolplugins.net/terms/usage-tracking/), [TOS](https://my.coolplugins.net/terms/), and [Privacy Policy](https://my.coolplugins.net/terms/privacy-policy/).
+
 == Screenshots == 
 1. Language Switcher Module Frontend Preview.
 2. Language Switcher Module Settings Preview.
