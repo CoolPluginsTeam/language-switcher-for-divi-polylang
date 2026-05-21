@@ -25,6 +25,10 @@ const LSDPFC = ({ attrName, subName, children, defaultAttr: explicitDefaultAttr,
   let computedDefaultAttr = explicitDefaultAttr;
   if (!computedDefaultAttr && lsdpdsa && attrName) {
     let raw = lsdpdsa?.[attrName]?.innerContent?.desktop?.value;
+    if ((raw === undefined || raw === null) && attrName.includes('.')) {
+      const rootKey = attrName.split('.')[0];
+      raw = lsdpdsa?.[rootKey]?.innerContent?.desktop?.value;
+    }
     if ((raw === undefined || raw === null) && subName) {
       raw = lsdpdsa?.[subName]?.innerContent?.desktop?.value;
     }

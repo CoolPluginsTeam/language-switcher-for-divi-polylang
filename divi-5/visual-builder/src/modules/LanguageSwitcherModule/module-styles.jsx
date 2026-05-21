@@ -38,7 +38,7 @@ export const ModuleStyles = (props) => {
           }
         }}
       />
-        {((attrs?.flag_style?.decoration?.aspect_ratio?.desktop?.value?.aspect_ratio ?? attrs?.flag_style?.innerContent?.decoration?.aspect_ratio?.desktop?.value) === '1/1') ? (
+        {((attrs?.flag_style?.decoration?.aspect_ratio?.desktop?.value?.aspect_ratio ?? attrs?.flag_style?.innerContent?.desktop?.value?.aspect_ratio) === '1/1') ? (
           <>
           <CommonStyle
             selector={`${orderClass} .lsdp-wrapper .lsdp-lang-image`}

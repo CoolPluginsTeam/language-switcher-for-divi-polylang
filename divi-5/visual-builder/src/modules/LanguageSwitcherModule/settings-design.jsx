@@ -30,6 +30,10 @@ const LSDPFC = ({ attrName, subName, children, defaultAttr: explicitDefaultAttr,
   let computedDefaultAttr = explicitDefaultAttr;
   if (!computedDefaultAttr && lsdpdsa && attrName) {
     let raw = lsdpdsa?.[attrName]?.innerContent?.desktop?.value;
+    if ((raw === undefined || raw === null) && attrName.includes('.')) {
+      const rootKey = attrName.split('.')[0];
+      raw = lsdpdsa?.[rootKey]?.innerContent?.desktop?.value;
+    }
     if ((raw === undefined || raw === null) && subName) {
       raw = lsdpdsa?.[subName]?.innerContent?.desktop?.value;
     }
@@ -102,9 +106,11 @@ export const SettingsDesign = (props) => (
       </GroupContainer>
 
       <GroupContainer id="text_style" title={__('Text', 'language-switcher-for-divi-polylang')}>
-      <LSDPFC attrName="text_style.decoration.font"
+        <FontGroup
+          attrName="text_style.decoration.font"
           grouped={false}
-          fields={{ textAlign: { render: false, }, }} />
+          fields={{ textAlign: { render: false } }}
+        />
       </GroupContainer>
 
       <GroupContainer id="background_style" title={__('Background', 'language-switcher-for-divi-polylang')}>
