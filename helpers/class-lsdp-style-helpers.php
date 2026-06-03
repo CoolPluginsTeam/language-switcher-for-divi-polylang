@@ -46,87 +46,36 @@ class LSDP_STYLE_HELPERS {
 			)
 		);
 
-		if ( '' !== $lang_padding ) {
-			$padding = $this->get_unit_value( $lang_padding );
-
-			foreach ( $padding as $key => $value ) {
-				if ( ! empty( $value ) ) {
-					ET_Builder_Element::set_style(
-						$slug,
-						array(
-							'selector'    => $selector,
-							'declaration' => sprintf( '--lsdp-lang-padding-%1$s: %2$s;', $key, $value ),
-						)
-					);
-				}
-			}
-		}
-		if ( '' !== $lang_margin ) {
-			$margin = $this->get_unit_value( $lang_margin );
-			foreach ( $margin as $key => $value ) {
-				if ( ! empty( $value ) ) {
-					ET_Builder_Element::set_style(
-						$slug,
-						array(
-							'selector'    => $selector,
-							'declaration' => sprintf( '--lsdp-lang-margin-%1$s: %2$s;', $key, $value ),
-						)
-					);
-				}
-			}
-		}
+		$this->set_spacing_styles( $slug, $selector, 'lsdp-lang-padding', $lang_padding );
+		$this->set_spacing_styles( $slug, $selector, 'lsdp-lang-margin', $lang_margin );
 
 		if ( '' !== $lang_normal_bg_color ) {
-			$color = sanitize_hex_color( $lang_normal_bg_color );
-			if ( ! $color ) {
-				return;
+			$color = $this->sanitize_css_color( $lang_normal_bg_color );
+			if ( false !== $color ) {
+				ET_Builder_Element::set_style(
+					$slug,
+					array(
+						'selector'    => $selector,
+						'declaration' => sprintf( '--lsdp-normal-bg-color: %1$s;', $color ),
+					)
+				);
 			}
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--lsdp-normal-bg-color: %1$s;', $color ),
-				)
-			);
 		}
 		if ( '' !== $lang_hover_bg_color_hover ) {
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--lsdp-hover-bg-color: %1$s;', $lang_hover_bg_color_hover ),
-				)
-			);
+			$color = $this->sanitize_css_color( $lang_hover_bg_color_hover );
+			if ( false !== $color ) {
+				ET_Builder_Element::set_style(
+					$slug,
+					array(
+						'selector'    => $selector,
+						'declaration' => sprintf( '--lsdp-hover-bg-color: %1$s;', $color ),
+					)
+				);
+			}
 		}
 
-		if ( '' !== $hover_bg_margin ) {
-			$margin = $this->get_unit_value( $hover_bg_margin );
-			foreach ( $margin as $key => $value ) {
-				if ( ! empty( $value ) ) {
-					ET_Builder_Element::set_style(
-						$slug,
-						array(
-							'selector'    => $selector,
-							'declaration' => sprintf( '--lsdp-hover-bg-mrgn-%1$s: %2$s;', $key, $value ),
-						)
-					);
-				}
-			}
-		}
-		if ( '' !== $hover_bg_padding ) {
-			$padding = $this->get_unit_value( $hover_bg_padding );
-			foreach ( $padding as $key => $value ) {
-				if ( ! empty( $value ) ) {
-					ET_Builder_Element::set_style(
-						$slug,
-						array(
-							'selector'    => $selector,
-							'declaration' => sprintf( '--lsdp-hover-bg-pading-%1$s: %2$s;', $key, $value ),
-						)
-					);
-				}
-			}
-		}
+		$this->set_spacing_styles( $slug, $selector, 'lsdp-hover-bg-mrgn', $hover_bg_margin );
+		$this->set_spacing_styles( $slug, $selector, 'lsdp-hover-bg-pading', $hover_bg_padding );
 
 		if ( '' !== $flag_ratio && '1/1' === $flag_ratio ) {
 			ET_Builder_Element::set_style(
@@ -138,36 +87,42 @@ class LSDP_STYLE_HELPERS {
 			);
 		}
 		if ( '' !== $flag_width ) {
-			if ( ! preg_match( '/^\d+(\.\d+)?(px|em|rem|%|vw|vh)?$/', $flag_width ) ) {
-				return;
+			$flag_width = $this->sanitize_css_length( $flag_width );
+			if ( false !== $flag_width ) {
+				ET_Builder_Element::set_style(
+					$slug,
+					array(
+						'selector'    => $selector,
+						'declaration' => sprintf( '--lsdp-flag-width: %1$s;', $flag_width ),
+					)
+				);
 			}
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--lsdp-flag-width: %1$s;', $flag_width ),
-				)
-			);
 		}
 		if ( '' !== $flag_radius ) {
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--lsdp-flag-radius: %1$s;', $flag_radius ),
-				)
-			);
+			$flag_radius = $this->sanitize_css_length( $flag_radius );
+			if ( false !== $flag_radius ) {
+				ET_Builder_Element::set_style(
+					$slug,
+					array(
+						'selector'    => $selector,
+						'declaration' => sprintf( '--lsdp-flag-radius: %1$s;', $flag_radius ),
+					)
+				);
+			}
 		}
 		if ( '' !== $normal_text_font ) {
 			$this->load_google_fonts( $normal_text_font );
 			$Font_properties = $this->get_font_properties( $normal_text_font );
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--lsdp-normal-text-font: %1$s;', $Font_properties['fontFamily'] ),
-				)
-			);
+			$font_family_css   = $this->format_css_font_family( $Font_properties['fontFamily'] );
+			if ( false !== $font_family_css ) {
+				ET_Builder_Element::set_style(
+					$slug,
+					array(
+						'selector'    => $selector,
+						'declaration' => sprintf( '--lsdp-normal-text-font: %1$s;', $font_family_css ),
+					)
+				);
+			}
 			ET_Builder_Element::set_style(
 				$slug,
 				array(
@@ -212,22 +167,28 @@ class LSDP_STYLE_HELPERS {
 			);
 		}
 		if ( '' !== $normal_text_color ) {
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--lsdp-normal-text-color: %1$s;', $normal_text_color ),
-				)
-			);
+			$color = $this->sanitize_css_color( $normal_text_color );
+			if ( false !== $color ) {
+				ET_Builder_Element::set_style(
+					$slug,
+					array(
+						'selector'    => $selector,
+						'declaration' => sprintf( '--lsdp-normal-text-color: %1$s;', $color ),
+					)
+				);
+			}
 		}
 		if ( '' !== $hover_text_color ) {
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--lsdp-hover-text-color: %1$s;', $hover_text_color ),
-				)
-			);
+			$color = $this->sanitize_css_color( $hover_text_color );
+			if ( false !== $color ) {
+				ET_Builder_Element::set_style(
+					$slug,
+					array(
+						'selector'    => $selector,
+						'declaration' => sprintf( '--lsdp-hover-text-color: %1$s;', $color ),
+					)
+				);
+			}
 		}
 		if ( '' !== $normal_text_spacing ) {
 			ET_Builder_Element::set_style(
@@ -248,22 +209,28 @@ class LSDP_STYLE_HELPERS {
 			);
 		}
 		if ( '' !== $normal_text_size ) {
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--lsdp-normal-text-size: %1$s;', $normal_text_size ),
-				)
-			);
+			$text_size = $this->sanitize_css_length( $normal_text_size );
+			if ( false !== $text_size ) {
+				ET_Builder_Element::set_style(
+					$slug,
+					array(
+						'selector'    => $selector,
+						'declaration' => sprintf( '--lsdp-normal-text-size: %1$s;', $text_size ),
+					)
+				);
+			}
 		}
-		if( '' !== $hover_text_size){
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--lsdp-hover-text-size: %1$s;', $hover_text_size ),
-				)
-			);
+		if ( '' !== $hover_text_size ) {
+			$text_size = $this->sanitize_css_length( $hover_text_size );
+			if ( false !== $text_size ) {
+				ET_Builder_Element::set_style(
+					$slug,
+					array(
+						'selector'    => $selector,
+						'declaration' => sprintf( '--lsdp-hover-text-size: %1$s;', $text_size ),
+					)
+				);
+			}
 		}
 		if ( '' !== $normal_text_line_height ) {
 			ET_Builder_Element::set_style(
@@ -288,21 +255,62 @@ class LSDP_STYLE_HELPERS {
 
 	private function load_google_fonts( $font_family ) {
 		$font_parts       = explode( '|', $font_family );
-		$font_family_name = trim( $font_parts[0] );
-	
-		// Allow only characters used in Google Font family names.
-		if ( ! preg_match( '/^[A-Za-z0-9\s\-_]+$/', $font_family_name ) ) {
+		$font_family_name = isset( $font_parts[0] ) ? $font_parts[0] : '';
+		$font_family_name = $this->sanitize_font_family_name( $font_family_name );
+
+		if ( false === $font_family_name ) {
 			return;
 		}
-	
-		$font_family_encoded = rawurlencode( $font_family_name );
-	
-		wp_enqueue_style(
-			'lsdp-gfonts-' . sanitize_key( $font_family_name ),
-			"https://fonts.googleapis.com/css2?family={$font_family_encoded}&display=swap",
-			[],
-			LSDP
+
+		$handle_suffix = sanitize_key( str_replace( ' ', '-', $font_family_name ) );
+		if ( '' === $handle_suffix ) {
+			return;
+		}
+
+		$url = sprintf(
+			'https://fonts.googleapis.com/css2?family=%s&display=swap',
+			rawurlencode( $font_family_name )
 		);
+
+		wp_enqueue_style( 'lsdp-gfonts-' . $handle_suffix, esc_url( $url ), array(), LSDP );
+	}
+
+	/**
+	 * Allow-list validation for font family names from builder props.
+	 *
+	 * @param string $font_family_name Raw font family name.
+	 * @return string|false Sanitized name, or false when invalid.
+	 */
+	private function sanitize_font_family_name( $font_family_name ) {
+		$font_family_name = trim( (string) $font_family_name );
+
+		if ( '' === $font_family_name || strlen( $font_family_name ) > 100 ) {
+			return false;
+		}
+
+		if ( ! preg_match( '/^[A-Za-z0-9][A-Za-z0-9 _\-]*$/', $font_family_name ) ) {
+			return false;
+		}
+
+		return $font_family_name;
+	}
+
+	/**
+	 * Wrap a validated font family name for safe CSS custom property output.
+	 *
+	 * @param string $font_family_name Raw font family name.
+	 * @return string|false Quoted CSS font-family value, or false when invalid.
+	 */
+	private function format_css_font_family( $font_family_name ) {
+		$font_family_name = $this->sanitize_font_family_name( $font_family_name );
+
+		if ( false === $font_family_name ) {
+			return false;
+		}
+
+		$escaped = addcslashes( $font_family_name, "\\\"" );
+
+		return '"' . $escaped . '"';
 	}
 
 	private function get_font_properties( $fontString ) {
@@ -342,6 +350,103 @@ class LSDP_STYLE_HELPERS {
 			'textDecorationLineColor' => $textDecorationLineColor,
 			'textDecorationStyle'     => $textDecorationStyle,
 		);
+	}
+
+	/**
+	 * Validate a CSS length for safe use in custom properties.
+	 *
+	 * @param string $length Raw length from builder props.
+	 * @return string|false Sanitized length, or false when invalid.
+	 */
+	private function sanitize_css_length( $length ) {
+		$length = trim( (string) $length );
+
+		if ( '' === $length ) {
+			return false;
+		}
+
+		if ( ! preg_match( '/^\d+(\.\d+)?(px|em|rem|%|vw|vh)?$/', $length ) ) {
+			return false;
+		}
+
+		return $length;
+	}
+
+	/**
+	 * Validate a color for safe use in CSS custom properties.
+	 *
+	 * @param string $color Raw color from builder props.
+	 * @return string|false Sanitized color, or false when invalid.
+	 */
+	private function sanitize_css_color( $color ) {
+		$color = trim( (string) $color );
+
+		if ( '' === $color ) {
+			return false;
+		}
+
+		$hex = sanitize_hex_color( $color );
+		if ( $hex ) {
+			return $hex;
+		}
+
+		if ( preg_match( '/^rgba?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*(?:,\s*(0|1|0?\.\d+)\s*)?\)$/i', $color, $matches ) ) {
+			$red   = (int) $matches[1];
+			$green = (int) $matches[2];
+			$blue  = (int) $matches[3];
+
+			if ( $red > 255 || $green > 255 || $blue > 255 ) {
+				return false;
+			}
+
+			if ( isset( $matches[4] ) && '' !== $matches[4] && (float) $matches[4] > 1 ) {
+				return false;
+			}
+
+			if ( isset( $matches[4] ) && '' !== $matches[4] ) {
+				return sprintf( 'rgba(%d,%d,%d,%s)', $red, $green, $blue, $matches[4] );
+			}
+
+			return sprintf( 'rgb(%d,%d,%d)', $red, $green, $blue );
+		}
+
+		return false;
+	}
+
+	/**
+	 * Output validated spacing values as CSS custom properties.
+	 *
+	 * @param string $slug            Module slug.
+	 * @param string $selector        CSS selector.
+	 * @param string $property_prefix Custom property prefix.
+	 * @param string $unit_string     Pipe-delimited Divi spacing string.
+	 */
+	private function set_spacing_styles( $slug, $selector, $property_prefix, $unit_string ) {
+		if ( '' === $unit_string ) {
+			return;
+		}
+
+		$allowed_sides = array( 'top', 'right', 'bottom', 'left' );
+		$spacing       = $this->get_unit_value( $unit_string );
+
+		foreach ( $spacing as $side => $value ) {
+			if ( ! in_array( $side, $allowed_sides, true ) || '' === $value ) {
+				continue;
+			}
+
+			$length = $this->sanitize_css_length( $value );
+			if ( false === $length ) {
+				continue;
+			}
+
+			ET_Builder_Element::set_style(
+				$slug,
+				array(
+					'selector'    => $selector,
+					'declaration' => sprintf( '--%1$s-%2$s: %3$s;', $property_prefix, $side, $length ),
+				)
+			);
+		}
 	}
 
 	private function get_unit_value( $unitString ) {
