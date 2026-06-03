@@ -95,6 +95,9 @@ trait ModuleStylesTrait {
                 'attr'                => $attrs['flag_style']['decoration']['flag_width'] ?? [],
                 'declarationFunction' => function ( $declaration_function_args ) {
                   $attr_value = $declaration_function_args['attrValue']['flag_width'] ?? [];
+                  if ( ! preg_match( '/^\d+(\.\d+)?(px|em|rem|%|vw|vh)?$/', $attr_value ) ) {
+                    return '';
+                  }
                   return ("--lsdp-flag-width: {$attr_value}; --lsdp-flag-height: {$attr_value};");
                 },
               ]
@@ -117,6 +120,9 @@ trait ModuleStylesTrait {
               'attr'                => $attrs['flag_style']['decoration']['flag_border_radius'] ?? [],
               'declarationFunction' => function ( $declaration_function_args ) {
                 $attr_value = $declaration_function_args['attrValue']['flag_border_radius'] ?? [];
+                if ( ! preg_match( '/^\d+(\.\d+)?(px|em|rem|%|vw|vh)?$/', $attr_value ) ) {
+                  return '';
+                }
                 return "--lsdp-flag-radius: {$attr_value};";
               },
             ]

@@ -77,11 +77,15 @@ class LSDP_STYLE_HELPERS {
 		}
 
 		if ( '' !== $lang_normal_bg_color ) {
+			$color = sanitize_hex_color( $lang_normal_bg_color );
+			if ( ! $color ) {
+				return;
+			}
 			ET_Builder_Element::set_style(
 				$slug,
 				array(
 					'selector'    => $selector,
-					'declaration' => sprintf( '--lsdp-normal-bg-color: %1$s;', $lang_normal_bg_color ),
+					'declaration' => sprintf( '--lsdp-normal-bg-color: %1$s;', $color ),
 				)
 			);
 		}
@@ -134,6 +138,9 @@ class LSDP_STYLE_HELPERS {
 			);
 		}
 		if ( '' !== $flag_width ) {
+			if ( ! preg_match( '/^\d+(\.\d+)?(px|em|rem|%|vw|vh)?$/', $flag_width ) ) {
+				return;
+			}
 			ET_Builder_Element::set_style(
 				$slug,
 				array(
@@ -281,10 +288,21 @@ class LSDP_STYLE_HELPERS {
 
 	private function load_google_fonts( $font_family ) {
 		$font_parts       = explode( '|', $font_family );
-		$font_family_name = $font_parts[0];
-		if ( $font_family_name ) {
-			wp_enqueue_style( 'lsdp-gfonts-' . $font_family_name, "https://fonts.googleapis.com/css2?family=$font_family_name&display=swap", [], LSDP );
+		$font_family_name = trim( $font_parts[0] );
+	
+		// Allow only characters used in Google Font family names.
+		if ( ! preg_match( '/^[A-Za-z0-9\s\-_]+$/', $font_family_name ) ) {
+			return;
 		}
+	
+		$font_family_encoded = rawurlencode( $font_family_name );
+	
+		wp_enqueue_style(
+			'lsdp-gfonts-' . sanitize_key( $font_family_name ),
+			"https://fonts.googleapis.com/css2?family={$font_family_encoded}&display=swap",
+			[],
+			LSDP
+		);
 	}
 
 	private function get_font_properties( $fontString ) {
