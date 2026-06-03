@@ -63,7 +63,7 @@ if (!defined('ABSPATH')) {
             function cool_plugins_activate(){
                 if(current_user_can('upload_plugins')){
                    
-                $plugin_slug= isset($_POST["polylang_activate_slug"])?sanitize_text_field($_POST["polylang_activate_slug"]):'';
+                $plugin_slug= isset($_POST["polylang_activate_slug"])?sanitize_text_field(wp_unslash($_POST["polylang_activate_slug"])):'';
                 
                 $wp_nonce = 'polylang-plugins-activate-' . $plugin_slug ;
                 if(!empty( $plugin_slug)){
@@ -71,7 +71,7 @@ if (!defined('ABSPATH')) {
                         wp_send_json_error( 'Invalid security token sent.' );
                         wp_die();
                     }
-                $pluginBase = ( isset( $_POST['polylang_activate_pluginbase'] ) && !empty( $_POST['polylang_activate_pluginbase'] ) )? sanitize_text_field($_POST['polylang_activate_pluginbase']) : null;
+                $pluginBase = ( isset( $_POST['polylang_activate_pluginbase'] ) && !empty( $_POST['polylang_activate_pluginbase'] ) )? sanitize_text_field( wp_unslash( $_POST['polylang_activate_pluginbase'] ) ) : null;
                 
                 $plugin_base_arr=explode("/",$pluginBase);
                 if( isset($plugin_base_arr[0]) && $plugin_base_arr[0]==$plugin_slug ){
@@ -97,7 +97,7 @@ if (!defined('ABSPATH')) {
              */
             function cool_plugins_install(){
             if(current_user_can('upload_plugins')){
-                $plugin_slug= isset($_POST['polylang_slug'])?sanitize_text_field($_POST['polylang_slug']):'';
+                $plugin_slug= isset($_POST['polylang_slug'])?sanitize_text_field(wp_unslash($_POST['polylang_slug'])):'';
                 $wp_nonce = wp_create_nonce('polylang-plugins-download-' . $plugin_slug );
                 if(!empty( $plugin_slug)){
                     if ( ! check_ajax_referer( 'polylang-plugins-download-' . $plugin_slug,'wp_nonce', false ) ) {
@@ -137,8 +137,8 @@ if (!defined('ABSPATH')) {
             function init_plugins_dasboard_page(){
                 add_submenu_page(
                     'mlang',
-                    __('Get Started', 'language-switcher-for-elementor-polylang'),
-                    __('Get Started', 'language-switcher-for-elementor-polylang'),
+                    __('Get Started', 'language-switcher-for-divi-polylang'),
+                    __('Get Started', 'language-switcher-for-divi-polylang'),
                     'manage_options',
                     'lsdp-get-started',
                     array($this, 'displayPluginAdminDashboard')
@@ -152,10 +152,10 @@ if (!defined('ABSPATH')) {
              */
             function displayPluginAdminDashboard(){
                 echo '<div class="wrap lsdp-get-started">';
-                echo '<h1>'.esc_html__('Welcome to Language Switcher – Polylang for Divi', 'language-switcher-for-elementor-polylang').'</h1>';
+                echo '<h1>'.esc_html__('Welcome to Language Switcher – Polylang for Divi', 'language-switcher-for-divi-polylang').'</h1>';
                 echo '<h2 class="lsdp-nav-tab-wrapper nav-tab-wrapper">';
-                echo '<a href="#lsdp-getting-started" class="lsdp-nav-tab lsdp-nav-tab-active nav-tab nav-tab-active">'.esc_html__('Get Started', 'language-switcher-for-elementor-polylang').'</a>';
-                echo '<a href="#lsdp-more-addons" class="lsdp-nav-tab nav-tab">'.esc_html__('More Addons', 'language-switcher-for-elementor-polylang').'</a>';
+                echo '<a href="#lsdp-getting-started" class="lsdp-nav-tab lsdp-nav-tab-active nav-tab nav-tab-active">'.esc_html__('Get Started', 'language-switcher-for-divi-polylang').'</a>';
+                echo '<a href="#lsdp-more-addons" class="lsdp-nav-tab nav-tab">'.esc_html__('More Addons', 'language-switcher-for-divi-polylang').'</a>';
                 echo '</h2>';
                 echo '<div id="lsdp-getting-started" class="lsdp-tab-content active">';
                 $this->get_started_content();
@@ -258,8 +258,8 @@ if (!defined('ABSPATH')) {
              */
             function enqueue_required_scripts(){
                 // A common CSS file will be enqueued for admin panel
-                wp_enqueue_style('cool-lsdp-polylang-addon', plugin_dir_url(__FILE__) .'assets/css/styles.css', null, null, 'all');
-                wp_enqueue_script( 'cool-lsdp-polylang-addon', plugin_dir_url(__FILE__) .'assets/js/script.js', array('jquery'), null, true);
+                wp_enqueue_style('cool-lsdp-polylang-addon', plugin_dir_url(__FILE__) .'assets/css/styles.css', null, $this->plugin_version, 'all');
+                wp_enqueue_script( 'cool-lsdp-polylang-addon', plugin_dir_url(__FILE__) .'assets/js/script.js', array('jquery'), $this->plugin_version, true);
                 wp_localize_script( 'cool-lsdp-polylang-addon', 'lsdp_polylang', array('ajax_url'=> admin_url('admin-ajax.php')));
                 
             }

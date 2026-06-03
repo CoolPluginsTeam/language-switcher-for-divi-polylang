@@ -1,6 +1,9 @@
 <?php
-namespace LSDP\feedback;
 
+namespace LSDP\feedback;
+if ( ! defined( 'ABSPATH' ) ) {
+	die( 'Direct access forbidden.' );
+  }
 /**
  * Class for feedback from user before deactivate plugin.
  */
@@ -77,24 +80,24 @@ class lsdp_feedback {
 		}
 		$deactivate_reasons = array(
 			'didnt_work_as_expected'         => array(
-				'title'             => esc_html__( 'The plugin didn\'t work as expected', 'cool-plugins' ),
-				'input_placeholder' => esc_html__( 'What did you expect?', 'cool-plugins' ),
+				'title'             => esc_html__( 'The plugin didn\'t work as expected', 'language-switcher-for-divi-polylang' ),
+				'input_placeholder' => esc_html__( 'What did you expect?', 'language-switcher-for-divi-polylang' ),
 			),
 			'found_a_better_plugin'          => array(
-				'title'             => esc_html__( 'I found a better plugin', 'cool-plugins' ),
-				'input_placeholder' => esc_html__( 'Please share which plugin', 'cool-plugins' ),
+				'title'             => esc_html__( 'I found a better plugin', 'language-switcher-for-divi-polylang' ),
+				'input_placeholder' => esc_html__( 'Please share which plugin', 'language-switcher-for-divi-polylang' ),
 			),
 			'couldnt_get_the_plugin_to_work' => array(
-				'title'             => esc_html__( 'The plugin is not working', 'cool-plugins' ),
-				'input_placeholder' => esc_html__( 'Please share your issue. So we can fix that for other users.', 'cool-plugins' ),
+				'title'             => esc_html__( 'The plugin is not working', 'language-switcher-for-divi-polylang' ),
+				'input_placeholder' => esc_html__( 'Please share your issue. So we can fix that for other users.', 'language-switcher-for-divi-polylang' ),
 			),
 			'temporary_deactivation'         => array(
-				'title'             => esc_html__( 'It\'s a temporary deactivation', 'cool-plugins' ),
+				'title'             => esc_html__( 'It\'s a temporary deactivation', 'language-switcher-for-divi-polylang' ),
 				'input_placeholder' => '',
 			),
 			'other'                          => array(
-				'title'             => esc_html__( 'Other', 'cool-plugins' ),
-				'input_placeholder' => esc_html__( 'Please share the reason', 'cool-plugins' ),
+				'title'             => esc_html__( 'Other', 'language-switcher-for-divi-polylang' ),
+				'input_placeholder' => esc_html__( 'Please share the reason', 'language-switcher-for-divi-polylang' ),
 			),
 		);
 
@@ -103,7 +106,7 @@ class lsdp_feedback {
 						
 			<div class="cool-plugins-deactivation-response">
 			<div id="cool-plugins-deactivate-feedback-dialog-header">
-				<span id="cool-plugins-feedback-form-title"><?php echo esc_html__( 'Quick Feedback', 'cool-plugins' ); ?></span>
+				<span id="cool-plugins-feedback-form-title"><?php echo esc_html__( 'Quick Feedback', 'language-switcher-for-divi-polylang' ); ?></span>
 			</div>
 			<div id="cool-plugins-loader-wrapper">
 				<div class="cool-plugins-loader-container">
@@ -116,7 +119,7 @@ class lsdp_feedback {
 				wp_nonce_field( '_cool-plugins_deactivate_feedback_nonce' );
 				?>
 				<input type="hidden" name="action" value="cool-plugins_deactivate_feedback" />
-				<div id="cool-plugins-deactivate-feedback-dialog-form-caption"><?php echo esc_html__( 'If you have a moment, please share why you are deactivating this plugin.', 'cool-plugins' ); ?></div>
+				<div id="cool-plugins-deactivate-feedback-dialog-form-caption"><?php echo esc_html__( 'If you have a moment, please share why you are deactivating this plugin.', 'language-switcher-for-divi-polylang' ); ?></div>
 				<div id="cool-plugins-deactivate-feedback-dialog-form-body">
 					<?php foreach ( $deactivate_reasons as $reason_key => $reason ) : ?>
 						<div class="cool-plugins-deactivate-feedback-dialog-input-wrapper">
@@ -130,11 +133,11 @@ class lsdp_feedback {
 							<?php endif; ?>
 						</div>
 					<?php endforeach; ?>
-					<input class="cool-plugins-GDPR-data-notice" id="cool-plugins-GDPR-data-notice" type="checkbox"><label for="cool-plugins-GDPR-data-notice"><?php echo esc_html__( 'I agree to share anonymous usage data and basic site details (such as server, PHP, and WordPress versions) to support Language Switcher for Divi & Polylang improvement efforts. Additionally, I allow Cool Plugins to store all information provided through this form and to respond to my inquiry.', 'cool-plugins' ); ?></label>
+					<input class="cool-plugins-GDPR-data-notice" id="cool-plugins-GDPR-data-notice" type="checkbox"><label for="cool-plugins-GDPR-data-notice"><?php echo esc_html__( 'I agree to share anonymous usage data and basic site details (such as server, PHP, and WordPress versions) to support Language Switcher for Divi & Polylang improvement efforts. Additionally, I allow Cool Plugins to store all information provided through this form and to respond to my inquiry.', 'language-switcher-for-divi-polylang' ); ?></label>
 				</div>
 				<div class="cool-plugin-popup-button-wrapper">
-					<a class="cool-plugins-button button-deactivate" id="cool-plugin-submitNdeactivate"><?php echo esc_html__( 'Submit and Deactivate', 'cool-plugins' ); ?></a>
-					<a class="cool-plugins-button" id="cool-plugin-skipNdeactivate"><?php echo esc_html__( 'Skip and Deactivate', 'cool-plugins' ); ?></a>
+					<a class="cool-plugins-button button-deactivate" id="cool-plugin-submitNdeactivate"><?php echo esc_html__( 'Submit and Deactivate', 'language-switcher-for-divi-polylang' ); ?></a>
+					<a class="cool-plugins-button" id="cool-plugin-skipNdeactivate"><?php echo esc_html__( 'Skip and Deactivate', 'language-switcher-for-divi-polylang' ); ?></a>
 				</div>
 			</form>
 			</div>
@@ -147,7 +150,8 @@ class lsdp_feedback {
 		global $wpdb;
 		$server_info = [
 		'server_software'        => isset($_SERVER['SERVER_SOFTWARE']) ? sanitize_text_field(wp_unslash($_SERVER['SERVER_SOFTWARE'])) : 'N/A',
-		'mysql_version'          => sanitize_text_field($wpdb->get_var("SELECT VERSION()")),
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- MySQL version query, caching not necessary as version rarely changes
+		'mysql_version'          => preg_replace('/[^0-9a-zA-Z.\-_]/', '', (string) $wpdb->get_var("SELECT VERSION()")),
 		'php_version'            => sanitize_text_field(phpversion()),
 		'wp_version'             => sanitize_text_field(get_bloginfo('version')),
 		'wp_debug'               => sanitize_text_field(defined('WP_DEBUG') && WP_DEBUG ? 'Enabled' : 'Disabled'),
@@ -194,24 +198,24 @@ class lsdp_feedback {
 			$reason             = isset( $_POST['reason'] ) ? sanitize_text_field( wp_unslash( $_POST['reason'] ) ) : '';
 			$deactivate_reasons = array(
 				'didnt_work_as_expected'         => array(
-					'title'             => esc_html__( 'The plugin didn\'t work as expected', 'cool-plugins' ),
-					'input_placeholder' => esc_html__( 'What did you expect?', 'cool-plugins' ),
+					'title'             => esc_html__( 'The plugin didn\'t work as expected', 'language-switcher-for-divi-polylang' ),
+					'input_placeholder' => esc_html__( 'What did you expect?', 'language-switcher-for-divi-polylang' ),
 				),
 				'found_a_better_plugin'          => array(
-					'title'             => esc_html__( 'I found a better plugin', 'cool-plugins' ),
-					'input_placeholder' => esc_html__( 'Please share which plugin', 'cool-plugins' ),
+					'title'             => esc_html__( 'I found a better plugin', 'language-switcher-for-divi-polylang' ),
+					'input_placeholder' => esc_html__( 'Please share which plugin', 'language-switcher-for-divi-polylang' ),
 				),
 				'couldnt_get_the_plugin_to_work' => array(
-					'title'             => esc_html__( 'The plugin is not working', 'cool-plugins' ),
-					'input_placeholder' => esc_html__( 'Please share your issue. So we can fix that for other users.', 'cool-plugins' ),
+					'title'             => esc_html__( 'The plugin is not working', 'language-switcher-for-divi-polylang' ),
+					'input_placeholder' => esc_html__( 'Please share your issue. So we can fix that for other users.', 'language-switcher-for-divi-polylang' ),
 				),
 				'temporary_deactivation'         => array(
-					'title'             => esc_html__( 'It\'s a temporary deactivation', 'cool-plugins' ),
+					'title'             => esc_html__( 'It\'s a temporary deactivation', 'language-switcher-for-divi-polylang' ),
 					'input_placeholder' => '',
 				),
 				'other'                          => array(
-					'title'             => esc_html__( 'Other', 'cool-plugins' ),
-					'input_placeholder' => esc_html__( 'Please share the reason', 'cool-plugins' ),
+					'title'             => esc_html__( 'Other', 'language-switcher-for-divi-polylang' ),
+					'input_placeholder' => esc_html__( 'Please share the reason', 'language-switcher-for-divi-polylang' ),
 				),
 			);
 

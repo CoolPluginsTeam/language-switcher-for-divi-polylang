@@ -146,7 +146,7 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
         public function lsdp_redirect_to_settings() {
             if ( get_option( 'lsdp_plugin_activation_redirect', false ) ) {
                 delete_option( 'lsdp_plugin_activation_redirect' );
-                wp_redirect( admin_url( 'admin.php?page=lsdp-get-started' ) );
+                wp_safe_redirect( admin_url( 'admin.php?page=lsdp-get-started' ) );
                 exit;
             }
         }

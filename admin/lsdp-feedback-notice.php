@@ -1,5 +1,8 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	die( 'Direct access forbidden.' );
+  }
 if ( ! class_exists( 'LSDPFeedbackNotice' ) ) {
 	/**
 	 * Class for feedback notice.
