@@ -61,20 +61,20 @@ if (!defined('ABSPATH')) {
              * handle ajax request for activating plugin from dashboard
              */
             function cool_plugins_activate(){
-                if(current_user_can('upload_plugins')){
+                if(current_user_can('activate_plugins')){
                    
                 $plugin_slug= isset($_POST["polylang_activate_slug"])?sanitize_text_field(wp_unslash($_POST["polylang_activate_slug"])):'';
                 
                 $wp_nonce = 'polylang-plugins-activate-' . $plugin_slug ;
                 if(!empty( $plugin_slug)){
                     if ( ! check_ajax_referer($wp_nonce,'wp_nonce', false ) ) {
-                        wp_send_json_error( 'Invalid security token sent.' );
+                        wp_send_json_error( esc_html__( 'Invalid security token sent.', 'language-switcher-for-divi-polylang' ) );
                         wp_die();
                     }
                 $pluginBase = ( isset( $_POST['polylang_activate_pluginbase'] ) && !empty( $_POST['polylang_activate_pluginbase'] ) ) ? sanitize_text_field( wp_unslash( $_POST['polylang_activate_pluginbase'] ) ) : null;
 
                 if ( empty( $pluginBase ) || 0 !== validate_file( $pluginBase ) ) {
-                    wp_send_json_error( 'Something wrong with plugin path.' );
+                    wp_send_json_error( esc_html__( 'Something wrong with plugin path.', 'language-switcher-for-divi-polylang' ) );
                     wp_die();
                 }
 
@@ -83,7 +83,7 @@ if (!defined('ABSPATH')) {
                 }
 
                 if ( ! in_array( $pluginBase, array_keys( get_plugins() ), true ) ) {
-                    wp_send_json_error( 'Something wrong with plugin path.' );
+                    wp_send_json_error( esc_html__( 'Something wrong with plugin path.', 'language-switcher-for-divi-polylang' ) );
                     wp_die();
                 }
 
@@ -91,15 +91,15 @@ if (!defined('ABSPATH')) {
                 if ( isset( $plugin_base_arr[0] ) && $plugin_base_arr[0] === $plugin_slug ) {
                     activate_plugin( $pluginBase );
                 } else {
-                    wp_send_json_error( 'Something wrong with plugin path.' );
+                    wp_send_json_error( esc_html__( 'Something wrong with plugin path.', 'language-switcher-for-divi-polylang' ) );
                     wp_die();
                 }
                 }else{
-                    wp_send_json_error( 'Plugin slug is missing.' );
+                    wp_send_json_error( esc_html__( 'Plugin slug is missing.', 'language-switcher-for-divi-polylang' ) );
                     wp_die();  
                 }
                 }else{
-                    wp_send_json_error( 'You have no permission to do this action.' );
+                    wp_send_json_error( esc_html__( 'You have no permission to do this action.', 'language-switcher-for-divi-polylang' ) );
                     wp_die();  
                 }
             }
@@ -109,13 +109,13 @@ if (!defined('ABSPATH')) {
              * This function use the core wordpress functionality of installing a plugin through URL
              */
             function cool_plugins_install(){
-            if(current_user_can('upload_plugins')){
+            if(current_user_can('install_plugins')){
                 $plugin_slug= isset($_POST['polylang_slug'])?sanitize_text_field(wp_unslash($_POST['polylang_slug'])):'';
                 $wp_nonce = wp_create_nonce('polylang-plugins-download-' . $plugin_slug );
                 if(!empty( $plugin_slug)){
                     if ( ! check_ajax_referer( 'polylang-plugins-download-' . $plugin_slug,'wp_nonce', false ) ) {
                   
-                        wp_send_json_error( 'Invalid security token sent.' );
+                        wp_send_json_error( esc_html__( 'Invalid security token sent.', 'language-switcher-for-divi-polylang' ) );
                         wp_die();
                     }
                   
@@ -130,15 +130,15 @@ if (!defined('ABSPATH')) {
                         
                         }
                 else{
-                    wp_send_json_error( 'Sorry, You are installing a wrong plugin.' );
+                    wp_send_json_error( esc_html__( 'Sorry, You are installing a wrong plugin.', 'language-switcher-for-divi-polylang' ) );
                     wp_die();
                 }
             }else{
-                wp_send_json_error( 'Plugin slug is missing.' );
+                wp_send_json_error( esc_html__( 'Plugin slug is missing.', 'language-switcher-for-divi-polylang' ) );
                 wp_die();  
             }
             }else{
-                wp_send_json_error( 'You have no permission to do this action.' );
+                wp_send_json_error( esc_html__( 'You have no permission to do this action.', 'language-switcher-for-divi-polylang' ) );
                 wp_die();  
             }
             }

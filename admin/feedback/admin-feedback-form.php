@@ -193,11 +193,11 @@ class lsdp_feedback {
 
 	public function submit_deactivation_response() {
 		if ( ! current_user_can( 'activate_plugins' ) ) { 
-			wp_send_json_error( 'You are not allowed to submit feedback' ); 
+			wp_send_json_error( esc_html__( 'You are not allowed to submit feedback', 'language-switcher-for-divi-polylang' ) ); 
 		}
 		$nonce = isset( $_POST['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ) : '';
 		if ( ! isset( $nonce ) || ! wp_verify_nonce( $nonce, '_cool-plugins_deactivate_feedback_nonce' ) ) {
-			wp_send_json_error( 'Invalid nonce' );
+			wp_send_json_error( esc_html__( 'Invalid nonce', 'language-switcher-for-divi-polylang' ) );
 		} else {
 			$reason             = isset( $_POST['reason'] ) ? sanitize_text_field( wp_unslash( $_POST['reason'] ) ) : '';
 			$deactivate_reasons = array(

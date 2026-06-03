@@ -157,7 +157,7 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
          * @param array $links  The Links you want to add.
          */
         	public function lsdp_settings_page( $links ) {
-            $links[] = '<a style="font-weight:bold" href="' . esc_url( admin_url( 'admin.php?page=lsdp-get-started' ) ) . '">' . __( 'Get Started', 'language-switcher-for-divi-polylang' ) . '</a>';
+            $links[] = '<a style="font-weight:bold" href="' . esc_url( admin_url( 'admin.php?page=lsdp-get-started' ) ) . '">' . esc_html__( 'Get Started', 'language-switcher-for-divi-polylang' ) . '</a>';
             return $links;
         }
 
