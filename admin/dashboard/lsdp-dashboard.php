@@ -271,14 +271,14 @@ if (!defined('ABSPATH')) {
              */
             function enqueue_required_scripts(){
                 // A common CSS file will be enqueued for admin panel
-                wp_enqueue_style('cool-lsdp-polylang-addon', plugin_dir_url(__FILE__) .'assets/css/styles.css', null, $this->plugin_version, 'all');
-                wp_enqueue_script( 'cool-lsdp-polylang-addon', plugin_dir_url(__FILE__) .'assets/js/script.js', array('jquery'), $this->plugin_version, true);
+                wp_enqueue_style('cool-lsdp-polylang-addon', plugin_dir_url(__FILE__) .'assets/css/styles.css', null, LSDP, 'all');
+                wp_enqueue_script( 'cool-lsdp-polylang-addon', plugin_dir_url(__FILE__) .'assets/js/script.js', array('jquery'), LSDP, true);
                 wp_localize_script( 'cool-lsdp-polylang-addon', 'lsdp_polylang', array('ajax_url'=> admin_url('admin-ajax.php')));
                 
             }
 
 
-    /**
+        /**
          * This function will gather all information regarding pro plugins.
          */
         public function request_pro_plugins_data($tag = null)
@@ -293,7 +293,7 @@ if (!defined('ABSPATH')) {
 
             $pro_api = esc_url($url);
             $response = wp_remote_get($pro_api, array('timeout' => 300));
-            if (is_wp_error($response)) {
+            if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
                 return;
             }
             $plugin_info = (array) json_decode($response['body']);
@@ -344,8 +344,8 @@ if (!defined('ABSPATH')) {
              $url = $this->plugin_api . 'free/' . $this->plugin_tag;
 
 
-            $response = wp_remote_get($url, array('timeout' => 300));
-            if (is_wp_error($response)) {
+            $response = wp_remote_get($url, array('timeout' => 15));
+            if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
                 return;
             }
             $plugin_info = json_decode($response['body'],true);

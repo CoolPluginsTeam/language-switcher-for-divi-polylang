@@ -10,18 +10,21 @@ class ModuleHelper {
     /**
      * Retrieves the attribute value from the provided attributes array.
      *
+     * Returns the raw value; escape at the point of output (esc_attr, esc_html, esc_url, etc.).
+     *
      * @param array  $attrs   The attributes array.
      * @param string $key     The key to retrieve the value for.
      * @param mixed  $default The default value to return if the key does not exist.
      *
-     * @return string|null The attribute value or the default value if not found.
+     * @return mixed The attribute value or the default value if not found.
      */
     public static function get_attr_value($attrs, $key, $default = null)
     {
-        $value = !empty($attrs[$key]['desktop']['value'][$key]) ? $attrs[$key]['desktop']['value'][$key] : $default;
+        if ( ! empty( $attrs[ $key ]['desktop']['value'][ $key ] ) ) {
+            return $attrs[ $key ]['desktop']['value'][ $key ];
+        }
 
-        // Check if the value is an array, return it directly, otherwise, sanitize as a string
-        return is_array($value) ? array_map('esc_html', $value) : esc_html($value);
+        return $default;
     }
 
     static function lsdp_localize_polyglang_data_divi_5($data) {

@@ -123,48 +123,12 @@ class LSDP_STYLE_HELPERS {
 					)
 				);
 			}
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--lsdp-normal-text-weight: %1$s;', $Font_properties['fontWeight'] ),
-				)
-			);
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--lsdp-normal-text-transform: %1$s;', $Font_properties['textTransform'] ),
-				)
-			);
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--lsdp-normal-text-decoration: %1$s;', $Font_properties['textDecoration'] ),
-				)
-			);
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--lsdp-normal-text-style: %1$s;', $Font_properties['fontStyle'] ),
-				)
-			);
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--lsdp-normal-text-decoration-color: %1$s;', $Font_properties['textDecorationLineColor'] ),
-				)
-			);
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--lsdp-normal-text-decoration-style: %1$s;', $Font_properties['textDecorationStyle'] ),
-				)
-			);
+			$this->set_css_custom_property( $slug, $selector, '--lsdp-normal-text-weight', $this->sanitize_css_font_weight( $Font_properties['fontWeight'] ) );
+			$this->set_css_custom_property( $slug, $selector, '--lsdp-normal-text-transform', $this->sanitize_css_text_transform( $Font_properties['textTransform'] ) );
+			$this->set_css_custom_property( $slug, $selector, '--lsdp-normal-text-decoration', $this->sanitize_css_text_decoration( $Font_properties['textDecoration'] ) );
+			$this->set_css_custom_property( $slug, $selector, '--lsdp-normal-text-style', $this->sanitize_css_font_style( $Font_properties['fontStyle'] ) );
+			$this->set_css_custom_property( $slug, $selector, '--lsdp-normal-text-decoration-color', $this->sanitize_css_color( $Font_properties['textDecorationLineColor'] ) );
+			$this->set_css_custom_property( $slug, $selector, '--lsdp-normal-text-decoration-style', $this->sanitize_css_text_decoration_style( $Font_properties['textDecorationStyle'] ) );
 		}
 		if ( '' !== $normal_text_color ) {
 			$color = $this->sanitize_css_color( $normal_text_color );
@@ -362,6 +326,118 @@ class LSDP_STYLE_HELPERS {
 			'textDecorationLineColor' => $textDecorationLineColor,
 			'textDecorationStyle'     => $textDecorationStyle,
 		);
+	}
+
+	/**
+	 * Output a validated CSS custom property, skipping invalid values.
+	 *
+	 * @param string       $slug           Module slug.
+	 * @param string       $selector       CSS selector.
+	 * @param string       $property_name  Custom property name (e.g. --lsdp-normal-text-weight).
+	 * @param string|false $value          Sanitized value, or false when invalid.
+	 */
+	private function set_css_custom_property( $slug, $selector, $property_name, $value ) {
+		if ( false === $value || '' === $value ) {
+			return;
+		}
+
+		ET_Builder_Element::set_style(
+			$slug,
+			array(
+				'selector'    => $selector,
+				'declaration' => sprintf( '%1$s: %2$s;', $property_name, $value ),
+			)
+		);
+	}
+
+	/**
+	 * Validate font-weight for safe use in CSS custom properties.
+	 *
+	 * @param string $weight Raw font weight from Divi font string.
+	 * @return string|false Sanitized weight, or false when invalid.
+	 */
+	private function sanitize_css_font_weight( $weight ) {
+		$weight = trim( (string) $weight );
+
+		if ( '' === $weight ) {
+			return false;
+		}
+
+		$keywords = array( 'normal', 'bold', 'lighter', 'bolder' );
+		if ( in_array( $weight, $keywords, true ) ) {
+			return $weight;
+		}
+
+		if ( preg_match( '/^[1-9]00$/', $weight ) ) {
+			return $weight;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Validate text-transform for safe use in CSS custom properties.
+	 *
+	 * @param string $transform Raw text-transform value.
+	 * @return string|false Sanitized value, or false when invalid.
+	 */
+	private function sanitize_css_text_transform( $transform ) {
+		$allowed = array( 'none', 'uppercase', 'lowercase', 'capitalize' );
+
+		return $this->sanitize_css_keyword( $transform, $allowed );
+	}
+
+	/**
+	 * Validate text-decoration for safe use in CSS custom properties.
+	 *
+	 * @param string $decoration Raw text-decoration value.
+	 * @return string|false Sanitized value, or false when invalid.
+	 */
+	private function sanitize_css_text_decoration( $decoration ) {
+		$allowed = array( 'none', 'underline', 'line-through', 'overline' );
+
+		return $this->sanitize_css_keyword( $decoration, $allowed );
+	}
+
+	/**
+	 * Validate font-style for safe use in CSS custom properties.
+	 *
+	 * @param string $style Raw font-style value.
+	 * @return string|false Sanitized value, or false when invalid.
+	 */
+	private function sanitize_css_font_style( $style ) {
+		$allowed = array( 'normal', 'italic', 'oblique' );
+
+		return $this->sanitize_css_keyword( $style, $allowed );
+	}
+
+	/**
+	 * Validate text-decoration-style for safe use in CSS custom properties.
+	 *
+	 * @param string $style Raw text-decoration-style value.
+	 * @return string|false Sanitized value, or false when invalid.
+	 */
+	private function sanitize_css_text_decoration_style( $style ) {
+		$allowed = array( 'solid', 'double', 'dotted', 'dashed', 'wavy' );
+
+		return $this->sanitize_css_keyword( $style, $allowed );
+	}
+
+	/**
+	 * Allow-list validation for discrete CSS keyword values.
+	 *
+	 * @param string $value   Raw value.
+	 * @param array  $allowed Permitted keyword values.
+	 * @return string|false Sanitized keyword, or false when invalid.
+	 */
+	private function sanitize_css_keyword( $value, $allowed ) {
+		$value = strtolower( trim( (string) $value ) );
+
+		if ( '' === $value || ! in_array( $value, $allowed, true ) ) {
+			return false;
+		}
+
+		return $value;
 	}
 
 	/**

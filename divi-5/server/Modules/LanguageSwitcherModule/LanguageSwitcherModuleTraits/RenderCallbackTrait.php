@@ -23,27 +23,32 @@ trait RenderCallbackTrait {
       'hide_untranslated_language' => ModuleHelper::get_attr_value($attrs, 'hide_untranslated_language', 'off'),
     );
     
+    $layout = sanitize_html_class( (string) $props['switcher_layouts'] );
+    if ( '' === $layout ) {
+      $layout = 'dropdown';
+    }
+
     $module_inner_container = HTMLUtility::render(
       [
-                'tag'               => 'div',
-                'attributes'        => [
-                  'class' => 'lsdp-wrapper ' . $props['switcher_layouts'],
-                  'id' => 'lsdp-wrapper',
-                ],
-                'childrenSanitizer' => 'et_core_esc_previously',
-                'children'          => LanguageSwitcherModule::render_content($props),
-              ]
+        'tag'               => 'div',
+        'attributes'        => [
+          'class' => 'lsdp-wrapper ' . $layout,
+          'id' => 'lsdp-wrapper',
+        ],
+        'childrenSanitizer' => 'et_core_esc_previously',
+        'children'          => LanguageSwitcherModule::render_content($props),
+      ]
     );
     
     $module_inner = HTMLUtility::render(
       [
-                'tag'               => 'div',
-                'attributes'        => [
-                  'class' => 'lsdp-main-wrapper ',
-                ],
-                'childrenSanitizer' => 'et_core_esc_previously',
-                'children'          => $module_inner_container,
-              ]
+        'tag'               => 'div',
+        'attributes'        => [
+          'class' => 'lsdp-main-wrapper ',
+        ],
+        'childrenSanitizer' => 'et_core_esc_previously',
+        'children'          => $module_inner_container,
+      ]
     );
     // This are the module elements that will be rendered in the frontend.
     $module_elements = $elements->style_components(
