@@ -35,7 +35,7 @@ define( 'LSDP_DIR', plugin_dir_path( __FILE__ ) );
 define( 'LSDP_URL', plugin_dir_url( __FILE__ ) );
 define( 'LSDP_MODULE_URL', plugin_dir_url( __FILE__ ) . 'includes/modules' );
 define( 'LSDP_MODULE_DIR', plugin_dir_path( __FILE__ ) . 'includes/modules' );
-
+define('LSDP_FEEDBACK_API',"https://feedback.coolplugins.net/");
 if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
 	class LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG {
 		public static $instance;

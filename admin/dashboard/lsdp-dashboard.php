@@ -71,13 +71,26 @@ if (!defined('ABSPATH')) {
                         wp_send_json_error( 'Invalid security token sent.' );
                         wp_die();
                     }
-                $pluginBase = ( isset( $_POST['polylang_activate_pluginbase'] ) && !empty( $_POST['polylang_activate_pluginbase'] ) )? sanitize_text_field( wp_unslash( $_POST['polylang_activate_pluginbase'] ) ) : null;
-                
-                $plugin_base_arr=explode("/",$pluginBase);
-                if( isset($plugin_base_arr[0]) && $plugin_base_arr[0]==$plugin_slug ){
+                $pluginBase = ( isset( $_POST['polylang_activate_pluginbase'] ) && !empty( $_POST['polylang_activate_pluginbase'] ) ) ? sanitize_text_field( wp_unslash( $_POST['polylang_activate_pluginbase'] ) ) : null;
+
+                if ( empty( $pluginBase ) || 0 !== validate_file( $pluginBase ) ) {
+                    wp_send_json_error( 'Something wrong with plugin path.' );
+                    wp_die();
+                }
+
+                if ( ! function_exists( 'get_plugins' ) ) {
+                    require_once ABSPATH . 'wp-admin/includes/plugin.php';
+                }
+
+                if ( ! in_array( $pluginBase, array_keys( get_plugins() ), true ) ) {
+                    wp_send_json_error( 'Something wrong with plugin path.' );
+                    wp_die();
+                }
+
+                $plugin_base_arr = explode( '/', $pluginBase );
+                if ( isset( $plugin_base_arr[0] ) && $plugin_base_arr[0] === $plugin_slug ) {
                     activate_plugin( $pluginBase );
-                  
-                }else{
+                } else {
                     wp_send_json_error( 'Something wrong with plugin path.' );
                     wp_die();
                 }

@@ -22,12 +22,15 @@ if ( ! class_exists( 'LSDPFeedbackNotice' ) ) {
 		/**
 		 *  Ajax callback for review notice.
 		 */
-			public function lsdp_dismiss_review_notice() {
-		// Verify nonce for security
-		check_ajax_referer( 'lsdp_dismiss_notice', '_wpnonce' );
-		
-		$rs = update_option( 'lsdp-ratingDiv', 'yes' );
-		wp_send_json_success( array( 'success' => 'true' ) );
+		public function lsdp_dismiss_review_notice() {
+            if ( ! current_user_can( 'update_plugins' ) ) {
+				wp_send_json_error( 'You are not allowed to dismiss review notice' );
+			}
+            // Verify nonce for security
+            check_ajax_referer( 'lsdp_dismiss_notice', '_wpnonce' );
+            
+            $rs = update_option( 'lsdp-ratingDiv', 'yes' );
+            wp_send_json_success( array( 'success' => 'true' ) );
 		}
 		/**
 		 * Admin notice.

@@ -48,7 +48,7 @@ class lsdp_feedback {
 	 *
 	 * @var feedback_url
 	 */
-	private $feedback_url = 'http://feedback.coolplugins.net/wp-json/coolplugins-feedback/v1/feedback';
+	private $feedback_url = LSDP_FEEDBACK_API.'wp-json/coolplugins-feedback/v1/feedback';
 	/**
 	 * Use this constructor to fire all actions and filters.
 	 */
@@ -192,8 +192,12 @@ class lsdp_feedback {
 	 */
 
 	public function submit_deactivation_response() {
-		if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], '_cool-plugins_deactivate_feedback_nonce' ) ) {
-			wp_send_json_error();
+		if ( ! current_user_can( 'activate_plugins' ) ) { 
+			wp_send_json_error( 'You are not allowed to submit feedback' ); 
+		}
+		$nonce = isset( $_POST['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ) : '';
+		if ( ! isset( $nonce ) || ! wp_verify_nonce( $nonce, '_cool-plugins_deactivate_feedback_nonce' ) ) {
+			wp_send_json_error( 'Invalid nonce' );
 		} else {
 			$reason             = isset( $_POST['reason'] ) ? sanitize_text_field( wp_unslash( $_POST['reason'] ) ) : '';
 			$deactivate_reasons = array(
@@ -225,13 +229,16 @@ class lsdp_feedback {
 			$sanitized_message = isset( $_POST['message'] ) && '' !== sanitize_text_field( wp_unslash( $_POST['message'] ) ) ? sanitize_text_field( wp_unslash( $_POST['message'] ) ) : 'N/A';
 			$admin_email       = sanitize_email( get_option( 'admin_email' ) );
 			$site_url          = esc_url( site_url() );
+			$info          = $this->lsdp_get_user_info();
+			$server_info   = $info['server_info'];
+			$extra_details = $info['extra_details'];
 			$response          = wp_remote_post(
 				$this->feedback_url,
 				array(
                     'timeout' => 30,
                         'body'    => array(
-                        'server_info' => serialize($this->lsdp_get_user_info()['server_info']),
-                        'extra_details' => serialize($this->lsdp_get_user_info()['extra_details']),
+                        'server_info'     => wp_json_encode( $server_info ),
+						'extra_details'   => wp_json_encode( $extra_details ),
                         'plugin_version' => $this->plugin_version,
                         'plugin_name'    => $this->plugin_name,
 						'plugin_initial'  => isset($plugin_initial) ? sanitize_text_field($plugin_initial) : 'N/A',
@@ -242,7 +249,7 @@ class lsdp_feedback {
                     ),
                 )
 			);
-			die( json_encode( array( 'response' => $response ) ) );
+			wp_send_json_success( array( 'message' => esc_html__( 'Feedback submitted.', 'language-switcher-for-divi-polylang' ) ) );
 		}
 
 	}
