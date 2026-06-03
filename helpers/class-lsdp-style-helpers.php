@@ -191,22 +191,28 @@ class LSDP_STYLE_HELPERS {
 			}
 		}
 		if ( '' !== $normal_text_spacing ) {
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--lsdp-normal-text-letter-spacing: %1$s;', $normal_text_spacing ),
-				)
-			);
+			$letter_spacing = $this->sanitize_css_length( $normal_text_spacing );
+			if ( false !== $letter_spacing ) {
+				ET_Builder_Element::set_style(
+					$slug,
+					array(
+						'selector'    => $selector,
+						'declaration' => sprintf( '--lsdp-normal-text-letter-spacing: %1$s;', $letter_spacing ),
+					)
+				);
+			}
 		}
 		if ( '' !== $hover_text_spacing ) {
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--lsdp-hover-text-letter-spacing: %1$s;', $hover_text_spacing ),
-				)
-			);
+			$letter_spacing = $this->sanitize_css_length( $hover_text_spacing );
+			if ( false !== $letter_spacing ) {
+				ET_Builder_Element::set_style(
+					$slug,
+					array(
+						'selector'    => $selector,
+						'declaration' => sprintf( '--lsdp-hover-text-letter-spacing: %1$s;', $letter_spacing ),
+					)
+				);
+			}
 		}
 		if ( '' !== $normal_text_size ) {
 			$text_size = $this->sanitize_css_length( $normal_text_size );
@@ -233,22 +239,28 @@ class LSDP_STYLE_HELPERS {
 			}
 		}
 		if ( '' !== $normal_text_line_height ) {
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--lsdp-normal-text-line-height: %1$s;', $normal_text_line_height ),
-				)
-			);
+			$line_height = $this->sanitize_css_length( $normal_text_line_height );
+			if ( false !== $line_height ) {
+				ET_Builder_Element::set_style(
+					$slug,
+					array(
+						'selector'    => $selector,
+						'declaration' => sprintf( '--lsdp-normal-text-line-height: %1$s;', $line_height ),
+					)
+				);
+			}
 		}
 		if ( '' !== $hover_text_line_height ) {
-			ET_Builder_Element::set_style(
-				$slug,
-				array(
-					'selector'    => $selector,
-					'declaration' => sprintf( '--lsdp-hover-text-line-height: %1$s;', $hover_text_line_height ),
-				)
-			);
+			$line_height = $this->sanitize_css_length( $hover_text_line_height );
+			if ( false !== $line_height ) {
+				ET_Builder_Element::set_style(
+					$slug,
+					array(
+						'selector'    => $selector,
+						'declaration' => sprintf( '--lsdp-hover-text-line-height: %1$s;', $line_height ),
+					)
+				);
+			}
 		}
 		// Code for generating Divi styles goes here
 	}
@@ -365,7 +377,7 @@ class LSDP_STYLE_HELPERS {
 			return false;
 		}
 
-		if ( ! preg_match( '/^\d+(\.\d+)?(px|em|rem|%|vw|vh)?$/', $length ) ) {
+		if ( ! preg_match( '/^-?\d+(\.\d+)?(px|em|rem|%|vw|vh)?$/', $length ) ) {
 			return false;
 		}
 
