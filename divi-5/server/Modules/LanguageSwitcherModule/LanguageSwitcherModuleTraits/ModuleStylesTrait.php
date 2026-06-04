@@ -143,8 +143,11 @@ trait ModuleStylesTrait {
               'attr'                => $attrs['background_style']['decoration']['background_color'] ?? [],
               'declarationFunction' => function ( $declaration_function_args ) {
                 $attr_value = $declaration_function_args['attrValue']['background_color'] ?? [];
-                $attr_value = sanitize_hex_color( $attr_value );
-                return "background-color: {$attr_value};";
+                $hex = sanitize_hex_color( (string) $attr_value );
+                if ( ! $hex ) {
+                  return '';
+                }
+                return "background-color: {$hex};";
               },
             ]
           ),

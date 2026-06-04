@@ -29,7 +29,7 @@ if ( ! class_exists( 'LSDPFeedbackNotice' ) ) {
 			}
             // Verify nonce for security
             check_ajax_referer( 'lsdp_dismiss_notice', '_wpnonce' );
-            
+
             $rs = update_option( 'lsdp-ratingDiv', 'yes' );
             wp_send_json_success( array( 'message' => esc_html__( 'Review notice dismissed.', 'language-switcher-for-divi-polylang' ) ) );
 		}

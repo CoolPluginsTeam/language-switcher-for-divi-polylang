@@ -111,7 +111,6 @@ if (!defined('ABSPATH')) {
             function cool_plugins_install(){
             if(current_user_can('install_plugins')){
                 $plugin_slug= isset($_POST['polylang_slug'])?sanitize_text_field(wp_unslash($_POST['polylang_slug'])):'';
-                $wp_nonce = wp_create_nonce('polylang-plugins-download-' . $plugin_slug );
                 if(!empty( $plugin_slug)){
                     if ( ! check_ajax_referer( 'polylang-plugins-download-' . $plugin_slug,'wp_nonce', false ) ) {
                   
@@ -292,7 +291,7 @@ if (!defined('ABSPATH')) {
             $url = $this->plugin_api . 'pro/' . $this->plugin_tag;
 
             $pro_api = esc_url($url);
-            $response = wp_remote_get($pro_api, array('timeout' => 300));
+            $response = wp_remote_get($pro_api, array('timeout' => 15));
             if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
                 return;
             }
