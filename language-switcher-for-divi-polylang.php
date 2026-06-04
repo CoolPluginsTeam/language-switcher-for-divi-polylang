@@ -97,6 +97,21 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
 			}
 			return false;
 		}
+		
+		public static function get_divi_theme_version() {
+			if ( ! self::is_theme_activate( 'Divi' ) ) {
+				return 0;
+			}
+		
+			$theme = wp_get_theme();
+		
+			// When active theme is a child of Divi, use the parent (Divi) theme version.
+			if ( $theme->parent() ) {
+				return $theme->parent()->get( 'Version' );
+			}
+		
+			return $theme->get( 'Version' );
+		}
 
 		public function admin_notice_missing_divi_theme() {
 			if ( current_user_can( 'activate_plugins' ) ) {
@@ -207,8 +222,9 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
 			return $data;
 		}
 
-		public function initialize_divi_5_module(){
-			if (wp_get_theme()->get('Version') >= 5) {
+		public function initialize_divi_5_module() { 
+			$divi_version = self::get_divi_theme_version();
+			if ( $divi_version && version_compare( (string) $divi_version, '5.0', '>=' ) ) {
 				require_once plugin_dir_path( __FILE__ ) . 'divi-5/divi-5.php';
 				new LSDP_Divi5();
 			}
