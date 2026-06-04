@@ -2,7 +2,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) {
 	die( 'Direct access forbidden.' );
-  }
+}
 if ( ! class_exists( 'LSDPFeedbackNotice' ) ) {
 	/**
 	 * Class for feedback notice.
@@ -25,6 +25,7 @@ if ( ! class_exists( 'LSDPFeedbackNotice' ) ) {
 		public function lsdp_dismiss_review_notice() {
             if ( ! current_user_can( 'update_plugins' ) ) {
 				wp_send_json_error( esc_html__( 'You are not allowed to dismiss review notice', 'language-switcher-for-divi-polylang' ) );
+                wp_die();
 			}
             // Verify nonce for security
             check_ajax_referer( 'lsdp_dismiss_notice', '_wpnonce' );

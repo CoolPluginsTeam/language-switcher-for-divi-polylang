@@ -3,7 +3,7 @@
 namespace LSDP\feedback;
 if ( ! defined( 'ABSPATH' ) ) {
 	die( 'Direct access forbidden.' );
-  }
+}
 /**
  * Class for feedback from user before deactivate plugin.
  */
@@ -194,10 +194,12 @@ class lsdp_feedback {
 	public function submit_deactivation_response() {
 		if ( ! current_user_can( 'activate_plugins' ) ) { 
 			wp_send_json_error( esc_html__( 'You are not allowed to submit feedback', 'language-switcher-for-divi-polylang' ) ); 
+			wp_die();
 		}
 		$nonce = isset( $_POST['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ) : '';
-		if ( ! isset( $nonce ) || ! wp_verify_nonce( $nonce, '_cool-plugins_deactivate_feedback_nonce' ) ) {
+		if ( empty($nonce) || ! wp_verify_nonce( $nonce, '_cool-plugins_deactivate_feedback_nonce' ) ) {
 			wp_send_json_error( esc_html__( 'Invalid nonce', 'language-switcher-for-divi-polylang' ) );
+			wp_die();
 		} else {
 			$reason             = isset( $_POST['reason'] ) ? sanitize_text_field( wp_unslash( $_POST['reason'] ) ) : '';
 			$deactivate_reasons = array(
@@ -232,23 +234,35 @@ class lsdp_feedback {
 			$info          = $this->lsdp_get_user_info();
 			$server_info   = $info['server_info'];
 			$extra_details = $info['extra_details'];
-			$response          = wp_remote_post(
+			$response = wp_remote_post(
 				$this->feedback_url,
 				array(
-                    'timeout' => 30,
-                        'body'    => array(
-                        'server_info'     => wp_json_encode( $server_info ),
-						'extra_details'   => wp_json_encode( $extra_details ),
-                        'plugin_version' => $this->plugin_version,
-                        'plugin_name'    => $this->plugin_name,
-						'plugin_initial'  => isset($plugin_initial) ? sanitize_text_field($plugin_initial) : 'N/A',
-                        'reason'         => $deativation_reason,
-                        'review'         => $sanitized_message,
-                        'email'          => $admin_email,
-                        'domain'         => $site_url,
-                    ),
-                )
+					'timeout' => 30,
+					'body'    => array(
+						'server_info'      => wp_json_encode( $server_info ),
+						'extra_details'    => wp_json_encode( $extra_details ),
+						'plugin_version'   => $this->plugin_version,
+						'plugin_name'      => $this->plugin_name,
+						'plugin_initial'   => empty( $plugin_initial ) ? 'N/A' : sanitize_text_field( $plugin_initial ),
+						'reason'           => $deativation_reason,
+						'review'           => $sanitized_message,
+						'email'            => $admin_email,
+						'domain'           => $site_url,
+					),
+				)
 			);
+
+			if ( is_wp_error( $response ) ) {
+				wp_send_json_error( esc_html__( 'Unable to submit feedback. Please try again.', 'language-switcher-for-divi-polylang' ) );
+				wp_die();
+			}
+
+			$response_code = (int) wp_remote_retrieve_response_code( $response );
+			if ( $response_code < 200 || $response_code >= 300 ) {
+				wp_send_json_error( esc_html__( 'Unable to submit feedback. Please try again.', 'language-switcher-for-divi-polylang' ) );
+				wp_die();
+			}
+
 			wp_send_json_success( array( 'message' => esc_html__( 'Feedback submitted.', 'language-switcher-for-divi-polylang' ) ) );
 		}
 
