@@ -163,20 +163,46 @@ if (!defined('ABSPATH')) {
              * Avoid using any HTML here or use nominal HTML tags inside this function.
              */
             function displayPluginAdminDashboard(){
+                $valid_tabs = array(
+                    'getting-started' => __( 'Get Started', 'language-switcher-for-divi-polylang' ),
+                    'more-addons'     => __( 'More Addons', 'language-switcher-for-divi-polylang' ),
+                );
+
+                // nonce verification is not required here because we are not processing form data.
+                // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                $tab = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'getting-started';
+                $current_tab = array_key_exists( $tab, $valid_tabs ) ? $tab : 'getting-started';
+                $page_slug = 'lsdp-get-started';
+
                 echo '<div class="wrap lsdp-get-started">';
-                echo '<h1>'.esc_html__('Welcome to Language Switcher – Polylang for Divi', 'language-switcher-for-divi-polylang').'</h1>';
-                echo '<h2 class="lsdp-nav-tab-wrapper nav-tab-wrapper">';
-                echo '<a href="#lsdp-getting-started" class="lsdp-nav-tab lsdp-nav-tab-active nav-tab nav-tab-active">'.esc_html__('Get Started', 'language-switcher-for-divi-polylang').'</a>';
-                echo '<a href="#lsdp-more-addons" class="lsdp-nav-tab nav-tab">'.esc_html__('More Addons', 'language-switcher-for-divi-polylang').'</a>';
-                echo '</h2>';
-                echo '<div id="lsdp-getting-started" class="lsdp-tab-content active">';
-                $this->get_started_content();
+                echo '<h1>' . esc_html__( 'Welcome to Language Switcher – Polylang for Divi', 'language-switcher-for-divi-polylang' ) . '</h1>';
+                echo '<nav class="lsdp-nav-tab-wrapper nav-tab-wrapper" aria-label="' . esc_attr__( 'Dashboard navigation', 'language-switcher-for-divi-polylang' ) . '">';
+
+                foreach ( $valid_tabs as $tab_key => $tab_title ) {
+                    $tab_url = add_query_arg(
+                        array(
+                            'page' => $page_slug,
+                            'tab'  => $tab_key,
+                        ),
+                        admin_url( 'admin.php' )
+                    );
+                    $active_class = ( $current_tab === $tab_key ) ? ' nav-tab-active' : '';
+                    echo '<a href="' . esc_url( $tab_url ) . '" class="lsdp-nav-tab nav-tab' . esc_attr( $active_class ) . '">' . esc_html( $tab_title ) . '</a>';
+                }
+
+                echo '</nav>';
+                echo '<div class="tab-content">';
+
+                if ( 'more-addons' === $current_tab ) {
+                    $this->moreaddons_plugins_data();
+                } else {
+                    echo '<div id="lsdp-getting-started" class="lsdp-tab-content active">';
+                    $this->get_started_content();
+                    echo '</div>';
+                }
+
                 echo '</div>';
-                echo '<div id="lsdp-more-addons" class="lsdp-tab-content">'; 
-                $this->moreaddons_plugins_data();
                 echo '</div>';
-                echo '</div>';
-                
             }
 
             function get_started_content(){
@@ -268,12 +294,16 @@ if (!defined('ABSPATH')) {
             /**
              * Lets enqueue all the required CSS & JS
              */
-            function enqueue_required_scripts(){
-                // A common CSS file will be enqueued for admin panel
+            function enqueue_required_scripts( $hook ){
+                // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                $page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
+                if ( 'lsdp-get-started' !== $page ) {
+                    return;
+                }
+
                 wp_enqueue_style('cool-lsdp-polylang-addon', plugin_dir_url(__FILE__) .'assets/css/styles.css', null, LSDP, 'all');
                 wp_enqueue_script( 'cool-lsdp-polylang-addon', plugin_dir_url(__FILE__) .'assets/js/script.js', array('jquery'), LSDP, true);
                 wp_localize_script( 'cool-lsdp-polylang-addon', 'lsdp_polylang', array('ajax_url'=> admin_url('admin-ajax.php')));
-                
             }
 
 
