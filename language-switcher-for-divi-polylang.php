@@ -3,7 +3,7 @@
 Plugin Name: Language Switcher – Polylang for Divi
 Plugin URI:  https://wordpress.org/plugins/language-switcher-for-divi-polylang
 Description: Language Switcher – Polylang for Divi to use added language switcher in your page or divi header menu
-Version:     1.0.6
+Version:     1.0.7
 Requires at least: 5.0
 Requires PHP: 7.2
 Author:      Coolplugins
@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
   die( 'Direct access forbidden.' );
 }
 
-define( 'LSDP', '1.0.6' );
+define( 'LSDP', '1.0.7' );
 define( 'LSDP_DIR', plugin_dir_path( __FILE__ ) );
 define( 'LSDP_URL', plugin_dir_url( __FILE__ ) );
 define( 'LSDP_MODULE_URL', plugin_dir_url( __FILE__ ) . 'includes/modules' );
