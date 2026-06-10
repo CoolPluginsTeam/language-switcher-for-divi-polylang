@@ -143,10 +143,10 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 = Version 1.0.7 | 10 June 2026 =
 - **Fixed:** Default Settings Issue with Divi 5.
 - **Improved:** Code Improvements & Optimization.
-- Tested Upto WordPress Version 7.0.
+- **Tested Up To:** WordPress Version 7.0.
 
 = Version 1.0.6 | 03 December 2025 =
-- Tested Upto WordPress Version 6.9.
+- **Tested Up To:** WordPress Version 6.9.
 
 = Version 1.0.5 | 19 November 2025 =
 - **Fixed:** Bug Fixes.
