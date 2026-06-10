@@ -3,7 +3,7 @@
 Plugin Name: Language Switcher – Polylang for Divi
 Plugin URI:  https://wordpress.org/plugins/language-switcher-for-divi-polylang
 Description: Language Switcher – Polylang for Divi to use added language switcher in your page or divi header menu
-Version:     1.0.6
+Version:     1.0.7
 Requires at least: 5.0
 Requires PHP: 7.2
 Author:      Coolplugins
@@ -30,12 +30,12 @@ if ( ! defined( 'ABSPATH' ) ) {
   die( 'Direct access forbidden.' );
 }
 
-define( 'LSDP', '1.0.6' );
+define( 'LSDP', '1.0.7' );
 define( 'LSDP_DIR', plugin_dir_path( __FILE__ ) );
 define( 'LSDP_URL', plugin_dir_url( __FILE__ ) );
 define( 'LSDP_MODULE_URL', plugin_dir_url( __FILE__ ) . 'includes/modules' );
 define( 'LSDP_MODULE_DIR', plugin_dir_path( __FILE__ ) . 'includes/modules' );
-
+define('LSDP_FEEDBACK_API',"https://feedback.coolplugins.net/");
 if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
 	class LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG {
 		public static $instance;
@@ -97,6 +97,21 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
 			}
 			return false;
 		}
+		
+		public static function get_divi_theme_version() {
+			if ( ! self::is_theme_activate( 'Divi' ) ) {
+				return 0;
+			}
+		
+			$theme = wp_get_theme();
+		
+			// When active theme is a child of Divi, use the parent (Divi) theme version.
+			if ( $theme->parent() ) {
+				return $theme->parent()->get( 'Version' );
+			}
+		
+			return $theme->get( 'Version' );
+		}
 
 		public function admin_notice_missing_divi_theme() {
 			if ( current_user_can( 'activate_plugins' ) ) {
@@ -146,7 +161,7 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
         public function lsdp_redirect_to_settings() {
             if ( get_option( 'lsdp_plugin_activation_redirect', false ) ) {
                 delete_option( 'lsdp_plugin_activation_redirect' );
-                wp_redirect( admin_url( 'admin.php?page=lsdp-get-started' ) );
+                wp_safe_redirect( admin_url( 'admin.php?page=lsdp-get-started' ) );
                 exit;
             }
         }
@@ -157,7 +172,7 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
          * @param array $links  The Links you want to add.
          */
         	public function lsdp_settings_page( $links ) {
-            $links[] = '<a style="font-weight:bold" href="' . esc_url( admin_url( 'admin.php?page=lsdp-get-started' ) ) . '">' . __( 'Get Started', 'language-switcher-for-divi-polylang' ) . '</a>';
+            $links[] = '<a style="font-weight:bold" href="' . esc_url( admin_url( 'admin.php?page=lsdp-get-started' ) ) . '">' . esc_html__( 'Get Started', 'language-switcher-for-divi-polylang' ) . '</a>';
             return $links;
         }
 
@@ -207,8 +222,9 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
 			return $data;
 		}
 
-		public function initialize_divi_5_module(){
-			if (wp_get_theme()->get('Version') >= 5) {
+		public function initialize_divi_5_module() { 
+			$divi_version = self::get_divi_theme_version();
+			if ( $divi_version && version_compare( (string) $divi_version, '5.0', '>=' ) ) {
 				require_once plugin_dir_path( __FILE__ ) . 'divi-5/divi-5.php';
 				new LSDP_Divi5();
 			}

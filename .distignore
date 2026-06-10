@@ -1,4 +1,10 @@
-.github/
-.claude/
-.cursor/
-.codex/
+README.md
+.distignore
+.git
+.github
+.gitattributes
+.gitignore
+.claude
+.vscode
+.codex
+.cursor

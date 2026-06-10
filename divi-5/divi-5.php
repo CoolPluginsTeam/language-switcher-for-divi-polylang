@@ -11,7 +11,8 @@ require_once LSDP_DIR . 'divi-5/server/Modules/Modules.php';
 class LSDP_Divi5 {
   public function __construct() {
     add_action( 'divi_visual_builder_assets_before_enqueue_scripts', array( $this, 'enqueue_visual_builder_assets' ) );
-    add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_assets' ) );
+    add_action('admin_enqueue_scripts', [$this, 'enqueue_frontend_assets'], 5);
+		add_action('wp_enqueue_scripts', [$this, 'enqueue_frontend_assets'], 5);
   }
 
   /**
@@ -20,7 +21,7 @@ class LSDP_Divi5 {
    * @since 1.0.0
    */
   function enqueue_frontend_assets() {
-    wp_enqueue_style( 'lsdp-divi5-frontend-style', LSDP_URL . 'includes/modules/lsdp_module/style.css', [], LSDP );
+    wp_enqueue_style( 'lsdp-divi5-frontend-style', LSDP_URL . 'styles/style.min.css', [], LSDP );
     wp_enqueue_style( 'lsdp-divi5-frontend-helper', LSDP_URL . 'assets/css/lsdphelper.css', [], LSDP );
     if(!et_core_is_fb_enabled()){
 			wp_enqueue_script( 'lsdp-module-js', LSDP_URL . 'assets/js/lsdp_module_frontend.js', [], LSDP, true );

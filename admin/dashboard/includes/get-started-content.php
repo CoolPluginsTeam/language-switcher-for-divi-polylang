@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	die( 'Direct access forbidden.' );
+  }
+?>
 <div class="lsdp-get-started-content">
     <div class="lsdp-content-wrapper">
         <div class="lsdp-content-left">

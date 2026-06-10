@@ -61,32 +61,45 @@ if (!defined('ABSPATH')) {
              * handle ajax request for activating plugin from dashboard
              */
             function cool_plugins_activate(){
-                if(current_user_can('upload_plugins')){
+                if(current_user_can('activate_plugins')){
                    
-                $plugin_slug= isset($_POST["polylang_activate_slug"])?sanitize_text_field($_POST["polylang_activate_slug"]):'';
+                $plugin_slug= isset($_POST["polylang_activate_slug"])?sanitize_text_field(wp_unslash($_POST["polylang_activate_slug"])):'';
                 
                 $wp_nonce = 'polylang-plugins-activate-' . $plugin_slug ;
                 if(!empty( $plugin_slug)){
                     if ( ! check_ajax_referer($wp_nonce,'wp_nonce', false ) ) {
-                        wp_send_json_error( 'Invalid security token sent.' );
+                        wp_send_json_error( esc_html__( 'Invalid security token sent.', 'language-switcher-for-divi-polylang' ) );
                         wp_die();
                     }
-                $pluginBase = ( isset( $_POST['polylang_activate_pluginbase'] ) && !empty( $_POST['polylang_activate_pluginbase'] ) )? sanitize_text_field($_POST['polylang_activate_pluginbase']) : null;
-                
-                $plugin_base_arr=explode("/",$pluginBase);
-                if( isset($plugin_base_arr[0]) && $plugin_base_arr[0]==$plugin_slug ){
+                $pluginBase = ( isset( $_POST['polylang_activate_pluginbase'] ) && !empty( $_POST['polylang_activate_pluginbase'] ) ) ? sanitize_text_field( wp_unslash( $_POST['polylang_activate_pluginbase'] ) ) : null;
+
+                if ( empty( $pluginBase ) || 0 !== validate_file( $pluginBase ) ) {
+                    wp_send_json_error( esc_html__( 'Something wrong with plugin path.', 'language-switcher-for-divi-polylang' ) );
+                    wp_die();
+                }
+
+                if ( ! function_exists( 'get_plugins' ) ) {
+                    require_once ABSPATH . 'wp-admin/includes/plugin.php';
+                }
+
+                if ( ! in_array( $pluginBase, array_keys( get_plugins() ), true ) ) {
+                    wp_send_json_error( esc_html__( 'Something wrong with plugin path.', 'language-switcher-for-divi-polylang' ) );
+                    wp_die();
+                }
+
+                $plugin_base_arr = explode( '/', $pluginBase );
+                if ( isset( $plugin_base_arr[0] ) && $plugin_base_arr[0] === $plugin_slug ) {
                     activate_plugin( $pluginBase );
-                  
-                }else{
-                    wp_send_json_error( 'Something wrong with plugin path.' );
+                } else {
+                    wp_send_json_error( esc_html__( 'Something wrong with plugin path.', 'language-switcher-for-divi-polylang' ) );
                     wp_die();
                 }
                 }else{
-                    wp_send_json_error( 'Plugin slug is missing.' );
+                    wp_send_json_error( esc_html__( 'Plugin slug is missing.', 'language-switcher-for-divi-polylang' ) );
                     wp_die();  
                 }
                 }else{
-                    wp_send_json_error( 'You have no permission to do this action.' );
+                    wp_send_json_error( esc_html__( 'You have no permission to do this action.', 'language-switcher-for-divi-polylang' ) );
                     wp_die();  
                 }
             }
@@ -96,13 +109,12 @@ if (!defined('ABSPATH')) {
              * This function use the core wordpress functionality of installing a plugin through URL
              */
             function cool_plugins_install(){
-            if(current_user_can('upload_plugins')){
-                $plugin_slug= isset($_POST['polylang_slug'])?sanitize_text_field($_POST['polylang_slug']):'';
-                $wp_nonce = wp_create_nonce('polylang-plugins-download-' . $plugin_slug );
+            if(current_user_can('install_plugins')){
+                $plugin_slug= isset($_POST['polylang_slug'])?sanitize_text_field(wp_unslash($_POST['polylang_slug'])):'';
                 if(!empty( $plugin_slug)){
                     if ( ! check_ajax_referer( 'polylang-plugins-download-' . $plugin_slug,'wp_nonce', false ) ) {
                   
-                        wp_send_json_error( 'Invalid security token sent.' );
+                        wp_send_json_error( esc_html__( 'Invalid security token sent.', 'language-switcher-for-divi-polylang' ) );
                         wp_die();
                     }
                   
@@ -117,15 +129,15 @@ if (!defined('ABSPATH')) {
                         
                         }
                 else{
-                    wp_send_json_error( 'Sorry, You are installing a wrong plugin.' );
+                    wp_send_json_error( esc_html__( 'Sorry, You are installing a wrong plugin.', 'language-switcher-for-divi-polylang' ) );
                     wp_die();
                 }
             }else{
-                wp_send_json_error( 'Plugin slug is missing.' );
+                wp_send_json_error( esc_html__( 'Plugin slug is missing.', 'language-switcher-for-divi-polylang' ) );
                 wp_die();  
             }
             }else{
-                wp_send_json_error( 'You have no permission to do this action.' );
+                wp_send_json_error( esc_html__( 'You have no permission to do this action.', 'language-switcher-for-divi-polylang' ) );
                 wp_die();  
             }
             }
@@ -137,8 +149,8 @@ if (!defined('ABSPATH')) {
             function init_plugins_dasboard_page(){
                 add_submenu_page(
                     'mlang',
-                    __('Get Started', 'language-switcher-for-elementor-polylang'),
-                    __('Get Started', 'language-switcher-for-elementor-polylang'),
+                    __('Get Started', 'language-switcher-for-divi-polylang'),
+                    __('Get Started', 'language-switcher-for-divi-polylang'),
                     'manage_options',
                     'lsdp-get-started',
                     array($this, 'displayPluginAdminDashboard')
@@ -151,20 +163,46 @@ if (!defined('ABSPATH')) {
              * Avoid using any HTML here or use nominal HTML tags inside this function.
              */
             function displayPluginAdminDashboard(){
+                $valid_tabs = array(
+                    'getting-started' => __( 'Get Started', 'language-switcher-for-divi-polylang' ),
+                    'more-addons'     => __( 'More Addons', 'language-switcher-for-divi-polylang' ),
+                );
+
+                // nonce verification is not required here because we are not processing form data.
+                // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                $tab = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'getting-started';
+                $current_tab = array_key_exists( $tab, $valid_tabs ) ? $tab : 'getting-started';
+                $page_slug = 'lsdp-get-started';
+
                 echo '<div class="wrap lsdp-get-started">';
-                echo '<h1>'.esc_html__('Welcome to Language Switcher – Polylang for Divi', 'language-switcher-for-elementor-polylang').'</h1>';
-                echo '<h2 class="lsdp-nav-tab-wrapper nav-tab-wrapper">';
-                echo '<a href="#lsdp-getting-started" class="lsdp-nav-tab lsdp-nav-tab-active nav-tab nav-tab-active">'.esc_html__('Get Started', 'language-switcher-for-elementor-polylang').'</a>';
-                echo '<a href="#lsdp-more-addons" class="lsdp-nav-tab nav-tab">'.esc_html__('More Addons', 'language-switcher-for-elementor-polylang').'</a>';
-                echo '</h2>';
-                echo '<div id="lsdp-getting-started" class="lsdp-tab-content active">';
-                $this->get_started_content();
+                echo '<h1>' . esc_html__( 'Welcome to Language Switcher – Polylang for Divi', 'language-switcher-for-divi-polylang' ) . '</h1>';
+                echo '<nav class="lsdp-nav-tab-wrapper nav-tab-wrapper" aria-label="' . esc_attr__( 'Dashboard navigation', 'language-switcher-for-divi-polylang' ) . '">';
+
+                foreach ( $valid_tabs as $tab_key => $tab_title ) {
+                    $tab_url = add_query_arg(
+                        array(
+                            'page' => $page_slug,
+                            'tab'  => $tab_key,
+                        ),
+                        admin_url( 'admin.php' )
+                    );
+                    $active_class = ( $current_tab === $tab_key ) ? ' nav-tab-active' : '';
+                    echo '<a href="' . esc_url( $tab_url ) . '" class="lsdp-nav-tab nav-tab' . esc_attr( $active_class ) . '">' . esc_html( $tab_title ) . '</a>';
+                }
+
+                echo '</nav>';
+                echo '<div class="tab-content">';
+
+                if ( 'more-addons' === $current_tab ) {
+                    $this->moreaddons_plugins_data();
+                } else {
+                    echo '<div id="lsdp-getting-started" class="lsdp-tab-content active">';
+                    $this->get_started_content();
+                    echo '</div>';
+                }
+
                 echo '</div>';
-                echo '<div id="lsdp-more-addons" class="lsdp-tab-content">'; 
-                $this->moreaddons_plugins_data();
                 echo '</div>';
-                echo '</div>';
-                
             }
 
             function get_started_content(){
@@ -256,16 +294,20 @@ if (!defined('ABSPATH')) {
             /**
              * Lets enqueue all the required CSS & JS
              */
-            function enqueue_required_scripts(){
-                // A common CSS file will be enqueued for admin panel
-                wp_enqueue_style('cool-lsdp-polylang-addon', plugin_dir_url(__FILE__) .'assets/css/styles.css', null, null, 'all');
-                wp_enqueue_script( 'cool-lsdp-polylang-addon', plugin_dir_url(__FILE__) .'assets/js/script.js', array('jquery'), null, true);
+            function enqueue_required_scripts( $hook ){
+                // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                $page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
+                if ( 'lsdp-get-started' !== $page ) {
+                    return;
+                }
+
+                wp_enqueue_style('cool-lsdp-polylang-addon', plugin_dir_url(__FILE__) .'assets/css/styles.css', null, LSDP, 'all');
+                wp_enqueue_script( 'cool-lsdp-polylang-addon', plugin_dir_url(__FILE__) .'assets/js/script.js', array('jquery'), LSDP, true);
                 wp_localize_script( 'cool-lsdp-polylang-addon', 'lsdp_polylang', array('ajax_url'=> admin_url('admin-ajax.php')));
-                
             }
 
 
-    /**
+        /**
          * This function will gather all information regarding pro plugins.
          */
         public function request_pro_plugins_data($tag = null)
@@ -279,8 +321,8 @@ if (!defined('ABSPATH')) {
             $url = $this->plugin_api . 'pro/' . $this->plugin_tag;
 
             $pro_api = esc_url($url);
-            $response = wp_remote_get($pro_api, array('timeout' => 300));
-            if (is_wp_error($response)) {
+            $response = wp_remote_get($pro_api, array('timeout' => 15));
+            if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
                 return;
             }
             $plugin_info = (array) json_decode($response['body']);
@@ -331,8 +373,8 @@ if (!defined('ABSPATH')) {
              $url = $this->plugin_api . 'free/' . $this->plugin_tag;
 
 
-            $response = wp_remote_get($url, array('timeout' => 300));
-            if (is_wp_error($response)) {
+            $response = wp_remote_get($url, array('timeout' => 15));
+            if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
                 return;
             }
             $plugin_info = json_decode($response['body'],true);

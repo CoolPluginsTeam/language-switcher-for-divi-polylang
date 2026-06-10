@@ -73,21 +73,11 @@
       "type": "object",
       "default": {
         "innerContent": {
-          "decoration": {
-            "aspect_ratio": {
-              "desktop": {
-                "value": "auto" 
-              }
-            },
-            "flag_width": {
-              "desktop": {
-                "value": "20" 
-              }
-            },
-            "flag_border_radius": {
-              "desktop": {
-                "value": "0" 
-              }
+          "desktop": {
+            "value": {
+              "aspect_ratio": "auto",
+              "flag_width": "20px",
+              "flag_border_radius": "0px"
             }
           }
         }
