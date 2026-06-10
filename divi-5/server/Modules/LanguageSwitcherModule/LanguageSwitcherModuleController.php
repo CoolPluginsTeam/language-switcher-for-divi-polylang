@@ -53,7 +53,7 @@ class LanguageSwitcherModuleController extends RESTController {
         'type'              => 'string',
         'default'           => '',
         'sanitize_callback' => function( $value, $request, $param ) {
-          return esc_html( $value );
+          return sanitize_text_field( $value );
         },
       ],
     ];

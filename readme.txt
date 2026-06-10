@@ -2,9 +2,9 @@
 Contributors: coolplugins, narinder-singh, satindersingh
 Tags: divi, language switcher, polylang, multilingual, languages
 Requires at least: 5.0
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 7.2
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,8 +140,13 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 
+= Version 1.0.7 | 10 June 2026 =
+- **Fixed:** Default Settings Issue with Divi 5.
+- **Improved:** Code Improvements & Optimization.
+- **Tested Up To:** WordPress Version 7.0.
+
 = Version 1.0.6 | 03 December 2025 =
-- Tested Upto WordPress Version 6.9.
+- **Tested Up To:** WordPress Version 6.9.
 
 = Version 1.0.5 | 19 November 2025 =
 - **Fixed:** Bug Fixes.

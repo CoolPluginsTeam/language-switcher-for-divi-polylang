@@ -1,22 +1,4 @@
 jQuery(document).ready(function($) {
-    // Tab functionality
-    $('.lsdp-nav-tab').on('click', function(e) {
-        e.preventDefault();
-        
-        // Remove active class from all tabs
-        $('.lsdp-nav-tab').removeClass('nav-tab-active');
-        
-        // Add active class to clicked tab
-        $(this).addClass('nav-tab-active');
-        
-        // Hide all content sections
-        $('.lsdp-tab-content').removeClass('active');
-        
-        // Show corresponding content based on href
-        var target = $(this).attr('href');
-        $(target).addClass('active');
-    });
-
     $('button.cool-plugins-addon').on('click', function() {
         if ($(this).hasClass('plugin-downloader')) {
             let nonce = $(this).attr('data-action-nonce');
@@ -69,7 +51,7 @@ jQuery(document).ready(function($) {
 
     })
 
-    $('.plugins-list').each(function(el) {
+    $('.plugins-list .installed-addons').each(function(el) {
         let $this = $(this);
         let message = $(this).attr('data-empty-message');
 
