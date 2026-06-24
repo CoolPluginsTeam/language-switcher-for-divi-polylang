@@ -78,6 +78,22 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
 			}
 			require_once __DIR__ . '/admin/dashboard/lsdp-dashboard.php';
 			cool_plugins_lsdp_polylang_addon_settings_page( 'polylang-addons', 'cool-plugins-polylang-addons', 'Polylang Addons' );
+			$this->initialize_theme_builder_conditions();
+		}
+
+		/**
+		 * Loads Theme Builder Polylang display conditions (Divi 4+).
+		 *
+		 * @since 1.0.8
+		 */
+		public function initialize_theme_builder_conditions() {
+			$divi_version = self::get_divi_theme_version();
+			if ( ! $divi_version || version_compare( (string) $divi_version, '4.0', '<' ) ) {
+				return;
+			}
+
+			require_once LSDP_DIR . 'theme-builder/class-lsdp-theme-builder-conditions.php';
+			new LSDP_Theme_Builder_Conditions();
 		}
 
 		public function is_divi_theme_exist() {	
