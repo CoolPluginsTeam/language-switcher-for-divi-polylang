@@ -105,13 +105,13 @@ final class LSDP_Theme_Builder_Conditions {
 	 * @param string $type    Request type reported by Divi (unused; signature is fixed).
 	 * @param string $subtype Post type or taxonomy slug (unused; signature is fixed).
 	 * @param int    $id      Post or term ID for the current request, when available.
-	 * @param array  $setting Condition ID split on `:`. Index 2 is the language slug.
+	 * @param array  $setting Condition ID parts from Divi (exploded on `:`). Index 2 is the language slug.
 	 * @return bool
 	 */
 	public static function validate_polylang_language( $type, $subtype, $id, $setting ) {
 		unset( $type, $subtype );
 
-		if ( ! is_array( $setting ) || ! isset( $setting[2] ) ) {
+		if ( ! is_array( $setting ) || empty( $setting[2] ) || ! is_string( $setting[2] ) ) {
 			return false;
 		}
 
