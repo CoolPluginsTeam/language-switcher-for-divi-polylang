@@ -210,9 +210,9 @@ if (!defined('ABSPATH')) {
             }
 
             function moreaddons_plugins_data(){
-                $tag = $this->plugin_tag;
-                $plugins = $this->request_wp_plugins_data( $tag );
-                $this->request_pro_plugins_data( $tag );
+                $lsdp_tag = $this->plugin_tag;
+                $plugins = $this->request_wp_plugins_data( $lsdp_tag );
+                $this->request_pro_plugins_data( $lsdp_tag );
                 $this->polylang_disable_free_plugins();
                 if( !empty( $plugins ) && count( $plugins ) > 0 ){
 
@@ -228,14 +228,14 @@ if (!defined('ABSPATH')) {
 
                     foreach($plugins as $plugin ){
 
-                        $plugin_name = $plugin['name'];
-                        $plugin_desc = $plugin['desc'];
-                        $plugin_logo =$this->polylang_addon_plugins_logo($plugin['slug']);
-                        $plugin_url = $plugin['download_link'];
-                        $plugin_slug = $plugin['slug'];
-                        $plugin_version = $plugin['version'];
+                        $lsdp_plugin_name = $plugin['name'];
+                        $lsdp_plugin_desc = $plugin['desc'];
+                        $lsdp_plugin_logo =$this->polylang_addon_plugins_logo($plugin['slug']);
+                        $lsdp_plugin_url = $plugin['download_link'];
+                        $lsdp_plugin_slug = $plugin['slug'];
+                        $lsdp_plugin_version = $plugin['version'];
  
-                        if( file_exists( WP_PLUGIN_DIR . '/' . $plugin_slug ) ){
+                        if( file_exists( WP_PLUGIN_DIR . '/' . $lsdp_plugin_slug ) ){
                             require $this->addon_dir . '/includes/dashboard-page.php';
                         }
 
@@ -248,14 +248,14 @@ if (!defined('ABSPATH')) {
                         if( $plugin['download_link'] == null ){
                             continue;
                         }
-                        $plugin_name = $plugin['name'];
-                        $plugin_desc = $plugin['desc'];
-                        $plugin_logo =$this->polylang_addon_plugins_logo($plugin['slug']);
-                        $plugin_url = $plugin['download_link'];
-                        $plugin_slug = $plugin['slug'];
-                        $plugin_version = $plugin['version'];
+                        $lsdp_plugin_name = $plugin['name'];
+                        $lsdp_plugin_desc = $plugin['desc'];
+                        $lsdp_plugin_logo =$this->polylang_addon_plugins_logo($plugin['slug']);
+                        $lsdp_plugin_url = $plugin['download_link'];
+                        $lsdp_plugin_slug = $plugin['slug'];
+                        $lsdp_plugin_version = $plugin['version'];
                         
-                        if( !file_exists( WP_PLUGIN_DIR . '/' . $plugin_slug ) ){
+                        if( !file_exists( WP_PLUGIN_DIR . '/' . $lsdp_plugin_slug ) ){
                             require $this->addon_dir . '/includes/dashboard-page.php';
                         }
 
@@ -267,15 +267,15 @@ if (!defined('ABSPATH')) {
                          */
                     echo "<div class='plugins-list pro-addons' data-empty-message='No more Pro plugins available at the moment'><h3>Pro Addons</h3>";
                         foreach($this->pro_plugins as $plugin ){
-                             $plugin_name = $plugin['name'];
-                            $plugin_desc = $plugin['desc'];
-                            $plugin_logo =$this->polylang_addon_plugins_logo($plugin['slug']);
-                            $plugin_pro_url = $plugin['buyLink'];
-                            $plugin_url = null;
-                            $plugin_version = null;
-                            $plugin_slug = $plugin['slug'];
+                             $lsdp_plugin_name = $plugin['name'];
+                            $lsdp_plugin_desc = $plugin['desc'];
+                            $lsdp_plugin_logo =$this->polylang_addon_plugins_logo($plugin['slug']);
+                            $lsdp_plugin_pro_url = $plugin['buyLink'];
+                            $lsdp_plugin_url = null;
+                            $lsdp_plugin_version = null;
+                            $lsdp_plugin_slug = $plugin['slug'];
                             
-                            if( !file_exists( WP_PLUGIN_DIR . '/' . $plugin_slug ) ){
+                            if( !file_exists( WP_PLUGIN_DIR . '/' . $lsdp_plugin_slug ) ){
                                 require $this->addon_dir . '/includes/dashboard-page.php';
                             }
 
