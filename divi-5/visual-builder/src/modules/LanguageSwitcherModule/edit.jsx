@@ -49,7 +49,9 @@ export const LanguageSwitcherModuleEdit = (props) => {
     language_switcher_module_data();
     setTimeout(() => {
     const thisModule = document.querySelector('.lsdp_language_switcher_for_divi_polylang');
-
+    if (!thisModule) {
+      return;
+    }
     const parentRow = thisModule.parentNode;
     if (parentRow) {
       if(parentRow.style.getPropertyValue('z-index') !== '999'){
@@ -103,10 +105,6 @@ export const LanguageSwitcherModuleEdit = (props) => {
                       if (lang === currentLang && 'on' === attributes?.hide_current_language) {
                         return null;
                       }
-
-                      // if (polylangData[lang].no_translation && 'on' === attributes?.hide_untranslated_language) {
-                      //   return null;
-                      // }
 
                       if (lang === currentLang && 'dropdown' === attributes?.switcher_layouts) {
                         return null;

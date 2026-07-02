@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
             private $pages = array();
             private $main_menu_slug = null;// 'cool-plugins-polylang-addon';
             private $plugin_tag = null;
-            private $dashboar_page_heading ;
+            private $dashboard_page_heading ;
             private $disable_plugins = array();
             private $addon_dir = __DIR__;    // point to the main addon-page directory
             private $addon_file = __FILE__;
@@ -47,11 +47,11 @@ if (!defined('ABSPATH')) {
                 if( !empty($plugin_tag) && !empty($menu_slug) && !empty($dashboard_heading) ){
                     $this->plugin_tag = $plugin_tag;
                     $this->main_menu_slug = $menu_slug;
-                    $this->dashboar_page_heading = $dashboard_heading;
+                    $this->dashboard_page_heading = $dashboard_heading;
                 }else{
                     return false;
                 }
-                add_action('admin_menu', array($this, 'init_plugins_dasboard_page'), 10);
+                add_action('admin_menu', array($this, 'init_plugins_dashboard_page'), 10);
                 add_action('wp_ajax_cool_plugins_install_'. $this->plugin_tag, array($this, 'cool_plugins_install'));
                 add_action('wp_ajax_cool_plugins_activate_'. $this->plugin_tag, array($this, 'cool_plugins_activate'));
                 add_action('admin_enqueue_scripts', array($this,'enqueue_required_scripts') );
@@ -146,7 +146,7 @@ if (!defined('ABSPATH')) {
             /**
              * This function will initialize the main dashboard page for all plugins
              */
-            function init_plugins_dasboard_page(){
+            function init_plugins_dashboard_page(){
                 add_submenu_page(
                     'mlang',
                     __('Get Started', 'language-switcher-for-divi-polylang'),
@@ -209,6 +209,24 @@ if (!defined('ABSPATH')) {
                 require $this->addon_dir . '/includes/get-started-content.php';
             }
 
+            private function render_plugin_card( $plugin, $is_pro = false ) {
+                $lsdp_plugin_name = $plugin['name'];
+                $lsdp_plugin_desc = $plugin['desc'];
+                $lsdp_plugin_logo = $this->polylang_addon_plugins_logo( $plugin['slug'] );
+                $lsdp_plugin_slug = $plugin['slug'];
+                
+                if ( $is_pro ) {
+                    $lsdp_plugin_pro_url = isset( $plugin['buyLink'] ) ? $plugin['buyLink'] : null;
+                    $lsdp_plugin_url     = null;
+                    $lsdp_plugin_version = null;
+                } else {
+                    $lsdp_plugin_url     = $plugin['download_link'];
+                    $lsdp_plugin_version = $plugin['version'];
+                }
+                
+                require $this->addon_dir . '/includes/dashboard-page.php';
+            }
+
             function moreaddons_plugins_data(){
                 $lsdp_tag = $this->plugin_tag;
                 $plugins = $this->request_wp_plugins_data( $lsdp_tag );
@@ -227,38 +245,21 @@ if (!defined('ABSPATH')) {
                     <div class="plugins-list installed-addons" data-empty-message="You have not installed any addon at the moment"><h3>Currently Installed Addons</h3>';
 
                     foreach($plugins as $plugin ){
-
-                        $lsdp_plugin_name = $plugin['name'];
-                        $lsdp_plugin_desc = $plugin['desc'];
-                        $lsdp_plugin_logo =$this->polylang_addon_plugins_logo($plugin['slug']);
-                        $lsdp_plugin_url = $plugin['download_link'];
-                        $lsdp_plugin_slug = $plugin['slug'];
-                        $lsdp_plugin_version = $plugin['version'];
- 
-                        if( file_exists( WP_PLUGIN_DIR . '/' . $lsdp_plugin_slug ) ){
-                            require $this->addon_dir . '/includes/dashboard-page.php';
+                        if( file_exists( WP_PLUGIN_DIR . '/' . $plugin['slug'] ) ){
+                            $this->render_plugin_card( $plugin );
                         }
-
                     }
                     echo "</div>";
 
                     echo "<div class='plugins-list more-addons' data-empty-message='No more free addons available at the moment'><h3>More Addons</h3>";
                     foreach($plugins as $plugin ){
-
                         if( $plugin['download_link'] == null ){
                             continue;
                         }
-                        $lsdp_plugin_name = $plugin['name'];
-                        $lsdp_plugin_desc = $plugin['desc'];
-                        $lsdp_plugin_logo =$this->polylang_addon_plugins_logo($plugin['slug']);
-                        $lsdp_plugin_url = $plugin['download_link'];
-                        $lsdp_plugin_slug = $plugin['slug'];
-                        $lsdp_plugin_version = $plugin['version'];
                         
-                        if( !file_exists( WP_PLUGIN_DIR . '/' . $lsdp_plugin_slug ) ){
-                            require $this->addon_dir . '/includes/dashboard-page.php';
+                        if( !file_exists( WP_PLUGIN_DIR . '/' . $plugin['slug'] ) ){
+                            $this->render_plugin_card( $plugin );
                         }
-
                     }
                     echo '</div>';
                     if( !empty($this->pro_plugins) && count($this->pro_plugins) >0 ):
@@ -267,27 +268,14 @@ if (!defined('ABSPATH')) {
                          */
                     echo "<div class='plugins-list pro-addons' data-empty-message='No more Pro plugins available at the moment'><h3>Pro Addons</h3>";
                         foreach($this->pro_plugins as $plugin ){
-                             $lsdp_plugin_name = $plugin['name'];
-                            $lsdp_plugin_desc = $plugin['desc'];
-                            $lsdp_plugin_logo =$this->polylang_addon_plugins_logo($plugin['slug']);
-                            $lsdp_plugin_pro_url = $plugin['buyLink'];
-                            $lsdp_plugin_url = null;
-                            $lsdp_plugin_version = null;
-                            $lsdp_plugin_slug = $plugin['slug'];
-                            
-                            if( !file_exists( WP_PLUGIN_DIR . '/' . $lsdp_plugin_slug ) ){
-                                require $this->addon_dir . '/includes/dashboard-page.php';
+                            if( !file_exists( WP_PLUGIN_DIR . '/' . $plugin['slug'] ) ){
+                                $this->render_plugin_card( $plugin, true );
                             }
-
                         }
                         echo '</div>';
                     endif;
                     echo '</div>';  // end of .cool-body-left
                     require $this->addon_dir . '/includes/dashboard-sidebar.php';
-                    
-
-                }else{
-                    // plugins are not available under this tag.
                 }
             }
 
@@ -335,7 +323,6 @@ if (!defined('ABSPATH')) {
                         'logo' => $plugin->image_url,
                         'desc' => $plugin->info,
                         'slug' => $plugin->slug,
-                        'buyLink' => $plugin->buy_url,
                         'version' => $plugin->version,
                         'download_link' => null,
                         'incompatible' => $plugin->free_version,
@@ -380,14 +367,15 @@ if (!defined('ABSPATH')) {
             $plugin_info = json_decode($response['body'],true);
             $all_plugins = array();
             foreach ($plugin_info as $plugin) {
-                $plugins_data['name'] = $plugin['name'];
-                $plugins_data['logo'] = $plugin['image_url'];
-                $plugins_data['slug'] = $plugin['slug'];
-                $plugins_data['desc'] = $plugin['info'];
-                $plugins_data['version'] = $plugin['version'];
-                $plugins_data['tags'] = $plugin['tag'];
-                $plugins_data['download_link'] = $plugin['download_url'];
-                $all_plugins[$plugin['slug']] = $plugins_data;
+                $all_plugins[$plugin['slug']] = array(
+                    'name'          => $plugin['name'],
+                    'logo'          => $plugin['image_url'],
+                    'slug'          => $plugin['slug'],
+                    'desc'          => $plugin['info'],
+                    'version'       => $plugin['version'],
+                    'tags'          => $plugin['tag'],
+                    'download_link' => $plugin['download_url'],
+                );
             }
            
 

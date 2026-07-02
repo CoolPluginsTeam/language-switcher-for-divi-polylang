@@ -10,23 +10,6 @@ if (!defined('ABSPATH')) {
 
 trait RenderContentTrait
 {
-    public static function lsdp_render_content($props)
-    {
-        global $polylang;
-        
-        $languages = pll_the_languages(['raw' => 1]);
-        $current_lang = strtolower(pll_current_language());
-        
-        if (!$languages || !isset($languages[$current_lang])) {
-            return '';
-        }
-        
-        if ($props['switcher_layouts'] === 'dropdown') {
-            return self::get_dropdown_languages_html($languages, $current_lang, $props);
-        }
-        
-        return self::get_languages_list_html($languages, $current_lang, $props);
-    }
 
     private static function get_dropdown_languages_html($languages, $current_lang, $props)
     {
@@ -38,19 +21,9 @@ trait RenderContentTrait
                 continue;
             }
 
-            $flag_icon = \LSDP_HELPERS::get_country_flag($lang['flag'], $lang['name']);
-
             $languages_html .= '<li class="lsdp-lang-item">';
             $languages_html .= '<a href="' . esc_url($lang['url']) . '">';
-            if (!empty($props['show_language_flag']) && $props['show_language_flag'] === 'on') {
-                $languages_html .= '<div class="lsdp-lang-image">' . $flag_icon . '</div>';
-            }
-            if (!empty($props['show_language_name']) && $props['show_language_name'] === 'on') {
-                $languages_html .= '<div class="lsdp-lang-name">' . esc_html($lang['name']) . '</div>';
-            }
-            if (!empty($props['show_language_code']) && $props['show_language_code'] === 'on') {
-                $languages_html .= '<div class="lsdp-lang-code">' . esc_html($lang['slug']) . '</div>';
-            }
+            $languages_html .= \LSDP_HELPERS::build_language_item($lang, $props);
             $languages_html .= '</a></li>';
         }
         
@@ -61,15 +34,7 @@ trait RenderContentTrait
     {
         $html = '<span class="lsdp-active-language">';
         $html .= '<a href="' . esc_url($lang['url']) . '">';
-        if (!empty($props['show_language_flag']) && $props['show_language_flag'] === 'on') {
-            $html .= '<div class="lsdp-lang-image">' . \LSDP_HELPERS::get_country_flag($lang['flag'], $lang['name']) . '</div>';
-        }
-        if (!empty($props['show_language_name']) && $props['show_language_name'] === 'on') {
-            $html .= '<div class="lsdp-lang-name">' . esc_html($lang['name']) . '</div>';
-        }
-        if (!empty($props['show_language_code']) && $props['show_language_code'] === 'on') {
-            $html .= '<div class="lsdp-lang-code">' . esc_html($lang['slug']) . '</div>';
-        }
+        $html .= \LSDP_HELPERS::build_language_item($lang, $props);
         $html .= '</a></span>';
         return $html;
     }
@@ -83,21 +48,12 @@ trait RenderContentTrait
                 continue;
             }
 
-            $flag_icon = \LSDP_HELPERS::get_country_flag($lang['flag'], $lang['name']);
             $anchor_open = '<a href="' . esc_url($lang['url']) . '">';
             $anchor_close = '</a>';
 
             $html .= '<li class="lsdp-lang-item">';
             $html .= $anchor_open;
-            if ($props['show_language_flag'] === 'on') {
-                $html .= '<div class="lsdp-lang-image">' .$flag_icon .'</div>';
-            }
-            if ($props['show_language_name'] === 'on') {
-                $html .= '<div class="lsdp-lang-name">' . wp_kses_post(esc_html($lang['name'])) . '</div>';
-            }
-            if ($props['show_language_code'] === 'on') {
-                $html .= '<div class="lsdp-lang-code">' . wp_kses_post(esc_html($lang['slug'])) . '</div>';
-            }
+            $html .= \LSDP_HELPERS::build_language_item($lang, $props);
             $html .= $anchor_close;
             $html .= '</li>';
         }
@@ -106,6 +62,17 @@ trait RenderContentTrait
 
     public static function render_content($props)
     {
-        return self::lsdp_render_content($props);
+        $languages = \LSDP_HELPERS::get_languages();
+        $current_lang = \LSDP_HELPERS::get_current_language();
+        
+        if (!$languages || !isset($languages[$current_lang])) {
+            return '';
+        }
+        
+        if ($props['switcher_layouts'] === 'dropdown') {
+            return self::get_dropdown_languages_html($languages, $current_lang, $props);
+        }
+        
+        return self::get_languages_list_html($languages, $current_lang, $props);
     }
 }

@@ -5,6 +5,37 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class LSDP_HELPERS {
+	private static $languages_cache        = null;
+	private static $current_language_cache = null;
+
+	public static function get_languages() {
+		if ( self::$languages_cache === null ) {
+			self::$languages_cache = function_exists( 'pll_the_languages' ) ? pll_the_languages( array( 'raw' => 1 ) ) : array();
+		}
+		return self::$languages_cache;
+	}
+
+	public static function get_current_language() {
+		if ( self::$current_language_cache === null ) {
+			self::$current_language_cache = function_exists( 'pll_current_language' ) ? strtolower( pll_current_language() ) : '';
+		}
+		return self::$current_language_cache;
+	}
+
+	public static function format_languages( $languages ) {
+		return array_map(
+			function( $language ) {
+				return array(
+					'flagCode'       => esc_html( self::get_flag_code( $language['flag'] ) ),
+					'slug'           => esc_html( $language['slug'] ),
+					'name'           => esc_html( $language['name'] ),
+					'no_translation' => esc_html( $language['no_translation'] ),
+					'url'            => esc_url( $language['url'] ),
+				);
+			},
+			$languages
+		);
+	}
 	public static function get_flag_code( $flag_url ) {
 		$flag_code = preg_match( '/polylang\/flags\/([a-z]+)\.(png|svg|jpg|jpeg)$/i', $flag_url, $matches ) ? $matches[1] : false;
 		return $flag_code;
@@ -51,16 +82,27 @@ class LSDP_HELPERS {
 		return $flag_html;
 	}
 
-	public function static_content( $exists = array() ) {
-		$helpers = array(
-			'defaults' => array(
-				'language-switcher-for-divi-polylang' => array(
-					'z_index' => 99,
-				),
-			),
-		);
+	public static function build_language_item( $lang, $props ) {
+		$html = '';
 
-		return array_merge_recursive( $exists, $helpers );
+		$show_flag = isset( $props['show_language_flag'] ) ? $props['show_language_flag'] : ( isset( $props['lsdp_flag_visibility'] ) ? $props['lsdp_flag_visibility'] : 'on' );
+		$show_name = isset( $props['show_language_name'] ) ? $props['show_language_name'] : ( isset( $props['lsdp_language_name_visibility'] ) ? $props['lsdp_language_name_visibility'] : 'on' );
+		$show_code = isset( $props['show_language_code'] ) ? $props['show_language_code'] : ( isset( $props['lsdp_language_code_visibility'] ) ? $props['lsdp_language_code_visibility'] : 'off' );
+
+		if ( 'on' === $show_flag ) {
+			$flag_icon = self::get_country_flag( $lang['flag'], $lang['name'] );
+			$html     .= sprintf( '<div class="lsdp-lang-image">%s</div>', $flag_icon );
+		}
+
+		if ( 'on' === $show_name ) {
+			$html .= sprintf( '<div class="lsdp-lang-name">%s</div>', esc_html( $lang['name'] ) );
+		}
+
+		if ( 'on' === $show_code ) {
+			$html .= sprintf( '<div class="lsdp-lang-code">%s</div>', esc_html( $lang['slug'] ) );
+		}
+
+		return $html;
 	}
 
 }
