@@ -1,3 +1,7 @@
+:root {
+    --lsdp-brand-green: #1bb95a;
+}
+
 .plugin-not-required {
     opacity: 0.4;
 }
@@ -31,8 +35,8 @@
 }
 
 .cool-plugins-polylang-addons .cool-header {
-    background-color: #1bb95a;
-    background: linear-gradient(to right, #1bb95a, #66cb8e);
+    background-color: var(--lsdp-brand-green);
+    background: linear-gradient(to right, var(--lsdp-brand-green), #66cb8e);
     padding: 20px 10px;
     margin: 0;
     display: inline-block;
@@ -129,7 +133,7 @@ h4.plugin-title {
 }
 
 .plugin-version {
-    background: #1bb95a;
+    background: var(--lsdp-brand-green);
     border: 1px solid #139648;
     color: #fff;
     font-size: 11px;
@@ -211,13 +215,6 @@ span.plugin-update-available {
     padding: 20px;
 }
 
-.lsdp-video-section h4 {
-    color: #1bb95a;
-    margin-bottom: 15px;
-    font-size: 16px;
-    text-align: center;
-}
-
 .lsdp-video-container {
     position: relative;
     width: 100%;
@@ -229,16 +226,8 @@ span.plugin-update-available {
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-.lsdp-video-description {
-    text-align: center;
-    color: #666;
-    font-size: 14px;
-    line-height: 1.4;
-    margin: 0;
-}
-
 .lsdp-get-started-content h3 {
-    color: #1bb95a;
+    color: var(--lsdp-brand-green);
     margin-bottom: 15px;
     font-size: 18px;
 }

@@ -57,10 +57,8 @@ class LSDP_Module extends ET_Builder_Module {
 		$advanced_fields['text']           = false;
 		$advanced_fields['margin_padding'] = false;
 		$advanced_fields['transform']      = false;
-		// $advanced_fields['filters']         = false;
 		$advanced_fields['box_shadow']     = false;
 		$advanced_fields['border']     	   = false;
-		// $advanced_fields['max_width'] 	   = false;
 		$advanced_fields['fonts']['lsdp_text_settings'] = array(
 			'label_prefix'        => esc_html__( 'Text', 'language-switcher-for-divi-polylang' ),
 			'tab_slug'            => 'advanced',
@@ -196,36 +194,15 @@ class LSDP_Module extends ET_Builder_Module {
 
 			if ( $display_content ) {
 
-				$languages = pll_the_languages( array( 'raw' => 1 ) );
-				$lang_curr = strtolower( pll_current_language() );
+				$languages = \LSDP_HELPERS::get_languages();
+				$lang_curr = \LSDP_HELPERS::get_current_language();
 
 				$html        = '';
 				$active_span = '';
 
 				if ( $style === 'dropdown' ) {
-					$active_flag_icon = LSDP_HELPERS::get_country_flag( $languages[ $lang_curr ]['flag'], $languages[ $lang_curr ]['name'] );
 					$active_span       = '<span><a href="' . esc_url( $languages[ $lang_curr ]['url'] ) . '">';
-					if ( 'on' === $flag_display ) {
-						$active_span .= sprintf(
-							'<div class="lsdp-lang-image">%s</div>',
-							$active_flag_icon,
-							esc_url( $languages[ $lang_curr ]['flag'] )
-						);
-					}
-
-					if ( 'on' === $name_display ) {
-						$active_span .= sprintf(
-							'<div class="lsdp-lang-name">%s</div>',
-							esc_html( $languages[ $lang_curr ]['name'] )
-						);
-					}
-
-					if ( 'on' === $code_display ) {
-						$active_span .= sprintf(
-							'<div class="lsdp-lang-code">%s</div>',
-							esc_html( $languages[ $lang_curr ]['slug'] )
-						);
-					}
+					$active_span      .= \LSDP_HELPERS::build_language_item( $languages[ $lang_curr ], $attrs );
 					$active_span .= '</a></span>';
 				}
 
@@ -242,30 +219,9 @@ class LSDP_Module extends ET_Builder_Module {
 					if ( $lang['no_translation'] && 'on' === $hide_untranslate_lang ) {
 						continue;
 					}
-					$flag_icon    = LSDP_HELPERS::get_country_flag( $lang['flag'], $lang['name'] );
 					$active_class = $lang_curr === $lang['slug'] ? 'lsdp_active_lang' : '';
 					$html        .= '<li class="' . esc_attr( $active_class ) . '"><a href="' . esc_url( $lang['url'] ) . '">';
-					if ( 'on' === $flag_display ) {
-						$html .= sprintf(
-							'<div class="lsdp-lang-image">%s</div>',
-							$flag_icon,
-							
-						);
-					}
-
-					if ( 'on' === $name_display ) {
-						$html .= sprintf(
-							'<div class="lsdp-lang-name">%s</div>',
-							esc_html( $lang['name'] ),
-						);
-					}
-
-					if ( 'on' === $code_display ) {
-						$html .= sprintf(
-							'<div class="lsdp-lang-code">%s</div>',
-							esc_html( $lang['slug'] ),
-						);
-					}
+					$html        .= \LSDP_HELPERS::build_language_item( $lang, $attrs );
 					$html .='</a></li>';
 				}
 

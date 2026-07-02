@@ -4,12 +4,12 @@ if ( ! defined( 'ABSPATH' ) ) {
   die( 'Direct access forbidden.' );
 }
 class LSDP_STYLE_HELPERS {
-	private $redner_slug = '';
+	private $render_slug = '';
 	private $props       = '';
 	private $order       = 0;
 
 	public function __construct( $props, $render_slug, $order ) {
-		$this->redner_slug = $render_slug;
+		$this->render_slug = $render_slug;
 		$this->props       = $props;
 		$this->order       = $order;
 		$this->generate_divi_styles();
@@ -17,67 +17,65 @@ class LSDP_STYLE_HELPERS {
 
 	private function generate_divi_styles() {
 		$selector = '%%order_class%% .lsdp-wrapper';
-		$slug                    = $this->redner_slug;
-		$attr                    = $this->props;
-		$lang_padding            = isset( $attr['lsdp_bg_normal_padding'] ) ? esc_attr($attr['lsdp_bg_normal_padding']) : '';
-		$lang_margin             = isset( $attr['lsdp_bg_normal_margin'] ) ? esc_attr($attr['lsdp_bg_normal_margin']) : '';
-		$lang_normal_bg_color    = isset( $attr['lsdp_bg_normal_color'] ) ? esc_attr($attr['lsdp_bg_normal_color']) : '';
-		$lang_hover_bg_color_hover = isset( $attr['lsdp_bg_normal_color__hover'] ) ? esc_attr($attr['lsdp_bg_normal_color__hover']) : '';
-		$flag_width              = isset( $attr['lsdp_flag_width'] ) ? esc_attr($attr['lsdp_flag_width']) : '';
-		$flag_radius             = isset( $attr['lsdp_flag_radius'] ) ? esc_attr($attr['lsdp_flag_radius']) : '';
-		$flag_ratio              = isset( $attr['lsdp_flag_ratio'] ) ? esc_attr($attr['lsdp_flag_ratio']) : '';
-		$normal_text_font        = isset( $attr['lsdp_text_settings_font'] ) ? esc_attr($attr['lsdp_text_settings_font']) : '';
-		$hover_text_font         = isset( $attr['lsdp_text_settings_font__hover'] ) ? esc_attr($attr['lsdp_text_settings_font__hover']) : '';
-		$normal_text_color       = isset( $attr['lsdp_text_settings_text_color'] ) ? esc_attr($attr['lsdp_text_settings_text_color']) : '';
-		$hover_text_color 		 = isset( $attr['lsdp_text_settings_text_color__hover'] ) ? esc_attr($attr['lsdp_text_settings_text_color__hover']) : '';
-		$normal_text_size        = isset( $attr['lsdp_text_settings_font_size'] ) ? esc_attr($attr['lsdp_text_settings_font_size']) : '';
-		$hover_text_size		 = isset( $attr['lsdp_text_settings_font_size__hover'] ) ? esc_attr($attr['lsdp_text_settings_font_size__hover']) : '';
-		$normal_text_spacing     = isset( $attr['lsdp_text_settings_letter_spacing'] ) ? esc_attr($attr['lsdp_text_settings_letter_spacing']) : '';
-		$hover_text_spacing      = isset( $attr['lsdp_text_settings_letter_spacing__hover'] ) ? esc_attr($attr['lsdp_text_settings_letter_spacing__hover']) : '';
-		$normal_text_line_height = isset( $attr['lsdp_text_settings_line_height'] ) ? esc_attr($attr['lsdp_text_settings_line_height']) : '';
-		$hover_text_line_height  = isset( $attr['lsdp_text_settings_line_height__hover'] ) ? esc_attr($attr['lsdp_text_settings_line_height__hover']) : '';
-		$hover_bg_margin         = isset( $attr['custom_margin__hover'] ) ? esc_attr($attr['custom_margin__hover']) : '';
-		$hover_bg_padding        = isset( $attr['custom_padding__hover'] ) ? esc_attr($attr['custom_padding__hover']) : '';
+		$slug     = $this->render_slug;
+		$attr     = $this->props;
+
 		ET_Builder_Element::set_style(
 			$slug,
 			array(
-				'selector'    => $selector.'.dropdown',
+				'selector'    => $selector . '.dropdown',
 				'declaration' => sprintf( '--lsdp-dropdown-index: %1$s;', ( 999 + $this->order ) ),
 			)
 		);
 
-		$this->set_spacing_styles( $slug, $selector, 'lsdp-lang-padding', $lang_padding );
-		$this->set_spacing_styles( $slug, $selector, 'lsdp-lang-margin', $lang_margin );
-
-		if ( '' !== $lang_normal_bg_color ) {
-			$color = $this->sanitize_css_color( $lang_normal_bg_color );
-			if ( false !== $color ) {
-				ET_Builder_Element::set_style(
-					$slug,
-					array(
-						'selector'    => $selector,
-						'declaration' => sprintf( '--lsdp-normal-bg-color: %1$s;', $color ),
-					)
-				);
-			}
-		}
-		if ( '' !== $lang_hover_bg_color_hover ) {
-			$color = $this->sanitize_css_color( $lang_hover_bg_color_hover );
-			if ( false !== $color ) {
-				ET_Builder_Element::set_style(
-					$slug,
-					array(
-						'selector'    => $selector,
-						'declaration' => sprintf( '--lsdp-hover-bg-color: %1$s;', $color ),
-					)
-				);
+		// 1. Spacing properties
+		$spacing_props = array(
+			'lsdp_bg_normal_padding' => 'lsdp-lang-padding',
+			'lsdp_bg_normal_margin'  => 'lsdp-lang-margin',
+			'custom_margin__hover'   => 'lsdp-hover-bg-mrgn',
+			'custom_padding__hover'  => 'lsdp-hover-bg-pading',
+		);
+		foreach ( $spacing_props as $key => $prefix ) {
+			if ( isset( $attr[ $key ] ) ) {
+				$this->set_spacing_styles( $slug, $selector, $prefix, esc_attr( $attr[ $key ] ) );
 			}
 		}
 
-		$this->set_spacing_styles( $slug, $selector, 'lsdp-hover-bg-mrgn', $hover_bg_margin );
-		$this->set_spacing_styles( $slug, $selector, 'lsdp-hover-bg-pading', $hover_bg_padding );
+		// 2. Standard CSS properties (color, length)
+		$css_props = array(
+			'lsdp_bg_normal_color'                     => array( '--lsdp-normal-bg-color', 'sanitize_css_color' ),
+			'lsdp_bg_normal_color__hover'              => array( '--lsdp-hover-bg-color', 'sanitize_css_color' ),
+			'lsdp_flag_width'                          => array( '--lsdp-flag-width', 'sanitize_css_length' ),
+			'lsdp_flag_radius'                         => array( '--lsdp-flag-radius', 'sanitize_css_length' ),
+			'lsdp_text_settings_text_color'            => array( '--lsdp-normal-text-color', 'sanitize_css_color' ),
+			'lsdp_text_settings_text_color__hover'     => array( '--lsdp-hover-text-color', 'sanitize_css_color' ),
+			'lsdp_text_settings_letter_spacing'        => array( '--lsdp-normal-text-letter-spacing', 'sanitize_css_length' ),
+			'lsdp_text_settings_letter_spacing__hover' => array( '--lsdp-hover-text-letter-spacing', 'sanitize_css_length' ),
+			'lsdp_text_settings_font_size'             => array( '--lsdp-normal-text-size', 'sanitize_css_length' ),
+			'lsdp_text_settings_font_size__hover'      => array( '--lsdp-hover-text-size', 'sanitize_css_length' ),
+			'lsdp_text_settings_line_height'           => array( '--lsdp-normal-text-line-height', 'sanitize_css_length' ),
+			'lsdp_text_settings_line_height__hover'    => array( '--lsdp-hover-text-line-height', 'sanitize_css_length' ),
+		);
 
-		if ( '' !== $flag_ratio && '1/1' === $flag_ratio ) {
+		foreach ( $css_props as $key => $config ) {
+			if ( isset( $attr[ $key ] ) && '' !== $attr[ $key ] ) {
+				$value = esc_attr( $attr[ $key ] );
+				$sanitizer = $config[1];
+				$sanitized = $this->$sanitizer( $value );
+				if ( false !== $sanitized ) {
+					ET_Builder_Element::set_style(
+						$slug,
+						array(
+							'selector'    => $selector,
+							'declaration' => sprintf( '%1$s: %2$s;', $config[0], $sanitized ),
+						)
+					);
+				}
+			}
+		}
+
+		// 3. Special cases: flag ratio
+		if ( isset( $attr['lsdp_flag_ratio'] ) && '1/1' === esc_attr( $attr['lsdp_flag_ratio'] ) ) {
 			ET_Builder_Element::set_style(
 				$slug,
 				array(
@@ -86,34 +84,14 @@ class LSDP_STYLE_HELPERS {
 				)
 			);
 		}
-		if ( '' !== $flag_width ) {
-			$flag_width = $this->sanitize_css_length( $flag_width );
-			if ( false !== $flag_width ) {
-				ET_Builder_Element::set_style(
-					$slug,
-					array(
-						'selector'    => $selector,
-						'declaration' => sprintf( '--lsdp-flag-width: %1$s;', $flag_width ),
-					)
-				);
-			}
-		}
-		if ( '' !== $flag_radius ) {
-			$flag_radius = $this->sanitize_css_length( $flag_radius );
-			if ( false !== $flag_radius ) {
-				ET_Builder_Element::set_style(
-					$slug,
-					array(
-						'selector'    => $selector,
-						'declaration' => sprintf( '--lsdp-flag-radius: %1$s;', $flag_radius ),
-					)
-				);
-			}
-		}
-		if ( '' !== $normal_text_font ) {
+
+		// 4. Special cases: font settings
+		if ( isset( $attr['lsdp_text_settings_font'] ) && '' !== $attr['lsdp_text_settings_font'] ) {
+			$normal_text_font = esc_attr( $attr['lsdp_text_settings_font'] );
 			$this->load_google_fonts( $normal_text_font );
 			$Font_properties = $this->get_font_properties( $normal_text_font );
-			$font_family_css   = $this->format_css_font_family( $Font_properties['fontFamily'] );
+			$font_family_css = $this->format_css_font_family( $Font_properties['fontFamily'] );
+			
 			if ( false !== $font_family_css ) {
 				ET_Builder_Element::set_style(
 					$slug,
@@ -130,103 +108,6 @@ class LSDP_STYLE_HELPERS {
 			$this->set_css_custom_property( $slug, $selector, '--lsdp-normal-text-decoration-color', $this->sanitize_css_color( $Font_properties['textDecorationLineColor'] ) );
 			$this->set_css_custom_property( $slug, $selector, '--lsdp-normal-text-decoration-style', $this->sanitize_css_text_decoration_style( $Font_properties['textDecorationStyle'] ) );
 		}
-		if ( '' !== $normal_text_color ) {
-			$color = $this->sanitize_css_color( $normal_text_color );
-			if ( false !== $color ) {
-				ET_Builder_Element::set_style(
-					$slug,
-					array(
-						'selector'    => $selector,
-						'declaration' => sprintf( '--lsdp-normal-text-color: %1$s;', $color ),
-					)
-				);
-			}
-		}
-		if ( '' !== $hover_text_color ) {
-			$color = $this->sanitize_css_color( $hover_text_color );
-			if ( false !== $color ) {
-				ET_Builder_Element::set_style(
-					$slug,
-					array(
-						'selector'    => $selector,
-						'declaration' => sprintf( '--lsdp-hover-text-color: %1$s;', $color ),
-					)
-				);
-			}
-		}
-		if ( '' !== $normal_text_spacing ) {
-			$letter_spacing = $this->sanitize_css_length( $normal_text_spacing );
-			if ( false !== $letter_spacing ) {
-				ET_Builder_Element::set_style(
-					$slug,
-					array(
-						'selector'    => $selector,
-						'declaration' => sprintf( '--lsdp-normal-text-letter-spacing: %1$s;', $letter_spacing ),
-					)
-				);
-			}
-		}
-		if ( '' !== $hover_text_spacing ) {
-			$letter_spacing = $this->sanitize_css_length( $hover_text_spacing );
-			if ( false !== $letter_spacing ) {
-				ET_Builder_Element::set_style(
-					$slug,
-					array(
-						'selector'    => $selector,
-						'declaration' => sprintf( '--lsdp-hover-text-letter-spacing: %1$s;', $letter_spacing ),
-					)
-				);
-			}
-		}
-		if ( '' !== $normal_text_size ) {
-			$text_size = $this->sanitize_css_length( $normal_text_size );
-			if ( false !== $text_size ) {
-				ET_Builder_Element::set_style(
-					$slug,
-					array(
-						'selector'    => $selector,
-						'declaration' => sprintf( '--lsdp-normal-text-size: %1$s;', $text_size ),
-					)
-				);
-			}
-		}
-		if ( '' !== $hover_text_size ) {
-			$text_size = $this->sanitize_css_length( $hover_text_size );
-			if ( false !== $text_size ) {
-				ET_Builder_Element::set_style(
-					$slug,
-					array(
-						'selector'    => $selector,
-						'declaration' => sprintf( '--lsdp-hover-text-size: %1$s;', $text_size ),
-					)
-				);
-			}
-		}
-		if ( '' !== $normal_text_line_height ) {
-			$line_height = $this->sanitize_css_length( $normal_text_line_height );
-			if ( false !== $line_height ) {
-				ET_Builder_Element::set_style(
-					$slug,
-					array(
-						'selector'    => $selector,
-						'declaration' => sprintf( '--lsdp-normal-text-line-height: %1$s;', $line_height ),
-					)
-				);
-			}
-		}
-		if ( '' !== $hover_text_line_height ) {
-			$line_height = $this->sanitize_css_length( $hover_text_line_height );
-			if ( false !== $line_height ) {
-				ET_Builder_Element::set_style(
-					$slug,
-					array(
-						'selector'    => $selector,
-						'declaration' => sprintf( '--lsdp-hover-text-line-height: %1$s;', $line_height ),
-					)
-				);
-			}
-		}
-		// Code for generating Divi styles goes here
 	}
 
 	private function load_google_fonts( $font_family ) {

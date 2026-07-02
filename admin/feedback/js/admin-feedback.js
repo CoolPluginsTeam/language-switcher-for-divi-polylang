@@ -4,65 +4,66 @@
         let text_domain = 'LSDP';
         
         $target = $('#the-list').find('[data-slug="'+plugin_slug+'"] span.deactivate a');
-
         var plugin_deactivate_link = $target.attr('href');
+
+        let $wrapper = $("." + plugin_slug + "#cool-plugins-deactivate-feedback-dialog-wrapper");
+        let $submitBtn = $("." + plugin_slug + " #cool-plugin-submitNdeactivate");
+        let $skipBtn = $("." + plugin_slug + " #cool-plugin-skipNdeactivate");
+        let $gdprCheckbox = $("." + plugin_slug + " #cool-plugins-GDPR-data-notice");
+        let $dialogInputs = $("." + plugin_slug + " .cool-plugins-deactivate-feedback-dialog-input");
+        let $loaderWrapper = $("." + plugin_slug + " #cool-plugins-loader-wrapper");
+        let $wpwrap = $('#wpwrap');
+        let $nonce = $("." + plugin_slug + " #_wpnonce");
+
         $($target).on('click', function(event){
             event.preventDefault();
-            $('#wpwrap').css('opacity','0.4');
+            $wpwrap.css('opacity','0.4');
 
-            $("." + plugin_slug + "#cool-plugins-deactivate-feedback-dialog-wrapper").animate({
+            $wrapper.animate({
                 opacity:1
             },200,function(){
-                $("." + plugin_slug + "#cool-plugins-deactivate-feedback-dialog-wrapper").removeClass('hide-feedback-popup');
-                $("." + plugin_slug + "#cool-plugins-deactivate-feedback-dialog-wrapper").find('#cool-plugin-submitNdeactivate').addClass(text_domain);
-                $("." + plugin_slug + "#cool-plugins-deactivate-feedback-dialog-wrapper").find('#cool-plugin-skipNdeactivate').addClass(text_domain);
+                $wrapper.removeClass('hide-feedback-popup');
+                $submitBtn.addClass(text_domain);
+                $skipBtn.addClass(text_domain);
             });
         });
 
-        $("." + plugin_slug + " .cool-plugins-deactivate-feedback-dialog-input").on('click',function(){
-            if($("." + plugin_slug + " #cool-plugins-GDPR-data-notice").is(":checked") === true && $("." + plugin_slug + " .cool-plugins-deactivate-feedback-dialog-input").is(':checked') === true){ 
-                $("." + plugin_slug + " #cool-plugin-submitNdeactivate").removeClass('button-deactivate');
+        function updateSubmitState() {
+            if($gdprCheckbox.is(":checked") === true && $dialogInputs.is(':checked') === true){ 
+                $submitBtn.removeClass('button-deactivate');
             }
             else{
-                $("." + plugin_slug + " #cool-plugin-submitNdeactivate").addClass('button-deactivate');
+                $submitBtn.addClass('button-deactivate');
             }
+        }
 
-        });
+        $dialogInputs.add($gdprCheckbox).on('click', updateSubmitState);
 
-        $("." + plugin_slug + " #cool-plugins-GDPR-data-notice").on('click', function(){
-
-            if($("." + plugin_slug + " #cool-plugins-GDPR-data-notice").is(":checked") === true && $("." + plugin_slug + " .cool-plugins-deactivate-feedback-dialog-input").is(':checked') === true){ 
-                $("." + plugin_slug + " #cool-plugin-submitNdeactivate").removeClass('button-deactivate');
-            }
-            else{
-                $("." + plugin_slug + " #cool-plugin-submitNdeactivate").addClass('button-deactivate');
-            }
-        })
-
-        $('#wpwrap').on('click', function(ev){
-            if( $("." + plugin_slug + "#cool-plugins-deactivate-feedback-dialog-wrapper.hide-feedback-popup").length==0 ){
+        $wpwrap.on('click', function(ev){
+            if( $wrapper.hasClass('hide-feedback-popup') === false ){
                 ev.preventDefault();
-                $("." + plugin_slug + "#cool-plugins-deactivate-feedback-dialog-wrapper").animate({
+                $wrapper.animate({
                     opacity:0
                 },200,function(){
-                    $("." + plugin_slug + "#cool-plugins-deactivate-feedback-dialog-wrapper").addClass("hide-feedback-popup");
-                    $("." + plugin_slug + "#cool-plugins-deactivate-feedback-dialog-wrapper").find('#cool-plugin-submitNdeactivate').removeClass(text_domain);
-                    $('#wpwrap').css('opacity','1');
+                    $wrapper.addClass("hide-feedback-popup");
+                    $submitBtn.removeClass(text_domain);
+                    $wpwrap.css('opacity','1');
                 })
-
             }
         })
 
         $(document).on('click', '.' + plugin_slug + ' #cool-plugin-submitNdeactivate.'+text_domain+':not(".button-deactivate")', function(event){
-            let nonce = $("." + plugin_slug + " #_wpnonce").val();
-            let reason = $("." + plugin_slug + " .cool-plugins-deactivate-feedback-dialog-input:checked").val();
+            let nonce = $nonce.val();
+            let reason = $dialogInputs.filter(":checked").val();
             let message = '';
-            if( $("." + plugin_slug + " textarea[name='reason_"+reason+"']").length>0 ){
-                if( $("." + plugin_slug + " textarea[name='reason_"+reason+"']").val() == '' ){
+            
+            let $reasonTextarea = $("." + plugin_slug + " textarea[name='reason_"+reason+"']");
+            if( $reasonTextarea.length>0 ){
+                if( $reasonTextarea.val() == '' ){
                     alert('Please provide some extra information!');
                     return;
                 }else{
-                    message=$("." + plugin_slug + " textarea[name='reason_"+reason+"']").val();
+                    message=$reasonTextarea.val();
                 }
             }
 
@@ -76,26 +77,28 @@
                     'message':message,
                 },
                 beforeSend:function(data){
-                    $("." + plugin_slug + " #cool-plugin-submitNdeactivate").text('Deactivating...');
-                    $("." + plugin_slug + " #cool-plugin-submitNdeactivate").attr('id','deactivating-plugin');
-                    $("." + plugin_slug + " #cool-plugins-loader-wrapper").show();
-                    $("." + plugin_slug + " #cool-plugin-skipNdeactivate").remove();
+                    $submitBtn.text('Deactivating...');
+                    $submitBtn.attr('id','deactivating-plugin');
+                    $loaderWrapper.show();
+                    $skipBtn.remove();
                 },
                 success:function(res){
-                    $("." + plugin_slug + " #cool-plugins-loader-wrapper").hide();
+                    $loaderWrapper.hide();
                     window.location = plugin_deactivate_link;
-                    $("." + plugin_slug + " #deactivating-plugin").text('Deactivated');
+                    $submitBtn.text('Deactivated');
                 }
             })
 
         });
 
         $(document).on('click', '.' + plugin_slug + ' #cool-plugin-skipNdeactivate.'+text_domain+':not(".button-deactivate")', function(){
-            $("." + plugin_slug + " #cool-plugin-submitNdeactivate").remove();
-            $("." + plugin_slug + " #cool-plugin-skipNdeactivate").addClass('button-deactivate');
-            $("." + plugin_slug + " #cool-plugin-skipNdeactivate").attr('id','deactivating-plugin');
+            $submitBtn.remove();
+            $skipBtn.addClass('button-deactivate');
+            $skipBtn.attr('id','deactivating-plugin');
             window.location = plugin_deactivate_link;
         });
+
+
 
     });
 })(jQuery);

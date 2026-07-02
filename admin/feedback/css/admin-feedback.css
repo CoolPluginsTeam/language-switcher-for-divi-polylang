@@ -1,3 +1,7 @@
+:root {
+    --cpfm-feedback-accent: #7bc6de;
+}
+
 /*
 |------------------------------------------
 |       Deactivation feedback form
@@ -23,7 +27,7 @@
     font-size: 16px;
     margin: 5px;
     cursor: pointer;
-    background-color: #7bc6de;
+    background-color: var(--cpfm-feedback-accent);
     color: white;
 }
 #cool-plugins-deactivate-feedback-dialog-form-body .cool-plugins-deactivate-feedback-dialog-input:not(:checked)~.cool-plugins-feedback-text {
@@ -82,7 +86,6 @@ span#cool-plugins-feedback-form-title {
     top: 38%;
     position: absolute;
     left: 42%;
-    text-align: center;
   }
 .cool-plugins-deactivation-response img.cool-plugins-preloader {
     width: 40px;
@@ -101,7 +104,7 @@ span#cool-plugins-feedback-form-title {
 }
 #cool-plugins-deactivate-feedback-dialog-header {
     padding: 20px;
-    background-color: #7bc6de;
+    background-color: var(--cpfm-feedback-accent);
 }
 a.cool-plugins-button:hover {
     background: #adebff;

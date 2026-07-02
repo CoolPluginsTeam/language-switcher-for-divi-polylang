@@ -70,15 +70,8 @@ class lsdp_feedback {
 		}
 	}
 
-	/**
-	 * HTML for creating feedback popup form.
-	 */
-	public function show_deactivate_feedback_popup() {
-		$screen = get_current_screen();
-		if ( ! isset( $screen ) || $screen->id != 'plugins' ) {
-			return;
-		}
-		$deactivate_reasons = array(
+	private function get_deactivate_reasons() {
+		return array(
 			'didnt_work_as_expected'         => array(
 				'title'             => esc_html__( 'The plugin didn\'t work as expected', 'language-switcher-for-divi-polylang' ),
 				'input_placeholder' => esc_html__( 'What did you expect?', 'language-switcher-for-divi-polylang' ),
@@ -100,6 +93,17 @@ class lsdp_feedback {
 				'input_placeholder' => esc_html__( 'Please share the reason', 'language-switcher-for-divi-polylang' ),
 			),
 		);
+	}
+
+	/**
+	 * HTML for creating feedback popup form.
+	 */
+	public function show_deactivate_feedback_popup() {
+		$screen = get_current_screen();
+		if ( ! isset( $screen ) || $screen->id != 'plugins' ) {
+			return;
+		}
+		$deactivate_reasons = $this->get_deactivate_reasons();
 
 		?>
 		<div id="cool-plugins-deactivate-feedback-dialog-wrapper" class="<?php echo esc_attr($this->plugin_slug); ?> hide-feedback-popup">
@@ -202,28 +206,7 @@ class lsdp_feedback {
 			wp_die();
 		} else {
 			$reason             = isset( $_POST['reason'] ) ? sanitize_text_field( wp_unslash( $_POST['reason'] ) ) : '';
-			$deactivate_reasons = array(
-				'didnt_work_as_expected'         => array(
-					'title'             => esc_html__( 'The plugin didn\'t work as expected', 'language-switcher-for-divi-polylang' ),
-					'input_placeholder' => esc_html__( 'What did you expect?', 'language-switcher-for-divi-polylang' ),
-				),
-				'found_a_better_plugin'          => array(
-					'title'             => esc_html__( 'I found a better plugin', 'language-switcher-for-divi-polylang' ),
-					'input_placeholder' => esc_html__( 'Please share which plugin', 'language-switcher-for-divi-polylang' ),
-				),
-				'couldnt_get_the_plugin_to_work' => array(
-					'title'             => esc_html__( 'The plugin is not working', 'language-switcher-for-divi-polylang' ),
-					'input_placeholder' => esc_html__( 'Please share your issue. So we can fix that for other users.', 'language-switcher-for-divi-polylang' ),
-				),
-				'temporary_deactivation'         => array(
-					'title'             => esc_html__( 'It\'s a temporary deactivation', 'language-switcher-for-divi-polylang' ),
-					'input_placeholder' => '',
-				),
-				'other'                          => array(
-					'title'             => esc_html__( 'Other', 'language-switcher-for-divi-polylang' ),
-					'input_placeholder' => esc_html__( 'Please share the reason', 'language-switcher-for-divi-polylang' ),
-				),
-			);
+			$deactivate_reasons = $this->get_deactivate_reasons();
 
 			$deativation_reason = array_key_exists( $reason, $deactivate_reasons ) ? $reason : 'other';
 

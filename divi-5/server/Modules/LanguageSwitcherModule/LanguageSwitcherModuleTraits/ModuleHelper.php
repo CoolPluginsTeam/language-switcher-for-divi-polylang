@@ -27,35 +27,25 @@ class ModuleHelper {
         return $default;
     }
 
-    static function lsdp_localize_polyglang_data_divi_5($data) {
-    
+    static function lsdp_localize_polyglang_data_divi_5() {
+        $data = [];
         global $polylang;
-        $lsdp_polylang = $polylang;
-        if ( isset( $lsdp_polylang ) ) {
+        if ( isset( $polylang ) ) {
             try {
                 require_once LSDP_DIR . 'helpers/class-lsdp-helpers.php';
       
                 if ( function_exists( 'pll_the_languages' ) && function_exists( 'pll_current_language' ) ) {
-                    $languages = pll_the_languages( array( 'raw' => 1 ) );
+                    $languages = \LSDP_HELPERS::get_languages();
                     
                     // Ensure $languages is an array
                     if ( !is_array( $languages ) || empty( $languages ) ) {
                         return; // Exit early if languages are not available
                     }
-                    $lang_curr = strtolower( pll_current_language() ? pll_current_language() : pll_default_language() );
-                    // Correct array_map function
-                    $languages = array_map(
-                        function( $language ) {
-                            return array(
-                                'flagCode'       => esc_html( \LSDP_HELPERS::get_flag_code( $language['flag'] ) ),
-                                'slug'           => esc_html( $language['slug'] ),
-                                'name'           => esc_html( $language['name'] ),
-                                'no_translation' => esc_html( $language['no_translation'] ),
-                                'url'            => esc_url( $language['url'] ),
-                            );
-                        },
-                        $languages
-                    );
+                    $lang_curr = \LSDP_HELPERS::get_current_language();
+                    if ( empty($lang_curr) ) {
+                        $lang_curr = strtolower( pll_default_language() );
+                    }
+                    $languages = \LSDP_HELPERS::format_languages( $languages );
                     $custom_data = array(
                         'lsdpLanguageData' => $languages,
                         'lsdpCurrentLang'   => esc_html( $lang_curr ),

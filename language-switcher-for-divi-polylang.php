@@ -66,7 +66,7 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
 		public function lsdp_init() {
 			global $polylang;
 			if ( ! isset( $polylang ) ) {
-				add_action( 'admin_notices', array( self::$instance, 'lsdp_plugin_required_admin_notice' ) );
+				add_action( 'admin_notices', array( $this, 'lsdp_plugin_required_admin_notice' ) );
 			}
 			if ( is_admin() ) {
 				
@@ -78,6 +78,22 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
 			}
 			require_once __DIR__ . '/admin/dashboard/lsdp-dashboard.php';
 			cool_plugins_lsdp_polylang_addon_settings_page( 'polylang-addons', 'cool-plugins-polylang-addons', 'Polylang Addons' );
+			$this->initialize_theme_builder_conditions();
+		}
+
+		/**
+		 * Loads Theme Builder Polylang display conditions (Divi 4+).
+		 *
+		 * @since 1.0.8
+		 */
+		public function initialize_theme_builder_conditions() {
+			$divi_version = self::get_divi_theme_version();
+			if ( ! $divi_version || version_compare( (string) $divi_version, '4.0', '<' ) ) {
+				return;
+			}
+
+			require_once LSDP_DIR . 'theme-builder/class-lsdp-theme-builder-conditions.php';
+			new LSDP_Theme_Builder_Conditions();
 		}
 
 		public function is_divi_theme_exist() {	
@@ -177,42 +193,27 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
         }
 
 		public function lsdp_localize_polyglang_data( $data ) {
-			// return $data;
 			global $polylang;
-			$lsdp_polylang = $polylang;
-
-			if ( isset( $lsdp_polylang ) ) {
+			if ( isset( $polylang ) ) {
 				if ( function_exists( 'et_core_is_fb_enabled' ) && et_core_is_fb_enabled() ) {
 					try {
 						require_once LSDP_DIR . 'helpers/class-lsdp-helpers.php';
 						if ( function_exists( 'pll_the_languages' ) && function_exists( 'pll_current_language' ) ) {
-							$languages = pll_the_languages( array( 'raw' => 1 ) );
+							$languages = \LSDP_HELPERS::get_languages();
 							if ( empty( $languages ) ) {
 								return $data; // If no languages, exit early
 							}
-							$lang_curr = strtolower( pll_current_language() );
+							$lang_curr = \LSDP_HELPERS::get_current_language();
 
-							$languages = array_map(
-								function( $language ) {
-									return $language['name'] = array(
-										'flagCode'       => esc_html( LSDP_HELPERS::get_flag_code( $language['flag'] ) ),
-										'slug'           => esc_html( $language['slug'] ),
-										'name'           => esc_html( $language['name'] ),
-										'no_translation' => esc_html( $language['no_translation'] ),
-										'url'            => esc_url( $language['url'] ),
-									);
-								},
-								$languages
-							);
+							$languages = \LSDP_HELPERS::format_languages( $languages );
 
 							$custom_data = array(
 								'lsdpLanguageData' => $languages,
 								'lsdpCurrentLang'   => esc_html( $lang_curr ),
 								'lsdpPluginUrl'     => esc_url( LSDP_URL ),
 							);
-							$custom_data_json = $custom_data;
 
-							$data['lsdpGlobalObj'] = $custom_data_json;
+							$data['lsdpGlobalObj'] = $custom_data;
 						}
 					} catch ( Exception $e ) {
 						// Handle exception if needed

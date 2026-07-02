@@ -11,9 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
   die( 'Direct access forbidden.' );
 }
 
-use LSDP\Modules\Modules;
 use ET\Builder\Framework\Controllers\RESTController;
-use LSDP\Modules\LanguageSwitcherModule\LanguageSwitcherModule;
 use LSDP\Modules\LanguageSwitcherModule\LanguageSwitcherModuleTraits\ModuleHelper;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -33,9 +31,8 @@ class LanguageSwitcherModuleController extends RESTController {
    * @return WP_REST_Response|WP_Error
    */
   public static function index( WP_REST_Request $request ): WP_REST_Response {
-    $args = [];
     $response = array(
-        'language_switcher_data' => ModuleHelper::lsdp_localize_polyglang_data_divi_5($args),
+        'language_switcher_data' => ModuleHelper::lsdp_localize_polyglang_data_divi_5(),
     );
     return rest_ensure_response($response);
   }

@@ -6,8 +6,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use ET\Builder\FrontEnd\Module\Style;
-use ET\Builder\Packages\Module\Options\Text\TextStyle;
-use ET\Builder\Packages\Module\Options\Css\CssStyle;
 use ET\Builder\Packages\Module\Layout\Components\StyleCommon\CommonStyle;
 
 trait ModuleStylesTrait {

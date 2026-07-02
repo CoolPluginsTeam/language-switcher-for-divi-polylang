@@ -28,7 +28,6 @@ trait ModuleClassnamesTrait {
     $classnames_instance->add(
       ElementClassnames::classnames(
         [
-          'attrs' => $attrs['module']['decoration'] ?? [],
           'attrs' => array_merge(
             $attrs['module']['decoration'] ?? [],
             [

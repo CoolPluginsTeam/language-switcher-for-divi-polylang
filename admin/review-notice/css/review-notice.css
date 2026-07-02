@@ -1,0 +1,32 @@
+/* lsdp-feedback-notice */
+.lsdp-feedback-notice-wrapper.notice.notice-info.is-dismissible {
+    position: relative;
+    margin: 10px 20px 10px 0 !important;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    max-width: 790px;
+    padding-left: 11px;
+    padding-bottom: 11px !important;
+    flex-wrap: wrap;
+}
+
+.lsdp-feedback-notice-wrapper .message_container {
+    width: 100%;
+}
+
+.lsdp-feedback-notice-wrapper .message_container p {
+    margin: 0;
+    margin-bottom: .5rem;
+}
+
+.lsdp-feedback-notice-wrapper a {
+    text-decoration: none;
+}
+
+@media (max-width: 767px) and (min-width: 100px) {
+    .lsdp-feedback-notice-wrapper.notice.notice-info.is-dismissible {
+        margin: 80px 20px 10px 0 !important;
+    }
+}
