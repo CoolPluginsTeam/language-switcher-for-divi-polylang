@@ -31,22 +31,19 @@ if ( ! class_exists( 'LSDPFeedbackNotice' ) ) {
             // Verify nonce for security
             check_ajax_referer( 'lsdp_dismiss_notice', '_wpnonce' );
 
-            $rs = update_option( 'lsdp-ratingDiv', 'yes' );
+            update_option( 'lsdp-ratingDiv', 'yes' );
             wp_send_json_success( array( 'message' => esc_html__( 'Review notice dismissed.', 'language-switcher-for-divi-polylang' ) ) );
 		}
 
-		/**
-		 * Enqueue Notice Assets.
-		 */
-		public function enqueue_notice_assets() {
+		private function review_notice_is_due() {
 			if ( ! current_user_can( 'update_plugins' ) ) {
-				return;
+				return false;
 			}
 			$installation_date = get_option( 'lsdp-installDate' );
-			$already_rated     = get_option( 'lsdp-ratingDiv' ) != false ? get_option( 'lsdp-ratingDiv' ) : 'no';
+			$already_rated     = get_option( 'lsdp-ratingDiv' );
 
 			if ( 'yes' === $already_rated || ! $installation_date ) {
-				return;
+				return false;
 			}
 
 			$display_date = gmdate( 'Y-m-d h:i:s' );
@@ -55,7 +52,14 @@ if ( ! class_exists( 'LSDPFeedbackNotice' ) ) {
 			$difference   = $install_date->diff( $current_date );
 			$diff_days    = $difference->days;
 
-			if ( isset( $diff_days ) && $diff_days >= 3 ) {
+			return ( isset( $diff_days ) && $diff_days >= 3 );
+		}
+
+		/**
+		 * Enqueue Notice Assets.
+		 */
+		public function enqueue_notice_assets() {
+			if ( $this->review_notice_is_due() ) {
 				wp_enqueue_style( 'lsdp-review-notice-style', plugin_dir_url( __DIR__ ) . 'admin/review-notice/css/review-notice.css', array(), LSDP );
 				wp_enqueue_script( 'lsdp-review-notice-script', plugin_dir_url( __DIR__ ) . 'admin/review-notice/js/review-notice.js', array( 'jquery' ), LSDP, true );
 			}
@@ -65,28 +69,7 @@ if ( ! class_exists( 'LSDPFeedbackNotice' ) ) {
 		 * Admin notice.
 		 */
 		public function admin_notice_for_reviews() {
-
-			if ( ! current_user_can( 'update_plugins' ) ) {
-				return;
-			}
-			 // Get installation dates and rated settings.
-			 $installation_date = get_option( 'lsdp-installDate' );
-			 $already_rated     = get_option( 'lsdp-ratingDiv' ) != false ? get_option( 'lsdp-ratingDiv' ) : 'no';
-
-			 // Check user already rated.
-			if ( 'yes' === $already_rated ) {
-				return;
-			}
-
-			// Grab plugin installation date and compare it with current date.
-			$display_date = gmdate( 'Y-m-d h:i:s' );
-			$install_date = new DateTime( $installation_date );
-			$current_date = new DateTime( $display_date );
-			$difference   = $install_date->diff( $current_date );
-			$diff_days    = $difference->days;
-
-			// Check if installation days is greator then week.
-			if ( isset( $diff_days ) && $diff_days >= 3 ) {
+			if ( $this->review_notice_is_due() ) {
 				$notice_content = $this->create_notice_content();
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Content is properly escaped within create_notice_content()
 				printf( '%s', $notice_content );
@@ -112,10 +95,8 @@ if ( ! class_exists( 'LSDPFeedbackNotice' ) ) {
 			$like_it_text       = __( 'Rate Now! ★★★★★', 'language-switcher-for-divi-polylang' );
 			$already_rated_text = __( 'Already Rated', 'language-switcher-for-divi-polylang' );
 			$not_interested     = __( 'Not Interested', 'language-switcher-for-divi-polylang' );
-			$p_name             = $plugin_name;
 			$p_link             = $plugin_link;
 			$wrap_cls           = $plugin_slug . '-feedback-notice-wrapper';
-			$pro_url            = '';
 
 			$nonce = wp_create_nonce( 'lsdp_dismiss_notice' );
 

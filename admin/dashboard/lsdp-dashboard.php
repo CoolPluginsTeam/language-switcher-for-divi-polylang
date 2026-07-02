@@ -17,13 +17,11 @@ if (!defined('ABSPATH')) {
          */
             private static $instance;
             private $pro_plugins = array();
-            private $pages = array();
             private $main_menu_slug = null;// 'cool-plugins-polylang-addon';
             private $plugin_tag = null;
             private $dashboard_page_heading ;
             private $disable_plugins = array();
             private $addon_dir = __DIR__;    // point to the main addon-page directory
-            private $addon_file = __FILE__;
             private $plugin_api = 'https://plugins.coolplugins.net/plugins-list/';
 
             /**
@@ -118,8 +116,10 @@ if (!defined('ABSPATH')) {
                         wp_die();
                     }
                   
-                    require_once 'includes/cool_plugins_downloader.php';
-                        $downloader = new cool_plugins_downloader();
+                    if ( ! class_exists( 'Plugin_Upgrader' ) ) {
+                        require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+                    }
+                    $downloader = new Plugin_Upgrader();
                       
                         $plugins = $this->request_wp_plugins_data($this->plugin_tag);
                        
@@ -214,6 +214,7 @@ if (!defined('ABSPATH')) {
                 $lsdp_plugin_desc = $plugin['desc'];
                 $lsdp_plugin_logo = $this->polylang_addon_plugins_logo( $plugin['slug'] );
                 $lsdp_plugin_slug = $plugin['slug'];
+                $lsdp_tag         = $this->plugin_tag;
                 
                 if ( $is_pro ) {
                     $lsdp_plugin_pro_url = isset( $plugin['buyLink'] ) ? $plugin['buyLink'] : null;
@@ -295,6 +296,33 @@ if (!defined('ABSPATH')) {
             }
 
 
+        private function fetch_plugins_data($url, $trans_name, $option_name, $mapper) {
+            if (get_transient($trans_name) != false) {
+                return get_option($option_name, false);
+            }
+
+            $response = wp_remote_get(esc_url($url), array('timeout' => 15));
+            if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
+                return get_option($option_name, false) ?: array();
+            }
+
+            $plugin_info = json_decode($response['body'], true);
+            if (!is_array($plugin_info)) {
+                return get_option($option_name, false) ?: array();
+            }
+
+            $plugins = call_user_func($mapper, $plugin_info);
+
+            if (!empty($plugins) && is_array($plugins) && count($plugins)) {
+                set_transient($trans_name, $plugins, DAY_IN_SECONDS);
+                update_option($option_name, $plugins);
+                return $plugins;
+            } elseif (get_option($option_name, false) != false) {
+                return get_option($option_name);
+            }
+            return array();
+        }
+
         /**
          * This function will gather all information regarding pro plugins.
          */
@@ -302,90 +330,57 @@ if (!defined('ABSPATH')) {
         {
             $trans_name = $this->main_menu_slug . '_pro_api_cache' . $this->plugin_tag;
             $option_name = $this->main_menu_slug . '-' . $this->plugin_tag . '-pro';
-            if (get_transient($trans_name) != false) {
-
-                return $this->pro_plugins = get_option($option_name, false);
-            }
             $url = $this->plugin_api . 'pro/' . $this->plugin_tag;
 
-            $pro_api = esc_url($url);
-            $response = wp_remote_get($pro_api, array('timeout' => 15));
-            if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
-                return;
-            }
-            $plugin_info = (array) json_decode($response['body']);
-
-            foreach ($plugin_info as $plugin) {
-              if ($plugin->name) {
-
-                    $this->pro_plugins[$plugin->slug] = array(
-                        'name' => $plugin->name,
-                        'logo' => $plugin->image_url,
-                        'desc' => $plugin->info,
-                        'slug' => $plugin->slug,
-                        'version' => $plugin->version,
-                        'download_link' => null,
-                        'incompatible' => $plugin->free_version,
-                        'buyLink' => $plugin->buy_url,
-                    );
-                    if (property_exists($plugin, 'free_version') && $plugin->free_version != null) {
-                        $this->disable_plugins[$plugin->free_version] = array('pro' => $plugin->slug);
+            $this->pro_plugins = $this->fetch_plugins_data($url, $trans_name, $option_name, function($plugin_info) {
+                $plugins = array();
+                foreach ($plugin_info as $plugin) {
+                    if (isset($plugin['name']) && $plugin['name']) {
+                        $plugins[$plugin['slug']] = array(
+                            'name' => $plugin['name'],
+                            'logo' => isset($plugin['image_url']) ? $plugin['image_url'] : '',
+                            'desc' => isset($plugin['info']) ? $plugin['info'] : '',
+                            'slug' => $plugin['slug'],
+                            'version' => isset($plugin['version']) ? $plugin['version'] : '',
+                            'download_link' => null,
+                            'incompatible' => isset($plugin['free_version']) ? $plugin['free_version'] : '',
+                            'buyLink' => isset($plugin['buy_url']) ? $plugin['buy_url'] : '',
+                        );
+                        if (isset($plugin['free_version']) && $plugin['free_version'] != null) {
+                            $this->disable_plugins[$plugin['free_version']] = array('pro' => $plugin['slug']);
+                        }
                     }
-               }
+                }
+                return $plugins;
+            });
 
-            }
-
-
-            if (!empty($this->pro_plugins) && is_array($this->pro_plugins) && count($this->pro_plugins)) {
-                set_transient($trans_name, $this->pro_plugins, DAY_IN_SECONDS);
-                update_option($option_name, $this->pro_plugins);
-                return $this->pro_plugins;
-            } else if (get_option($option_name, false) != false) {
-                return get_option($option_name);
-            }
-
+            return $this->pro_plugins;
         }
 
-
-           
         /**
          * Gather all the free plugin information from wordpress.org API
          */
         public function request_wp_plugins_data($tag = null)
         {
+            $trans_name = $this->main_menu_slug . '_api_cache' . $this->plugin_tag;
+            $option_name = $this->main_menu_slug . '-' . $this->plugin_tag;
+            $url = $this->plugin_api . 'free/' . $this->plugin_tag;
 
-            if (get_transient($this->main_menu_slug . '_api_cache' . $this->plugin_tag) != false) {
-                return get_option($this->main_menu_slug . '-' . $this->plugin_tag, false);
-            }
-             $url = $this->plugin_api . 'free/' . $this->plugin_tag;
-
-
-            $response = wp_remote_get($url, array('timeout' => 15));
-            if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
-                return;
-            }
-            $plugin_info = json_decode($response['body'],true);
-            $all_plugins = array();
-            foreach ($plugin_info as $plugin) {
-                $all_plugins[$plugin['slug']] = array(
-                    'name'          => $plugin['name'],
-                    'logo'          => $plugin['image_url'],
-                    'slug'          => $plugin['slug'],
-                    'desc'          => $plugin['info'],
-                    'version'       => $plugin['version'],
-                    'tags'          => $plugin['tag'],
-                    'download_link' => $plugin['download_url'],
-                );
-            }
-           
-
-            if (!empty($all_plugins) && is_array($all_plugins) && count($all_plugins)) {
-                set_transient($this->main_menu_slug . '_api_cache' . $this->plugin_tag, $all_plugins, DAY_IN_SECONDS);
-                update_option($this->main_menu_slug . '-' . $this->plugin_tag, $all_plugins);
+            return $this->fetch_plugins_data($url, $trans_name, $option_name, function($plugin_info) {
+                $all_plugins = array();
+                foreach ($plugin_info as $plugin) {
+                    $all_plugins[$plugin['slug']] = array(
+                        'name'          => isset($plugin['name']) ? $plugin['name'] : '',
+                        'logo'          => isset($plugin['image_url']) ? $plugin['image_url'] : '',
+                        'slug'          => $plugin['slug'],
+                        'desc'          => isset($plugin['info']) ? $plugin['info'] : '',
+                        'version'       => isset($plugin['version']) ? $plugin['version'] : '',
+                        'tags'          => isset($plugin['tag']) ? $plugin['tag'] : '',
+                        'download_link' => isset($plugin['download_url']) ? $plugin['download_url'] : '',
+                    );
+                }
                 return $all_plugins;
-            } elseif (get_option($this->main_menu_slug . '-' . $this->plugin_tag, false) != false) {
-                return get_option($this->main_menu_slug . '-' . $this->plugin_tag);
-            }
+            });
         }
    
     function polylang_addon_plugins_logo($slug){

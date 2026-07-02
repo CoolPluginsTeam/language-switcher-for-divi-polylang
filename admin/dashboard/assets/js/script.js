@@ -16,30 +16,28 @@ jQuery(document).ready(function($) {
         });
     }
 
+    function buildAddonData(btn, actionPrefix) {
+        return {
+            'action': actionPrefix + btn.attr('data-plugin-tag'),
+            'wp_nonce': btn.attr('data-action-nonce')
+        };
+    }
+
     $('button.cool-plugins-addon').on('click', function() {
-        if ($(this).hasClass('plugin-downloader')) {
-            let nonce = $(this).attr('data-action-nonce');
-            let nonceName = $(this).attr('data-action-name');
-            let pluginTag = $(this).attr('data-plugin-tag');
-            let pluginSlug = $(this).attr('data-plugin-slug');
-            let btn = $(this);
-            
-            let data = { 'action': 'cool_plugins_install_' + pluginTag, 'wp_nonce': nonce, 'nonce_name': nonceName, 'polylang_slug': pluginSlug  };
+        let btn = $(this);
+        let pluginSlug = btn.attr('data-plugin-slug');
+
+        if (btn.hasClass('plugin-downloader')) {
+            let data = buildAddonData(btn, 'cool_plugins_install_');
+            data.polylang_slug = pluginSlug;
             doAddonAjax(data, btn, 'Installing...');
-        }
-        if ($(this).hasClass('plugin-activator')) {
-            let nonce = $(this).attr('data-action-nonce');
-            let nonceName = $(this).attr('data-action-name');
-            let pluginFile = $(this).attr('data-plugin-id');
-            let pluginTag = $(this).attr('data-plugin-tag');
-            let pluginSlug = $(this).attr('data-plugin-slug');
-            let btn = $(this);
-            
-            let data = { 'action': 'cool_plugins_activate_' + pluginTag, 'polylang_activate_pluginbase': pluginFile, 'wp_nonce': nonce, 'nonce_name': nonceName, 'polylang_activate_slug': pluginSlug };
+        } else if (btn.hasClass('plugin-activator')) {
+            let data = buildAddonData(btn, 'cool_plugins_activate_');
+            data.polylang_activate_slug = pluginSlug;
+            data.polylang_activate_pluginbase = btn.attr('data-plugin-id');
             doAddonAjax(data, btn, 'Activating...');
         }
-
-    })
+    });
 
     $('.plugins-list .installed-addons').each(function(el) {
         let $this = $(this);

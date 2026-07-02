@@ -6,7 +6,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use LSDP\Modules\LanguageSwitcherModule\LanguageSwitcherModule;
-use ET\Builder\FrontEnd\BlockParser\BlockParserStore;
 use ET\Builder\Framework\Utility\HTMLUtility;
 use ET\Builder\Packages\Module\Module;
 use LSDP\Modules\LanguageSwitcherModule\LanguageSwitcherModuleTraits\ModuleHelper;

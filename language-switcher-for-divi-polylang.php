@@ -66,7 +66,7 @@ if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
 		public function lsdp_init() {
 			global $polylang;
 			if ( ! isset( $polylang ) ) {
-				add_action( 'admin_notices', array( self::$instance, 'lsdp_plugin_required_admin_notice' ) );
+				add_action( 'admin_notices', array( $this, 'lsdp_plugin_required_admin_notice' ) );
 			}
 			if ( is_admin() ) {
 				

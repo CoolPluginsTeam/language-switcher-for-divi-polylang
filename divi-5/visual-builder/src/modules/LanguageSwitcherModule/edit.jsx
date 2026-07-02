@@ -40,8 +40,7 @@ export const LanguageSwitcherModuleEdit = (props) => {
       method: 'GET',
       restRoute: '/lsdp/v1/module-data/language-switcher-module',
     })
-    .catch((error) => {
-      console.error('Error fetching data:', error);
+    .catch(() => {
     });
   }
 

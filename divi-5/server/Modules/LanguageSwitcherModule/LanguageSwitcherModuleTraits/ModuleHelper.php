@@ -30,8 +30,7 @@ class ModuleHelper {
     static function lsdp_localize_polyglang_data_divi_5() {
         $data = [];
         global $polylang;
-        $lsdp_polylang = $polylang;
-        if ( isset( $lsdp_polylang ) ) {
+        if ( isset( $polylang ) ) {
             try {
                 require_once LSDP_DIR . 'helpers/class-lsdp-helpers.php';
       

@@ -11,9 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
   die( 'Direct access forbidden.' );
 }
 
-use LSDP\Modules\Modules;
 use ET\Builder\Framework\Controllers\RESTController;
-use LSDP\Modules\LanguageSwitcherModule\LanguageSwitcherModule;
 use LSDP\Modules\LanguageSwitcherModule\LanguageSwitcherModuleTraits\ModuleHelper;
 use WP_REST_Request;
 use WP_REST_Response;
