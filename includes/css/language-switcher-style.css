@@ -1,0 +1,217 @@
+.lsep-main-wrapper{
+  --lsep-flag-radius: 0px;
+  --lsep-flag-ratio: 4/3;
+  --lsep-normal-bg-color: #fff;
+  --lsep-normal-text-color: #000;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: 1.5;
+}
+/* General reset */
+.lsep-language-list,
+.lsep-language-list li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.lsep-main-wrapper .lsep-language-list{
+  overflow: hidden;
+}
+
+.lsep-main-wrapper .lsep-wrapper a{
+  text-decoration: none;
+}
+
+.lsep-main-wrapper .lsep-wrapper.horizontal {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
+.lsep-main-wrapper .lsep-wrapper.vertical {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Language switcher container */
+.lsep-wrapper {
+    padding: 10px;
+}
+
+/* Language item styling */
+.lsep-lang-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    margin-bottom: 6px;
+    white-space: nowrap;
+    line-height: 1;
+}
+
+.lsep-wrapper.horizontal .lsep-lang-item a,
+.lsep-wrapper.vertical .lsep-lang-item a{
+  background-color: var(--lsep-normal-bg-color);
+}
+
+
+.lsep-lang-image{
+  aspect-ratio: var(--lsep-flag-ratio);
+}
+
+/* Flag image styling */
+.lsep-lang-image img {
+    object-fit: cover;
+    border-radius: var(--lsep-flag-radius);
+}
+
+/* Name, code, and flag inline */
+.lsep-lang-image,
+.lsep-lang-name,
+.lsep-lang-code {
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+    /* text-transform: capitalize; */
+}
+
+/* Link reset */
+.lsep-lang-item a,
+.lsep-active-language a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--lsep-normal-text-color);
+}
+
+/* Active language button (dropdown trigger) */
+.lsep-active-language {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 6px 8px;
+    border-radius: 4px;
+    color: var(--lsep-normal-text-color);
+}
+
+/* DROPDOWN STYLING */
+.lsep-wrapper.dropdown {
+  position: relative;
+  display: inline-flex;
+  margin: 0 auto;
+  padding: 10px 15px;
+  cursor: pointer;
+  outline: none;
+  background-color: var(--lsep-normal-bg-color);
+  overflow: visible;
+  align-items: center;
+}
+
+.lsep-active-language .lsep-dropdown-icon {
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.lsep-wrapper.dropdown:hover .lsep-dropdown-icon {
+  transform: rotate(180deg);
+}
+
+.lsep-wrapper.dropdown span a{
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.lsep-wrapper.dropdown ul {
+  position: absolute;
+  top: 100%;
+  left: 0px;
+  right: 0px;
+
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  list-style: none;
+  opacity: 0;
+  pointer-events: none;
+  padding: 0px;
+  z-index: 999;
+  /* overflow-wrap: anywhere; */
+  display: inline-table;
+  width: 100%;
+}
+
+.lsep-wrapper.dropdown ul li{
+  text-decoration: none;
+  background: var(--lsep-normal-bg-color);
+  display: block
+}
+.lsep-wrapper.dropdown li a{
+  color: var(--lsep-normal-text-color);
+  padding: 5px 15px;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  white-space: nowrap;
+}
+
+.lsep-dropdown-direction-up .lsep-wrapper.dropdown ul {
+  top: auto;
+  bottom: 100%;
+  justify-content: flex-start;
+}
+
+.lsep-wrapper.dropdown.active::after, .lsep-wrapper.dropdown:hover::after {
+  border-width: 0 6px 6px 6px;
+}
+
+.lsep-wrapper.dropdown.active ul, .lsep-wrapper.dropdown:hover ul {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+.lsep_elementor_review_notice .lsep_elementor_review_wrapper{
+  padding: 10px; border:
+  2px solid #EDACFB;
+}
+.lsep_elementor_review_notice #lsep_elementor_review_dismiss{
+  position: absolute;
+  bottom: 4px;
+  background: #EDACFB;
+  color: #0C0D0E;
+  font-size: 10px;
+  padding: 5px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.lsep_elementor_review_notice .lsep_elementor_review_msg{
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.lsep_elementor_review_notice .lsep_elementor_review_msg a{
+  color: #EDACFB;
+}
+.lsep_elementor_demo_btn{
+  position: absolute;
+  bottom: 4px;
+  right: 30px;
+  background: #EDACFB;
+  font-size: 10px;
+  padding: 5px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.lsep_elementor_demo_btn a{
+  color: black;
+}
+.lsep_elementor_demo_btn a:hover{
+  color:black;
+  text-decoration: none;
+}

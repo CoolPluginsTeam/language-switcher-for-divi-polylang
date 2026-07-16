@@ -1,5 +1,5 @@
 <?php
-/*
+/**
 Plugin Name: Language Switcher – Polylang for Divi
 Plugin URI:  https://wordpress.org/plugins/language-switcher-for-divi-polylang
 Description: Language Switcher – Polylang for Divi to use added language switcher in your page or divi header menu
@@ -25,222 +25,174 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with Language Switcher – Polylang for Divi. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
-*/
+
+ * @package LanguageSwitcherForDiviPolylang
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
-  die( 'Direct access forbidden.' );
+	exit;
 }
 
 define( 'LSDP', '1.0.7' );
 define( 'LSDP_DIR', plugin_dir_path( __FILE__ ) );
 define( 'LSDP_URL', plugin_dir_url( __FILE__ ) );
-define( 'LSDP_MODULE_URL', plugin_dir_url( __FILE__ ) . 'includes/modules' );
-define( 'LSDP_MODULE_DIR', plugin_dir_path( __FILE__ ) . 'includes/modules' );
-define('LSDP_FEEDBACK_API',"https://feedback.coolplugins.net/");
-if ( ! class_exists( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG' ) ) {
-	class LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG {
-		public static $instance;
+define( 'LSDP_MODULE_URL', LSDP_URL . 'includes/modules' );
+define( 'LSDP_MODULE_DIR', LSDP_DIR . 'includes/modules' );
+define( 'LSDP_FEEDBACK_API', 'https://feedback.coolplugins.net/' );
 
-		public function __construct() {
-			
-			register_activation_hook( __FILE__, array( $this, 'lsdp_activate' ) );
-			add_action( 'plugins_loaded', array( $this, 'lsdp_init' ) );
-			add_action( 'admin_init', array( $this, 'is_divi_theme_exist' ) );
-			add_action( 'admin_init', array( $this, 'lsdp_redirect_to_settings' ) );
-            add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'lsdp_settings_page' ) );
-			add_action( 'divi_extensions_init', array( $this, 'initialize_divi_module' ) );
-			add_filter( 'et_fb_backend_helpers', array( $this, 'lsdp_localize_polyglang_data' ) );
-			self::initialize_divi_5_module();
+/**
+ * Main plugin bootstrap.
+ */
+final class LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG {
+
+	/**
+	 * Singleton instance.
+	 *
+	 * @var self|null
+	 */
+	private static $instance = null;
+
+	/** Register hooks. */
+	private function __construct() {
+
+		add_action( 'plugins_loaded', array( $this, 'init' ), 20 );
+		add_action( 'admin_init', array( $this, 'redirect_after_activation' ) );
+		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'plugin_action_links' ) );
+		add_action( 'divi_extensions_init', array( $this, 'initialize_divi_4' ) );
+		add_filter( 'et_fb_backend_helpers', array( $this, 'localize_divi_data' ) );
+	}
+	/** Activation defaults. */
+	public static function activate() {
+		update_option( 'lsdp-v', LSDP );
+		update_option( 'lsdp-type', 'FREE' );
+		if ( ! get_option( 'lsdp_initial_save_version' ) ) {
+			add_option( 'lsdp_initial_save_version', LSDP );
+			add_option( 'lsdp_plugin_activation_redirect', true );
 		}
-
-		public function lsdp_activate() {
-			update_option( 'lsdp-v', LSDP );
-			update_option( 'lsdp-type', 'FREE' );
-			update_option( 'lsdp-installDate', gmdate( 'Y-m-d h:i:s' ) );
-			update_option( 'lsdp-ratingDiv', 'no' );
-			if (!get_option( 'lsdp_initial_save_version' ) ) {
-                add_option( 'lsdp_initial_save_version', LSDP );
-				add_option( 'lsdp_plugin_activation_redirect', true );
-            }
-		}
-
-		public function lsdp_init() {
-			global $polylang;
-			if ( ! isset( $polylang ) ) {
-				add_action( 'admin_notices', array( self::$instance, 'lsdp_plugin_required_admin_notice' ) );
-			}
-			if ( is_admin() ) {
-				
-				/** Feedback form after deactivation */
-				require_once __DIR__ . '/admin/feedback/admin-feedback-form.php';
-				/*** Plugin review notice file */
-				require_once __DIR__ . '/admin/lsdp-feedback-notice.php';
-				new LSDPFeedbackNotice();
-			}
-			require_once __DIR__ . '/admin/dashboard/lsdp-dashboard.php';
-			cool_plugins_lsdp_polylang_addon_settings_page( 'polylang-addons', 'cool-plugins-polylang-addons', 'Polylang Addons' );
-		}
-
-		public function is_divi_theme_exist() {	
-			if ( ! self::is_theme_activate( 'Divi' ) ) {
-				// Divi theme is not activated, display admin notice
-				add_action( 'admin_notices', array( $this, 'admin_notice_missing_divi_theme' ) );
-			}
-		}
-
-		public static function is_theme_activate( $target ) {
-			$theme = wp_get_theme();
-			if ( $theme->name == $target || stripos( $theme->parent_theme, $target ) !== false ) {
-				return true;
-			}
-			if ( apply_filters( 'divi_ghoster_ghosted_theme', '' ) == $target ) {
-				return true;
-			}
-			return false;
-		}
-		
-		public static function get_divi_theme_version() {
-			if ( ! self::is_theme_activate( 'Divi' ) ) {
-				return 0;
-			}
-		
-			$theme = wp_get_theme();
-		
-			// When active theme is a child of Divi, use the parent (Divi) theme version.
-			if ( $theme->parent() ) {
-				return $theme->parent()->get( 'Version' );
-			}
-		
-			return $theme->get( 'Version' );
-		}
-
-		public function admin_notice_missing_divi_theme() {
-			if ( current_user_can( 'activate_plugins' ) ) {
-				$message = sprintf(
-					// translators: 1: Plugin Name, 2: Theme Name
-					esc_html__(
-						'%1$s requires %2$s to be installed and activated.',
-						'language-switcher-for-divi-polylang'
-					),
-					esc_html__( 'Language Switcher – Polylang for Divi', 'language-switcher-for-divi-polylang' ),
-					esc_html__( 'Divi (Theme)', 'language-switcher-for-divi-polylang' )
-				);
-				echo sprintf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', esc_html( $message ) );
-				if ( function_exists( 'deactivate_plugins' ) ) {
-					deactivate_plugins( __FILE__ );
-			  	}
-			}
-		}
-
-		public function lsdp_plugin_required_admin_notice() {
-			if ( current_user_can( 'activate_plugins' ) ) {
-				$url         = 'plugin-install.php?tab=plugin-information&plugin=polylang&TB_iframe=true';
-				$title       = 'Polylang';
-				$plugin_info = get_plugin_data( __FILE__, true, true );
-				echo '<div class="error"><p>' .
-				sprintf(
-					// translators: 1: Plugin Name, 2: Plugin URL
-					esc_html__(
-						'In order to use %1$s plugin, please install and activate the latest version  of %2$s',
-						'language-switcher-for-divi-polylang'
-					),
-					wp_kses( '<strong>' . esc_html( $plugin_info['Name'] ) . '</strong>', 'strong' ),
-					wp_kses( '<a href="' . esc_url( $url ) . '" class="thickbox" title="' . esc_attr( $title ) . '">' . esc_html( $title ) . '</a>', 'a' )
-				) . '.</p></div>';
-
-				if ( function_exists( 'deactivate_plugins' ) ) {
-					  deactivate_plugins( __FILE__ );
-				}
-			}
-		}
-
-		/**
-         * Redirect to settings page on plugin activation.
-         *
-         * @since 1.0.0
-         */
-        public function lsdp_redirect_to_settings() {
-            if ( get_option( 'lsdp_plugin_activation_redirect', false ) ) {
-                delete_option( 'lsdp_plugin_activation_redirect' );
-                wp_safe_redirect( admin_url( 'admin.php?page=lsdp-get-started' ) );
-                exit;
-            }
-        }
-
-        /**
-         * Description  Add links in plugin list page
-         *
-         * @param array $links  The Links you want to add.
-         */
-        	public function lsdp_settings_page( $links ) {
-            $links[] = '<a style="font-weight:bold" href="' . esc_url( admin_url( 'admin.php?page=lsdp-get-started' ) ) . '">' . esc_html__( 'Get Started', 'language-switcher-for-divi-polylang' ) . '</a>';
-            return $links;
-        }
-
-		public function lsdp_localize_polyglang_data( $data ) {
-			// return $data;
-			global $polylang;
-			$lsdp_polylang = $polylang;
-
-			if ( isset( $lsdp_polylang ) ) {
-				if ( function_exists( 'et_core_is_fb_enabled' ) && et_core_is_fb_enabled() ) {
-					try {
-						require_once LSDP_DIR . 'helpers/class-lsdp-helpers.php';
-						if ( function_exists( 'pll_the_languages' ) && function_exists( 'pll_current_language' ) ) {
-							$languages = pll_the_languages( array( 'raw' => 1 ) );
-							if ( empty( $languages ) ) {
-								return $data; // If no languages, exit early
-							}
-							$lang_curr = strtolower( pll_current_language() );
-
-							$languages = array_map(
-								function( $language ) {
-									return $language['name'] = array(
-										'flagCode'       => esc_html( LSDP_HELPERS::get_flag_code( $language['flag'] ) ),
-										'slug'           => esc_html( $language['slug'] ),
-										'name'           => esc_html( $language['name'] ),
-										'no_translation' => esc_html( $language['no_translation'] ),
-										'url'            => esc_url( $language['url'] ),
-									);
-								},
-								$languages
-							);
-
-							$custom_data = array(
-								'lsdpLanguageData' => $languages,
-								'lsdpCurrentLang'   => esc_html( $lang_curr ),
-								'lsdpPluginUrl'     => esc_url( LSDP_URL ),
-							);
-							$custom_data_json = $custom_data;
-
-							$data['lsdpGlobalObj'] = $custom_data_json;
-						}
-					} catch ( Exception $e ) {
-						// Handle exception if needed
-					}
-				}
-			}
-			return $data;
-		}
-
-		public function initialize_divi_5_module() { 
-			$divi_version = self::get_divi_theme_version();
-			if ( $divi_version && version_compare( (string) $divi_version, '5.0', '>=' ) ) {
-				require_once plugin_dir_path( __FILE__ ) . 'divi-5/divi-5.php';
-				new LSDP_Divi5();
-			}
-		}
-		public function initialize_divi_module() {
-			require_once plugin_dir_path( __FILE__ ) . 'includes/LanguageSwitcherForDiviPolylang.php';
-		}
-
-		public static function get_instance() {
-			if ( null === self::$instance ) {
-				self::$instance = new self();
-			}
-			return self::$instance;
+		if ( ! get_option( 'lsdp-installDate' ) ) {
+			add_option( 'lsdp-installDate', gmdate( 'Y-m-d H:i:s' ) );
 		}
 	}
 
-	LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG::get_instance();
+	/** Load builder-independent features and optional integrations. */
+	public function init() {
+		require_once LSDP_DIR . 'helpers/class-lsdp-common-helpers.php';
+		require_once LSDP_DIR . 'helpers/lsdp-block-helpers.php';
+
+		if ( ! LSDP_Common_Helpers::is_dependencies_active() ) {
+			add_action( 'admin_notices', array( $this, 'polylang_notice' ) );
+			return;
+		}
+
+		// Divi builds its native module dependency tree while the theme loads.
+		// Register these hooks now, before after_setup_theme, so Divi 5 can find them.
+		$this->initialize_divi_5();
+		require_once LSDP_DIR . 'includes/class-lsdp-language-switcher-block.php';
+		LSDP_Language_Switcher_Block::get_instance();
+
+		if ( LSDP_Common_Helpers::is_elementor_available() ) {
+			require_once LSDP_DIR . 'includes/class-lsdp-manager.php';
+			require_once LSDP_DIR . 'includes/class-lsdp-register-widget.php';
+		}
+
+		if ( is_admin() ) {
+			require_once LSDP_DIR . 'admin/class-lsdp-floating-switcher-settings.php';
+			LSDP_Floating_Switcher_Settings::get_instance();
+			require_once LSDP_DIR . 'admin/feedback/class-lsdp-feedback.php';
+			require_once LSDP_DIR . 'admin/dashboard/class-lsdp-admin-dashboard.php';
+			lsdp_register_admin_dashboard();
+		} else {
+			require_once LSDP_DIR . 'includes/class-lsdp-floating-switcher-frontend.php';
+		}
+	}
+
+	/** Load the Divi 4 extension only when Divi fires its integration hook. */
+	public function initialize_divi_4() {
+		if ( file_exists( LSDP_DIR . 'includes/LanguageSwitcherForDiviPolylang.php' ) ) {
+			require_once LSDP_DIR . 'includes/LanguageSwitcherForDiviPolylang.php';
+		}
+	}
+
+	/** Register optional Divi 5 support before the theme builds its module tree. */
+	public function initialize_divi_5() {
+
+		require_once LSDP_DIR . 'divi-5/divi-5.php';
+		new LSDP_Divi5();
+	}
+
+	/**
+	 * Supply language data to the Divi visual builder.
+	 *
+	 * @param array $data Existing visual builder data.
+	 * @return array
+	 */
+	public function localize_divi_data( $data ) {
+		if ( ! function_exists( 'et_core_is_fb_enabled' ) || ! et_core_is_fb_enabled() || ! function_exists( 'pll_the_languages' ) ) {
+			return $data;
+		}
+
+		$languages = pll_the_languages( array( 'raw' => 1 ) );
+		if ( empty( $languages ) || ! is_array( $languages ) ) {
+			return $data;
+		}
+
+		$data['lsdpGlobalObj'] = array(
+			'lsdpLanguageData' => array_map(
+				static function ( $language ) {
+					return array(
+						'flagCode'       => LSDP_Common_Helpers::get_flag_code( $language['flag'] ),
+						'slug'           => sanitize_key( $language['slug'] ),
+						'name'           => sanitize_text_field( $language['name'] ),
+						'no_translation' => ! empty( $language['no_translation'] ),
+						'url'            => esc_url_raw( $language['url'] ),
+					);
+				},
+				$languages
+			),
+			'lsdpCurrentLang'  => function_exists( 'pll_current_language' ) ? sanitize_key( pll_current_language() ) : '',
+			'lsdpPluginUrl'    => esc_url_raw( LSDP_URL ),
+		);
+
+		return $data;
+	}
+
+	/** Show the sole dependency notice. */
+	public function polylang_notice() {
+		if ( ! current_user_can( 'activate_plugins' ) ) {
+			return;
+		}
+		echo '<div class="notice notice-warning"><p>' . esc_html__( 'Language Switcher for Polylang requires Polylang to be installed and activated.', 'language-switcher-for-divi-polylang' ) . '</p></div>';
+	}
+
+	/** Redirect once after activation. */
+	public function redirect_after_activation() {
+		if ( ! get_option( 'lsdp_plugin_activation_redirect', false ) || ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+		delete_option( 'lsdp_plugin_activation_redirect' );
+		wp_safe_redirect( admin_url( 'admin.php?page=lsep-get-started' ) );
+		exit;
+	}
+
+	/**
+	 * Add the dashboard link on the Plugins screen.
+	 *
+	 * @param array $links Existing plugin action links.
+	 * @return array
+	 */
+	public function plugin_action_links( $links ) {
+		$links[] = '<a href="' . esc_url( admin_url( 'admin.php?page=lsep-get-started' ) ) . '">' . esc_html__( 'Get Started', 'language-switcher-for-divi-polylang' ) . '</a>';
+		return $links;
+	}
+
+	/** Get singleton. */
+	public static function get_instance() {
+		if ( null === self::$instance ) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
 }
 
+register_activation_hook( __FILE__, array( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG', 'activate' ) );
+LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG::get_instance();

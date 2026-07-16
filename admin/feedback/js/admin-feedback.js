@@ -1,8 +1,7 @@
 (function($){
     $(document).ready(function(){
         let plugin_slug = 'language-switcher-for-divi-polylang';
-        let text_domain = 'LSDP';
-        
+		let text_domain = 'LSDP';
         $target = $('#the-list').find('[data-slug="'+plugin_slug+'"] span.deactivate a');
 
         var plugin_deactivate_link = $target.attr('href');
@@ -20,7 +19,7 @@
         });
 
         $("." + plugin_slug + " .cool-plugins-deactivate-feedback-dialog-input").on('click',function(){
-            if($("." + plugin_slug + " #cool-plugins-GDPR-data-notice").is(":checked") === true && $("." + plugin_slug + " .cool-plugins-deactivate-feedback-dialog-input").is(':checked') === true){ 
+            if($("." + plugin_slug + " #cool-plugins-GDPR-data-notice").is(":checked") === true && $("." + plugin_slug + " .cool-plugins-deactivate-feedback-dialog-input").is(':checked') === true){
                 $("." + plugin_slug + " #cool-plugin-submitNdeactivate").removeClass('button-deactivate');
             }
             else{
@@ -31,7 +30,7 @@
 
         $("." + plugin_slug + " #cool-plugins-GDPR-data-notice").on('click', function(){
 
-            if($("." + plugin_slug + " #cool-plugins-GDPR-data-notice").is(":checked") === true && $("." + plugin_slug + " .cool-plugins-deactivate-feedback-dialog-input").is(':checked') === true){ 
+            if($("." + plugin_slug + " #cool-plugins-GDPR-data-notice").is(":checked") === true && $("." + plugin_slug + " .cool-plugins-deactivate-feedback-dialog-input").is(':checked') === true){
                 $("." + plugin_slug + " #cool-plugin-submitNdeactivate").removeClass('button-deactivate');
             }
             else{

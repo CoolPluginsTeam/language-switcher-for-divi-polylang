@@ -50,7 +50,7 @@ export const LanguageSwitcherModuleEdit = (props) => {
     setTimeout(() => {
     const thisModule = document.querySelector('.lsdp_language_switcher_for_divi_polylang');
 
-    const parentRow = thisModule.parentNode;
+    const parentRow = thisModule ? thisModule.parentNode : null;
     if (parentRow) {
       if(parentRow.style.getPropertyValue('z-index') !== '999'){
         parentRow.style.setProperty('z-index', '999');

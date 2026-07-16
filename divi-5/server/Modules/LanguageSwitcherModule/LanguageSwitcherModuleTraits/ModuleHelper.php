@@ -33,7 +33,7 @@ class ModuleHelper {
         $lsdp_polylang = $polylang;
         if ( isset( $lsdp_polylang ) ) {
             try {
-                require_once LSDP_DIR . 'helpers/class-lsdp-helpers.php';
+                require_once LSDP_DIR . 'helpers/class-lsdp-common-helpers.php';
       
                 if ( function_exists( 'pll_the_languages' ) && function_exists( 'pll_current_language' ) ) {
                     $languages = pll_the_languages( array( 'raw' => 1 ) );
@@ -47,7 +47,7 @@ class ModuleHelper {
                     $languages = array_map(
                         function( $language ) {
                             return array(
-                                'flagCode'       => esc_html( \LSDP_HELPERS::get_flag_code( $language['flag'] ) ),
+                                'flagCode'       => esc_html( \LSDP_Common_Helpers::get_flag_code( $language['flag'] ) ),
                                 'slug'           => esc_html( $language['slug'] ),
                                 'name'           => esc_html( $language['name'] ),
                                 'no_translation' => esc_html( $language['no_translation'] ),
