@@ -4,23 +4,23 @@
 (function () {
 	'use strict';
 
-	var wrap = document.getElementById('lsep-gs-wrap');
-	if (!wrap || !window.lsepGetStarted) {
+	var wrap = document.getElementById('lsdp-gs-wrap');
+	if (!wrap || !window.lsdpGetStarted) {
 		return;
 	}
 
-	var config = window.lsepGetStarted;
+	var config = window.lsdpGetStarted;
 	var data = config.builders;
-	var guideTitle = document.getElementById('lsep-gs-guide-title');
-	var guideSub = document.getElementById('lsep-gs-guide-sub');
-	var stepsWrap = document.getElementById('lsep-gs-steps');
-	var videoIframe = document.getElementById('lsep-gs-video-iframe');
-	var backBtn = document.getElementById('lsep-gs-back-btn');
-	var cards = wrap.querySelectorAll('.lsep-gs-builder-card');
+	var guideTitle = document.getElementById('lsdp-gs-guide-title');
+	var guideSub = document.getElementById('lsdp-gs-guide-sub');
+	var stepsWrap = document.getElementById('lsdp-gs-steps');
+	var videoIframe = document.getElementById('lsdp-gs-video-iframe');
+	var backBtn = document.getElementById('lsdp-gs-back-btn');
+	var cards = wrap.querySelectorAll('.lsdp-gs-builder-card');
 	var defaultBuilder = wrap.getAttribute('data-default-builder') || 'gutenberg';
 	var preferredBuilder = config.preferredBuilder || defaultBuilder;
 	var restoreContent = !!config.restoreContent;
-	var hasPicker = !wrap.classList.contains('lsep-gs-no-picker') && cards.length > 0;
+	var hasPicker = !wrap.classList.contains('lsdp-gs-no-picker') && cards.length > 0;
 
 	function escapeHtml(text) {
 		var el = document.createElement('div');
@@ -28,44 +28,14 @@
 		return el.innerHTML;
 	}
 
-	/**
-	 * Escape step item text but allow the known Gutenberg/Divi plus SVG.
-	 */
-	function formatStepItem(item) {
-		var svgMatch = item.match(/<svg\b[^>]*>[\s\S]*?<\/svg>/i);
-		if (!svgMatch) {
-			return escapeHtml(item);
-		}
-
-		var parts = item.split(/(<svg\b[^>]*>[\s\S]*?<\/svg>)/i);
-		return parts.map(function (part) {
-			if (/^<svg\b/i.test(part)) {
-				return part;
-			}
-			return escapeHtml(part);
+	function renderOverview(builder) {
+		var items = (builder.overviewItems || []).map(function (item) {
+			return '<li><span class="lsdp-gs-check" aria-hidden="true"></span><span>' + escapeHtml(item) + '</span></li>';
 		}).join('');
-	}
 
-	function renderSteps(steps) {
-		var html = '';
-		steps.forEach(function (step, index) {
-			var items = step.items.map(function (item) {
-				return '<li><span class="lsep-gs-check" aria-hidden="true"></span><span class="lsep-gs-step-item-text">' + formatStepItem(item) + '</span></li>';
-			}).join('');
-			var button = step.button && step.buttonUrl
-				? '<a class="lsep-gs-step-btn" href="' + encodeURI(step.buttonUrl) + '">' + escapeHtml(step.button) + '</a>'
-				: '';
-			html +=
-				'<div class="lsep-gs-step">' +
-					'<div class="lsep-gs-step-num">' + (index + 1) + '</div>' +
-					'<div class="lsep-gs-step-body">' +
-						'<h4>' + escapeHtml(step.title) + '</h4>' +
-						'<ul>' + items + '</ul>' +
-						button +
-					'</div>' +
-				'</div>';
-		});
-		stepsWrap.innerHTML = html;
+		stepsWrap.innerHTML =
+			'<h3 class="lsdp-gs-overview-title">' + escapeHtml(builder.overviewTitle || '') + '</h3>' +
+			'<ul class="lsdp-gs-overview-list">' + items + '</ul>';
 	}
 
 	function renderBuilder(key) {
@@ -76,7 +46,7 @@
 
 		guideTitle.textContent = builder.guideTitle;
 		guideSub.textContent = builder.guideSub;
-		renderSteps(builder.steps);
+		renderOverview(builder);
 
 		if (videoIframe && builder.embedUrl) {
 			videoIframe.src = builder.embedUrl;
@@ -89,7 +59,7 @@
 		}
 
 		var body = new window.FormData();
-		body.append('action', 'lsep_save_preferred_builder');
+		body.append('action', 'lsdp_save_preferred_builder');
 		body.append('nonce', config.nonce);
 		body.append('builder', key);
 

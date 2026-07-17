@@ -223,11 +223,11 @@ class LSDP_Feedback {
 
 			$deativation_reason = array_key_exists( $reason, $deactivate_reasons ) ? $reason : 'other';
 
-			$plugin_initial    = get_option( 'lsep_initial_save_version' );
+			$plugin_initial    = get_option( 'lsdp_initial_save_version' );
 			$sanitized_message = isset( $_POST['message'] ) && '' !== sanitize_text_field( wp_unslash( $_POST['message'] ) ) ? sanitize_text_field( wp_unslash( $_POST['message'] ) ) : 'N/A';
 			$admin_email       = sanitize_email( get_option( 'admin_email' ) );
 			$site_url          = get_site_url();
-			$install_date      = get_option( 'lsep_install_date' );
+			$install_date      = get_option( 'lsdp_install_date' );
 			$uni_id            = '40';
 			$site_id           = $site_url . '-' . $install_date . '-' . $uni_id;
 			$response          = wp_remote_post(

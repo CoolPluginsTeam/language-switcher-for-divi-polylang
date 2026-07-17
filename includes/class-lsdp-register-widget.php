@@ -48,17 +48,17 @@ class LSDP_Register_Widget {
 	}
 
 	public function add_editor_js() {
-		wp_enqueue_script( 'lsep-editor-js', LSDP_URL . 'includes/js/lsdp-editor.js', array( 'jquery' ), LSDP, true );
+		wp_enqueue_script( 'lsdp-editor-js', LSDP_URL . 'includes/js/lsdp-editor.js', array( 'jquery' ), LSDP, true );
 	}
 
 	// Elementor Review notice ajax request function
 	public function lsdp_elementor_review_notice() {
-		if ( ! check_ajax_referer( 'lsep_elementor_review', 'nonce', false ) ) {
+		if ( ! check_ajax_referer( 'lsdp_elementor_review', 'nonce', false ) ) {
 			wp_send_json_error( __( 'Invalid security token sent.', 'language-switcher-for-divi-polylang' ) );
 			wp_die( '0', 400 );
 		}
 
-		if ( isset( $_POST['lsep_notice_dismiss'] ) && 'true' === sanitize_text_field( wp_unslash( $_POST['lsep_notice_dismiss'] ) ) ) {
+		if ( isset( $_POST['lsdp_notice_dismiss'] ) && 'true' === sanitize_text_field( wp_unslash( $_POST['lsdp_notice_dismiss'] ) ) ) {
 			update_option( 'lsdp_elementor_review_notice_dismiss', 'yes' );
 		}
 		exit;

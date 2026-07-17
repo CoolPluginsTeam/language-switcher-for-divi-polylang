@@ -211,7 +211,7 @@ class LSDP_Manager {
 		$current_lang_name = pll_get_post_language( $post_id, 'name' );
 
 		$document->start_controls_section(
-			'lsep_language_panel_controls',
+			'lsdp_language_panel_controls',
 			array(
 				'label' => esc_html__( 'Translations', 'language-switcher-for-divi-polylang' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_SETTINGS,
@@ -229,7 +229,7 @@ class LSDP_Manager {
 				}
 
 				$document->add_control(
-					"lsep_elementor_edit_lang_{$lang_slug}",
+					"lsdp_elementor_edit_lang_{$lang_slug}",
 					array(
 						'type'            => \Elementor\Controls_Manager::RAW_HTML,
 						'raw'             => sprintf(
@@ -253,7 +253,7 @@ class LSDP_Manager {
 				);
 
 				$document->add_control(
-					"lsep_elementor_add_lang_{$lang_slug}",
+					"lsdp_elementor_add_lang_{$lang_slug}",
 					array(
 						'type'            => \Elementor\Controls_Manager::RAW_HTML,
 						'raw'             => sprintf(

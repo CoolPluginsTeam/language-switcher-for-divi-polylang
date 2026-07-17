@@ -1,7 +1,7 @@
 <?php
 return array(
 	'dependencies' => array(
-		'lsep-custom-dropdown',
+		'lsdp-custom-dropdown',
 		'wp-blocks',
 		'wp-element',
 		'wp-block-editor',

@@ -88,17 +88,17 @@ class LSDP_Language_Switcher_Block {
 
 		$block_args = array(
 			'attributes'      => $attributes,
-			'style'           => 'lsep-language-switcher-block',
+			'style'           => 'lsdp-language-switcher-block',
 			'render_callback' => array( $this, 'render_language_switcher_block' ),
 		);
 
 		if ( $this->is_modern_block_editor_available() ) {
 			$block_args['api_version']   = version_compare( $GLOBALS['wp_version'], '6.3', '>=' ) ? 3 : 2;
-			$block_args['editor_script'] = 'lsep-language-switcher-block';
-			$block_args['editor_style']  = 'lsep-language-switcher-block-editor';
+			$block_args['editor_script'] = 'lsdp-language-switcher-block';
+			$block_args['editor_style']  = 'lsdp-language-switcher-block-editor';
 		}
 
-		register_block_type( 'lsep/language-switcher', $block_args );
+		register_block_type( 'lsdp/language-switcher', $block_args );
 	}
 
 	/**
@@ -129,7 +129,7 @@ class LSDP_Language_Switcher_Block {
 
 		if ( $this->is_modern_block_editor_available() ) {
 			wp_register_script(
-				'lsep-language-switcher-block',
+				'lsdp-language-switcher-block',
 				LSDP_URL . 'blocks/language-switcher/build/index.js',
 				$asset['dependencies'],
 				$asset['version'],
@@ -138,7 +138,7 @@ class LSDP_Language_Switcher_Block {
 		}
 
 		wp_register_script(
-			'lsep-custom-dropdown',
+			'lsdp-custom-dropdown',
 			LSDP_URL . 'blocks/language-switcher/build/dropdown.js',
 			array(),
 			LSDP,
@@ -146,14 +146,14 @@ class LSDP_Language_Switcher_Block {
 		);
 
 		wp_register_style(
-			'lsep-language-switcher-block-editor',
+			'lsdp-language-switcher-block-editor',
 			LSDP_URL . 'blocks/language-switcher/build/editor.css',
 			array( 'wp-edit-blocks' ),
 			LSDP
 		);
 
 		wp_register_style(
-			'lsep-language-switcher-block',
+			'lsdp-language-switcher-block',
 			LSDP_URL . 'blocks/language-switcher/build/style.css',
 			array(),
 			LSDP
@@ -169,8 +169,8 @@ class LSDP_Language_Switcher_Block {
 	 */
 	public function enqueue_block_editor_assets() {
 		wp_localize_script(
-			'lsep-language-switcher-block',
-			'lsepBlockSettings',
+			'lsdp-language-switcher-block',
+			'lsdpBlockSettings',
 			array(
 				'options'        => $this->get_switcher_options(),
 				'languages'      => LSDP_Common_Helpers::get_polylang_language_select_options(),
@@ -178,7 +178,7 @@ class LSDP_Language_Switcher_Block {
 			)
 		);
 
-		wp_enqueue_script( 'lsep-custom-dropdown' );
+		wp_enqueue_script( 'lsdp-custom-dropdown' );
 	}
 
 	/**
@@ -377,7 +377,7 @@ class LSDP_Language_Switcher_Block {
 	private function get_unique_block_id( $attributes ) {
 		++$this->block_id;
 		$unique_hash = substr( md5( $this->block_id . wp_json_encode( $attributes ) ), 0, 8 );
-		$unique_id   = 'lsep-block-' . $this->block_id . '-' . $unique_hash;
+		$unique_id   = 'lsdp-block-' . $this->block_id . '-' . $unique_hash;
 		return $unique_id;
 	}
 
@@ -396,8 +396,8 @@ class LSDP_Language_Switcher_Block {
 			return '';
 		}
 
-		wp_enqueue_style( 'lsep-language-switcher-block' );
-		wp_add_inline_style( 'lsep-language-switcher-block', $css );
+		wp_enqueue_style( 'lsdp-language-switcher-block' );
+		wp_add_inline_style( 'lsdp-language-switcher-block', $css );
 		return $css;
 	}
 
@@ -484,8 +484,8 @@ class LSDP_Language_Switcher_Block {
 		if ( ! empty( $list_declarations ) ) {
 			$rules[] = $this->build_css_rule(
 				array(
-					'.' . $block_class . '.lsep-layout-horizontal .lsep-lang-item',
-					'.' . $block_class . '.lsep-layout-vertical .lsep-lang-item',
+					'.' . $block_class . '.lsdp-layout-horizontal .lsdp-lang-item',
+					'.' . $block_class . '.lsdp-layout-vertical .lsdp-lang-item',
 				),
 				$list_declarations
 			);
@@ -546,18 +546,18 @@ class LSDP_Language_Switcher_Block {
 		$text    = $style_context['alignment'];
 
 		$rules = array(
-			$this->build_css_rule( array( '.' . $block_class . '.lsep-layout-horizontal' ), array( 'justify-content: ' . $justify . ';' ) ),
-			$this->build_css_rule( array( '.' . $block_class . '.lsep-layout-dropdown' ), array( 'text-align: ' . $text . ';' ) ),
+			$this->build_css_rule( array( '.' . $block_class . '.lsdp-layout-horizontal' ), array( 'justify-content: ' . $justify . ';' ) ),
+			$this->build_css_rule( array( '.' . $block_class . '.lsdp-layout-dropdown' ), array( 'text-align: ' . $text . ';' ) ),
 		);
 
 		if ( 'center' === $style_context['alignment'] ) {
 			$rules[] = $this->build_css_rule(
-				array( '.' . $block_class . '.lsep-layout-vertical' ),
+				array( '.' . $block_class . '.lsdp-layout-vertical' ),
 				array( 'margin-left: auto;', 'margin-right: auto;' )
 			);
 		} elseif ( 'right' === $style_context['alignment'] ) {
 			$rules[] = $this->build_css_rule(
-				array( '.' . $block_class . '.lsep-layout-vertical' ),
+				array( '.' . $block_class . '.lsdp-layout-vertical' ),
 				array( 'margin-left: auto;' )
 			);
 		}
@@ -584,12 +584,12 @@ class LSDP_Language_Switcher_Block {
 			$container_declarations[] = 'background-color: ' . esc_attr( $style_context['background_color'] ) . ' !important;';
 		}
 		if ( ! empty( $container_declarations ) ) {
-			$rules[] = $this->build_css_rule( array( '.' . $block_class . '.lsep-layout-dropdown .lsep-dropdown-container' ), $container_declarations );
+			$rules[] = $this->build_css_rule( array( '.' . $block_class . '.lsdp-layout-dropdown .lsdp-dropdown-container' ), $container_declarations );
 		}
 
 		$button_declarations = $this->get_typography_declarations( $style_context, true, false );
 		if ( ! empty( $button_declarations ) ) {
-			$rules[] = $this->build_css_rule( array( '.' . $block_class . '.lsep-layout-dropdown .lsep-dropdown-button' ), $button_declarations );
+			$rules[] = $this->build_css_rule( array( '.' . $block_class . '.lsdp-layout-dropdown .lsdp-dropdown-button' ), $button_declarations );
 		}
 
 		$menu_declarations = array();
@@ -598,19 +598,19 @@ class LSDP_Language_Switcher_Block {
 		}
 		$menu_declarations = array_merge( $menu_declarations, $this->get_border_radius_declarations( $style_context['border'], true, $style_context['has_border_radius'] ) );
 		if ( ! empty( $menu_declarations ) ) {
-			$rules[] = $this->build_css_rule( array( '.' . $block_class . '.lsep-layout-dropdown .lsep-dropdown-menu' ), $menu_declarations );
+			$rules[] = $this->build_css_rule( array( '.' . $block_class . '.lsdp-layout-dropdown .lsdp-dropdown-menu' ), $menu_declarations );
 		}
 
 		if ( $style_context['has_padding'] ) {
 			$rules[] = $this->build_css_rule(
-				array( '.' . $block_class . '.lsep-layout-dropdown .lsep-dropdown-item' ),
+				array( '.' . $block_class . '.lsdp-layout-dropdown .lsdp-dropdown-item' ),
 				$this->get_spacing_declarations( $style_context['padding'], 'padding', true, true )
 			);
 		}
 
 		$item_link_declarations = $this->get_typography_declarations( $style_context, false, false );
 		if ( ! empty( $item_link_declarations ) ) {
-			$rules[] = $this->build_css_rule( array( '.' . $block_class . '.lsep-layout-dropdown .lsep-dropdown-item a' ), $item_link_declarations );
+			$rules[] = $this->build_css_rule( array( '.' . $block_class . '.lsdp-layout-dropdown .lsdp-dropdown-item a' ), $item_link_declarations );
 		}
 
 		return $rules;
@@ -633,7 +633,7 @@ class LSDP_Language_Switcher_Block {
 		$rules       = array();
 
 		$rules[] = $this->build_css_rule(
-			array( '.' . $block_class . ' .lsep-lang-image' ),
+			array( '.' . $block_class . ' .lsdp-lang-image' ),
 			array(
 				'width: ' . absint( $flag['width'] ) . 'px;',
 				'height: ' . absint( $flag_height ) . 'px;',
@@ -650,7 +650,7 @@ class LSDP_Language_Switcher_Block {
 			$image_declarations[] = 'border-radius: ' . absint( $flag['radius'] ) . 'px;';
 		}
 
-		$rules[] = $this->build_css_rule( array( '.' . $block_class . ' .lsep-lang-image img' ), $image_declarations );
+		$rules[] = $this->build_css_rule( array( '.' . $block_class . ' .lsdp-lang-image img' ), $image_declarations );
 
 		return $rules;
 	}
@@ -1055,7 +1055,7 @@ class LSDP_Language_Switcher_Block {
 		$show_language_codes = ! empty( $attributes['show_language_codes'] );
 
 		$unique_class       = $this->get_unique_block_id( $attributes );
-		$layout_class       = 'lsep-layout-' . esc_attr( $layout );
+		$layout_class       = 'lsdp-layout-' . esc_attr( $layout );
 		$custom_class       = isset( $attributes['className'] ) ? $attributes['className'] : '';
 		$wrapper_class      = trim( $unique_class . ' ' . $layout_class . ' ' . $custom_class );
 		$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => $wrapper_class ) );
@@ -1067,7 +1067,7 @@ class LSDP_Language_Switcher_Block {
 		foreach ( $languages as $lang ) {
 			$is_current = isset( $lang['slug'] ) && $lang['slug'] === $current_lang_slug;
 
-			$switcher_output .= '<li class="lsep-lang-item' . ( $is_current ? ' current-lang' : '' ) . '">';
+			$switcher_output .= '<li class="lsdp-lang-item' . ( $is_current ? ' current-lang' : '' ) . '">';
 
 			$link_attrs = array(
 				'href' => esc_url( $lang['url'] ),
@@ -1091,16 +1091,16 @@ class LSDP_Language_Switcher_Block {
 			if ( $show_flags ) {
 				$custom_flag = LSDP_Common_Helpers::get_country_flag( $lang['flag'], $lang['name'] );
 				if ( $custom_flag ) {
-					$switcher_output .= '<div class="lsep-lang-image">' . $custom_flag . '</div>';
+					$switcher_output .= '<div class="lsdp-lang-image">' . $custom_flag . '</div>';
 				}
 			}
 
 			if ( $show_names && ! empty( $lang['name'] ) ) {
-				$switcher_output .= '<div class="lsep-lang-name">' . esc_html( $lang['name'] ) . '</div>';
+				$switcher_output .= '<div class="lsdp-lang-name">' . esc_html( $lang['name'] ) . '</div>';
 			}
 
 			if ( $show_language_codes && ! empty( $lang['slug'] ) ) {
-				$switcher_output .= '<div class="lsep-lang-code">' . esc_html( $lang['slug'] ) . '</div>';
+				$switcher_output .= '<div class="lsdp-lang-code">' . esc_html( $lang['slug'] ) . '</div>';
 			}
 
 			$switcher_output .= '</a></li>';
@@ -1182,10 +1182,10 @@ class LSDP_Language_Switcher_Block {
 		$show_flags          = ! empty( $attributes['show_flags'] );
 		$show_language_codes = ! empty( $attributes['show_language_codes'] );
 
-		wp_enqueue_script( 'lsep-custom-dropdown' );
+		wp_enqueue_script( 'lsdp-custom-dropdown' );
 
 		$unique_class = $this->get_unique_block_id( $attributes );
-		$unique_id    = 'lsep-dropdown-' . substr( $unique_class, -8 );
+		$unique_id    = 'lsdp-dropdown-' . substr( $unique_class, -8 );
 
 		// Find current language
 		$current_lang = null;
@@ -1207,7 +1207,7 @@ class LSDP_Language_Switcher_Block {
 			return '';
 		}
 
-		$layout_class       = 'lsep-layout-dropdown lsep-custom-dropdown';
+		$layout_class       = 'lsdp-layout-dropdown lsdp-custom-dropdown';
 		$custom_class       = isset( $attributes['className'] ) ? $attributes['className'] : '';
 		$wrapper_class      = trim( $unique_class . ' ' . $layout_class . ' ' . $custom_class );
 		$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => $wrapper_class ) );
@@ -1217,29 +1217,29 @@ class LSDP_Language_Switcher_Block {
 
 		$output  = $this->get_instance_style_tag( $spacing_css );
 		$output .= '<div ' . $wrapper_attributes . '>';
-		$output .= '<div class="lsep-dropdown-container" id="' . esc_attr( $unique_id ) . '">';
-		$output .= '<button type="button" class="lsep-dropdown-button lsep-lang-item" aria-haspopup="listbox" aria-expanded="false" aria-label="' . esc_attr( $aria_label ) . '">';
+		$output .= '<div class="lsdp-dropdown-container" id="' . esc_attr( $unique_id ) . '">';
+		$output .= '<button type="button" class="lsdp-dropdown-button lsdp-lang-item" aria-haspopup="listbox" aria-expanded="false" aria-label="' . esc_attr( $aria_label ) . '">';
 
 		if ( $show_flags ) {
 			$custom_flag = LSDP_Common_Helpers::get_country_flag( $current_lang['flag'], $current_lang['name'] );
 			if ( $custom_flag ) {
-				$output .= '<div class="lsep-lang-image">' . $custom_flag . '</div>';
+				$output .= '<div class="lsdp-lang-image">' . $custom_flag . '</div>';
 			}
 		}
 
 		if ( $show_names && ! empty( $current_lang['name'] ) ) {
-			$output .= '<div class="lsep-dropdown-button-name">' . esc_html( $current_lang['name'] );
+			$output .= '<div class="lsdp-dropdown-button-name">' . esc_html( $current_lang['name'] );
 			if ( $show_language_codes && ! empty( $current_lang['slug'] ) ) {
-				$output .= ' <span class="lsep-language-code">' . esc_html( $current_lang['slug'] ) . '</span>';
+				$output .= ' <span class="lsdp-language-code">' . esc_html( $current_lang['slug'] ) . '</span>';
 			}
 			$output .= '</div>';
 		} elseif ( $show_language_codes && ! empty( $current_lang['slug'] ) ) {
-			$output .= '<div class="lsep-dropdown-button-name"><span class="lsep-language-code">' . esc_html( $current_lang['slug'] ) . '</span></div>';
+			$output .= '<div class="lsdp-dropdown-button-name"><span class="lsdp-language-code">' . esc_html( $current_lang['slug'] ) . '</span></div>';
 		}
 
-		$output .= '<span class="lsep-dropdown-arrow" aria-hidden="true">&#9660;</span>';
+		$output .= '<span class="lsdp-dropdown-arrow" aria-hidden="true">&#9660;</span>';
 		$output .= '</button>';
-		$output .= '<ul class="lsep-dropdown-menu" role="listbox" style="display: none;">';
+		$output .= '<ul class="lsdp-dropdown-menu" role="listbox" style="display: none;">';
 
 		foreach ( $languages as $lang ) {
 			// Skip the language shown in the dropdown button.
@@ -1247,7 +1247,7 @@ class LSDP_Language_Switcher_Block {
 				continue;
 			}
 
-			$classes = array( 'lsep-dropdown-item' );
+			$classes = array( 'lsdp-dropdown-item' );
 
 			$output .= '<li role="option" class="' . esc_attr( implode( ' ', $classes ) ) . '">';
 			$output .= '<a href="' . esc_url( $lang['url'] ) . '">';
@@ -1255,18 +1255,18 @@ class LSDP_Language_Switcher_Block {
 			if ( $show_flags ) {
 				$custom_flag = LSDP_Common_Helpers::get_country_flag( $lang['flag'], $lang['name'] );
 				if ( $custom_flag ) {
-					$output .= '<div class="lsep-lang-image">' . $custom_flag . '</div>';
+					$output .= '<div class="lsdp-lang-image">' . $custom_flag . '</div>';
 				}
 			}
 
 			if ( $show_names && ! empty( $lang['name'] ) ) {
-				$output .= '<div class="lsep-dropdown-item-name">' . esc_html( $lang['name'] );
+				$output .= '<div class="lsdp-dropdown-item-name">' . esc_html( $lang['name'] );
 				if ( $show_language_codes && ! empty( $lang['slug'] ) ) {
-					$output .= ' <span class="lsep-language-code">' . esc_html( $lang['slug'] ) . '</span>';
+					$output .= ' <span class="lsdp-language-code">' . esc_html( $lang['slug'] ) . '</span>';
 				}
 				$output .= '</div>';
 			} elseif ( $show_language_codes && ! empty( $lang['slug'] ) ) {
-				$output .= '<div class="lsep-dropdown-item-name"><span class="lsep-language-code">' . esc_html( $lang['slug'] ) . '</span></div>';
+				$output .= '<div class="lsdp-dropdown-item-name"><span class="lsdp-language-code">' . esc_html( $lang['slug'] ) . '</span></div>';
 			}
 
 			$output .= '</a></li>';

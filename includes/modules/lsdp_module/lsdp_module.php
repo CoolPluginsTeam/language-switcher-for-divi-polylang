@@ -7,6 +7,7 @@ class LSDP_Module extends ET_Builder_Module {
 
 	public $slug                   = 'language-switcher-for-divi-polylang';
 	public $vb_support             = 'on';
+	public $icon_path;
 	private static $language_index = 0;
 	protected $module_credits = array(
 		'module_uri' => '',

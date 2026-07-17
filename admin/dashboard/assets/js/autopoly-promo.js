@@ -4,7 +4,7 @@
 (function () {
 	'use strict';
 
-	var config = window.lsepAutopolyPromo;
+	var config = window.lsdpAutopolyPromo;
 	if (!config) {
 		return;
 	}
@@ -14,16 +14,16 @@
 			return;
 		}
 
-		var existing = promoBox.querySelector('.lsep-install-message');
+		var existing = promoBox.querySelector('.lsdp-install-message');
 		if (existing) {
 			existing.remove();
 		}
 
 		var messageDiv = document.createElement('div');
-		messageDiv.className = 'lsep-install-message lsep-install-message--' + type;
+		messageDiv.className = 'lsdp-install-message lsdp-install-message--' + type;
 		messageDiv.textContent = message;
 
-		var actions = promoBox.querySelector('.lsep-promo-actions');
+		var actions = promoBox.querySelector('.lsdp-promo-actions');
 		if (actions) {
 			actions.insertAdjacentElement('afterend', messageDiv);
 		} else {
@@ -38,7 +38,7 @@
 		var processingText = isActivate
 			? (i18n.activating || 'Activating...')
 			: (i18n.installing || 'Installing...');
-		var promoBox = button.closest('.lsep-promo-box');
+		var promoBox = button.closest('.lsdp-promo-box');
 
 		button.textContent = processingText;
 		button.disabled = true;
@@ -53,7 +53,7 @@
 		}
 
 		var formData = new FormData();
-		formData.append('action', 'lsep_install_autopoly');
+		formData.append('action', 'lsdp_install_autopoly');
 		formData.append('nonce', config.installNonce || '');
 
 		fetch(config.ajaxUrl, {
@@ -68,7 +68,7 @@
 				if (data.success) {
 					var settingsLink = document.createElement('a');
 					settingsLink.href = config.settingsUrl || 'admin.php?page=polylang-atfp-dashboard';
-					settingsLink.className = 'button button-primary lsep-promo-button';
+					settingsLink.className = 'button button-primary lsdp-promo-button';
 					settingsLink.target = '_blank';
 					settingsLink.rel = 'noopener noreferrer';
 					settingsLink.textContent = i18n.goToSettings || 'Go to Settings';
@@ -94,7 +94,7 @@
 	}
 
 	document.addEventListener('click', function (event) {
-		var button = event.target.closest('.lsep-autopoly-action-btn');
+		var button = event.target.closest('.lsdp-autopoly-action-btn');
 		if (!button) {
 			return;
 		}

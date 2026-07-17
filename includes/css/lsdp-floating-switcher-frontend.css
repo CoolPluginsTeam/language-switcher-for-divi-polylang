@@ -6,35 +6,35 @@
 /* ============================================
    Base Floating Switcher
    ============================================ */
-   .lsep-floating-switcher {
+   .lsdp-floating-switcher {
     display: flex;
     flex-direction: column-reverse;
     position: fixed;
     z-index: 99999;
     overflow: hidden;
-    padding: var(--lsep-desktop-padding, 10px 0);
+    padding: var(--lsdp-desktop-padding, 10px 0);
     border: var(--border-width, 1px) solid var(--border-color, transparent);
     border-radius: var(--border-radius, 8px);
     background: var(--bg, #fff);
-    width: var(--lsep-desktop-width, var(--switcher-width, 115px));
-    top: var(--lsep-desktop-top, unset);
-    right: var(--lsep-desktop-right, unset);
-    bottom: var(--lsep-desktop-bottom, unset);
-    left: var(--lsep-desktop-left, unset);
+    width: var(--lsdp-desktop-width, var(--switcher-width, 115px));
+    top: var(--lsdp-desktop-top, unset);
+    right: var(--lsdp-desktop-right, unset);
+    bottom: var(--lsdp-desktop-bottom, unset);
+    left: var(--lsdp-desktop-left, unset);
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.08);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
-.lsep-floating-switcher[data-lsep-desktop-vertical="top"] {
+.lsdp-floating-switcher[data-lsdp-desktop-vertical="top"] {
     flex-direction: column;
 }
 
-.lsep-floating-switcher[data-lsep-desktop-vertical="bottom"] {
+.lsdp-floating-switcher[data-lsdp-desktop-vertical="bottom"] {
     flex-direction: column-reverse;
 }
 
-.lsep-floating-switcher[data-lsep-desktop-vertical="top"] .lsep-language-switcher-inner,
-.lsep-floating-switcher[data-lsep-desktop-vertical="top"] .lsep-switcher-dropdown-list {
+.lsdp-floating-switcher[data-lsdp-desktop-vertical="top"] .lsdp-language-switcher-inner,
+.lsdp-floating-switcher[data-lsdp-desktop-vertical="top"] .lsdp-switcher-dropdown-list {
     flex-direction: column;
 }
 
@@ -42,15 +42,15 @@
    Switcher Inner Container
    ============================================ */
 
-.lsep-language-switcher-inner{
+.lsdp-language-switcher-inner{
     padding: 10px 0px 10px 0px !important;
 }
-.lsep-floating-switcher .lsep-language-switcher-inner {
+.lsdp-floating-switcher .lsdp-language-switcher-inner {
     display: flex;
     flex-direction: column-reverse;
 }
 
-.lsep-ls-inline .lsep-language-switcher-inner {
+.lsdp-ls-inline .lsdp-language-switcher-inner {
     flex-direction: row;
 }
 
@@ -60,38 +60,38 @@
    ============================================ */
 
 /* Inline mode - all items in a row */
-.lsep-ls-inline .lsep-language-switcher-inner {
+.lsdp-ls-inline .lsdp-language-switcher-inner {
     flex-direction: row !important;
     gap: 0;
 }
 
 /* Inline mode language items */
-.lsep-ls-inline .lsep-language-item {
+.lsdp-ls-inline .lsdp-language-item {
     flex: 0 0 auto;
     /* border-right: 1px solid rgba(255, 255, 255, 0.1); */
 }
 
 /* Remove border from last item */
-.lsep-ls-inline .lsep-language-item:last-child {
+.lsdp-ls-inline .lsdp-language-item:last-child {
     border-right: none;
 }
 
 /* Hover effect for inline items */
-.lsep-ls-inline .lsep-language-item:hover {
+.lsdp-ls-inline .lsdp-language-item:hover {
     background: var(--bg-hover, #444) !important;
 }
 
 /* Hover text color for inline items */
-.lsep-ls-inline .lsep-language-item:hover .lsep-language-item-name {
+.lsdp-ls-inline .lsdp-language-item:hover .lsdp-language-item-name {
     color: var(--text-hover, #eee) !important;
 }
 
 /* Current language in inline mode should not have hover effect */
-.lsep-ls-dropdown .lsep-language-item__current:hover,
-.lsep-ls-dropdown .lsep-language-item__default:hover {
+.lsdp-ls-dropdown .lsdp-language-item__current:hover,
+.lsdp-ls-dropdown .lsdp-language-item__default:hover {
     background: transparent !important;
 }
-.lsep-floating-switcher .lsep-language-switcher-inner {
+.lsdp-floating-switcher .lsdp-language-switcher-inner {
     width: auto !important;
     overflow: visible !important;
     min-width: unset !important;
@@ -100,7 +100,7 @@
 /* ============================================
    Dropdown List
    ============================================ */
-.lsep-switcher-dropdown-list {
+.lsdp-switcher-dropdown-list {
     display: flex;
     flex-direction: column-reverse;
     overflow-y: hidden;
@@ -109,8 +109,8 @@
 }
 
 /* Open state */
-.lsep-ls-dropdown.is-open .lsep-switcher-dropdown-list,
-.lsep-ls-dropdown[aria-expanded="true"] .lsep-switcher-dropdown-list {
+.lsdp-ls-dropdown.is-open .lsdp-switcher-dropdown-list,
+.lsdp-ls-dropdown[aria-expanded="true"] .lsdp-switcher-dropdown-list {
     overflow-y: auto;
     max-height: min(350px, 70vh);
     -webkit-overflow-scrolling: touch;
@@ -119,25 +119,25 @@
 }
 
 /* Transitioning state */
-.lsep-ls-dropdown.is-transitioning .lsep-switcher-dropdown-list {
+.lsdp-ls-dropdown.is-transitioning .lsdp-switcher-dropdown-list {
     overflow-y: hidden !important;
 }
 
 /* Webkit scrollbar styling */
-.lsep-switcher-dropdown-list::-webkit-scrollbar {
+.lsdp-switcher-dropdown-list::-webkit-scrollbar {
     width: 6px;
 }
 
-.lsep-switcher-dropdown-list::-webkit-scrollbar-track {
+.lsdp-switcher-dropdown-list::-webkit-scrollbar-track {
     background: transparent;
 }
 
-.lsep-switcher-dropdown-list::-webkit-scrollbar-thumb {
+.lsdp-switcher-dropdown-list::-webkit-scrollbar-thumb {
     background: var(--text, #888);
     border-radius: 3px;
 }
 
-.lsep-switcher-dropdown-list::-webkit-scrollbar-thumb:hover {
+.lsdp-switcher-dropdown-list::-webkit-scrollbar-thumb:hover {
     background: var(--text-hover, #555);
 }
 
@@ -147,24 +147,24 @@
    /* ============================================
    Remove WordPress/Browser Default Pseudo-elements
    ============================================ */
-.lsep-language-item::before,
-.lsep-language-item::after,
-.lsep-language-item__current::before,
-.lsep-language-item__current::after,
-.lsep-language-item__default::before,
-.lsep-language-item__default::after {
+.lsdp-language-item::before,
+.lsdp-language-item::after,
+.lsdp-language-item__current::before,
+.lsdp-language-item__current::after,
+.lsdp-language-item__default::before,
+.lsdp-language-item__default::after {
     content: none !important;
     display: none !important;
 }
 
 /* Remove any checkbox/button styling */
-.lsep-language-item[role="button"]::before,
-.lsep-language-item[role="button"]::after {
+.lsdp-language-item[role="button"]::before,
+.lsdp-language-item[role="button"]::after {
     content: none !important;
     display: none !important;
 }
 
-   .lsep-language-item {
+   .lsdp-language-item {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -188,45 +188,45 @@
 }
 
 /* Dropdown items - apply background and text color from variables */
-.lsep-switcher-dropdown-list .lsep-language-item {
+.lsdp-switcher-dropdown-list .lsdp-language-item {
     background: var(--bg, #fff) !important;
     color: var(--text, #000) !important;
 }
 
 /* Dropdown items hover - background AND text color */
-.lsep-switcher-dropdown-list .lsep-language-item:hover {
+.lsdp-switcher-dropdown-list .lsdp-language-item:hover {
     background: var(--bg-hover, #f3f3f3) !important;
     color: var(--text-hover, #000) !important;
 }
 
 /* Make sure text span inherits the hover color */
-.lsep-switcher-dropdown-list .lsep-language-item:hover .lsep-language-item-name {
+.lsdp-switcher-dropdown-list .lsdp-language-item:hover .lsdp-language-item-name {
     color: var(--text-hover, #000) !important;
 }
 
 /* Current language (non-clickable) */
-.lsep-ls-dropdown .lsep-language-item__current {
+.lsdp-ls-dropdown .lsdp-language-item__current {
     pointer-events: none;
     cursor: default;
 }
 
-.lsep-ls-dropdown .lsep-language-item__default {
+.lsdp-ls-dropdown .lsdp-language-item__default {
     pointer-events: none;
     cursor: default;
 }
 
 /* When current language is a button control (for dropdown) */
-.lsep-language-item__current[role="button"] {
+.lsdp-language-item__current[role="button"] {
     pointer-events: all;
     cursor: pointer;
 }
 
 /* Focus styles */
-.lsep-language-item:focus {
+.lsdp-language-item:focus {
     outline: none;
 }
 
-.lsep-language-item:focus-visible {
+.lsdp-language-item:focus-visible {
     outline: 2px solid var(--text);
     outline-offset: -2px;
 }
@@ -234,7 +234,7 @@
 /* ============================================
    Language Names
    ============================================ */
-.lsep-language-item-name {
+.lsdp-language-item-name {
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;
@@ -245,7 +245,7 @@
 /* ============================================
    Flag Images
    ============================================ */
-.lsep-flag-image {
+.lsdp-flag-image {
     width: var(--flag-size, 18px);
     height: auto;
     border-radius: var(--flag-radius, 2px);
@@ -255,11 +255,11 @@
     display: block;
 }
 
-.lsep-flag-square {
+.lsdp-flag-square {
     aspect-ratio: 1;
 }
 
-.lsep-flag-rounded {
+.lsdp-flag-rounded {
     border-radius: 50%;
 }
 
@@ -292,7 +292,7 @@
 /* ============================================
    Animations & Transitions
    ============================================ */
-@keyframes lsep-fadeIn {
+@keyframes lsdp-fadeIn {
     from {
         opacity: 0;
         transform: translateY(-10px);
@@ -303,63 +303,63 @@
     }
 }
 
-.lsep-floating-switcher {
-    animation: lsep-fadeIn 0.3s ease-out;
+.lsdp-floating-switcher {
+    animation: lsdp-fadeIn 0.3s ease-out;
     z-index: 99999;
 }
 
-.lsep-language-item-name-mobile {
+.lsdp-language-item-name-mobile {
     display: none;
 }
 
-.lsep-flag-slot {
+.lsdp-flag-slot {
     display: none;
     align-items: center;
 }
 
-.lsep-flag-slot-desktop-before,
-.lsep-flag-slot-desktop-after {
+.lsdp-flag-slot-desktop-before,
+.lsdp-flag-slot-desktop-after {
     display: inline-flex;
 }
 
 @media screen and (max-width: 767px) {
-    .lsep-floating-switcher {
-        top: var(--lsep-mobile-top, unset);
-        right: var(--lsep-mobile-right, unset);
-        bottom: var(--lsep-mobile-bottom, unset);
-        left: var(--lsep-mobile-left, unset);
-        width: var(--lsep-mobile-width, var(--switcher-width, 115px));
-        padding: var(--lsep-mobile-padding, 10px 0);
+    .lsdp-floating-switcher {
+        top: var(--lsdp-mobile-top, unset);
+        right: var(--lsdp-mobile-right, unset);
+        bottom: var(--lsdp-mobile-bottom, unset);
+        left: var(--lsdp-mobile-left, unset);
+        width: var(--lsdp-mobile-width, var(--switcher-width, 115px));
+        padding: var(--lsdp-mobile-padding, 10px 0);
     }
 
-    .lsep-floating-switcher[data-lsep-mobile-vertical="top"] {
+    .lsdp-floating-switcher[data-lsdp-mobile-vertical="top"] {
         flex-direction: column;
     }
 
-    .lsep-floating-switcher[data-lsep-mobile-vertical="bottom"] {
+    .lsdp-floating-switcher[data-lsdp-mobile-vertical="bottom"] {
         flex-direction: column-reverse;
     }
 
-    .lsep-floating-switcher[data-lsep-mobile-vertical="top"] .lsep-language-switcher-inner,
-    .lsep-floating-switcher[data-lsep-mobile-vertical="top"] .lsep-switcher-dropdown-list {
+    .lsdp-floating-switcher[data-lsdp-mobile-vertical="top"] .lsdp-language-switcher-inner,
+    .lsdp-floating-switcher[data-lsdp-mobile-vertical="top"] .lsdp-switcher-dropdown-list {
         flex-direction: column;
     }
 
-    .lsep-language-item-name-desktop {
+    .lsdp-language-item-name-desktop {
         display: none;
     }
 
-    .lsep-language-item-name-mobile {
+    .lsdp-language-item-name-mobile {
         display: inline-block;
     }
 
-    .lsep-flag-slot-desktop-before,
-    .lsep-flag-slot-desktop-after {
+    .lsdp-flag-slot-desktop-before,
+    .lsdp-flag-slot-desktop-after {
         display: none;
     }
 
-    .lsep-flag-slot-mobile-before,
-    .lsep-flag-slot-mobile-after {
+    .lsdp-flag-slot-mobile-before,
+    .lsdp-flag-slot-mobile-after {
         display: inline-flex;
     }
 }
@@ -368,14 +368,14 @@
    Responsive Adjustments
    ============================================ */
 @media screen and (max-width: 767px) {
-    .lsep-language-item {
+    .lsdp-language-item {
         padding: 10px 16px;
         min-height: 24px;
     }
 }
 
 @media screen and (max-width: 480px) {
-    .lsep-floating-switcher {
+    .lsdp-floating-switcher {
         /* Further adjustments for small screens */
         font-size: 13px;
     }
@@ -385,7 +385,7 @@
    Print Styles
    ============================================ */
 @media print {
-    .lsep-floating-switcher {
+    .lsdp-floating-switcher {
         display: none !important;
     }
 }
@@ -394,11 +394,11 @@
    High Contrast Mode Support
    ============================================ */
 @media (prefers-contrast: high) {
-    .lsep-language-item {
+    .lsdp-language-item {
         border: 1px solid currentColor;
     }
 
-    .lsep-language-item:hover {
+    .lsdp-language-item:hover {
         background: var(--text);
         color: var(--bg);
     }
@@ -408,9 +408,9 @@
    Reduced Motion Support
    ============================================ */
 @media (prefers-reduced-motion: reduce) {
-    .lsep-floating-switcher,
-    .lsep-language-item,
-    .lsep-switcher-dropdown-list {
+    .lsdp-floating-switcher,
+    .lsdp-language-item,
+    .lsdp-switcher-dropdown-list {
         animation: none !important;
         transition: none !important;
     }
@@ -427,27 +427,27 @@
 /* ============================================
    RTL Support
    ============================================ */
-[dir="rtl"] .lsep-language-item {
+[dir="rtl"] .lsdp-language-item {
     text-align: right;
 }
 
-[dir="rtl"] .lsep-flag-image {
+[dir="rtl"] .lsdp-flag-image {
     order: 2;
 }
 
 /* ============================================
    Admin Bar Adjustment
    ============================================ */
-body.admin-bar .lsep-floating-switcher[data-lsep-desktop-vertical="top"] {
+body.admin-bar .lsdp-floating-switcher[data-lsdp-desktop-vertical="top"] {
     top: 32px;
 }
 
 @media screen and (max-width: 782px) {
-    body.admin-bar .lsep-floating-switcher[data-lsep-desktop-vertical="top"] {
+    body.admin-bar .lsdp-floating-switcher[data-lsdp-desktop-vertical="top"] {
         top: 46px;
     }
 
-    body.admin-bar .lsep-floating-switcher[data-lsep-mobile-vertical="top"] {
+    body.admin-bar .lsdp-floating-switcher[data-lsdp-mobile-vertical="top"] {
         top: 46px;
     }
 }
@@ -457,19 +457,19 @@ body.admin-bar .lsep-floating-switcher[data-lsep-desktop-vertical="top"] {
    ============================================ */
 /* If you need to adjust for specific themes, add here */
 /* Example: */
-/* body.some-theme .lsep-floating-switcher {
+/* body.some-theme .lsdp-floating-switcher {
     z-index: 999999;
 } */
 
 /* ============================================
    Custom Hover Effects
    ============================================ */
-.lsep-language-item {
+.lsdp-language-item {
     position: relative;
     overflow: hidden;
 }
 
-.lsep-language-item::before {
+.lsdp-language-item::before {
     content: '';
     position: absolute;
     top: 0;
@@ -481,20 +481,20 @@ body.admin-bar .lsep-floating-switcher[data-lsep-desktop-vertical="top"] {
     pointer-events: none;
 }
 
-.lsep-language-item:hover::before {
+.lsdp-language-item:hover::before {
     left: 0;
 }
 
 /* Disable hover effect on current language */
-.lsep-language-item__default::before,
-.lsep-language-item__current:not([role="button"])::before {
+.lsdp-language-item__default::before,
+.lsdp-language-item__current:not([role="button"])::before {
     display: none;
 }
 
 /* ============================================
    Loading State (Optional)
    ============================================ */
-.lsep-floating-switcher.is-loading {
+.lsdp-floating-switcher.is-loading {
     opacity: 0.6;
     pointer-events: none;
 }
@@ -502,7 +502,7 @@ body.admin-bar .lsep-floating-switcher[data-lsep-desktop-vertical="top"] {
 /* ============================================
    Error State (Optional)
    ============================================ */
-.lsep-floating-switcher.has-error {
+.lsdp-floating-switcher.has-error {
     border: 2px solid #d63638;
 }
 
@@ -510,12 +510,12 @@ body.admin-bar .lsep-floating-switcher[data-lsep-desktop-vertical="top"] {
    Compatibility Fixes
    ============================================ */
 /* Reset any theme overrides */
-.lsep-floating-switcher * {
+.lsdp-floating-switcher * {
     box-sizing: border-box;
 }
 
 /* Ensure flags don't inherit weird image styles from themes */
-.lsep-flag-image {
+.lsdp-flag-image {
     max-width: none;
     height: auto;
     vertical-align: middle;

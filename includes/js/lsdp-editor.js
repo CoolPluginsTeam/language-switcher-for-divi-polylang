@@ -3,8 +3,8 @@
 
     $(document).ready(function() {
         // Elementor Review Notice Start
-        jQuery(document).on('click','#lsep_elementor_review_dismiss',(event)=>{
-            jQuery(".lsep_elementor_review_notice").hide();
+        jQuery(document).on('click','#lsdp_elementor_review_dismiss',(event)=>{
+            jQuery(".lsdp_elementor_review_notice").hide();
             const btn=jQuery(event.target);
             const nonce=btn.data('nonce');
             const url=btn.data('url');
@@ -14,8 +14,8 @@
                 // eslint-disable-next-line no-undef
                 url: url, // Set this using wp_localize_script
                 data: {
-                    action: 'lsep_elementor_review_notice',
-                    lsep_notice_dismiss: true,
+                    action: 'lsdp_elementor_review_notice',
+                    lsdp_notice_dismiss: true,
                     nonce: nonce
                 },
                 success: (response) => {

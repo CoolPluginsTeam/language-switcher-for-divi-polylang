@@ -26,7 +26,7 @@
         super(props);
 
         // Load data from global window object passed from PHP
-        const data = window.lsepFloaterData || {};
+        const data = window.lsdpFloaterData || {};
 
         // Initialize component state
         this.state = {
@@ -195,12 +195,12 @@
         this.setState({ isSaving: true });
 
         const data = new FormData();
-        data.append("action", "lsep_save_floating_switcher");
-        data.append("nonce", window.lsepFloaterData.nonce);
+        data.append("action", "lsdp_save_floating_switcher");
+        data.append("nonce", window.lsdpFloaterData.nonce);
         data.append("config", JSON.stringify(this.state.config));
 
         try {
-          const response = await fetch(window.lsepFloaterData.ajaxUrl, {
+          const response = await fetch(window.lsdpFloaterData.ajaxUrl, {
             method: "POST",
             body: data,
             credentials: "same-origin",
@@ -247,8 +247,8 @@
       }
 
       toggleCollapsible(event) {
-        const box = event.currentTarget.closest(".lsep-settings-box");
-        if (box && box.classList.contains("lsep-collapsible")) {
+        const box = event.currentTarget.closest(".lsdp-settings-box");
+        if (box && box.classList.contains("lsdp-collapsible")) {
           box.classList.toggle("open");
         }
       }
@@ -256,13 +256,13 @@
       render() {
           return h(
           "div",
-          { className: "lsep-floater-app-container" },
+          { className: "lsdp-floater-app-container" },
           h(
               "main",
-              { className: "lsep-ls-view" },
+              { className: "lsdp-ls-view" },
               h(
               "div",
-              { className: "lsep-floater-settings__wrapper" },
+              { className: "lsdp-floater-settings__wrapper" },
               this.renderLeftColumn(),
               this.renderRightColumn()
               )
@@ -273,10 +273,10 @@
       renderRightColumn() {
         return h(
           "div",
-          { className: "lsep-floater-settings__left" },
+          { className: "lsdp-floater-settings__left" },
           h(
             "div",
-            { className: "lsep-sticky-box" },
+            { className: "lsdp-sticky-box" },
             this.renderActionButtons(),
             this.renderPreviewBox(),
             this.renderAutoPolyPromo()
@@ -300,7 +300,7 @@
             href: href,
             target: "blank",
             rel: "noopener noreferrer",
-            className: "lsep-icon-button",
+            className: "lsdp-icon-button",
             title: title,
             "aria-label": ariaLabel || title,
             style: {
@@ -339,19 +339,19 @@
 
         return h(
           "div",
-          { className: "lsep-settings-box" },
+          { className: "lsdp-settings-box" },
           h(
             "header",
-            { className: "lsep-header" },
+            { className: "lsdp-header" },
             h(
               "span",
-              { className: "lsep-title" },
+              { className: "lsdp-title" },
               __("Switcher Preview", "language-switcher-for-divi-polylang")
             ),
             h(
               "div",
               {
-                className: "lsep-header-buttons",
+                className: "lsdp-header-buttons",
                 style: {
                   display: "flex",
                   gap: "8px",
@@ -360,7 +360,7 @@
                 }
               },
               this.renderIconButton({
-                href: "https://docs.coolplugins.net/doc/add-language-switcher-elementor/?ref=creame&utm_source=lsep_plugin&utm_medium=inside&utm_campaign=docs&utm_content=floating_switcher",
+                href: "https://docs.coolplugins.net/doc/add-language-switcher-elementor/?ref=creame&utm_source=lsdp_plugin&utm_medium=inside&utm_campaign=docs&utm_content=floating_switcher",
                 title: __("View Documentation", "language-switcher-for-divi-polylang"),
                 color: "#2271b1",
                 ariaLabel: __("Open documentation in new tab", "language-switcher-for-divi-polylang"),
@@ -405,12 +405,12 @@
           ),
           h(
             "section",
-            { className: "lsep-body" },
+            { className: "lsdp-body" },
 
             !config.enabled ? h(
               "div",
               {
-                className: "lsep-preview-disabled-message",
+                className: "lsdp-preview-disabled-message",
                 style: {
                   textAlign: "center",
                   padding: "60px 20px",
@@ -450,14 +450,14 @@
               h(
                 "div",
                 {
-                  className: "lsep-language-switcher-preview__container",
+                  className: "lsdp-language-switcher-preview__container",
                   style: {
-                    "--lsep-preview-bg": `url(${window.lsepFloaterData.pluginUrl}assets/images/preview-bg.png)`,
+                    "--lsdp-preview-bg": `url(${window.lsdpFloaterData.pluginUrl}assets/images/preview-bg.png)`,
                   },
                 },
                 h(
                   "div",
-                  { className: "lsep-language-switcher-preview-box" },
+                  { className: "lsdp-language-switcher-preview-box" },
                   this.renderSwitcherPreview()
                 )
               ),
@@ -466,7 +466,7 @@
                 "span",
                 {
                   className:
-                    "lsep-language-switcher-preview-text lsep-description-text",
+                    "lsdp-language-switcher-preview-text lsdp-description-text",
                 },
                 __(
                   "Hover over the language switcher to see it in action!",
@@ -479,9 +479,9 @@
       }
 
   renderAutoPolyPromo() {
-    const html = (window.lsepFloaterData && window.lsepFloaterData.autoPolyPromoHtml) || "";
+    const html = (window.lsdpFloaterData && window.lsdpFloaterData.autoPolyPromoHtml) || "";
     return h("div", {
-      className: "lsep-autopoly-promo-host",
+      className: "lsdp-autopoly-promo-host",
       dangerouslySetInnerHTML: { __html: html },
     });
   }
@@ -493,8 +493,8 @@
         const styles = this.buildPreviewStyles();
 
         const positionClass = layoutConfig.position.includes("bottom")
-          ? "lsep-switcher-position-bottom"
-          : "lsep-switcher-position-top";
+          ? "lsdp-switcher-position-bottom"
+          : "lsdp-switcher-position-top";
 
         const isDropdown = config.type === "dropdown";
         const isSideBySide = config.type === "side-by-side";
@@ -515,14 +515,14 @@
         return h(
           "div",
           {
-            className: `lsep-language-switcher lsep-floating-switcher lsep-ls-${
+            className: `lsdp-language-switcher lsdp-floating-switcher lsdp-ls-${
               isDropdown ? "dropdown" : "inline"
             } ${positionClass}`,
             style: styles,
           },
           h(
             "div",
-            { className: "lsep-language-switcher-inner" },
+            { className: "lsdp-language-switcher-inner" },
             isSideBySide
               ? sampleLangs.map((lang, index) =>
                   this.renderLanguageItem(lang, index === 0, layoutConfig, isDropdown)
@@ -534,7 +534,7 @@
                       "div",
                       {
                         className:
-                          "lsep-switcher-dropdown-list lsep-preview-expanded",
+                          "lsdp-switcher-dropdown-list lsdp-preview-expanded",
                       },
                       others.map((lang) =>
                         this.renderLanguageItem(lang, false, layoutConfig, isDropdown)
@@ -556,15 +556,15 @@
         return h(
           "a",
           {
-            className: `lsep-language-item ${
-              isDefault ? "lsep-language-item__default" : ""
+            className: `lsdp-language-item ${
+              isDefault ? "lsdp-language-item__default" : ""
             }`,
             onClick: (e) => e.preventDefault(),
           },
           layoutConfig.flagIconPosition === "before" &&
             h("img", {
               src: flagUrl,
-              className: "lsep-flag-image",
+              className: "lsdp-flag-image",
               loading: "lazy",
               alt: lang.name,
             }),
@@ -572,21 +572,21 @@
             h(
               "span",
               {
-                className: "lsep-language-item-name",
+                className: "lsdp-language-item-name",
               },
               displayName
             ),
           layoutConfig.flagIconPosition === "after" &&
             h("img", {
               src: flagUrl,
-              className: "lsep-flag-image",
+              className: "lsdp-flag-image",
               loading: "lazy",
               alt: lang.name,
             }),
             isDefault && isDropdown && h(
               "svg",
               {
-                className: "lsep-dropdown-arrow",
+                className: "lsdp-dropdown-arrow",
                 width: "12",
                 height: "8",
                 viewBox: "0 0 12 8",
@@ -644,11 +644,11 @@
 
         return h(
           "div",
-          { className: "lsep-settings-actions" },
+          { className: "lsdp-settings-actions" },
           h(
             "button",
             {
-              className: "lsep-submit-btn",
+              className: "lsdp-submit-btn",
               onClick: () => this.saveSettings(),
               disabled: !hasChanges || isSaving,
             },
@@ -663,7 +663,7 @@
           h(
             "button",
             {
-              className: "lsep-button-secondary",
+              className: "lsdp-button-secondary",
               onClick: () => this.revertChanges(),
               disabled: !hasChanges,
               title: __(
@@ -693,7 +693,7 @@
       renderLeftColumn() {
         return h(
           "div",
-          { className: "lsep-floater-settings__right" },
+          { className: "lsdp-floater-settings__right" },
           this.renderEnableAndType(),
           this.renderPresets(),
           this.renderCustomizeLayout(),
@@ -706,29 +706,29 @@
 
         return h(
           "div",
-          { className: "lsep-settings-box" },
+          { className: "lsdp-settings-box" },
           h(
             "header",
-            { className: "lsep-header" },
+            { className: "lsdp-header" },
             h(
               "span",
-              { className: "lsep-title" },
+              { className: "lsdp-title" },
               __("Floating Language Switcher Settings", "language-switcher-for-divi-polylang")
             )
           ),
           h(
             "section",
-            { className: "lsep-body" },
+            { className: "lsdp-body" },
 
             h(
               "div",
               {
-                className: "lsep-field lsep-field--row",
+                className: "lsdp-field lsdp-field--row",
                 style: { marginBottom: "20px" },
               },
               h(
                 "span",
-                { className: "lsep-field__label lsep-primary-text-bold" },
+                { className: "lsdp-field__label lsdp-primary-text-bold" },
                 __("Enable Floating Language Switcher", "language-switcher-for-divi-polylang")
               ),
               this.renderToggleField(
@@ -741,26 +741,26 @@
               )
             ),
 
-            h("div", { className: "lsep-separator" }),
+            h("div", { className: "lsdp-separator" }),
 
             h(
               "div",
               {
-                className: "lsep-field lsep-field--row",
+                className: "lsdp-field lsdp-field--row",
                 style: { gap: "12px" },
               },
               h(
                 "span",
-                { className: "lsep-field__label lsep-primary-text-bold" },
+                { className: "lsdp-field__label lsdp-primary-text-bold" },
                 __("Switcher Type", "language-switcher-for-divi-polylang")
               ),
               h(
                 "div",
-                { className: "lsep-lc-mode-toggle" },
+                { className: "lsdp-lc-mode-toggle" },
                 h(
                   "button",
                   {
-                    className: `lsep-lc-mode-button ${
+                    className: `lsdp-lc-mode-button ${
                       config.type === "dropdown" ? "active" : ""
                     }`,
                     type: "button",
@@ -771,7 +771,7 @@
                 h(
                   "button",
                   {
-                    className: `lsep-lc-mode-button ${
+                    className: `lsdp-lc-mode-button ${
                       config.type === "side-by-side" ? "active" : ""
                     }`,
                     type: "button",
@@ -788,22 +788,22 @@
       renderPresets() {
         return h(
           "div",
-          { className: "lsep-settings-box" },
+          { className: "lsdp-settings-box" },
           h(
             "header",
-            { className: "lsep-header" },
+            { className: "lsdp-header" },
             h(
               "span",
-              { className: "lsep-title" },
+              { className: "lsdp-title" },
               __("Apply a Preset", "language-switcher-for-divi-polylang")
             )
           ),
           h(
             "section",
-            { className: "lsep-body" },
+            { className: "lsdp-body" },
             h(
               "div",
-              { className: "lsep-preset-applier" },
+              { className: "lsdp-preset-applier" },
               this.presets.map((preset) => this.renderPresetCard(preset))
             )
           )
@@ -849,8 +849,8 @@
         return h(
           "div",
           {
-            className: `lsep-preset-card${
-              this.isPresetActive(preset) ? " lsep-preset-card-active" : ""
+            className: `lsdp-preset-card${
+              this.isPresetActive(preset) ? " lsdp-preset-card-active" : ""
             }`,
             style: { ...presetStyles, position: "relative" },
           },
@@ -859,14 +859,14 @@
             h(
               "div",
               {
-                className: "lsep-preset-confirm-overlay",
+                className: "lsdp-preset-confirm-overlay",
               },
               h(
                 "div",
-                { className: "lsep-preset-confirm-content" },
+                { className: "lsdp-preset-confirm-content" },
                 h(
                   "p",
-                  { className: "lsep-preset-confirm-title" },
+                  { className: "lsdp-preset-confirm-title" },
                   __(
                     "Are you sure you want to apply the ",
                     "language-switcher-for-divi-polylang"
@@ -876,7 +876,7 @@
                 ),
                 h(
                   "p",
-                  { className: "lsep-preset-confirm-warning" },
+                  { className: "lsdp-preset-confirm-warning" },
                   __(
                     "It will override your current settings.",
                     "language-switcher-for-divi-polylang"
@@ -884,12 +884,12 @@
                 ),
                 h(
                   "div",
-                  { className: "lsep-preset-confirm-actions" },
+                  { className: "lsdp-preset-confirm-actions" },
                   h(
                     "button",
                     {
                       className:
-                        "lsep-preset-confirm-btn lsep-preset-confirm-btn-primary",
+                        "lsdp-preset-confirm-btn lsdp-preset-confirm-btn-primary",
                       onClick: () => this.applyPreset(preset),
                     },
                     __("Apply Preset", "language-switcher-for-divi-polylang")
@@ -898,7 +898,7 @@
                     "button",
                     {
                       className:
-                        "lsep-preset-confirm-btn lsep-preset-confirm-btn-secondary",
+                        "lsdp-preset-confirm-btn lsdp-preset-confirm-btn-secondary",
                       onClick: () => this.cancelPresetConfirmation(),
                     },
                     __("Cancel", "language-switcher-for-divi-polylang")
@@ -910,38 +910,38 @@
           h(
             "div",
             {
-              className: "lsep-preview-rect",
+              className: "lsdp-preview-rect",
               style: { background: preset.background },
             },
             h(
               "div",
               {
-                className: `lsep-preset-switcher-preview lsep-language-switcher lsep-floating-switcher lsep-ls-${
+                className: `lsdp-preset-switcher-preview lsdp-language-switcher lsdp-floating-switcher lsdp-ls-${
                   isDropdown ? "dropdown" : "inline"
-                } lsep-switcher-position-bottom`,
+                } lsdp-switcher-position-bottom`,
               },
               h(
                 "div",
-                { className: "lsep-language-switcher-inner" },
+                { className: "lsdp-language-switcher-inner" },
                 isSideBySide
                   ? sampleLangs.map((lang, index) =>
                       h(
                         "a",
                         {
-                          className: `lsep-language-item ${
-                            index === 0 ? "lsep-language-item__current" : ""
+                          className: `lsdp-language-item ${
+                            index === 0 ? "lsdp-language-item__current" : ""
                           }`,
                           onClick: (e) => e.preventDefault(),
                         },
                         h("img", {
                           src: lang.flag,
-                          className: "lsep-flag-image",
+                          className: "lsdp-flag-image",
                           loading: "lazy",
                           alt: lang.name,
                         }),
                         h(
                           "span",
-                          { className: "lsep-language-item-name" },
+                          { className: "lsdp-language-item-name" },
                           lang.name
                         )
                       )
@@ -951,41 +951,41 @@
                         "a",
                         {
                           className:
-                            "lsep-language-item lsep-language-item__default",
+                            "lsdp-language-item lsdp-language-item__default",
                           onClick: (e) => e.preventDefault(),
                         },
                         h("img", {
                           src: current.flag,
-                          className: "lsep-flag-image",
+                          className: "lsdp-flag-image",
                           loading: "lazy",
                           alt: current.name,
                         }),
                         h(
                           "span",
-                          { className: "lsep-language-item-name" },
+                          { className: "lsdp-language-item-name" },
                           current.name
                         )
                       ),
                       others.length > 0 &&
                         h(
                           "div",
-                          { className: "lsep-switcher-dropdown-list" },
+                          { className: "lsdp-switcher-dropdown-list" },
                           others.map((lang) =>
                             h(
                               "a",
                               {
-                                className: "lsep-language-item",
+                                className: "lsdp-language-item",
                                 onClick: (e) => e.preventDefault(),
                               },
                               h("img", {
                                 src: lang.flag,
-                                className: "lsep-flag-image",
+                                className: "lsdp-flag-image",
                                 loading: "lazy",
                                 alt: lang.name,
                               }),
                               h(
                                 "span",
-                                { className: "lsep-language-item-name" },
+                                { className: "lsdp-language-item-name" },
                                 lang.name
                               )
                             )
@@ -998,8 +998,8 @@
           h(
             "button",
             {
-              className: `lsep-apply-btn${
-                this.isPresetActive(preset) ? " lsep-apply-btn-active" : ""
+              className: `lsdp-apply-btn${
+                this.isPresetActive(preset) ? " lsdp-apply-btn-active" : ""
               }`,
               onClick: () => this.showPresetConfirmation(preset),
               disabled: this.isPresetActive(preset),
@@ -1020,25 +1020,25 @@
         return h(
           "div",
           {
-            className: "lsep-settings-box lsep-collapsible",
-            style: { "--lsep-field-label-width": "190px" },
+            className: "lsdp-settings-box lsdp-collapsible",
+            style: { "--lsdp-field-label-width": "190px" },
           },
           h(
             "header",
             {
-              className: "lsep-header",
+              className: "lsdp-header",
               onClick: (e) => this.toggleCollapsible(e),
             },
             h(
               "span",
-              { className: "lsep-title" },
+              { className: "lsdp-title" },
               __("Customize Design", "language-switcher-for-divi-polylang")
             ),
             this.renderChevron()
           ),
           h(
             "section",
-            { className: "lsep-body" },
+            { className: "lsdp-body" },
 
             this.renderColorField(
               "bgColor",
@@ -1074,7 +1074,7 @@
 
             this.renderBorderRadiusField(),
 
-            h("div", { className: "lsep-separator" }),
+            h("div", { className: "lsdp-separator" }),
 
             this.renderToggleField(
               "enableTransitions",
@@ -1083,7 +1083,7 @@
               null
             ),
 
-            h("div", { className: "lsep-separator" }),
+            h("div", { className: "lsdp-separator" }),
 
             this.renderRadioGroup(
               "size",
@@ -1102,7 +1102,7 @@
               "column"
             ),
 
-            h("div", { className: "lsep-separator" }),
+            h("div", { className: "lsdp-separator" }),
 
             this.renderRadioGroup(
               "flagShape",
@@ -1127,7 +1127,7 @@
               config.flagRadius
             ),
 
-            h("div", { className: "lsep-separator" }),
+            h("div", { className: "lsdp-separator" }),
 
             this.renderToggleField(
               "enableCustomCss",
@@ -1147,36 +1147,36 @@
 
         return h(
           "div",
-          { className: "lsep-settings-box lsep-collapsible" },
+          { className: "lsdp-settings-box lsdp-collapsible" },
           h(
             "header",
             {
-              className: "lsep-header",
+              className: "lsdp-header",
               onClick: (e) => this.toggleCollapsible(e),
             },
             h(
               "span",
-              { className: "lsep-title" },
+              { className: "lsdp-title" },
               __("Customize Layout", "language-switcher-for-divi-polylang")
             ),
             this.renderChevron()
           ),
           h(
             "section",
-            { className: "lsep-body" },
+            { className: "lsdp-body" },
             h(
               "div",
               {
                 className:
-                  "lsep-layout-customizer-field lsep-field lsep-field--column lsep-field lsep-field--row",
+                  "lsdp-layout-customizer-field lsdp-field lsdp-field--column lsdp-field lsdp-field--row",
               },
               h(
                 "div",
-                { className: "lsep-lc-mode-toggle" },
+                { className: "lsdp-lc-mode-toggle" },
                 h(
                   "button",
                   {
-                    className: `lsep-lc-mode-button ${
+                    className: `lsdp-lc-mode-button ${
                       currentDevice === "desktop" ? "active" : ""
                     }`,
                     type: "button",
@@ -1188,7 +1188,7 @@
                 h(
                   "button",
                   {
-                    className: `lsep-lc-mode-button ${
+                    className: `lsdp-lc-mode-button ${
                       currentDevice === "mobile" ? "active" : ""
                     }`,
                     type: "button",
@@ -1201,13 +1201,13 @@
 
               h(
                 "div",
-                { className: "lsep-lc-settings-panel" },
+                { className: "lsdp-lc-settings-panel" },
                 h(
                   "div",
-                  { className: "lsep-lc-section" },
+                  { className: "lsdp-lc-section" },
                   h(
                     "div",
-                    { className: "lsep-lc-subfield" },
+                    { className: "lsdp-lc-subfield" },
                     this.renderLayoutRadioGroup(
                       "position",
                       [
@@ -1234,7 +1234,7 @@
 
                   h(
                     "div",
-                    { className: "lsep-lc-subfield" },
+                    { className: "lsdp-lc-subfield" },
                     this.renderLayoutRadioGroup(
                       "width",
                       [
@@ -1254,7 +1254,7 @@
                   layoutConfig.width === "custom" &&
                     h(
                       "div",
-                      { className: "lsep-lc-subfield" },
+                      { className: "lsdp-lc-subfield" },
                       this.renderLayoutNumberField(
                         "customWidth",
                         __("Custom Width", "language-switcher-for-divi-polylang"),
@@ -1264,7 +1264,7 @@
 
                   h(
                     "div",
-                    { className: "lsep-lc-subfield" },
+                    { className: "lsdp-lc-subfield" },
                     this.renderLayoutRadioGroup(
                       "padding",
                       [
@@ -1284,7 +1284,7 @@
                   layoutConfig.padding === "custom" &&
                     h(
                       "div",
-                      { className: "lsep-lc-subfield" },
+                      { className: "lsdp-lc-subfield" },
                       this.renderLayoutNumberField(
                         "customPadding",
                         __("Custom Padding", "language-switcher-for-divi-polylang"),
@@ -1294,7 +1294,7 @@
 
                   h(
                     "div",
-                    { className: "lsep-lc-subfield" },
+                    { className: "lsdp-lc-subfield" },
                     this.renderLayoutRadioGroup(
                       "flagIconPosition",
                       [
@@ -1317,7 +1317,7 @@
 
                   h(
                     "div",
-                    { className: "lsep-lc-subfield" },
+                    { className: "lsdp-lc-subfield" },
                     this.renderLayoutRadioGroup(
                       "languageNames",
                       [
@@ -1347,21 +1347,21 @@
       renderToggleField(key, value, label, description) {
         return h(
           "div",
-          { className: "lsep-toggle-status-field lsep-field lsep-field--row" },
-          h("span", { className: "lsep-primary-text" }, label),
+          { className: "lsdp-toggle-status-field lsdp-field lsdp-field--row" },
+          h("span", { className: "lsdp-primary-text" }, label),
           h(
             "div",
-            { className: "lsep-toggle-wrapper" },
+            { className: "lsdp-toggle-wrapper" },
             h(
               "div",
-              { className: "lsep-toggle-inner" },
+              { className: "lsdp-toggle-inner" },
               h("input", {
                 type: "checkbox",
-                className: "lsep-toggle-input",
+                className: "lsdp-toggle-input",
                 checked: value,
                 onChange: (e) => this.updateConfig({ [key]: e.target.checked }),
               }),
-              h("span", { className: "lsep-toggle-slider" })
+              h("span", { className: "lsdp-toggle-slider" })
             )
           )
         );
@@ -1371,24 +1371,24 @@
         return h(
           "div",
           {
-            className: `lsep-radio-group__wrapper lsep-field lsep-field--${layout}`,
+            className: `lsdp-radio-group__wrapper lsdp-field lsdp-field--${layout}`,
           },
           title &&
             h(
               "span",
-              { className: "lsep-field__label lsep-primary-text-bold" },
+              { className: "lsdp-field__label lsdp-primary-text-bold" },
               title
             ),
           h(
             "div",
-            { className: "lsep-radio-group" },
+            { className: "lsdp-radio-group" },
             options.map((option) =>
               h(
                 "div",
-                { className: "lsep-radio-option", key: option.value },
+                { className: "lsdp-radio-option", key: option.value },
                 h(
                   "label",
-                  { className: "lsep-radio-label" },
+                  { className: "lsdp-radio-label" },
                   h("input", {
                     type: "radio",
                     name: key,
@@ -1410,22 +1410,22 @@
 
         return h(
           "div",
-          { className: "lsep-radio-group__wrapper" },
+          { className: "lsdp-radio-group__wrapper" },
           h(
             "span",
-            { className: "lsep-field__label lsep-primary-text-bold" },
+            { className: "lsdp-field__label lsdp-primary-text-bold" },
             title
           ),
           h(
             "div",
-            { className: "lsep-radio-group" },
+            { className: "lsdp-radio-group" },
             options.map((option) =>
               h(
                 "div",
-                { className: "lsep-radio-option", key: option.value },
+                { className: "lsdp-radio-option", key: option.value },
                 h(
                   "label",
-                  { className: "lsep-radio-label" },
+                  { className: "lsdp-radio-label" },
                   h("input", {
                     type: "radio",
                     name: `${currentDevice}-${key}`,
@@ -1451,18 +1451,18 @@
 
         return h(
           "div",
-          { className: "lsep-field lsep-field--row" },
+          { className: "lsdp-field lsdp-field--row" },
           h(
             "span",
-            { className: "lsep-field__label lsep-primary-text-bold" },
+            { className: "lsdp-field__label lsdp-primary-text-bold" },
             label
           ),
           h(
             "div",
-            { className: "lsep-color__wrapper" },
+            { className: "lsdp-color__wrapper" },
             h("input", {
               type: "color",
-              className: "lsep-color-input",
+              className: "lsdp-color-input",
               value: isTransparent ? "#ffffff" : displayValue,
               onChange: (e) => this.updateConfig({ [key]: e.target.value }),
               title: __("Pick a color", "language-switcher-for-divi-polylang"),
@@ -1470,7 +1470,7 @@
             h(
               "span",
               {
-                className: "lsep-color-code lsep-primary-text",
+                className: "lsdp-color-code lsdp-primary-text",
                 style: { cursor: isTransparent ? "pointer" : "default" },
                 onClick: isTransparent
                   ? () => this.updateConfig({ [key]: "#000000" })
@@ -1485,24 +1485,24 @@
       renderNumberField(key, label, value, min = 0) {
         return h(
           "div",
-          { className: "lsep-field lsep-field--row" },
+          { className: "lsdp-field lsdp-field--row" },
           h(
             "span",
-            { className: "lsep-field__label lsep-primary-text-bold" },
+            { className: "lsdp-field__label lsdp-primary-text-bold" },
             label
           ),
           h(
             "div",
-            { className: "lsep-number__wrapper" },
+            { className: "lsdp-number__wrapper" },
             h("input", {
               type: "number",
-              className: "lsep-number-input",
+              className: "lsdp-number-input",
               min: min,
               value: value,
               onChange: (e) =>
                 this.updateConfig({ [key]: parseInt(e.target.value) || 0 }),
             }),
-            h("span", { className: "lsep-primary-text" }, "px")
+            h("span", { className: "lsdp-primary-text" }, "px")
           )
         );
       }
@@ -1512,18 +1512,18 @@
 
         return h(
           "div",
-          { className: "lsep-field lsep-field--row" },
+          { className: "lsdp-field lsdp-field--row" },
           h(
             "span",
-            { className: "lsep-field__label lsep-primary-text-bold" },
+            { className: "lsdp-field__label lsdp-primary-text-bold" },
             label
           ),
           h(
             "div",
-            { className: "lsep-number__wrapper" },
+            { className: "lsdp-number__wrapper" },
             h("input", {
               type: "number",
-              className: "lsep-number-input",
+              className: "lsdp-number-input",
               min: 0,
               value: value,
               onChange: (e) =>
@@ -1531,7 +1531,7 @@
                   [key]: parseInt(e.target.value) || 0,
                 }),
             }),
-            h("span", { className: "lsep-primary-text" }, "px")
+            h("span", { className: "lsdp-primary-text" }, "px")
           )
         );
       }
@@ -1548,30 +1548,30 @@
 
         return h(
           "div",
-          { className: "lsep-field lsep-field--column" },
+          { className: "lsdp-field lsdp-field--column" },
           h(
             "span",
-            { className: "lsep-field__label lsep-primary-text-bold" },
+            { className: "lsdp-field__label lsdp-primary-text-bold" },
             __("Switcher border radius", "language-switcher-for-divi-polylang")
           ),
           h(
             "div",
-            { className: "lsep-quad-grid" },
+            { className: "lsdp-quad-grid" },
             corners.map((corner, index) =>
               h(
                 "div",
-                { className: "lsep-quad-radius-corner", key: corner },
+                { className: "lsdp-quad-radius-corner", key: corner },
                 h(
                   "span",
-                  { className: "lsep-primary-text lsep-corner-label" },
+                  { className: "lsdp-primary-text lsdp-corner-label" },
                   corner
                 ),
                 h(
                   "div",
-                  { className: "lsep-number__wrapper" },
+                  { className: "lsdp-number__wrapper" },
                   h("input", {
                     type: "number",
-                    className: "lsep-number-input",
+                    className: "lsdp-number-input",
                     min: 0,
                     value: config.borderRadius[index],
                     onChange: (e) => {
@@ -1580,7 +1580,7 @@
                       this.updateConfig({ borderRadius: newRadius });
                     },
                   }),
-                  h("span", { className: "lsep-primary-text" }, "px")
+                  h("span", { className: "lsdp-primary-text" }, "px")
                 )
               )
             )
@@ -1594,7 +1594,7 @@
         return h(
           "div",
           {
-            className: "lsep-custom-css-editor lsep-field lsep-field--row",
+            className: "lsdp-custom-css-editor lsdp-field lsdp-field--row",
             style: { display: config.enableCustomCss ? "block" : "none" },
           },
           h("textarea", {
@@ -1615,7 +1615,7 @@
         return h(
           "svg",
           {
-            className: "lsep-chevron open",
+            className: "lsdp-chevron open",
             viewBox: "0 0 20 20",
             width: 20,
             height: 20,
@@ -1668,7 +1668,7 @@
      * Initialize the App
      */
     document.addEventListener("DOMContentLoaded", function () {
-      const root = document.getElementById("lsep-floater-app-root");
+      const root = document.getElementById("lsdp-floater-app-root");
 
       if (root && typeof wp !== "undefined" && wp.element) {
         const { render, createElement: h } = wp.element;

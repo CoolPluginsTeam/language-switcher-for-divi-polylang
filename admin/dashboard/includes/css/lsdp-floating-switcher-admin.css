@@ -1,44 +1,44 @@
 /**
  * Floating Switcher Admin CSS
- * Clean, maintainable version with lsep- prefix
+ * Clean, maintainable version with lsdp- prefix
  */
 
 /* ============================================
    CSS Variables & Base
    ============================================ */
    :root {
-    --lsep-primary: #2271b1;
-    --lsep-primary-hover: #135e96;
-    --lsep-text-primary: #1d2327;
-    --lsep-text-secondary: #646970;
-    --lsep-border: #dcdcde;
-    --lsep-background: #f0f0f1;
-    --lsep-card-bg: #ffffff;
-    --lsep-accent: #2271b1;
-    --lsep-success: #00a32a;
-    --lsep-error: #d63638;
+    --lsdp-primary: #2271b1;
+    --lsdp-primary-hover: #135e96;
+    --lsdp-text-primary: #1d2327;
+    --lsdp-text-secondary: #646970;
+    --lsdp-border: #dcdcde;
+    --lsdp-background: #f0f0f1;
+    --lsdp-card-bg: #ffffff;
+    --lsdp-accent: #2271b1;
+    --lsdp-success: #00a32a;
+    --lsdp-error: #d63638;
 }
 
 /* Notice styling within tab content */
-.lsep-tab-content-wrapper .notice {
+.lsdp-tab-content-wrapper .notice {
     margin: 20px 0;
 }
 
 /* Adjust floater app container when inside dashboard wrap */
-.lsep-dashboard-wrap .lsep-floater-app-container {
+.lsdp-dashboard-wrap .lsdp-floater-app-container {
     background: transparent;
     padding: 0;
 }
 
 /* Ensure the floating switcher action buttons work well in new layout */
-.lsep-dashboard-wrap .lsep-action-buttons {
+.lsdp-dashboard-wrap .lsdp-action-buttons {
     margin-bottom: 20px;
 }
 
 /* ============================================
    Main Layout
    ============================================ */
-.lsep-ls-view {
+.lsdp-ls-view {
     display: flex;
     gap: 30px;
     max-width: 1600px;
@@ -46,18 +46,18 @@
     padding: 20px 0;
 }
 
-.lsep-floater-settings__wrapper {
+.lsdp-floater-settings__wrapper {
     display: flex;
     gap: 30px;
     width: 100%;
 }
 
-.lsep-floater-settings__left {
+.lsdp-floater-settings__left {
     flex: 0 0 400px;
     min-width: 400px;
 }
 
-.lsep-floater-settings__right {
+.lsdp-floater-settings__right {
     flex: 1;
     min-width: 600px;
 }
@@ -65,61 +65,61 @@
 /* ============================================
    Settings Box
    ============================================ */
-.lsep-settings-box {
-    background: var(--lsep-card-bg);
-    border: 1px solid var(--lsep-border);
+.lsdp-settings-box {
+    background: var(--lsdp-card-bg);
+    border: 1px solid var(--lsdp-border);
     border-radius: 8px;
     margin-bottom: 20px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
 }
 
-.lsep-settings-box .lsep-header {
+.lsdp-settings-box .lsdp-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 16px 20px;
-    border-bottom: 1px solid var(--lsep-border);
+    border-bottom: 1px solid var(--lsdp-border);
     cursor: pointer;
     user-select: none;
 }
 
-.lsep-settings-box.lsep-collapsible .lsep-header:hover {
+.lsdp-settings-box.lsdp-collapsible .lsdp-header:hover {
     background-color: #f9f9f9;
 }
 
-.lsep-settings-box .lsep-title {
+.lsdp-settings-box .lsdp-title {
     font-size: 15px;
     font-weight: 600;
-    color: var(--lsep-text-primary);
+    color: var(--lsdp-text-primary);
     margin: 0;
 }
 
-.lsep-settings-box .lsep-body {
+.lsdp-settings-box .lsdp-body {
     padding: 20px;
 }
 
-.lsep-settings-box.lsep-collapsible .lsep-body {
+.lsdp-settings-box.lsdp-collapsible .lsdp-body {
     display: none;
 }
 
-.lsep-settings-box.lsep-collapsible.open .lsep-body {
+.lsdp-settings-box.lsdp-collapsible.open .lsdp-body {
     display: block;
 }
 
 /* Chevron icon */
-.lsep-chevron {
+.lsdp-chevron {
     transition: transform 0.2s ease;
     transform: rotate(-90deg);
 }
 
-.lsep-settings-box.lsep-collapsible.open .lsep-chevron {
+.lsdp-settings-box.lsdp-collapsible.open .lsdp-chevron {
     transform: rotate(0deg);
 }
 
 /* ============================================
    Sticky Preview Box
    ============================================ */
-.lsep-sticky-box {
+.lsdp-sticky-box {
     position: sticky;
     top: 32px;
 }
@@ -127,9 +127,9 @@
 /* ============================================
    Language Switcher Preview
    ============================================ */
-.lsep-language-switcher-preview__container {
+.lsdp-language-switcher-preview__container {
     position: relative;
-    background-image: var(--lsep-preview-bg);
+    background-image: var(--lsdp-preview-bg);
     background-size: cover;
     background-position: center;
     border-radius: 8px;
@@ -145,18 +145,18 @@
    ============================================ */
 
 /* Preview container - simulate page corner */
-.lsep-language-switcher-preview-box {
+.lsdp-language-switcher-preview-box {
     width: 100%;
     height: 280px;
     position: relative;
-    background: var(--lsep-preview-bg);
+    background: var(--lsdp-preview-bg);
     background-size: cover;
     border-radius: 8px;
     overflow: hidden;
 }
 
 /* Switcher positioned absolutely in preview to show position settings */
-.lsep-language-switcher-preview-box .lsep-floating-switcher {
+.lsdp-language-switcher-preview-box .lsdp-floating-switcher {
     display: flex !important;
     flex-direction: column-reverse !important;
     border: var(--border-width, 1px) solid var(--border-color, transparent);
@@ -175,22 +175,22 @@
 }
 
 /* Top-positioned: normal column order */
-.lsep-language-switcher-preview-box .lsep-switcher-position-top {
+.lsdp-language-switcher-preview-box .lsdp-switcher-position-top {
     flex-direction: column !important;
 }
 
 /* Inner wrapper */
-.lsep-language-switcher-preview-box .lsep-language-switcher-inner {
+.lsdp-language-switcher-preview-box .lsdp-language-switcher-inner {
     display: flex !important;
     flex-direction: column-reverse !important;
 }
 
-.lsep-language-switcher-preview-box .lsep-switcher-position-top .lsep-language-switcher-inner {
+.lsdp-language-switcher-preview-box .lsdp-switcher-position-top .lsdp-language-switcher-inner {
     flex-direction: column !important;
 }
 
 /* Current/default language item - ALWAYS VISIBLE */
-.lsep-language-switcher-preview-box .lsep-language-item__default {
+.lsdp-language-switcher-preview-box .lsdp-language-item__default {
     display: flex !important;
     align-items: center;
     gap: 8px;
@@ -204,7 +204,7 @@
 }
 
 /* Dropdown list - HIDDEN by default, SHOWN on hover */
-.lsep-language-switcher-preview-box .lsep-switcher-dropdown-list {
+.lsdp-language-switcher-preview-box .lsdp-switcher-dropdown-list {
     display: flex !important;
     flex-direction: column-reverse !important;
     max-height: 0;
@@ -212,18 +212,18 @@
     transition: max-height 0.3s ease;
 }
 
-.lsep-language-switcher-preview-box .lsep-switcher-position-top .lsep-switcher-dropdown-list {
+.lsdp-language-switcher-preview-box .lsdp-switcher-position-top .lsdp-switcher-dropdown-list {
     flex-direction: column !important;
 }
 
 /* SHOW dropdown on hover */
-.lsep-language-switcher-preview-box .lsep-floating-switcher:hover .lsep-switcher-dropdown-list {
+.lsdp-language-switcher-preview-box .lsdp-floating-switcher:hover .lsdp-switcher-dropdown-list {
     max-height: 500px;
     overflow: visible;
 }
 
 /* All language items in dropdown */
-.lsep-language-switcher-preview-box .lsep-switcher-dropdown-list .lsep-language-item {
+.lsdp-language-switcher-preview-box .lsdp-switcher-dropdown-list .lsdp-language-item {
     display: flex !important;
     align-items: center;
     gap: 8px;
@@ -237,13 +237,13 @@
     box-sizing: content-box;
 }
 
-.lsep-language-switcher-preview-box .lsep-switcher-dropdown-list .lsep-language-item:hover {
+.lsdp-language-switcher-preview-box .lsdp-switcher-dropdown-list .lsdp-language-item:hover {
     background: var(--bg-hover, #444) !important;
     color: var(--text-hover, #eee) !important;
 }
 
 /* Flag images */
-.lsep-language-switcher-preview-box .lsep-flag-image {
+.lsdp-language-switcher-preview-box .lsdp-flag-image {
     width: var(--flag-size, 18px) !important;
     height: auto;
     border-radius: var(--flag-radius, 2px);
@@ -253,7 +253,7 @@
 }
 
 /* Language names */
-.lsep-language-switcher-preview-box .lsep-language-item-name {
+.lsdp-language-switcher-preview-box .lsdp-language-item-name {
     font-size: var(--font-size, 14px);
     line-height: 1.2;
     white-space: nowrap;
@@ -263,11 +263,11 @@
     font-weight: 400;
 }
 
-.lsep-language-switcher {
+.lsdp-language-switcher {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
-.lsep-floating-switcher {
+.lsdp-floating-switcher {
     display: flex;
     flex-direction: column-reverse;
     border: var(--border-width, 1px) solid var(--border-color, transparent);
@@ -279,13 +279,13 @@
     overflow: hidden;
 }
 
-.lsep-ls-dropdown .lsep-language-switcher-inner {
+.lsdp-ls-dropdown .lsdp-language-switcher-inner {
     display: flex;
     flex-direction: column-reverse;
     padding: 10px 0px 10px 0px !important;
 }
 
-.lsep-language-item {
+.lsdp-language-item {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -297,16 +297,16 @@
     cursor: pointer;
 }
 
-.lsep-language-item:hover {
+.lsdp-language-item:hover {
     background: var(--bg-hover, #f3f3f3);
     color: var(--text-hover, #000);
 }
 
-.lsep-language-item__default {
+.lsdp-language-item__default {
     pointer-events: none;
 }
 
-.lsep-flag-image {
+.lsdp-flag-image {
     width: var(--flag-size, 18px);
     height: auto;
     border-radius: var(--flag-radius, 2px);
@@ -315,19 +315,19 @@
     flex-shrink: 0;
 }
 
-.lsep-language-item-name {
+.lsdp-language-item-name {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.lsep-switcher-dropdown-list {
+.lsdp-switcher-dropdown-list {
     display: flex;
     flex-direction: column-reverse;
     gap: 7px;
 }
 /* Dropdown Arrow Icon - Admin Preview & Presets */
-.lsep-dropdown-arrow {
+.lsdp-dropdown-arrow {
     margin-left: auto !important;
     transition: transform 0.3s ease !important;
     flex-shrink: 0 !important;
@@ -337,29 +337,29 @@
 }
 
 /* For preview box */
-.lsep-language-switcher-preview-box .lsep-language-item__default .lsep-dropdown-arrow {
+.lsdp-language-switcher-preview-box .lsdp-language-item__default .lsdp-dropdown-arrow {
     display: block !important;
     opacity: 1 !important;
     visibility: visible !important;
 }
 
 /* For preset cards */
-.lsep-preset-switcher-preview .lsep-language-item__default .lsep-dropdown-arrow {
+.lsdp-preset-switcher-preview .lsdp-language-item__default .lsdp-dropdown-arrow {
     display: block !important;
     opacity: 1 !important;
     visibility: visible !important;
 }
 
 /* Rotate arrow when hovering preview */
-.lsep-language-switcher-preview-box .lsep-floating-switcher:hover .lsep-dropdown-arrow,
-.lsep-preset-switcher-preview.is-open .lsep-dropdown-arrow {
+.lsdp-language-switcher-preview-box .lsdp-floating-switcher:hover .lsdp-dropdown-arrow,
+.lsdp-preset-switcher-preview.is-open .lsdp-dropdown-arrow {
     transform: rotate(180deg) !important;
 }
 
 /* Ensure items have flex layout */
-.lsep-language-switcher-preview-box .lsep-language-item__default,
-.lsep-preset-switcher-preview .lsep-language-item__default,
-.lsep-language-item {
+.lsdp-language-switcher-preview-box .lsdp-language-item__default,
+.lsdp-preset-switcher-preview .lsdp-language-item__default,
+.lsdp-language-item {
     display: flex !important;
     align-items: center !important;
 }
@@ -367,15 +367,15 @@
 /* ============================================
    Settings Actions
    ============================================ */
-.lsep-settings-actions {
+.lsdp-settings-actions {
     display: flex;
     gap: 12px;
     border-radius: 8px;
     margin-bottom: 20px;
 }
 
-.lsep-submit-btn {
-    background: var(--lsep-primary);
+.lsdp-submit-btn {
+    background: var(--lsdp-primary);
     color: #fff;
     border: none;
     padding: 8px 20px;
@@ -389,19 +389,19 @@
     gap: 8px;
 }
 
-.lsep-submit-btn:hover {
-    background: var(--lsep-primary-hover);
+.lsdp-submit-btn:hover {
+    background: var(--lsdp-primary-hover);
 }
 
-.lsep-submit-btn:disabled {
+.lsdp-submit-btn:disabled {
     opacity: 0.6;
     cursor: not-allowed;
 }
 
-.lsep-button-secondary {
+.lsdp-button-secondary {
     background: transparent;
-    color: var(--lsep-text-primary);
-    border: 1px solid var(--lsep-border);
+    color: var(--lsdp-text-primary);
+    border: 1px solid var(--lsdp-border);
     padding: 8px 16px;
     border-radius: 4px;
     font-size: 14px;
@@ -412,16 +412,16 @@
     gap: 6px;
 }
 
-.lsep-button-secondary:hover {
-    border-color: var(--lsep-primary);
-    color: var(--lsep-primary);
+.lsdp-button-secondary:hover {
+    border-color: var(--lsdp-primary);
+    color: var(--lsdp-primary);
 }
 
 /* ============================================
    Form Fields Base
    ============================================ */
 
-.lsep-field--row {
+.lsdp-field--row {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -429,50 +429,50 @@
     margin-top: 10px;
 }
 
-.lsep-field--column {
+.lsdp-field--column {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
 }
 
-.lsep-field__label {
+.lsdp-field__label {
     font-size: 14px;
-    color: var(--lsep-text-primary);
-    width: var(--lsep-field-label-width, auto);
+    color: var(--lsdp-text-primary);
+    width: var(--lsdp-field-label-width, auto);
 }
 
-.lsep-primary-text-bold {
+.lsdp-primary-text-bold {
     font-weight: 600;
 }
 
-.lsep-primary-text {
+.lsdp-primary-text {
     font-size: 14px;
-    color: var(--lsep-text-primary);
+    color: var(--lsdp-text-primary);
 }
 
-.lsep-description-text {
+.lsdp-description-text {
     font-size: 13px;
-    color: var(--lsep-text-secondary);
+    color: var(--lsdp-text-secondary);
     line-height: 1.5;
 }
 
-.lsep-separator {
+.lsdp-separator {
     height: 1px;
-    background: var(--lsep-border);
+    background: var(--lsdp-border);
     margin: 16px 0;
 }
 
 /* ============================================
    Toggle Switch - Override WordPress Admin Styles
    ============================================ */
-.lsep-toggle-wrapper {
+.lsdp-toggle-wrapper {
     display: inline-flex;
     align-items: center;
     gap: 12px;
 }
 
-.lsep-toggle-inner {
+.lsdp-toggle-inner {
     position: relative;
     width: 44px;
     height: 24px;
@@ -483,7 +483,7 @@
 }
 
 /* Higher specificity to override WordPress defaults */
-.lsep-toggle-inner input[type="checkbox"].lsep-toggle-input {
+.lsdp-toggle-inner input[type="checkbox"].lsdp-toggle-input {
     position: absolute !important;
     top: 0 !important;
     left: 0 !important;
@@ -501,15 +501,15 @@
     appearance: none !important;
 }
 
-.lsep-toggle-input:checked + .lsep-toggle-slider {
+.lsdp-toggle-input:checked + .lsdp-toggle-slider {
     transform: translateX(20px);
 }
 
-.lsep-toggle-inner:has(.lsep-toggle-input:checked) {
-    background: var(--lsep-success);
+.lsdp-toggle-inner:has(.lsdp-toggle-input:checked) {
+    background: var(--lsdp-success);
 }
 
-.lsep-toggle-slider {
+.lsdp-toggle-slider {
     position: absolute;
     top: 2px;
     left: 2px;
@@ -524,7 +524,7 @@
 }
 
 /* Toggle Status Field */
-.lsep-toggle-status-field {
+.lsdp-toggle-status-field {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -533,33 +533,33 @@
 /* ============================================
    Radio Groups
    ============================================ */
-.lsep-radio-group__wrapper > .lsep-radio-group {
+.lsdp-radio-group__wrapper > .lsdp-radio-group {
     margin-top: 12px; /* Adjust this value if you want a larger or smaller gap */
 }
 
-.lsep-radio-group {
+.lsdp-radio-group {
     display: grid;
     grid-template-columns: repeat(2, minmax(150px, 1fr));
     gap: 12px;
     width: 100%;
 }
 
-.lsep-radio-option {
+.lsdp-radio-option {
     display: flex;
     align-items: center;
 }
 
-.lsep-radio-label {
+.lsdp-radio-label {
     display: flex;
     align-items: center;
     gap: 8px;
     cursor: pointer;
     font-size: 14px;
-    color: var(--lsep-text-primary);
+    color: var(--lsdp-text-primary);
 }
 
 /* Radio button - override WordPress defaults */
-.lsep-radio-label input[type="radio"] {
+.lsdp-radio-label input[type="radio"] {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -578,16 +578,16 @@
     padding: 0 !important;
 }
 
-.lsep-radio-label input[type="radio"]:hover {
-    border-color: var(--lsep-primary, #2271b1) !important;
+.lsdp-radio-label input[type="radio"]:hover {
+    border-color: var(--lsdp-primary, #2271b1) !important;
 }
 
-.lsep-radio-label input[type="radio"]:checked {
-    border-color: var(--lsep-primary, #2271b1) !important;
-    background: var(--lsep-primary, #2271b1) !important;
+.lsdp-radio-label input[type="radio"]:checked {
+    border-color: var(--lsdp-primary, #2271b1) !important;
+    background: var(--lsdp-primary, #2271b1) !important;
 }
 
-.lsep-radio-label input[type="radio"]:checked::before {
+.lsdp-radio-label input[type="radio"]:checked::before {
     content: '' !important;
     display: block !important;
     width: 6px !important;
@@ -602,14 +602,14 @@
 }
 
 /* Remove any WordPress default pseudo-elements */
-.lsep-radio-label input[type="radio"]::after {
+.lsdp-radio-label input[type="radio"]::after {
     display: none !important;
 }
 
 /* ============================================
    Color Picker
    ============================================ */
-.lsep-color__wrapper {
+.lsdp-color__wrapper {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -617,36 +617,36 @@
     justify-content: flex-start;
 }
 
-.lsep-color-input {
+.lsdp-color-input {
     width: 50px;
     height: 30px;
-    border: 1px solid var(--lsep-border);
+    border: 1px solid var(--lsdp-border);
     border-radius: 4px;
     cursor: pointer;
     transition: border-color 0.2s ease;
 }
 
-.lsep-color-input:hover {
-    border-color: var(--lsep-primary);
+.lsdp-color-input:hover {
+    border-color: var(--lsdp-primary);
 }
 
-.lsep-color-input:focus-visible {
-    outline: 2px solid var(--lsep-primary);
+.lsdp-color-input:focus-visible {
+    outline: 2px solid var(--lsdp-primary);
     outline-offset: 2px;
 }
 
-.lsep-color-code {
+.lsdp-color-code {
     font-size: 13px;
     min-width: 90px;
     text-align: left;
     font-family: 'Courier New', monospace;
-    color: var(--lsep-text-secondary);
+    color: var(--lsdp-text-secondary);
 }
 
 /* ============================================
    Number Input
    ============================================ */
-.lsep-number__wrapper {
+.lsdp-number__wrapper {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -654,57 +654,57 @@
     justify-content: flex-start;
 }
 
-.lsep-number-input {
+.lsdp-number-input {
     width: 70px;
     height: 30px;
-    border: 1px solid var(--lsep-border);
+    border: 1px solid var(--lsdp-border);
     border-radius: 4px;
     cursor: pointer;
     transition: border-color 0.2s ease;
 }
 
-.lsep-number__wrapper > .lsep-primary-text {
+.lsdp-number__wrapper > .lsdp-primary-text {
     min-width: 90px;
     text-align: left;
 }
 
-.lsep-number-input:focus {
+.lsdp-number-input:focus {
     outline: none;
-    border-color: var(--lsep-primary);
-    box-shadow: 0 0 0 1px var(--lsep-primary);
+    border-color: var(--lsdp-primary);
+    box-shadow: 0 0 0 1px var(--lsdp-primary);
 }
 
 /* ============================================
    Quad Border Radius
    ============================================ */
-.lsep-quad-grid {
+.lsdp-quad-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
 }
 
-.lsep-quad-radius-corner {
+.lsdp-quad-radius-corner {
     display: flex;
     flex-direction: column;
     gap: 6px;
 }
 
-.lsep-corner-label {
+.lsdp-corner-label {
     font-size: 12px;
-    color: var(--lsep-text-secondary);
+    color: var(--lsdp-text-secondary);
 }
 
 /* ============================================
    Preset Cards
    ============================================ */
-.lsep-preset-applier {
+.lsdp-preset-applier {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
 }
 
-.lsep-preset-card {
-    border: 1px solid var(--lsep-border);
+.lsdp-preset-card {
+    border: 1px solid var(--lsdp-border);
     border-radius: 8px;
     overflow: hidden;
     transition: all 0.2s ease;
@@ -712,30 +712,30 @@
 }
 
 /* Active/Selected preset card */
-.lsep-preset-card-active {
-    border: 2px solid var(--lsep-primary);
+.lsdp-preset-card-active {
+    border: 2px solid var(--lsdp-primary);
     box-shadow: 0 0 0 3px rgba(45, 108, 223, 0.1);
     background: rgba(45, 108, 223, 0.02);
 }
 
-.lsep-apply-btn.lsep-apply-btn-active {
-    background: var(--lsep-primary);
+.lsdp-apply-btn.lsdp-apply-btn-active {
+    background: var(--lsdp-primary);
     color: #fff;
     font-weight: 600;
 }
 
-.lsep-apply-btn:disabled,
-.lsep-apply-btn-active:disabled {
+.lsdp-apply-btn:disabled,
+.lsdp-apply-btn-active:disabled {
     opacity: 0.6;
     cursor: not-allowed;
     pointer-events: none;
 }
 
-.lsep-apply-btn.lsep-apply-btn-active:hover {
-    background: var(--lsep-primary-hover);
+.lsdp-apply-btn.lsdp-apply-btn-active:hover {
+    background: var(--lsdp-primary-hover);
 }
 
-.lsep-preview-rect {
+.lsdp-preview-rect {
     padding: 40px 20px;
     display: flex;
     justify-content: center;
@@ -743,39 +743,39 @@
     min-height: 180px;
 }
 
-.lsep-switcher-preview {
+.lsdp-switcher-preview {
     width: 100%;
     max-width: 180px;
 }
 
-.lsep-switcher-preview .lsep-language-item {
+.lsdp-switcher-preview .lsdp-language-item {
     padding: 8px 12px;
     font-size: 13px;
 }
 
-.lsep-switcher-preview .lsep-flag-image {
+.lsdp-switcher-preview .lsdp-flag-image {
     width: 16px;
 }
 
-.lsep-apply-btn {
+.lsdp-apply-btn {
     width: 100%;
     padding: 10px;
     border: none;
     background: #f0f0f1;
-    color: var(--lsep-text-primary);
+    color: var(--lsdp-text-primary);
     font-size: 13px;
     font-weight: 500;
     cursor: pointer;
     transition: background 0.2s ease;
 }
 
-.lsep-apply-btn:hover {
-    background: var(--lsep-primary);
+.lsdp-apply-btn:hover {
+    background: var(--lsdp-primary);
     color: #fff;
 }
 
 /* Dropdown preview styling for preset cards */
-.lsep-dropdown-preview {
+.lsdp-dropdown-preview {
     display: flex;
     flex-direction: column;
     background: var(--bg, #fff);
@@ -785,17 +785,17 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.lsep-dropdown-preview .lsep-language-item {
+.lsdp-dropdown-preview .lsdp-language-item {
     width: 100%;
     justify-content: flex-start;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.lsep-dropdown-preview .lsep-language-item:last-child {
+.lsdp-dropdown-preview .lsdp-language-item:last-child {
     border-bottom: none;
 }
 
-.lsep-dropdown-preview .lsep-language-item:hover {
+.lsdp-dropdown-preview .lsdp-language-item:hover {
     background: var(--bg-hover, #f5f5f5);
 }
 
@@ -804,21 +804,21 @@
    ============================================ */
 
 /* Main preview - inline mode */
-.lsep-language-switcher-preview-box .lsep-ls-inline .lsep-language-switcher-inner {
+.lsdp-language-switcher-preview-box .lsdp-ls-inline .lsdp-language-switcher-inner {
     flex-direction: row !important;
     gap: 0;
 }
 
-.lsep-language-switcher-preview-box .lsep-ls-inline .lsep-language-item {
+.lsdp-language-switcher-preview-box .lsdp-ls-inline .lsdp-language-item {
     flex: 0 0 auto;
     border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.lsep-language-switcher-preview-box .lsep-ls-inline .lsep-language-item:last-child {
+.lsdp-language-switcher-preview-box .lsdp-ls-inline .lsdp-language-item:last-child {
     border-right: none;
 }
 
-.lsep-language-switcher-preview-box .lsep-ls-inline .lsep-language-item:hover {
+.lsdp-language-switcher-preview-box .lsdp-ls-inline .lsdp-language-item:hover {
     background: var(--bg-hover, #444) !important;
 }
 
@@ -827,56 +827,56 @@
    ============================================ */
 
 /* Parent container must also be row for inline */
-.lsep-preset-switcher-preview.lsep-ls-inline.lsep-floating-switcher,
-.lsep-preset-switcher-preview.lsep-ls-inline {
+.lsdp-preset-switcher-preview.lsdp-ls-inline.lsdp-floating-switcher,
+.lsdp-preset-switcher-preview.lsdp-ls-inline {
     display: flex !important;
     flex-direction: row !important;
 }
 
 /* Inner wrapper in row */
-.lsep-preset-switcher-preview.lsep-ls-inline .lsep-language-switcher-inner {
+.lsdp-preset-switcher-preview.lsdp-ls-inline .lsdp-language-switcher-inner {
     display: flex !important;
     flex-direction: row !important;
     gap: 0;
 }
 
 /* Language items in inline mode */
-.lsep-preset-switcher-preview.lsep-ls-inline .lsep-language-item {
+.lsdp-preset-switcher-preview.lsdp-ls-inline .lsdp-language-item {
     flex: 0 0 auto;
     border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.lsep-preset-switcher-preview.lsep-ls-inline .lsep-language-item:last-child {
+.lsdp-preset-switcher-preview.lsdp-ls-inline .lsdp-language-item:last-child {
     border-right: none;
 }
 
-.lsep-preset-switcher-preview.lsep-ls-inline .lsep-language-item:hover {
+.lsdp-preset-switcher-preview.lsdp-ls-inline .lsdp-language-item:hover {
     background: var(--bg-hover, #444) !important;
 }
 
 /* ============================================
    Layout Customizer
    ============================================ */
-.lsep-layout-customizer-field {
+.lsdp-layout-customizer-field {
     width: 100%;
 }
 
-.lsep-lc-mode-toggle {
+.lsdp-lc-mode-toggle {
     display: flex;
     gap: 8px;
 }
 
-.lsep-lc-mode-button {
+.lsdp-lc-mode-button {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
     padding: 10px 16px;
-    border: 1px solid var(--lsep-border);
+    border: 1px solid var(--lsdp-border);
     border-radius: 6px;
     background: transparent;
-    color: var(--lsep-text-primary);
+    color: var(--lsdp-text-primary);
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
@@ -884,76 +884,76 @@
     width: 9rem;
 }
 
-.lsep-lc-mode-button:hover {
-    border-color: var(--lsep-primary);
-    color: var(--lsep-primary);
+.lsdp-lc-mode-button:hover {
+    border-color: var(--lsdp-primary);
+    color: var(--lsdp-primary);
 }
 
-.lsep-lc-mode-button.active {
-    background: var(--lsep-primary);
-    border-color: var(--lsep-primary);
+.lsdp-lc-mode-button.active {
+    background: var(--lsdp-primary);
+    border-color: var(--lsdp-primary);
     color: #fff;
 }
 
-.lsep-lc-mode-button svg {
+.lsdp-lc-mode-button svg {
     width: 20px;
     height: 20px;
 }
 
-.lsep-lc-settings-panel {
+.lsdp-lc-settings-panel {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-.lsep-lc-section {
+.lsdp-lc-section {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.lsep-lc-subfield {
+.lsdp-lc-subfield {
     margin-bottom: 16px;
 }
 
-.lsep-lc-subfield:last-child {
+.lsdp-lc-subfield:last-child {
     margin-bottom: 0;
 }
 
 /* Better spacing for radio options */
-.lsep-layout-customizer-field .lsep-radio-option {
+.lsdp-layout-customizer-field .lsdp-radio-option {
     display: flex;
     align-items: center;
     padding: 8px 12px;
     background: #f9f9f9;
-    border: 1px solid var(--lsep-border);
+    border: 1px solid var(--lsdp-border);
     border-radius: 6px;
     transition: all 0.2s ease;
 }
 
-.lsep-layout-customizer-field .lsep-radio-option:hover {
+.lsdp-layout-customizer-field .lsdp-radio-option:hover {
     background: #f0f0f0;
-    border-color: var(--lsep-primary);
+    border-color: var(--lsdp-primary);
 }
 
 /* Highlight selected radio option */
-.lsep-layout-customizer-field .lsep-radio-option:has(input:checked) {
+.lsdp-layout-customizer-field .lsdp-radio-option:has(input:checked) {
     background: #e8f4fd;
-    border-color: var(--lsep-primary);
+    border-color: var(--lsdp-primary);
 }
 
 /* ============================================
    Custom CSS Editor
    ============================================ */
-.lsep-custom-css-editor {
+.lsdp-custom-css-editor {
     width: 100%;
 }
 
-.lsep-custom-css-editor textarea {
+.lsdp-custom-css-editor textarea {
     width: 100%;
     min-height: 200px;
     padding: 12px;
-    border: 1px solid var(--lsep-border);
+    border: 1px solid var(--lsdp-border);
     border-radius: 4px;
     font-family: 'Courier New', Consolas, monospace;
     font-size: 13px;
@@ -961,16 +961,16 @@
     resize: vertical;
 }
 
-.lsep-custom-css-editor textarea:focus {
+.lsdp-custom-css-editor textarea:focus {
     outline: none;
-    border-color: var(--lsep-primary);
-    box-shadow: 0 0 0 1px var(--lsep-primary);
+    border-color: var(--lsdp-primary);
+    box-shadow: 0 0 0 1px var(--lsdp-primary);
 }
 
 /* ============================================
    Preset Card Inline Confirmation
    ============================================ */
-.lsep-preset-confirm-overlay {
+.lsdp-preset-confirm-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -985,37 +985,37 @@
     border-radius: 8px;
 }
 
-.lsep-preset-confirm-content {
+.lsdp-preset-confirm-content {
     text-align: center;
     max-width: 280px;
 }
 
-.lsep-preset-confirm-title {
+.lsdp-preset-confirm-title {
     margin: 0 0 12px 0;
     font-size: 14px;
-    color: var(--lsep-text-primary);
+    color: var(--lsdp-text-primary);
     line-height: 1.5;
 }
 
-.lsep-preset-confirm-title strong {
+.lsdp-preset-confirm-title strong {
     font-weight: 600;
-    color: var(--lsep-primary);
+    color: var(--lsdp-primary);
 }
 
-.lsep-preset-confirm-warning {
+.lsdp-preset-confirm-warning {
     margin: 0 0 20px 0;
     font-size: 12px;
     color: #d63638;
     line-height: 1.4;
 }
 
-.lsep-preset-confirm-actions {
+.lsdp-preset-confirm-actions {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.lsep-preset-confirm-btn {
+.lsdp-preset-confirm-btn {
     width: 100%;
     padding: 10px 16px;
     border: none;
@@ -1026,56 +1026,56 @@
     transition: all 0.2s ease;
 }
 
-.lsep-preset-confirm-btn-primary {
-    background: var(--lsep-primary);
+.lsdp-preset-confirm-btn-primary {
+    background: var(--lsdp-primary);
     color: #fff;
 }
 
-.lsep-preset-confirm-btn-primary:hover {
-    background: var(--lsep-primary-hover);
+.lsdp-preset-confirm-btn-primary:hover {
+    background: var(--lsdp-primary-hover);
 }
 
-.lsep-preset-confirm-btn-secondary {
+.lsdp-preset-confirm-btn-secondary {
     background: transparent;
-    color: var(--lsep-text-secondary);
-    border: 1px solid var(--lsep-border);
+    color: var(--lsdp-text-secondary);
+    border: 1px solid var(--lsdp-border);
 }
 
-.lsep-preset-confirm-btn-secondary:hover {
+.lsdp-preset-confirm-btn-secondary:hover {
     background: #f0f0f1;
-    color: var(--lsep-text-primary);
+    color: var(--lsdp-text-primary);
 }
 
 /* ============================================
    Responsive Design
    ============================================ */
 @media screen and (max-width: 1280px) {
-    .lsep-floater-settings__wrapper {
+    .lsdp-floater-settings__wrapper {
         flex-direction: column;
     }
 
-    .lsep-floater-settings__left {
+    .lsdp-floater-settings__left {
         flex: 1;
         max-width: 100%;
     }
 
-    .lsep-sticky-box {
+    .lsdp-sticky-box {
         position: relative;
         top: 0;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .lsep-preset-applier {
+    .lsdp-preset-applier {
         grid-template-columns: 1fr 1fr;
     }
 
-    .lsep-field--row {
+    .lsdp-field--row {
         flex-direction: column;
         align-items: flex-start;
     }
 
-    .lsep-floater-settings__left {
+    .lsdp-floater-settings__left {
         min-width: 100%;
     }
 }

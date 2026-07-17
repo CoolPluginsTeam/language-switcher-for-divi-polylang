@@ -24,7 +24,7 @@ function lsdp_get_autopoly_promo_html( $context = 'get_started' ) {
 	$is_active    = ! empty( $status['active'] );
 	$is_installed = ! empty( $status['installed'] );
 	$image_url    = LSDP_URL . 'admin/dashboard/assets/images/autopoly-ai-translation-for-polylang-pro.png';
-	$docs_url     = 'https://docs.coolplugins.net/plugin/ai-translation-for-polylang/?utm_source=lsep_plugin&utm_medium=inside&utm_campaign=docs&utm_content=' . rawurlencode( $context );
+	$docs_url     = 'https://docs.coolplugins.net/plugin/ai-translation-for-polylang/?utm_source=lsdp_plugin&utm_medium=inside&utm_campaign=docs&utm_content=' . rawurlencode( $context );
 	$settings_url = admin_url( 'admin.php?page=polylang-atfp-dashboard' );
 
 	if ( $is_active ) {
@@ -37,29 +37,29 @@ function lsdp_get_autopoly_promo_html( $context = 'get_started' ) {
 
 	ob_start();
 	?>
-	<div class="lsep-promo-box lsep-promo-box-floating-switcher">
-		<div class="lsep-promo-main">
-			<div class="lsep-promo-image-section">
+	<div class="lsdp-promo-box lsdp-promo-box-floating-switcher">
+		<div class="lsdp-promo-main">
+			<div class="lsdp-promo-image-section">
 				<img
-					class="lsep-promo-image"
+					class="lsdp-promo-image"
 					src="<?php echo esc_url( $image_url ); ?>"
 					alt="<?php echo esc_attr__( 'AutoPoly logo', 'language-switcher-for-divi-polylang' ); ?>"
 				/>
 			</div>
-			<div class="lsep-promo-text-section">
-				<div class="lsep-promo-header-row">
-					<strong class="lsep-promo-title"><?php esc_html_e( 'AutoPoly - AI Translation For Polylang', 'language-switcher-for-divi-polylang' ); ?></strong>
+			<div class="lsdp-promo-text-section">
+				<div class="lsdp-promo-header-row">
+					<strong class="lsdp-promo-title"><?php esc_html_e( 'AutoPoly - AI Translation For Polylang', 'language-switcher-for-divi-polylang' ); ?></strong>
 				</div>
-				<p class="lsep-promo-subtitle">
+				<p class="lsdp-promo-subtitle">
 					<?php esc_html_e( 'Automatically translate pages and posts built with Elementor or Gutenberg using AI in one click. Save time and effort.', 'language-switcher-for-divi-polylang' ); ?>
 				</p>
 			</div>
 		</div>
-		<div class="lsep-promo-actions">
+		<div class="lsdp-promo-actions">
 			<?php if ( $is_active ) : ?>
 				<a
 					href="<?php echo esc_url( $settings_url ); ?>"
-					class="button button-primary lsep-promo-button"
+					class="button button-primary lsdp-promo-button"
 					target="_blank"
 					rel="noopener noreferrer"
 				>
@@ -68,7 +68,7 @@ function lsdp_get_autopoly_promo_html( $context = 'get_started' ) {
 			<?php else : ?>
 				<button
 					type="button"
-					class="button button-primary lsep-promo-button lsep-autopoly-action-btn"
+					class="button button-primary lsdp-promo-button lsdp-autopoly-action-btn"
 					data-context="<?php echo esc_attr( $context ); ?>"
 				>
 					<?php echo esc_html( $button_text ); ?>
@@ -76,7 +76,7 @@ function lsdp_get_autopoly_promo_html( $context = 'get_started' ) {
 			<?php endif; ?>
 			<a
 				href="<?php echo esc_url( $docs_url ); ?>"
-				class="button button-secondary lsep-promo-button-secondary"
+				class="button button-secondary lsdp-promo-button-secondary"
 				target="_blank"
 				rel="noopener noreferrer"
 			>
@@ -107,7 +107,7 @@ function lsdp_render_autopoly_promo( $context = 'get_started' ) {
 function lsdp_get_autopoly_promo_script_data() {
 	return array(
 		'ajaxUrl'      => admin_url( 'admin-ajax.php' ),
-		'installNonce' => wp_create_nonce( 'lsep_install_autopoly' ),
+		'installNonce' => wp_create_nonce( 'lsdp_install_autopoly' ),
 		'settingsUrl'  => admin_url( 'admin.php?page=polylang-atfp-dashboard' ),
 		'i18n'         => array(
 			'installing'   => __( 'Installing...', 'language-switcher-for-divi-polylang' ),
@@ -126,7 +126,7 @@ function lsdp_get_autopoly_promo_script_data() {
  * @param array $deps Script dependencies.
  */
 function lsdp_enqueue_autopoly_promo_script( $deps = array() ) {
-	$handle = 'lsep-autopoly-promo';
+	$handle = 'lsdp-autopoly-promo';
 
 	wp_enqueue_script(
 		$handle,
@@ -136,5 +136,5 @@ function lsdp_enqueue_autopoly_promo_script( $deps = array() ) {
 		true
 	);
 
-	wp_localize_script( $handle, 'lsepAutopolyPromo', lsdp_get_autopoly_promo_script_data() );
+	wp_localize_script( $handle, 'lsdpAutopolyPromo', lsdp_get_autopoly_promo_script_data() );
 }

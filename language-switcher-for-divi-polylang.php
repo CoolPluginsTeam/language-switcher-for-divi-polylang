@@ -1,8 +1,8 @@
 <?php
 /**
-Plugin Name: Language Switcher – Polylang for Divi
+Plugin Name: Language Switcher for Polylang – Elementor, Gutenberg, & Divi
 Plugin URI:  https://wordpress.org/plugins/language-switcher-for-divi-polylang
-Description: Language Switcher – Polylang for Divi to use added language switcher in your page or divi header menu
+Description: Language Switcher for Polylang – Elementor, Gutenberg, & Divi to use added language switcher in your page or divi header menu
 Version:     1.0.7
 Requires at least: 5.0
 Requires PHP: 7.2
@@ -13,18 +13,18 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: language-switcher-for-divi-polylang
 Requires Plugins: polylang
 
-Language Switcher – Polylang for Divi is free software: you can redistribute it and/or modify
+Language Switcher for Polylang – Elementor, Gutenberg, & Divi is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 2 of the License, or
 any later version.
 
-Language Switcher – Polylang for Divi is distributed in the hope that it will be useful,
+Language Switcher for Polylang – Elementor, Gutenberg, & Divi is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with Language Switcher – Polylang for Divi. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
+along with Language Switcher for Polylang – Elementor, Gutenberg, & Divi. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
 
  * @package LanguageSwitcherForDiviPolylang
  */
@@ -170,7 +170,7 @@ final class LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG {
 			return;
 		}
 		delete_option( 'lsdp_plugin_activation_redirect' );
-		wp_safe_redirect( admin_url( 'admin.php?page=lsep-get-started' ) );
+		wp_safe_redirect( admin_url( 'admin.php?page=lsdp-get-started' ) );
 		exit;
 	}
 
@@ -181,7 +181,7 @@ final class LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG {
 	 * @return array
 	 */
 	public function plugin_action_links( $links ) {
-		$links[] = '<a href="' . esc_url( admin_url( 'admin.php?page=lsep-get-started' ) ) . '">' . esc_html__( 'Get Started', 'language-switcher-for-divi-polylang' ) . '</a>';
+		$links[] = '<a href="' . esc_url( admin_url( 'admin.php?page=lsdp-get-started' ) ) . '">' . esc_html__( 'Get Started', 'language-switcher-for-divi-polylang' ) . '</a>';
 		return $links;
 	}
 

@@ -34,8 +34,8 @@
          */
         constructor(element) {
             this.switcher = element; // Root switcher element
-            this.dropdown = element.querySelector('.lsep-switcher-dropdown-list'); // Dropdown list container
-            this.currentItem = element.querySelector('.lsep-language-item__current[role="button"]'); // Active language button
+            this.dropdown = element.querySelector('.lsdp-switcher-dropdown-list'); // Dropdown list container
+            this.currentItem = element.querySelector('.lsdp-language-item__current[role="button"]'); // Active language button
             this.isOpen = false; // Tracks dropdown open/close state
             this.closeTimeout = null; // Timeout ID for delayed close on hover
 
@@ -62,9 +62,9 @@
          * @since 1.2.4
          */
         setFixedWidth() {
-            const mobileBreakpoint = (window.lsepFloaterFrontend && window.lsepFloaterFrontend.mobileBreakpoint) || 768;
+            const mobileBreakpoint = (window.lsdpFloaterFrontend && window.lsdpFloaterFrontend.mobileBreakpoint) || 768;
             const isMobile = window.matchMedia(`(max-width: ${mobileBreakpoint - 1}px)`).matches;
-            const widthVar = isMobile ? '--lsep-mobile-width' : '--lsep-desktop-width';
+            const widthVar = isMobile ? '--lsdp-mobile-width' : '--lsdp-desktop-width';
             const currentWidth = getComputedStyle(this.switcher).getPropertyValue(widthVar).trim();
 
             if (currentWidth && currentWidth !== 'auto') {
@@ -73,8 +73,8 @@
             }
 
             // Get the currently active language item element
-            const currentLangItem = this.switcher.querySelector('.lsep-language-item__current') ||
-                this.switcher.querySelector('.lsep-language-item__default');
+            const currentLangItem = this.switcher.querySelector('.lsdp-language-item__current') ||
+                this.switcher.querySelector('.lsdp-language-item__default');
 
             if (!currentLangItem) return;
 
@@ -82,7 +82,7 @@
                 // Create a temporary hidden element to measure the exact width needed
                 const measurer = document.createElement('div');
                 measurer.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;';
-                measurer.className = 'lsep-language-item';
+                measurer.className = 'lsdp-language-item';
                 document.body.appendChild(measurer);
 
                 // Copy all relevant styles from the actual language item for accurate measurement
@@ -94,13 +94,13 @@
                 measurer.style.gap = styles.gap;
 
                 // Clone the current language content (text + flag icon)
-                const langName = currentLangItem.querySelector('.lsep-language-item-name');
-                const langFlag = currentLangItem.querySelector('.lsep-flag-image');
+                const langName = currentLangItem.querySelector('.lsdp-language-item-name');
+                const langFlag = currentLangItem.querySelector('.lsdp-flag-image');
 
                 // Add language name if present
                 if (langName) {
                     const nameSpan = document.createElement('span');
-                    nameSpan.className = 'lsep-language-item-name';
+                    nameSpan.className = 'lsdp-language-item-name';
                     nameSpan.textContent = langName.textContent;
                     measurer.appendChild(nameSpan);
                 }
@@ -151,7 +151,7 @@
             });
 
             // Hover handlers: Open on hover (desktop only, min-width: 768px)
-            const mobileBreakpoint = (window.lsepFloaterFrontend && window.lsepFloaterFrontend.mobileBreakpoint) || 768;
+            const mobileBreakpoint = (window.lsdpFloaterFrontend && window.lsdpFloaterFrontend.mobileBreakpoint) || 768;
             if (window.matchMedia(`(min-width: ${mobileBreakpoint}px)`).matches) {
                 this.switcher.addEventListener('mouseenter', () => {
                     clearTimeout(this.closeTimeout); // Cancel any pending close
@@ -182,7 +182,7 @@
             });
 
             // Keyboard navigation for dropdown items
-            const items = this.dropdown.querySelectorAll('.lsep-language-item');
+            const items = this.dropdown.querySelectorAll('.lsdp-language-item');
             items.forEach((item, index) => {
                 item.addEventListener('keydown', (e) => {
                     if (e.key === 'ArrowDown') {
@@ -287,7 +287,7 @@
          * @since 1.2.4
          */
         focusFirstItem() {
-            const firstItem = this.dropdown.querySelector('.lsep-language-item');
+            const firstItem = this.dropdown.querySelector('.lsdp-language-item');
             if (firstItem) firstItem.focus();
         }
     }
@@ -302,7 +302,7 @@
      */
     function initFloatingSwitchers() {
         // Find all dropdown-type floating switchers
-        const switchers = document.querySelectorAll('.lsep-floating-switcher.lsep-ls-dropdown');
+        const switchers = document.querySelectorAll('.lsdp-floating-switcher.lsdp-ls-dropdown');
 
         // Initialize each switcher instance
         switchers.forEach(switcher => {

@@ -42,12 +42,12 @@ $video_id = isset( $builder_video_ids[ $default_builder ] ) ? $builder_video_ids
 
 $restore_content = $show_builder_picker && (bool) $saved_builder;
 
-$wrap_classes = array( 'lsep-get-started-content' );
+$wrap_classes = array( 'lsdp-get-started-content' );
 if ( ! $show_builder_picker || $restore_content ) {
 	$wrap_classes[] = 'is-content-active';
 }
 if ( ! $show_builder_picker ) {
-	$wrap_classes[] = 'lsep-gs-no-picker';
+	$wrap_classes[] = 'lsdp-gs-no-picker';
 }
 
 $builder_cards = array(
@@ -74,15 +74,15 @@ $builder_cards = array(
 // Put the selected builder first while preserving the normal order of the others.
 $builder_order = array_unique( array( $default_builder, 'divi', 'elementor', 'gutenberg' ) );
 ?>
-<div class="<?php echo esc_attr( implode( ' ', $wrap_classes ) ); ?>" id="lsep-gs-wrap" data-default-builder="<?php echo esc_attr( $default_builder ); ?>">
+<div class="<?php echo esc_attr( implode( ' ', $wrap_classes ) ); ?>" id="lsdp-gs-wrap" data-default-builder="<?php echo esc_attr( $default_builder ); ?>">
 	<?php if ( $show_builder_picker ) : ?>
-	<div class="lsep-gs-builder-section" id="lsep-gs-builder-section">
-		<div class="lsep-gs-choose-heading">
+	<div class="lsdp-gs-builder-section" id="lsdp-gs-builder-section">
+		<div class="lsdp-gs-choose-heading">
 			<h2><?php esc_html_e( 'Choose your builder', 'language-switcher-for-divi-polylang' ); ?></h2>
 			<p><?php esc_html_e( 'Select the builder you use to add and manage the language switcher.', 'language-switcher-for-divi-polylang' ); ?></p>
 		</div>
 
-		<div class="lsep-gs-builder-cards">
+		<div class="lsdp-gs-builder-cards">
 			<?php foreach ( $builder_order as $builder_key ) : ?>
 				<?php
 				$builder_card = $builder_cards[ $builder_key ];
@@ -90,52 +90,35 @@ $builder_order = array_unique( array( $default_builder, 'divi', 'elementor', 'gu
 					continue;
 				}
 				?>
-			<button type="button" class="lsep-gs-builder-card<?php echo $builder_key === $default_builder ? ' is-selected' : ''; ?>" data-builder="<?php echo esc_attr( $builder_key ); ?>">
-				<img class="lsep-gs-builder-icon" src="<?php echo esc_url( $assets_url . $builder_card['icon'] ); ?>" alt="" />
-				<span class="lsep-gs-builder-text">
-					<span class="lsep-gs-builder-title"><?php echo esc_html( $builder_card['title'] ); ?></span>
-					<span class="lsep-gs-builder-desc"><?php echo esc_html( $builder_card['description'] ); ?></span>
+			<button type="button" class="lsdp-gs-builder-card<?php echo $builder_key === $default_builder ? ' is-selected' : ''; ?>" data-builder="<?php echo esc_attr( $builder_key ); ?>">
+				<img class="lsdp-gs-builder-icon" src="<?php echo esc_url( $assets_url . $builder_card['icon'] ); ?>" alt="" />
+				<span class="lsdp-gs-builder-text">
+					<span class="lsdp-gs-builder-title"><?php echo esc_html( $builder_card['title'] ); ?></span>
+					<span class="lsdp-gs-builder-desc"><?php echo esc_html( $builder_card['description'] ); ?></span>
 				</span>
-				<span class="dashicons dashicons-arrow-right-alt2 lsep-gs-chevron" aria-hidden="true"></span>
+				<span class="dashicons dashicons-arrow-right-alt2 lsdp-gs-chevron" aria-hidden="true"></span>
 			</button>
 			<?php endforeach; ?>
 		</div>
 	</div>
 
-	<button type="button" class="lsep-gs-back-btn" id="lsep-gs-back-btn">
+	<button type="button" class="lsdp-gs-back-btn" id="lsdp-gs-back-btn">
 		<span class="dashicons dashicons-arrow-left-alt2" aria-hidden="true"></span>
 		<?php esc_html_e( 'Change builder', 'language-switcher-for-divi-polylang' ); ?>
 	</button>
 	<?php endif; ?>
 
-	<?php
-	$guide_titles  = array(
-		'elementor' => __( 'Elementor Quick Start Guide', 'language-switcher-for-divi-polylang' ),
-		'gutenberg' => __( 'Gutenberg Quick Start Guide', 'language-switcher-for-divi-polylang' ),
-		'divi'      => __( 'Divi Quick Start Guide', 'language-switcher-for-divi-polylang' ),
-	);
-	$guide_subs    = array(
-		'elementor' => __( 'Follow these simple steps to add and configure the Language Switcher widget in Elementor.', 'language-switcher-for-divi-polylang' ),
-		'gutenberg' => __( 'Follow these simple steps to add and configure the Language Switcher block in the Block Editor.', 'language-switcher-for-divi-polylang' ),
-		'divi'      => __( 'Follow these simple steps to add and configure the Language Switcher module in Divi.', 'language-switcher-for-divi-polylang' ),
-	);
-	$initial_title = isset( $guide_titles[ $default_builder ] ) ? $guide_titles[ $default_builder ] : $guide_titles['gutenberg'];
-	$initial_sub   = isset( $guide_subs[ $default_builder ] ) ? $guide_subs[ $default_builder ] : $guide_subs['gutenberg'];
-	?>
-	<div class="lsep-gs-info-grid" id="lsep-gs-info-grid">
-		<div class="lsep-gs-info-card lsep-gs-guide-card">
-			<h2 id="lsep-gs-guide-title"><?php echo esc_html( $initial_title ); ?></h2>
-			<p class="lsep-gs-sub" id="lsep-gs-guide-sub"><?php echo esc_html( $initial_sub ); ?></p>
-			<div id="lsep-gs-steps"></div>
+	<div class="lsdp-gs-info-grid" id="lsdp-gs-info-grid">
+		<div class="lsdp-gs-info-card lsdp-gs-guide-card">
+			<h2 id="lsdp-gs-guide-title"></h2>
+			<p class="lsdp-gs-sub" id="lsdp-gs-guide-sub"></p>
+			<div id="lsdp-gs-steps"></div>
 		</div>
 
-		<div class="lsep-gs-info-card lsep-gs-video-card">
-			<header class="lsep-gs-video-header">
-				<h2 class="lsep-gs-video-title"><?php esc_html_e( 'Video Tutorial', 'language-switcher-for-divi-polylang' ); ?></h2>
-			</header>
-			<div class="lsep-video-container">
+		<div class="lsdp-gs-info-card lsdp-gs-video-card">
+			<div class="lsdp-video-container">
 				<iframe
-					id="lsep-gs-video-iframe"
+					id="lsdp-gs-video-iframe"
 					width="100%"
 					height="380"
 					src="<?php echo esc_url( 'https://www.youtube.com/embed/' . $video_id ); ?>"
@@ -145,28 +128,20 @@ $builder_order = array_unique( array( $default_builder, 'divi', 'elementor', 'gu
 					allowfullscreen>
 				</iframe>
 			</div>
-			<div class="lsep-gs-video-takeaways">
-				<h3><?php esc_html_e( 'What you will learn', 'language-switcher-for-divi-polylang' ); ?></h3>
-				<ul>
-					<li><?php esc_html_e( 'Add the language switcher to your page or layout.', 'language-switcher-for-divi-polylang' ); ?></li>
-					<li><?php esc_html_e( 'Configure the switcher display and language options.', 'language-switcher-for-divi-polylang' ); ?></li>
-					<li><?php esc_html_e( 'Create a smooth language-switching experience for visitors.', 'language-switcher-for-divi-polylang' ); ?></li>
-				</ul>
-			</div>
 		</div>
 	</div>
 
-	<footer class="lsep-gs-footer">
+	<footer class="lsdp-gs-footer">
 
-		<div class="lsep-gs-footer-card">
-			<div class="lsep-gs-footer-icon" aria-hidden="true">
+		<div class="lsdp-gs-footer-card">
+			<div class="lsdp-gs-footer-icon" aria-hidden="true">
 				<span class="dashicons dashicons-editor-help"></span>
 			</div>
 			<h3><?php esc_html_e( 'Support', 'language-switcher-for-divi-polylang' ); ?></h3>
 			<p><?php esc_html_e( 'Need help? Our team can assist with setup and troubleshooting.', 'language-switcher-for-divi-polylang' ); ?></p>
-			<div class="lsep-gs-footer-links">
+			<div class="lsdp-gs-footer-links">
 				<a
-					class="lsep-gs-footer-btn"
+					class="lsdp-gs-footer-btn"
 					href="<?php echo esc_url( 'https://wordpress.org/support/plugin/language-switcher-for-divi-polylang/#new-topic-0' ); ?>"
 					target="_blank"
 					rel="noopener noreferrer"
@@ -179,15 +154,15 @@ $builder_order = array_unique( array( $default_builder, 'divi', 'elementor', 'gu
 
 		<?php lsdp_render_autopoly_promo( 'get_started' ); ?>
 
-		<div class="lsep-gs-footer-card">
-			<div class="lsep-gs-footer-icon" aria-hidden="true">
+		<div class="lsdp-gs-footer-card">
+			<div class="lsdp-gs-footer-icon" aria-hidden="true">
 				<span class="dashicons dashicons-star-filled"></span>
 			</div>
 			<h3><?php esc_html_e( 'Your Feedback Matters', 'language-switcher-for-divi-polylang' ); ?></h3>
 			<p><?php esc_html_e( 'If you\'re happy with the plugin, we\'d greatly appreciate a quick review. Your support helps us continue improving it.', 'language-switcher-for-divi-polylang' ); ?></p>
-			<div class="lsep-gs-footer-links">
+			<div class="lsdp-gs-footer-links">
 				<a
-					class="lsep-gs-footer-btn"
+					class="lsdp-gs-footer-btn"
 					href="<?php echo esc_url( 'https://wordpress.org/support/plugin/language-switcher-for-divi-polylang/reviews/#new-post' ); ?>"
 					target="_blank"
 					rel="noopener noreferrer"

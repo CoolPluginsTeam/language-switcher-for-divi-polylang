@@ -13,7 +13,7 @@
     }
 
     function setFixedWidth(container) {
-        var button = container.querySelector('.lsep-dropdown-button');
+        var button = container.querySelector('.lsdp-dropdown-button');
         var doc = container.ownerDocument;
 
         if (!button || !doc || !doc.body) {
@@ -60,8 +60,8 @@
     }
 
     function initDropdown(container) {
-        var button = container.querySelector('.lsep-dropdown-button');
-        var menu = container.querySelector('.lsep-dropdown-menu');
+        var button = container.querySelector('.lsdp-dropdown-button');
+        var menu = container.querySelector('.lsdp-dropdown-menu');
         var doc = container.ownerDocument;
 
         if (!button || !menu || !doc) {
@@ -133,17 +133,17 @@
     function initAllDropdowns(doc) {
         doc = doc || document;
 
-        doc.querySelectorAll('.lsep-dropdown-container').forEach(function(dropdown) {
+        doc.querySelectorAll('.lsdp-dropdown-container').forEach(function(dropdown) {
             setFixedWidth(dropdown);
 
-            if (!dropdown.hasAttribute('data-lsep-initialized')) {
-                dropdown.setAttribute('data-lsep-initialized', 'true');
+            if (!dropdown.hasAttribute('data-lsdp-initialized')) {
+                dropdown.setAttribute('data-lsdp-initialized', 'true');
                 initDropdown(dropdown);
             }
         });
     }
 
-    window.lsepInitDropdowns = initAllDropdowns;
+    window.lsdpInitDropdowns = initAllDropdowns;
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function() {

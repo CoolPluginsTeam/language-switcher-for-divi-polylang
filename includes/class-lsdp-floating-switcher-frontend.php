@@ -61,7 +61,7 @@ class LSDP_Floating_Switcher_Frontend {
 	 */
 	private function get_config() {
 		if ( null === $this->config ) {
-			$this->config = get_option( 'lsep_floating_switcher_config', array() );
+			$this->config = get_option( 'lsdp_floating_switcher_config', array() );
 		}
 
 		return $this->config;
@@ -93,7 +93,7 @@ class LSDP_Floating_Switcher_Frontend {
 		$version    = defined( 'LSDP' ) ? LSDP : '1.0.0';
 
 		wp_enqueue_style(
-			'lsep-floating-switcher-frontend',
+			'lsdp-floating-switcher-frontend',
 			$plugin_url . 'includes/css/lsdp-floating-switcher-frontend.css',
 			array(),
 			$version
@@ -104,11 +104,11 @@ class LSDP_Floating_Switcher_Frontend {
 			$custom_css = wp_strip_all_tags( $config['customCss'] );
 			$custom_css = preg_replace( '/<script\b[^>]*>.*?<\/script>/is', '', $custom_css );
 
-			wp_add_inline_style( 'lsep-floating-switcher-frontend', $custom_css );
+			wp_add_inline_style( 'lsdp-floating-switcher-frontend', $custom_css );
 		}
 
 		wp_enqueue_script(
-			'lsep-floating-switcher-js',
+			'lsdp-floating-switcher-js',
 			$plugin_url . 'includes/js/lsdp-floating-switcher-frontend.js',
 			array(),
 			$version,
@@ -116,8 +116,8 @@ class LSDP_Floating_Switcher_Frontend {
 		);
 
 		wp_localize_script(
-			'lsep-floating-switcher-js',
-			'lsepFloaterFrontend',
+			'lsdp-floating-switcher-js',
+			'lsdpFloaterFrontend',
 			array(
 				'mobileBreakpoint' => self::MOBILE_BREAKPOINT,
 			)
@@ -213,13 +213,13 @@ class LSDP_Floating_Switcher_Frontend {
 		$horizontal     = $position_parts[1] ?? 'right';
 
 		return array(
-			'--lsep-' . $viewport . '-top'      => ( 'top' === $vertical ) ? '0px' : 'auto',
-			'--lsep-' . $viewport . '-bottom'   => ( 'bottom' === $vertical ) ? '0px' : 'auto',
-			'--lsep-' . $viewport . '-right'    => ( 'right' === $horizontal ) ? '10%' : 'auto',
-			'--lsep-' . $viewport . '-left'     => ( 'left' === $horizontal ) ? '10%' : 'auto',
-			'--lsep-' . $viewport . '-width'    => ( 'custom' === ( $layout['width'] ?? 'default' ) ) ? absint( $layout['customWidth'] ?? 216 ) . 'px' : 'auto',
-			'--lsep-' . $viewport . '-padding'  => ( 'custom' === ( $layout['padding'] ?? 'default' ) ) ? absint( $layout['customPadding'] ?? 0 ) . 'px' : '0',
-			'--lsep-' . $viewport . '-vertical' => $vertical,
+			'--lsdp-' . $viewport . '-top'      => ( 'top' === $vertical ) ? '0px' : 'auto',
+			'--lsdp-' . $viewport . '-bottom'   => ( 'bottom' === $vertical ) ? '0px' : 'auto',
+			'--lsdp-' . $viewport . '-right'    => ( 'right' === $horizontal ) ? '10%' : 'auto',
+			'--lsdp-' . $viewport . '-left'     => ( 'left' === $horizontal ) ? '10%' : 'auto',
+			'--lsdp-' . $viewport . '-width'    => ( 'custom' === ( $layout['width'] ?? 'default' ) ) ? absint( $layout['customWidth'] ?? 216 ) . 'px' : 'auto',
+			'--lsdp-' . $viewport . '-padding'  => ( 'custom' === ( $layout['padding'] ?? 'default' ) ) ? absint( $layout['customPadding'] ?? 0 ) . 'px' : '0',
+			'--lsdp-' . $viewport . '-vertical' => $vertical,
 		);
 	}
 
@@ -277,22 +277,22 @@ class LSDP_Floating_Switcher_Frontend {
 			return;
 		}
 
-		$layout_class = $is_dropdown ? 'lsep-ls-dropdown' : 'lsep-ls-inline';
+		$layout_class = $is_dropdown ? 'lsdp-ls-dropdown' : 'lsdp-ls-inline';
 		?>
-		<nav class="lsep-language-switcher lsep-floating-switcher <?php echo esc_attr( $layout_class ); ?>"
+		<nav class="lsdp-language-switcher lsdp-floating-switcher <?php echo esc_attr( $layout_class ); ?>"
 			style="<?php echo esc_attr( $styles ); ?>"
 			role="navigation"
 			aria-label="<?php esc_attr_e( 'Website language selector', 'language-switcher-for-divi-polylang' ); ?>"
-			data-lsep-desktop-vertical="<?php echo esc_attr( $this->get_layout_vertical( $desktop_layout ) ); ?>"
-			data-lsep-mobile-vertical="<?php echo esc_attr( $this->get_layout_vertical( $mobile_layout ) ); ?>"
+			data-lsdp-desktop-vertical="<?php echo esc_attr( $this->get_layout_vertical( $desktop_layout ) ); ?>"
+			data-lsdp-mobile-vertical="<?php echo esc_attr( $this->get_layout_vertical( $mobile_layout ) ); ?>"
 			data-no-translation>
 
 			<?php if ( $is_dropdown ) : ?>
-				<div class="lsep-language-switcher-inner">
+				<div class="lsdp-language-switcher-inner">
 					<?php $this->render_language_item( $current, true, $desktop_layout, $mobile_layout ); ?>
 
 					<?php if ( ! empty( $others ) ) : ?>
-						<div class="lsep-switcher-dropdown-list"
+						<div class="lsdp-switcher-dropdown-list"
 							role="group"
 							aria-label="<?php esc_attr_e( 'Available languages', 'language-switcher-for-divi-polylang' ); ?>"
 							hidden
@@ -304,7 +304,7 @@ class LSDP_Floating_Switcher_Frontend {
 					<?php endif; ?>
 				</div>
 			<?php else : ?>
-				<div class="lsep-language-switcher-inner">
+				<div class="lsdp-language-switcher-inner">
 					<?php
 					foreach ( $languages as $lang ) :
 						$this->render_language_item( $lang, false, $desktop_layout, $mobile_layout, $lang['is_current'] );
@@ -327,14 +327,14 @@ class LSDP_Floating_Switcher_Frontend {
 	 * @param bool   $is_current      Whether this is the current active language.
 	 */
 	private function render_language_item( $lang, $as_control, $desktop_layout, $mobile_layout, $is_current = false ) {
-		$classes = array( 'lsep-language-item' );
+		$classes = array( 'lsdp-language-item' );
 
 		if ( $as_control ) {
-			$classes[] = 'lsep-language-item__current';
+			$classes[] = 'lsdp-language-item__current';
 		}
 
 		if ( $is_current ) {
-			$classes[] = 'lsep-language-item__default';
+			$classes[] = 'lsdp-language-item__default';
 		}
 
 		$tag = $as_control ? 'div' : 'a';
@@ -382,13 +382,13 @@ class LSDP_Floating_Switcher_Frontend {
 
 		if ( $show_desktop || $show_mobile ) {
 			if ( $show_desktop && $show_mobile && $desktop_name === $mobile_name ) {
-				$html .= '<span class="lsep-language-item-name">' . esc_html( $desktop_name ) . '</span>';
+				$html .= '<span class="lsdp-language-item-name">' . esc_html( $desktop_name ) . '</span>';
 			} else {
 				if ( $show_desktop ) {
-					$html .= '<span class="lsep-language-item-name lsep-language-item-name-desktop">' . esc_html( $desktop_name ) . '</span>';
+					$html .= '<span class="lsdp-language-item-name lsdp-language-item-name-desktop">' . esc_html( $desktop_name ) . '</span>';
 				}
 				if ( $show_mobile ) {
-					$html .= '<span class="lsep-language-item-name lsep-language-item-name-mobile">' . esc_html( $mobile_name ) . '</span>';
+					$html .= '<span class="lsdp-language-item-name lsdp-language-item-name-mobile">' . esc_html( $mobile_name ) . '</span>';
 				}
 			}
 		}
@@ -418,14 +418,14 @@ class LSDP_Floating_Switcher_Frontend {
 			return '';
 		}
 
-		$classes = array( 'lsep-flag-slot' );
+		$classes = array( 'lsdp-flag-slot' );
 
 		if ( $position === $desktop_flag && 'hide' !== $desktop_flag ) {
-			$classes[] = 'lsep-flag-slot-desktop-' . sanitize_html_class( $position );
+			$classes[] = 'lsdp-flag-slot-desktop-' . sanitize_html_class( $position );
 		}
 
 		if ( $position === $mobile_flag && 'hide' !== $mobile_flag ) {
-			$classes[] = 'lsep-flag-slot-mobile-' . sanitize_html_class( $position );
+			$classes[] = 'lsdp-flag-slot-mobile-' . sanitize_html_class( $position );
 		}
 
 		if ( count( $classes ) === 1 ) {
@@ -461,13 +461,13 @@ class LSDP_Floating_Switcher_Frontend {
 		$config      = $this->get_config();
 		$shape_class = '';
 		if ( 'square' === ( $config['flagShape'] ?? '' ) ) {
-			$shape_class = 'lsep-flag-square';
+			$shape_class = 'lsdp-flag-square';
 		} elseif ( 'rounded' === ( $config['flagShape'] ?? '' ) ) {
-			$shape_class = 'lsep-flag-rounded';
+			$shape_class = 'lsdp-flag-rounded';
 		}
 
 		return sprintf(
-			'<img src="%s" class="lsep-flag-image %s" alt="%s" loading="lazy" decoding="async" />',
+			'<img src="%s" class="lsdp-flag-image %s" alt="%s" loading="lazy" decoding="async" />',
 			esc_url( $lang['flag'] ),
 			esc_attr( $shape_class ),
 			esc_attr( $lang['name'] )

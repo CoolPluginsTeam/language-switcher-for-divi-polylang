@@ -23,14 +23,26 @@
     var useState = element.useState;
 
     // Get settings from localized script
-    var settings = window.lsepBlockSettings || { options: {}, languages: [], polylangActive: false };
+    var settings = window.lsdpBlockSettings || { options: {}, languages: [], polylangActive: false };
 
-    registerBlockType('lsep/language-switcher', {
+    registerBlockType('lsdp/language-switcher', {
         apiVersion: 3,
         title: __('Language Switcher', 'language-switcher-for-divi-polylang'),
         description: __('Display a language switcher block', 'language-switcher-for-divi-polylang'),
         category: 'widgets',
-        icon: 'translation',
+        icon: el(
+            'svg',
+            {
+                xmlns: 'http://www.w3.org/2000/svg',
+                width: 20,
+                height: 20,
+                viewBox: '0 0 640 512'
+            },
+            el('path', {
+                fill: 'currentColor',
+                d: 'M0 128c0-35.3 28.7-64 64-64h512c35.3 0 64 28.7 64 64v256c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm320 0v256h256V128zm-141.7 47.9c-3.2-7.2-10.4-11.9-18.3-11.9s-15.1 4.7-18.3 11.9l-64 144c-4.5 10.1.1 21.9 10.2 26.4s21.9-.1 26.4-10.2l8.9-20.1h73.6l8.9 20.1c4.5 10.1 16.3 14.6 26.4 10.2s14.6-16.3 10.2-26.4zM160 233.2l19 42.8h-38zM448 164c11 0 20 9 20 20v4h60c11 0 20 9 20 20s-9 20-20 20h-2l-1.6 4.5c-8.9 24.4-22.4 46.6-39.6 65.4c.9.6 1.8 1.1 2.7 1.6l18.9 11.3c9.5 5.7 12.5 18 6.9 27.4s-18 12.5-27.4 6.9L467 333.8c-4.5-2.7-8.8-5.5-13.1-8.5c-10.6 7.5-21.9 14-34 19.4l-3.6 1.6c-10.1 4.5-21.9-.1-26.4-10.2s.1-21.9 10.2-26.4l3.6-1.6c6.4-2.9 12.6-6.1 18.5-9.8L410 286.1c-7.8-7.8-7.8-20.5 0-28.3s20.5-7.8 28.3 0l14.6 14.6l.5.5c12.4-13.1 22.5-28.3 29.8-45l-35.2.1h-72c-11 0-20-9-20-20s9-20 20-20h52v-4c0-11 9-20 20-20'
+            })
+        ),
         keywords: [
             __('language', 'language-switcher-for-divi-polylang'),
             __('polylang', 'language-switcher-for-divi-polylang'),
@@ -609,14 +621,14 @@
             tabsArray.push({
                 name: 'default',
                 title: __('Default', 'language-switcher-for-divi-polylang'),
-                className: 'lsep-default-tab'
+                className: 'lsdp-default-tab'
             });
 
             // Always add Styles tab
             tabsArray.push({
                 name: 'styles',
                 title: __('Styles', 'language-switcher-for-divi-polylang'),
-                className: 'lsep-styles-tab'
+                className: 'lsdp-styles-tab'
             });
 
             // Set initial tab
@@ -628,8 +640,8 @@
                 }
 
                 function initDropdowns() {
-                    if (typeof window.lsepInitDropdowns === 'function') {
-                        window.lsepInitDropdowns(element.ownerDocument);
+                    if (typeof window.lsdpInitDropdowns === 'function') {
+                        window.lsdpInitDropdowns(element.ownerDocument);
                     }
                 }
 
@@ -667,7 +679,7 @@
                     el(
                         TabPanel,
                         {
-                            className: 'lsep-inspector-tabs',
+                            className: 'lsdp-inspector-tabs',
                             activeClass: 'active-tab',
                             initialTabName: initialTab,
                             tabs: tabsArray
@@ -844,7 +856,7 @@
                     )
                 ),
                 el(ServerSideRender, {
-                    block: 'lsep/language-switcher',
+                    block: 'lsdp/language-switcher',
                     attributes: attributes
                 })
             );

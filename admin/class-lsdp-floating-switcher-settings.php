@@ -62,10 +62,10 @@ class LSDP_Floating_Switcher_Settings {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 
 		// Register AJAX handler for saving settings
-		add_action( 'wp_ajax_lsep_save_floating_switcher', array( $this, 'ajax_save_settings' ) );
+		add_action( 'wp_ajax_lsdp_save_floating_switcher', array( $this, 'ajax_save_settings' ) );
 
 		// Register AJAX handler for AutoPoly install/activate
-		add_action( 'wp_ajax_lsep_install_autopoly', array( $this, 'ajax_install_autopoly' ) );
+		add_action( 'wp_ajax_lsdp_install_autopoly', array( $this, 'ajax_install_autopoly' ) );
 	}
 
 	/**
@@ -77,7 +77,7 @@ class LSDP_Floating_Switcher_Settings {
 	 * @since 1.2.4
 	 */
 	public function render_page() {
-		wp_safe_redirect( admin_url( 'admin.php?page=lsep-get-started&tab=floating-switcher' ) );
+		wp_safe_redirect( admin_url( 'admin.php?page=lsdp-get-started&tab=floating-switcher' ) );
 		exit;
 	}
 
@@ -96,8 +96,8 @@ class LSDP_Floating_Switcher_Settings {
         // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- GET used only for conditional asset loading.
 		$tab = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : '';
 
-		$is_floating_tab = ( 'lsep-get-started' === $page && 'floating-switcher' === $tab );
-		$is_legacy_page  = ( strpos( $hook, 'lsep-floating-switcher' ) !== false || 'lsep-floating-switcher' === $page );
+		$is_floating_tab = ( 'lsdp-get-started' === $page && 'floating-switcher' === $tab );
+		$is_legacy_page  = ( strpos( $hook, 'lsdp-floating-switcher' ) !== false || 'lsdp-floating-switcher' === $page );
 
 		if ( ! $is_floating_tab && ! $is_legacy_page ) {
 			return;
@@ -112,7 +112,7 @@ class LSDP_Floating_Switcher_Settings {
 
 		// Enqueue admin stylesheet
 		wp_enqueue_style(
-			'lsep-floating-switcher-admin',
+			'lsdp-floating-switcher-admin',
 			$plugin_url . 'admin/dashboard/includes/css/lsdp-floating-switcher-admin.css',
 			array(),
 			$version
@@ -123,23 +123,23 @@ class LSDP_Floating_Switcher_Settings {
 
 		// Enqueue React app JavaScript
 		wp_enqueue_script(
-			'lsep-floating-switcher-app',
+			'lsdp-floating-switcher-app',
 			$plugin_url . 'admin/dashboard/includes/js/lsdp-floating-switcher-app.js',
-			array( 'wp-element', 'wp-i18n', 'lsep-autopoly-promo' ),
+			array( 'wp-element', 'wp-i18n', 'lsdp-autopoly-promo' ),
 			$version,
 			true
 		);
 
 		// Pass configuration data and settings to the JavaScript app
 		wp_localize_script(
-			'lsep-floating-switcher-app',
-			'lsepFloaterData',
+			'lsdp-floating-switcher-app',
+			'lsdpFloaterData',
 			$this->get_localized_data()
 		);
 
 		// Set up script translations for internationalization
 		wp_set_script_translations(
-			'lsep-floating-switcher-app',
+			'lsdp-floating-switcher-app',
 			'language-switcher-for-divi-polylang',
 			LSDP_DIR . 'languages'
 		);
@@ -162,7 +162,7 @@ class LSDP_Floating_Switcher_Settings {
 		return array(
 			'config'            => $config,
 			'languages'         => $languages,
-			'nonce'             => wp_create_nonce( 'lsep_floating_switcher_save' ),
+			'nonce'             => wp_create_nonce( 'lsdp_floating_switcher_save' ),
 			'ajaxUrl'           => admin_url( 'admin-ajax.php' ),
 			'pluginUrl'         => LSDP_URL,
 			'autoPolyPromoHtml' => function_exists( 'lsdp_get_autopoly_promo_html' )
@@ -183,7 +183,7 @@ class LSDP_Floating_Switcher_Settings {
 	 */
 	public function get_switcher_config() {
 		// Get saved configuration from database
-		$saved    = get_option( 'lsep_floating_switcher_config', null );
+		$saved    = get_option( 'lsdp_floating_switcher_config', null );
 		$defaults = $this->get_default_config();
 
 		// If no saved config or invalid, return defaults without writing.
@@ -283,7 +283,7 @@ class LSDP_Floating_Switcher_Settings {
 	public function ajax_save_settings() {
 		// Verify nonce for security
 		$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
-		if ( ! wp_verify_nonce( $nonce, 'lsep_floating_switcher_save' ) ) {
+		if ( ! wp_verify_nonce( $nonce, 'lsdp_floating_switcher_save' ) ) {
 			wp_send_json_error( __( 'Invalid nonce.', 'language-switcher-for-divi-polylang' ), 403 );
 		}
 
@@ -306,7 +306,7 @@ class LSDP_Floating_Switcher_Settings {
 		$sanitized = $this->sanitize_config( $config );
 
 		// Save to database
-		update_option( 'lsep_floating_switcher_config', $sanitized );
+		update_option( 'lsdp_floating_switcher_config', $sanitized );
 
 		// Return success response
 		wp_send_json_success( __( 'Settings saved successfully.', 'language-switcher-for-divi-polylang' ) );
@@ -319,7 +319,7 @@ class LSDP_Floating_Switcher_Settings {
 	 */
 	public function ajax_install_autopoly() {
 		$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
-		if ( ! wp_verify_nonce( $nonce, 'lsep_install_autopoly' ) ) {
+		if ( ! wp_verify_nonce( $nonce, 'lsdp_install_autopoly' ) ) {
 			wp_send_json_error(
 				array(
 					'message' => __( 'Invalid security token.', 'language-switcher-for-divi-polylang' ),
@@ -389,8 +389,8 @@ class LSDP_Floating_Switcher_Settings {
 			}
 		}
 
-		if ( ! get_option( 'lsep_autopoly_installed' ) ) {
-			update_option( 'lsep_autopoly_installed', 'installed_by_lsep' );
+		if ( ! get_option( 'lsdp_autopoly_installed' ) ) {
+			update_option( 'lsdp_autopoly_installed', 'installed_by_lsdp' );
 		}
 
 		wp_send_json_success(

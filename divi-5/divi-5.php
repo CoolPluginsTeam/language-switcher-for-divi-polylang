@@ -37,6 +37,11 @@ class LSDP_Divi5 {
 			return;
 		}
 
+		// Frontend module assets belong on the public site or inside Divi Visual Builder only.
+		if ( is_admin() && ! et_core_is_fb_enabled() ) {
+			return;
+		}
+
 		wp_enqueue_style( 'lsdp-divi5-frontend-style', LSDP_URL . 'styles/style.min.css', array(), LSDP );
 		wp_enqueue_style( 'lsdp-divi5-frontend-helper', LSDP_URL . 'assets/css/lsdphelper.css', array(), LSDP );
 		if ( ! et_core_is_fb_enabled() ) {
