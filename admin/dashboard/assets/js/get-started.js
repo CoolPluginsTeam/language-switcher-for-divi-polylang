@@ -15,12 +15,9 @@
 	var guideSub = document.getElementById('lsdp-gs-guide-sub');
 	var stepsWrap = document.getElementById('lsdp-gs-steps');
 	var videoIframe = document.getElementById('lsdp-gs-video-iframe');
-	var backBtn = document.getElementById('lsdp-gs-back-btn');
 	var cards = wrap.querySelectorAll('.lsdp-gs-builder-card');
 	var defaultBuilder = wrap.getAttribute('data-default-builder') || 'gutenberg';
 	var preferredBuilder = config.preferredBuilder || defaultBuilder;
-	var restoreContent = !!config.restoreContent;
-	var hasPicker = !wrap.classList.contains('lsdp-gs-no-picker') && cards.length > 0;
 
 	function escapeHtml(text) {
 		var el = document.createElement('div');
@@ -29,13 +26,12 @@
 	}
 
 	function renderOverview(builder) {
-		var items = (builder.overviewItems || []).map(function (item) {
-			return '<li><span class="lsdp-gs-check" aria-hidden="true"></span><span>' + escapeHtml(item) + '</span></li>';
+		var items = (builder.overviewItems || []).map(function (item, index) {
+			return '<div class="lsdp-gs-step"><span class="lsdp-gs-step-number" aria-hidden="true">' + (index + 1) + '</span><p>' + escapeHtml(item) + '</p></div>';
 		}).join('');
 
 		stepsWrap.innerHTML =
-			'<h3 class="lsdp-gs-overview-title">' + escapeHtml(builder.overviewTitle || '') + '</h3>' +
-			'<ul class="lsdp-gs-overview-list">' + items + '</ul>';
+			'<h3 class="lsdp-gs-overview-title">' + escapeHtml(builder.overviewTitle || '') + '</h3>' + items;
 	}
 
 	function renderBuilder(key) {
@@ -72,58 +68,35 @@
 		}).then(function (result) {
 			if (result && result.success) {
 				config.preferredBuilder = key;
-				config.restoreContent = true;
 				preferredBuilder = key;
-				restoreContent = true;
 			}
 		}).catch(function () {
 			// Preference save is best-effort; UI already updated.
 		});
 	}
 
-	function selectBuilder(key, activateContent, persist) {
+	function selectBuilder(key, persist) {
 		cards.forEach(function (card) {
-			card.classList.toggle('is-selected', card.getAttribute('data-builder') === key);
+			var isSelected = card.getAttribute('data-builder') === key;
+			card.classList.toggle('is-selected', isSelected);
+			card.setAttribute('aria-checked', isSelected ? 'true' : 'false');
 		});
 		renderBuilder(key);
-		if (activateContent) {
-			wrap.classList.add('is-content-active');
-		}
 		if (persist) {
 			savePreferredBuilder(key);
 		}
 	}
 
 	function initScreen() {
-		if (!hasPicker) {
-			renderBuilder(defaultBuilder);
-			wrap.classList.add('is-content-active');
-			return;
-		}
-
 		var builder = preferredBuilder || defaultBuilder;
-		if (restoreContent) {
-			selectBuilder(builder, true, false);
-			return;
-		}
-
-		wrap.classList.remove('is-content-active');
-		selectBuilder(builder, false, false);
+		selectBuilder(builder, false);
 	}
 
 	cards.forEach(function (card) {
 		card.addEventListener('click', function () {
-			selectBuilder(card.getAttribute('data-builder'), true, true);
-			window.scrollTo({ top: 0, behavior: 'smooth' });
+			selectBuilder(card.getAttribute('data-builder'), true);
 		});
 	});
-
-	if (backBtn) {
-		backBtn.addEventListener('click', function () {
-			wrap.classList.remove('is-content-active');
-			window.scrollTo({ top: 0, behavior: 'smooth' });
-		});
-	}
 
 	initScreen();
 	window.addEventListener('pageshow', initScreen);

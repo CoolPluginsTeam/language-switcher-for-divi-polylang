@@ -171,8 +171,7 @@ class LSDP_Admin_Dashboard {
 				'overviewItems' => array(
 					__( 'Edit the header template with Elementor or create a new one.', 'language-switcher-for-divi-polylang' ),
 					__( 'Drag and drop the Language Switcher widget into your header.', 'language-switcher-for-divi-polylang' ),
-					__( 'Configure Language Switcher display (names, flags, or both).', 'language-switcher-for-divi-polylang' ),
-					__( 'Customize the switcher\'s colors, typography, spacing, and layout.', 'language-switcher-for-divi-polylang' ),
+					__( 'Configure language display (names, flags, or both) and customize the switcher\'s appearance (color, style, typography, and more).', 'language-switcher-for-divi-polylang' ),
 					__( 'Save your changes and preview the language switcher on the frontend.', 'language-switcher-for-divi-polylang' ),
 				),
 				'embedUrl'      => $embed_urls['elementor'],
@@ -196,8 +195,7 @@ class LSDP_Admin_Dashboard {
 				'overviewItems' => array(
 					__( 'Navigate to Divi Theme Builder, add a new or edit an existing header template.', 'language-switcher-for-divi-polylang' ),
 					__( 'Add the Language Switcher module where you want it to appear.', 'language-switcher-for-divi-polylang' ),
-					__( 'Configure switcher display settings (names, flags, or both).', 'language-switcher-for-divi-polylang' ),
-					__( 'Customize the switcher\'s colors, typography, spacing, and layout using Divi\'s design settings.', 'language-switcher-for-divi-polylang' ),
+					__( 'Configure switcher display settings (names, flags, or both) and customize the switcher\'s colors, typography, spacing, and layout.', 'language-switcher-for-divi-polylang' ),
 					__( 'Save your changes and preview the header on the frontend.', 'language-switcher-for-divi-polylang' ),
 				),
 				'embedUrl'      => $embed_urls['divi'],

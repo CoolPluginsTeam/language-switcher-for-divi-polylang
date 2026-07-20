@@ -40,16 +40,6 @@ if ( $saved_builder ) {
 
 $video_id = isset( $builder_video_ids[ $default_builder ] ) ? $builder_video_ids[ $default_builder ] : $builder_video_ids['gutenberg'];
 
-$restore_content = $show_builder_picker && (bool) $saved_builder;
-
-$wrap_classes = array( 'lsdp-get-started-content' );
-if ( ! $show_builder_picker || $restore_content ) {
-	$wrap_classes[] = 'is-content-active';
-}
-if ( ! $show_builder_picker ) {
-	$wrap_classes[] = 'lsdp-gs-no-picker';
-}
-
 $builder_cards = array(
 	'divi'      => array(
 		'available'   => $has_divi,
@@ -74,15 +64,15 @@ $builder_cards = array(
 // Put the selected builder first while preserving the normal order of the others.
 $builder_order = array_unique( array( $default_builder, 'divi', 'elementor', 'gutenberg' ) );
 ?>
-<div class="<?php echo esc_attr( implode( ' ', $wrap_classes ) ); ?>" id="lsdp-gs-wrap" data-default-builder="<?php echo esc_attr( $default_builder ); ?>">
+<div class="lsdp-get-started-content" id="lsdp-gs-wrap" data-default-builder="<?php echo esc_attr( $default_builder ); ?>">
 	<?php if ( $show_builder_picker ) : ?>
-	<div class="lsdp-gs-builder-section" id="lsdp-gs-builder-section">
+	<div class="lsdp-gs-box lsdp-gs-builder-section" id="lsdp-gs-builder-section">
 		<div class="lsdp-gs-choose-heading">
 			<h2><?php esc_html_e( 'Choose your builder', 'language-switcher-for-divi-polylang' ); ?></h2>
 			<p><?php esc_html_e( 'Select the builder you use to add and manage the language switcher.', 'language-switcher-for-divi-polylang' ); ?></p>
 		</div>
 
-		<div class="lsdp-gs-builder-cards">
+		<div class="lsdp-gs-builder-cards" role="radiogroup" aria-label="<?php echo esc_attr__( 'Choose your builder', 'language-switcher-for-divi-polylang' ); ?>">
 			<?php foreach ( $builder_order as $builder_key ) : ?>
 				<?php
 				$builder_card = $builder_cards[ $builder_key ];
@@ -90,43 +80,43 @@ $builder_order = array_unique( array( $default_builder, 'divi', 'elementor', 'gu
 					continue;
 				}
 				?>
-			<button type="button" class="lsdp-gs-builder-card<?php echo $builder_key === $default_builder ? ' is-selected' : ''; ?>" data-builder="<?php echo esc_attr( $builder_key ); ?>">
-				<img class="lsdp-gs-builder-icon" src="<?php echo esc_url( $assets_url . $builder_card['icon'] ); ?>" alt="" />
-				<span class="lsdp-gs-builder-text">
-					<span class="lsdp-gs-builder-title"><?php echo esc_html( $builder_card['title'] ); ?></span>
-					<span class="lsdp-gs-builder-desc"><?php echo esc_html( $builder_card['description'] ); ?></span>
+			<button type="button" class="lsdp-gs-builder-card<?php echo $builder_key === $default_builder ? ' is-selected' : ''; ?>" data-builder="<?php echo esc_attr( $builder_key ); ?>" role="radio" aria-checked="<?php echo $builder_key === $default_builder ? 'true' : 'false'; ?>">
+				<span class="lsdp-gs-builder-top">
+					<span class="lsdp-gs-builder-icon-wrap" aria-hidden="true">
+						<img class="lsdp-gs-builder-icon" src="<?php echo esc_url( $assets_url . $builder_card['icon'] ); ?>" alt="" />
+					</span>
 				</span>
-				<span class="dashicons dashicons-arrow-right-alt2 lsdp-gs-chevron" aria-hidden="true"></span>
+				<span class="lsdp-gs-builder-title"><?php echo esc_html( $builder_card['title'] ); ?></span>
+				<span class="lsdp-gs-builder-desc"><?php echo esc_html( $builder_card['description'] ); ?></span>
 			</button>
 			<?php endforeach; ?>
 		</div>
 	</div>
 
-	<button type="button" class="lsdp-gs-back-btn" id="lsdp-gs-back-btn">
-		<span class="dashicons dashicons-arrow-left-alt2" aria-hidden="true"></span>
-		<?php esc_html_e( 'Change builder', 'language-switcher-for-divi-polylang' ); ?>
-	</button>
 	<?php endif; ?>
 
-	<div class="lsdp-gs-info-grid" id="lsdp-gs-info-grid">
-		<div class="lsdp-gs-info-card lsdp-gs-guide-card">
+	<div class="lsdp-gs-box lsdp-gs-content-panel" id="lsdp-gs-info-grid">
+		<div class="lsdp-gs-content-header">
 			<h2 id="lsdp-gs-guide-title"></h2>
 			<p class="lsdp-gs-sub" id="lsdp-gs-guide-sub"></p>
-			<div id="lsdp-gs-steps"></div>
 		</div>
 
-		<div class="lsdp-gs-info-card lsdp-gs-video-card">
-			<div class="lsdp-video-container">
-				<iframe
-					id="lsdp-gs-video-iframe"
-					width="100%"
-					height="380"
-					src="<?php echo esc_url( 'https://www.youtube.com/embed/' . $video_id ); ?>"
-					title="<?php echo esc_attr__( 'Language Switcher for Elementor & Polylang Tutorial', 'language-switcher-for-divi-polylang' ); ?>"
-					frameborder="0"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-					allowfullscreen>
-				</iframe>
+		<div class="lsdp-gs-content-grid">
+			<div class="lsdp-gs-video">
+				<h3><?php esc_html_e( 'Watch how it works', 'language-switcher-for-divi-polylang' ); ?></h3>
+				<div class="lsdp-video-container">
+					<iframe
+						id="lsdp-gs-video-iframe"
+						width="100%"
+						height="380"
+						src="<?php echo esc_url( 'https://www.youtube.com/embed/' . $video_id ); ?>"
+						title="<?php echo esc_attr__( 'Language Switcher tutorial', 'language-switcher-for-divi-polylang' ); ?>"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen>
+					</iframe>
+				</div>
+			</div>
+			<div class="lsdp-gs-guide" id="lsdp-gs-steps">
 			</div>
 		</div>
 	</div>
