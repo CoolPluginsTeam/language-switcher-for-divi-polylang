@@ -18,6 +18,7 @@
 	var cards = wrap.querySelectorAll('.lsdp-gs-builder-card');
 	var defaultBuilder = wrap.getAttribute('data-default-builder') || 'gutenberg';
 	var preferredBuilder = config.preferredBuilder || defaultBuilder;
+	var contentChosen = !!config.restoreContent || wrap.classList.contains('lsdp-gs-no-picker');
 
 	function escapeHtml(text) {
 		var el = document.createElement('div');
@@ -31,7 +32,7 @@
 		}).join('');
 
 		stepsWrap.innerHTML =
-			'<h3 class="lsdp-gs-overview-title">' + escapeHtml(builder.overviewTitle || '') + '</h3>' + items;
+			'<h3>' + escapeHtml(builder.overviewTitle || '') + '</h3>' + items;
 	}
 
 	function renderBuilder(key) {
@@ -83,6 +84,8 @@
 		});
 		renderBuilder(key);
 		if (persist) {
+			contentChosen = true;
+			wrap.classList.add('is-content-active');
 			savePreferredBuilder(key);
 		}
 	}
@@ -90,6 +93,7 @@
 	function initScreen() {
 		var builder = preferredBuilder || defaultBuilder;
 		selectBuilder(builder, false);
+		wrap.classList.toggle('is-content-active', contentChosen);
 	}
 
 	cards.forEach(function (card) {

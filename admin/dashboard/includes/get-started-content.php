@@ -64,9 +64,9 @@ $builder_cards = array(
 // Put the selected builder first while preserving the normal order of the others.
 $builder_order = array_unique( array( $default_builder, 'divi', 'elementor', 'gutenberg' ) );
 ?>
-<div class="lsdp-get-started-content" id="lsdp-gs-wrap" data-default-builder="<?php echo esc_attr( $default_builder ); ?>">
+<div class="<?php echo esc_attr( 'lsdp-get-started-content' . ( $show_builder_picker ? '' : ' lsdp-gs-no-picker' ) ); ?>" id="lsdp-gs-wrap" data-default-builder="<?php echo esc_attr( $default_builder ); ?>">
 	<?php if ( $show_builder_picker ) : ?>
-	<div class="lsdp-gs-box lsdp-gs-builder-section" id="lsdp-gs-builder-section">
+	<div class="lsdp-gs-box">
 		<div class="lsdp-gs-choose-heading">
 			<h2><?php esc_html_e( 'Choose your builder', 'language-switcher-for-divi-polylang' ); ?></h2>
 			<p><?php esc_html_e( 'Select the builder you use to add and manage the language switcher.', 'language-switcher-for-divi-polylang' ); ?></p>
@@ -95,7 +95,7 @@ $builder_order = array_unique( array( $default_builder, 'divi', 'elementor', 'gu
 
 	<?php endif; ?>
 
-	<div class="lsdp-gs-box lsdp-gs-content-panel" id="lsdp-gs-info-grid">
+	<div class="lsdp-gs-box lsdp-gs-content-panel">
 		<div class="lsdp-gs-content-header">
 			<h2 id="lsdp-gs-guide-title"></h2>
 			<p class="lsdp-gs-sub" id="lsdp-gs-guide-sub"></p>
