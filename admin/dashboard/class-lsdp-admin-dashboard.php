@@ -92,7 +92,7 @@ class LSDP_Admin_Dashboard {
 		}
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- GET used only for tab display.
-		$current_tab = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'getting-started';
+		$current_tab = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'add-to-your-pages';
 		$page_url    = admin_url( 'admin.php?page=lsdp-get-started' );
 		$logo_url    = plugin_dir_url( __FILE__ ) . 'assets/images/language-switcher-for-elementor-polylang.png';
 
@@ -112,8 +112,8 @@ class LSDP_Admin_Dashboard {
 				echo '</div>';
 
 		echo '<h2 class="nav-tab-wrapper">';
-		echo '<a href="' . esc_url( add_query_arg( 'tab', 'getting-started', $page_url ) ) . '" class="nav-tab' . ( 'getting-started' === $current_tab ? ' nav-tab-active' : '' ) . '">' . esc_html__( 'Get Started', 'language-switcher-for-divi-polylang' ) . '</a>';
-		echo '<a href="' . esc_url( add_query_arg( 'tab', 'floating-switcher', $page_url ) ) . '" class="nav-tab' . ( 'floating-switcher' === $current_tab ? ' nav-tab-active' : '' ) . '">' . esc_html__( 'Floating Language Switcher', 'language-switcher-for-divi-polylang' ) . '</a>';
+		echo '<a href="' . esc_url( add_query_arg( 'tab', 'add-to-your-pages', $page_url ) ) . '" class="nav-tab' . ( 'add-to-your-pages' === $current_tab ? ' nav-tab-active' : '' ) . '">' . esc_html__( 'Add to Your Pages', 'language-switcher-for-divi-polylang' ) . '</a>';
+		echo '<a href="' . esc_url( add_query_arg( 'tab', 'floating-switcher', $page_url ) ) . '" class="nav-tab' . ( 'floating-switcher' === $current_tab ? ' nav-tab-active' : '' ) . '">' . esc_html__( 'Floating Switcher', 'language-switcher-for-divi-polylang' ) . '</a>';
 		echo '</h2>';
 
 		echo '<div class="lsdp-tab-content-wrapper">';
@@ -212,7 +212,7 @@ class LSDP_Admin_Dashboard {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- GET used only for conditional asset loading.
 		$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- GET used only for conditional asset loading.
-		$tab = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'getting-started';
+		$tab = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'add-to-your-pages';
 
 		if ( 'lsdp-get-started' !== $page && false === strpos( $hook, 'lsdp-get-started' ) ) {
 				return;

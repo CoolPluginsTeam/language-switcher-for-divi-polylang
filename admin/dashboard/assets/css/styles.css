@@ -3,6 +3,8 @@
    ============================================ */
 
 .lsdp-dashboard-wrap {
+    --lsdp-dash-content-max: 1260px;
+    --lsdp-dash-inline: 30px;
     margin: 0 0 0 -20px !important;
     padding: 0 !important;
     box-sizing: border-box !important;
@@ -120,12 +122,17 @@
     font-size: 26px !important;
 }
 
-/* Nav Tab CSS - CPEL Style */
+/* Nav tabs stay full-width for the underline; inset matches the centered content column */
 .lsdp-dashboard-wrap h2.nav-tab-wrapper {
-    padding: 20px 30px 0 60px !important;
+    width: 100%;
+    max-width: none;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 20px max(var(--lsdp-dash-inline), calc((100% - var(--lsdp-dash-content-max)) / 2 + var(--lsdp-dash-inline))) 0 !important;
     border-bottom: 1px solid #c3c4c7 !important;
     padding-bottom: 0 !important;
     line-height: inherit;
+    box-sizing: border-box !important;
 }
 
 .lsdp-dashboard-wrap h2.nav-tab-wrapper::after {
@@ -202,25 +209,41 @@
     }
 }
 
-/* Tab Content Wrapper */
+/* Tab Content Wrapper - same width/centering as nav tabs */
 .lsdp-tab-content-wrapper {
-    padding: 30px 64px;
+    width: 100%;
+    max-width: var(--lsdp-dash-content-max);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px var(--lsdp-dash-inline);
     min-height: 500px;
+    box-sizing: border-box;
 }
 
 /* Responsive Design - header/tabs defaults for smaller screens.
    Get Started breakpoints below refine 560 / 561-992 / 993+. */
+@media (min-width: 561px) and (max-width: 992px) {
+    .lsdp-dashboard-wrap {
+        --lsdp-dash-inline: 18px;
+    }
+}
+
 @media (max-width: 560px) {
+    .lsdp-dashboard-wrap {
+        --lsdp-dash-inline: 14px;
+    }
+
     .lsdp-dashboard-header {
         padding: 15px 20px;
     }
 
     .lsdp-dashboard-wrap h2.nav-tab-wrapper {
-        padding: 20px 14px 0px 14px !important;
+        padding-top: 20px !important;
     }
 
     .lsdp-tab-content-wrapper {
-        padding: 16px 14px 30px;
+        padding-top: 16px;
+        padding-bottom: 30px;
     }
 }
 
@@ -240,9 +263,9 @@
     --lsdp-gs-radius-md: 12px;
     --lsdp-gs-shadow: 0 1px 2px rgba(17, 24, 39, 0.06);
     box-sizing: border-box;
-    width: min(100%, 1260px);
-    max-width: 1260px;
-    margin: 0 auto;
+    width: 100%;
+    max-width: none;
+    margin: 0;
     color: var(--lsdp-gs-text);
     font-size: 14px;
     line-height: 1.5;
@@ -255,7 +278,7 @@
 }
 
 .lsdp-gs-box {
-    padding: 26px;
+    padding: 0px 26px 26px 26px;
     margin-bottom: 24px;
     background: #fff;
     border: 1px solid var(--lsdp-gs-border);
@@ -268,7 +291,6 @@
     margin-bottom: 18px;
 }
 
-.lsdp-gs-choose-heading h2,
 .lsdp-gs-video h3,
 .lsdp-gs-guide h3,
 .lsdp-gs-footer-card h3 {
@@ -282,6 +304,10 @@
 
 .lsdp-gs-choose-heading h2 {
     margin-bottom: 6px;
+    font-size: 24px;
+    font-weight: 650;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
 }
 
 .lsdp-gs-choose-heading p {
@@ -386,8 +412,8 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 8px 12px;
-    margin-bottom: 24px;
+    gap: 5px 12px;
+    margin: 1em 0 1em 0;
 }
 
 .lsdp-gs-content-header h2 {
@@ -616,12 +642,6 @@
 @media (max-width: 992px) {
     .lsdp-dashboard-wrap .lsdp-dashboard-header {
         padding: 15px 20px;
-    }
-
-    .lsdp-dashboard-wrap h2.nav-tab-wrapper,
-    .lsdp-tab-content-wrapper {
-        padding-left: 18px !important;
-        padding-right: 18px !important;
     }
 
     .lsdp-gs-builder-cards {

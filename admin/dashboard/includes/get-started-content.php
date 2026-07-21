@@ -68,8 +68,7 @@ $builder_order = array_unique( array( $default_builder, 'divi', 'elementor', 'gu
 	<?php if ( $show_builder_picker ) : ?>
 	<div class="lsdp-gs-box">
 		<div class="lsdp-gs-choose-heading">
-			<h2><?php esc_html_e( 'Choose your builder', 'language-switcher-for-divi-polylang' ); ?></h2>
-			<p><?php esc_html_e( 'Select the builder you use to add and manage the language switcher.', 'language-switcher-for-divi-polylang' ); ?></p>
+			<h2><?php esc_html_e( 'Place the switcher inside your pages, headers, footers, templates, or navigation menus.', 'language-switcher-for-divi-polylang' ); ?></h2>
 		</div>
 
 		<div class="lsdp-gs-builder-cards" role="radiogroup" aria-label="<?php echo esc_attr__( 'Choose your builder', 'language-switcher-for-divi-polylang' ); ?>">

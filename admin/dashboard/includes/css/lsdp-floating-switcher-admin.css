@@ -72,7 +72,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 20px;
+    padding: 20px 20px;
     border-bottom: 1px solid var(--lsdp-border);
     cursor: pointer;
     user-select: none;
@@ -184,14 +184,16 @@
     flex-direction: column !important;
 }
 
-/* Current/default language item - ALWAYS VISIBLE */
+/* Current/default language item - ALWAYS VISIBLE
+   Keep item bg transparent so semi-transparent --bg on the container
+   (e.g. Transparent preset) is not double-painted and looks opaque. */
 .lsdp-language-switcher-preview-box .lsdp-language-item__default {
     display: flex !important;
     align-items: center;
     gap: 8px;
     padding: 7px 16px !important;
     color: var(--text, #fff) !important;
-    background: var(--bg, #000) !important;
+    background: transparent !important;
     cursor: default;
     text-decoration: none !important;
     min-height: 19px;
@@ -217,14 +219,14 @@
     overflow: visible;
 }
 
-/* All language items in dropdown */
+/* All language items in dropdown — transparent so container --bg shows through */
 .lsdp-language-switcher-preview-box .lsdp-switcher-dropdown-list .lsdp-language-item {
     display: flex !important;
     align-items: center;
     gap: 8px;
     padding: 7px 16px !important;
     color: var(--text, #fff) !important;
-    background: var(--bg, #000) !important;
+    background: transparent !important;
     text-decoration: none !important;
     transition: background var(--transition-duration, 0.2s) ease;
     cursor: pointer;
@@ -420,7 +422,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    margin-top: 10px;
+    margin-top: 3px;
 }
 
 .lsdp-field--column {

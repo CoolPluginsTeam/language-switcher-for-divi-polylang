@@ -713,7 +713,7 @@
             h(
               "span",
               { className: "lsdp-title" },
-              __("Floating Language Switcher Settings", "language-switcher-for-divi-polylang")
+              __("Display a floating language switcher that appears across your website without adding it to your pages.", "language-switcher-for-divi-polylang")
             )
           ),
           h(

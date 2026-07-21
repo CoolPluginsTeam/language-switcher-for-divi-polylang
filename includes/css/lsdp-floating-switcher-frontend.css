@@ -187,9 +187,10 @@
     user-select: none;
 }
 
-/* Dropdown items - apply background and text color from variables */
+/* Dropdown items use transparent fill so alpha --bg on the container
+   (Transparent preset) is not stacked twice and rendered opaque. */
 .lsdp-switcher-dropdown-list .lsdp-language-item {
-    background: var(--bg, #fff) !important;
+    background: transparent !important;
     color: var(--text, #000) !important;
 }
 
