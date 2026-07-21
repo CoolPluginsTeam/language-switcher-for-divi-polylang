@@ -160,8 +160,9 @@ class LSDP_Floating_Switcher_Settings {
 		$languages = LSDP_Common_Helpers::get_polylang_languages_for_admin();
 
 		return array(
-			'config'            => $config,
-			'languages'         => $languages,
+			'config'                  => $config,
+			'languages'               => $languages,
+			'sideBySideMaxLanguages'  => LSDP_Common_Helpers::SIDE_BY_SIDE_MAX_LANGUAGES,
 			'nonce'             => wp_create_nonce( 'lsdp_floating_switcher_save' ),
 			'ajaxUrl'           => admin_url( 'admin-ajax.php' ),
 			'pluginUrl'         => LSDP_URL,
@@ -191,8 +192,28 @@ class LSDP_Floating_Switcher_Settings {
 			return $defaults;
 		}
 
-		// Merge saved config with defaults to ensure all fields exist
-		return $this->deep_merge_defaults( $saved, $defaults );
+		// Merge saved config with defaults to ensure all fields exist.
+		$config = $this->deep_merge_defaults( $saved, $defaults );
+
+		return $this->normalize_side_by_side_type( $config );
+	}
+
+	/**
+	 * Fall back to dropdown when side-by-side is saved but too many languages exist.
+	 *
+	 * @since 1.2.5
+	 * @param array $config Switcher configuration.
+	 * @return array
+	 */
+	private function normalize_side_by_side_type( $config ) {
+		if (
+			LSDP_Common_Helpers::is_side_by_side_type( $config['type'] ?? '' )
+			&& ! LSDP_Common_Helpers::is_side_by_side_allowed()
+		) {
+			$config['type'] = 'dropdown';
+		}
+
+		return $config;
 	}
 
 	/**
@@ -418,10 +439,17 @@ class LSDP_Floating_Switcher_Settings {
 		$sanitized['enableCustomCss']   = ! empty( $config['enableCustomCss'] );
 		$sanitized['enableTransitions'] = ! empty( $config['enableTransitions'] );
 
-		// Validate and sanitize type field (dropdown, inline, or side-by-side)
+		// Validate and sanitize type field (dropdown, inline, or side-by-side).
 		$sanitized['type'] = in_array( $config['type'] ?? '', array( 'dropdown', 'inline', 'side-by-side' ), true )
 		? $config['type']
 		: 'dropdown';
+
+		if (
+			LSDP_Common_Helpers::is_side_by_side_type( $sanitized['type'] )
+			&& ! LSDP_Common_Helpers::is_side_by_side_allowed()
+		) {
+			$sanitized['type'] = 'dropdown';
+		}
 
 		// Sanitize color fields (supports hex with alpha or rgba)
 		$color_fields = array( 'bgColor', 'bgHoverColor', 'textColor', 'textHoverColor', 'borderColor' );

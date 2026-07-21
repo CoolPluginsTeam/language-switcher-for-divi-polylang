@@ -286,7 +286,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 7px 16px;
+    padding: 7px 10px;
     text-decoration: none;
     color: var(--text, #000);
     font-size: var(--font-size, 14px);
@@ -768,57 +768,19 @@
     color: #fff;
 }
 
-/* ============================================
-   Side-by-Side (Inline) Mode
-   ============================================ */
-
-/* Main preview - inline mode */
-.lsdp-language-switcher-preview-box .lsdp-ls-inline .lsdp-language-switcher-inner {
-    flex-direction: row !important;
-    gap: 0;
-}
-
-.lsdp-language-switcher-preview-box .lsdp-ls-inline .lsdp-language-item {
-    flex: 0 0 auto;
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.lsdp-language-switcher-preview-box .lsdp-ls-inline .lsdp-language-item:last-child {
-    border-right: none;
-}
-
-.lsdp-language-switcher-preview-box .lsdp-ls-inline .lsdp-language-item:hover {
-    background: var(--bg-hover, #444) !important;
-}
-
-/* ============================================
-   Preset Cards - Inline (Side-by-Side) Mode
-   ============================================ */
-
-/* Parent container must also be row for inline */
-.lsdp-preset-switcher-preview.lsdp-ls-inline.lsdp-floating-switcher,
-.lsdp-preset-switcher-preview.lsdp-ls-inline {
-    display: flex !important;
-    flex-direction: row !important;
-}
-
-/* Inner wrapper in row */
+/* Inline (side-by-side) preview styles */
+.lsdp-language-switcher-preview-box .lsdp-ls-inline .lsdp-language-switcher-inner,
 .lsdp-preset-switcher-preview.lsdp-ls-inline .lsdp-language-switcher-inner {
-    display: flex !important;
     flex-direction: row !important;
     gap: 0;
 }
 
-/* Language items in inline mode */
+.lsdp-language-switcher-preview-box .lsdp-ls-inline .lsdp-language-item,
 .lsdp-preset-switcher-preview.lsdp-ls-inline .lsdp-language-item {
     flex: 0 0 auto;
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.lsdp-preset-switcher-preview.lsdp-ls-inline .lsdp-language-item:last-child {
-    border-right: none;
-}
-
+.lsdp-language-switcher-preview-box .lsdp-ls-inline .lsdp-language-item:hover,
 .lsdp-preset-switcher-preview.lsdp-ls-inline .lsdp-language-item:hover {
     background: var(--bg-hover, #444) !important;
 }
@@ -862,6 +824,16 @@
     background: var(--lsdp-primary);
     border-color: var(--lsdp-primary);
     color: #fff;
+}
+
+.lsdp-lc-mode-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.lsdp-lc-mode-button:disabled:hover {
+    border-color: var(--lsdp-border);
+    color: var(--lsdp-text-primary);
 }
 
 .lsdp-lc-mode-button svg {

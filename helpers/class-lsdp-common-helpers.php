@@ -19,6 +19,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class LSDP_Common_Helpers {
 	/**
+	 * Maximum number of languages supported in side-by-side switcher mode.
+	 *
+	 * @since 1.2.5
+	 * @var int
+	 */
+	const SIDE_BY_SIDE_MAX_LANGUAGES = 3;
+
+	/**
 	 * Extract flag code from flag URL.
 	 *
 	 * @since 1.0.0
@@ -243,6 +251,38 @@ class LSDP_Common_Helpers {
 		}
 
 		return $languages;
+	}
+
+	/**
+	 * Whether the given switcher type renders languages side by side.
+	 *
+	 * @since 1.2.5
+	 * @param string $type Switcher type from saved config.
+	 * @return bool
+	 */
+	public static function is_side_by_side_type( $type ) {
+		return in_array( $type, array( 'inline', 'side-by-side' ), true );
+	}
+
+	/**
+	 * Whether side-by-side mode is allowed for the current Polylang language count.
+	 *
+	 * @since 1.2.5
+	 * @return bool
+	 */
+	public static function is_side_by_side_allowed() {
+		return count( self::get_polylang_languages_with_fallback() ) <= self::SIDE_BY_SIDE_MAX_LANGUAGES;
+	}
+
+	/**
+	 * Limit language list to the side-by-side maximum (current language stays first).
+	 *
+	 * @since 1.2.5
+	 * @param array $languages Normalized language list.
+	 * @return array
+	 */
+	public static function limit_languages_for_side_by_side( $languages ) {
+		return array_slice( $languages, 0, self::SIDE_BY_SIDE_MAX_LANGUAGES );
 	}
 
 	/**

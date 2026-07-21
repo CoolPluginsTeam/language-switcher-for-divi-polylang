@@ -51,42 +51,23 @@
 }
 
 .lsdp-ls-inline .lsdp-language-switcher-inner {
-    flex-direction: row;
-}
-
-
-/* ============================================
-   Side-by-Side (Inline) Mode Styles
-   ============================================ */
-
-/* Inline mode - all items in a row */
-.lsdp-ls-inline .lsdp-language-switcher-inner {
     flex-direction: row !important;
     gap: 0;
 }
 
-/* Inline mode language items */
 .lsdp-ls-inline .lsdp-language-item {
     flex: 0 0 auto;
-    /* border-right: 1px solid rgba(255, 255, 255, 0.1); */
 }
 
-/* Remove border from last item */
-.lsdp-ls-inline .lsdp-language-item:last-child {
-    border-right: none;
-}
-
-/* Hover effect for inline items */
 .lsdp-ls-inline .lsdp-language-item:hover {
     background: var(--bg-hover, #444) !important;
 }
 
-/* Hover text color for inline items */
 .lsdp-ls-inline .lsdp-language-item:hover .lsdp-language-item-name {
     color: var(--text-hover, #eee) !important;
 }
 
-/* Current language in inline mode should not have hover effect */
+/* Current language in dropdown mode should not have hover effect */
 .lsdp-ls-dropdown .lsdp-language-item__current:hover,
 .lsdp-ls-dropdown .lsdp-language-item__default:hover {
     background: transparent !important;

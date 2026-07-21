@@ -27,20 +27,35 @@
 
         // Load data from global window object passed from PHP
         const data = window.lsdpFloaterData || {};
+        const languages = data.languages || [];
+        let config = data.config || this.getDefaultConfig();
+
+        if (config.type === "side-by-side" && languages.length > this.getSideBySideMaxLanguages()) {
+          config = { ...config, type: "dropdown" };
+        }
 
         // Initialize component state
         this.state = {
-          config: data.config || this.getDefaultConfig(),
-          languages: data.languages || [],
+          config: config,
+          languages: languages,
           currentDevice: "desktop",
           isSaving: false,
           hasChanges: false,
-          originalConfig: JSON.stringify(data.config || this.getDefaultConfig()),
+          originalConfig: JSON.stringify(config),
           showColorPicker: null,
           showPresetConfirm: null,
         };
 
         this.presets = this.getPresets();
+      }
+
+      getSideBySideMaxLanguages() {
+        const data = window.lsdpFloaterData || {};
+        return data.sideBySideMaxLanguages || 3;
+      }
+
+      isSideBySideAllowed() {
+        return this.state.languages.length <= this.getSideBySideMaxLanguages();
       }
 
       getDefaultConfig() {
@@ -510,7 +525,7 @@
               { code: "fr", name: "French", flag: "" },
             ];
 
-        const maxLanguages = isSideBySide ? 3 : 5;
+        const maxLanguages = isSideBySide ? this.getSideBySideMaxLanguages() : 5;
         const sampleLangs = allLangs.slice(0, maxLanguages);
 
         const current = sampleLangs[0];
@@ -709,6 +724,11 @@
 
       renderEnableAndType() {
         const { config } = this.state;
+        const sideBySideAllowed = this.isSideBySideAllowed();
+        const sideBySideDisabledTitle = __(
+          "Side by Side is available for up to 3 languages.",
+          "language-switcher-for-divi-polylang"
+        );
 
         return h(
           "div",
@@ -778,10 +798,16 @@
                   "button",
                   {
                     className: `lsdp-lc-mode-button ${
-                      config.type === "side-by-side" ? "active" : ""
+                      config.type === "side-by-side" && sideBySideAllowed ? "active" : ""
                     }`,
                     type: "button",
-                    onClick: () => this.updateConfig({ type: "side-by-side" }),
+                    disabled: !sideBySideAllowed,
+                    title: sideBySideAllowed ? "" : sideBySideDisabledTitle,
+                    onClick: () => {
+                      if (sideBySideAllowed) {
+                        this.updateConfig({ type: "side-by-side" });
+                      }
+                    },
                   },
                   h("span", null, __("Side by Side", "language-switcher-for-divi-polylang"))
                 )
@@ -829,7 +855,7 @@
               { code: "fr", name: "French", flag: "" },
             ];
 
-        const maxLanguages = isSideBySide ? 3 : 5;
+        const maxLanguages = isSideBySide ? this.getSideBySideMaxLanguages() : 5;
         const sampleLangs = allLangs.slice(0, maxLanguages);
 
         const presetStyles = {

@@ -148,7 +148,16 @@ class LSDP_Floating_Switcher_Frontend {
 		}
 
 		$is_dropdown = ( 'dropdown' === $config['type'] );
-		$styles      = $this->build_responsive_switcher_styles( $config, $desktop_layout, $mobile_layout );
+
+		if ( ! $is_dropdown && ! LSDP_Common_Helpers::is_side_by_side_allowed() ) {
+			$is_dropdown = true;
+		}
+
+		if ( ! $is_dropdown ) {
+			$languages = LSDP_Common_Helpers::limit_languages_for_side_by_side( $languages );
+		}
+
+		$styles = $this->build_responsive_switcher_styles( $config, $desktop_layout, $mobile_layout );
 
 		$this->render_switcher_html(
 			$languages,
