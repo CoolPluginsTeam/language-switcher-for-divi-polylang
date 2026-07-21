@@ -551,16 +551,19 @@
 
 .lsdp-radio-option {
     display: flex;
-    align-items: center;
+    align-items: stretch;
 }
 
 .lsdp-radio-label {
     display: flex;
     align-items: center;
     gap: 8px;
+    width: 100%;
+    padding: 4px 4px;
     cursor: pointer;
     font-size: 14px;
     color: var(--lsdp-text-primary);
+    box-sizing: border-box;
 }
 
 /* Radio button - override WordPress defaults */

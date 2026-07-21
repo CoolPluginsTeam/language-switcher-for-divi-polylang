@@ -995,13 +995,20 @@
         height: 52px;
     }
 
-    .lsdp-get-started-content.is-content-active .lsdp-gs-choose-heading {
-        display: none;
+    .lsdp-gs-choose-heading {
+        display: block;
+        margin-bottom: 14px;
+    }
+
+    .lsdp-gs-choose-heading h2 {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.4;
     }
 
     .lsdp-get-started-content.is-content-active .lsdp-gs-builder-cards {
         grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
-        gap: 0;
+        gap: 10px;
         margin-bottom: 14px;
     }
 
@@ -1015,15 +1022,10 @@
         padding: 9px 4px 11px;
         text-align: center;
         background: #fff;
-        border: 0;
-        border-right: 1px solid var(--lsdp-gs-border);
-        border-radius: 0;
+        border: 1px solid var(--lsdp-gs-border-strong);
+        border-radius: 7px;
         box-shadow: none;
         transform: none;
-    }
-
-    .lsdp-get-started-content.is-content-active .lsdp-gs-builder-card:last-child {
-        border-right: 0;
     }
 
     .lsdp-get-started-content.is-content-active .lsdp-gs-builder-top {
@@ -1036,10 +1038,13 @@
     }
 
     .lsdp-get-started-content.is-content-active .lsdp-gs-builder-title {
+        align-self: center;
+        width: 100%;
         margin: 0;
         color: var(--lsdp-gs-text-secondary);
         font-size: 11px;
         font-weight: 600;
+        text-align: center;
     }
 
     .lsdp-get-started-content.is-content-active .lsdp-gs-builder-desc {
@@ -1047,10 +1052,10 @@
     }
 
     .lsdp-get-started-content.is-content-active .lsdp-gs-builder-card.is-selected {
-        background: #fff;
-        border: 2px solid var(--lsdp-gs-blue);
-        border-radius: 6px;
-        box-shadow: 0 0 3px rgba(11, 103, 240, 0.3);
+        background: var(--lsdp-gs-blue-lighter);
+        border: 1px solid var(--lsdp-gs-blue);
+        border-radius: 7px;
+        box-shadow: 0 0 0 1px var(--lsdp-gs-blue);
     }
 
     .lsdp-get-started-content.is-content-active .lsdp-gs-builder-card.is-selected .lsdp-gs-builder-title {

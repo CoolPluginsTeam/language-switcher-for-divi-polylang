@@ -19,7 +19,8 @@
 	var cards = wrap.querySelectorAll('.lsdp-gs-builder-card');
 	var defaultBuilder = wrap.getAttribute('data-default-builder') || 'gutenberg';
 	var preferredBuilder = config.preferredBuilder || defaultBuilder;
-	var contentChosen = !!config.restoreContent || wrap.classList.contains('lsdp-gs-no-picker');
+	var isMobileViewport = window.matchMedia && window.matchMedia('(max-width: 560px)').matches;
+	var contentChosen = (!isMobileViewport && !!config.restoreContent) || wrap.classList.contains('lsdp-gs-no-picker');
 
 	function escapeHtml(text) {
 		var el = document.createElement('div');
