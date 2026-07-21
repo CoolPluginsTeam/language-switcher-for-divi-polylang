@@ -191,7 +191,7 @@ class LSDP_Floating_Switcher_Frontend {
 			'--flag-size'           => $is_large ? '20px' : '18px',
 			'--aspect-ratio'        => ( 'rect' === $config['flagShape'] ) ? '4/3' : '1',
 			'--font-size'           => $is_large ? '16px' : '14px',
-			'--transition-duration' => ! empty( $config['enableTransitions'] ) ? '0.2s' : '0s',
+			'--transition-duration' => '0.2s',
 		);
 		$desktop_vars = $this->build_layout_css_vars( 'desktop', $desktop_layout );
 		$mobile_vars  = $this->build_layout_css_vars( 'mobile', $mobile_layout );

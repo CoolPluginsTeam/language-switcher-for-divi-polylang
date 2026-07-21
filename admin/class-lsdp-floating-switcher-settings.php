@@ -264,7 +264,6 @@ class LSDP_Floating_Switcher_Settings {
 			'enableCustomCss'   => true, // Allow custom CSS
 			'customCss'         => '', // Custom CSS code
 			'layoutCustomizer'  => $layout_defaults, // Device-specific layout settings
-			'enableTransitions' => true, // Enable animations
 		);
 	}
 
@@ -437,7 +436,6 @@ class LSDP_Floating_Switcher_Settings {
 		// Sanitize boolean fields (convert to true/false)
 		$sanitized['enabled']           = ! empty( $config['enabled'] );
 		$sanitized['enableCustomCss']   = ! empty( $config['enableCustomCss'] );
-		$sanitized['enableTransitions'] = ! empty( $config['enableTransitions'] );
 
 		// Validate and sanitize type field (dropdown, inline, or side-by-side).
 		$sanitized['type'] = in_array( $config['type'] ?? '', array( 'dropdown', 'inline', 'side-by-side' ), true )

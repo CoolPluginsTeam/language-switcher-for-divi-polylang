@@ -74,7 +74,6 @@
           flagRadius: 2,
           enableCustomCss: true,
           customCss: "",
-          enableTransitions: true,
           layoutCustomizer: {
             desktop: {
               position: "bottom-right",
@@ -564,7 +563,7 @@
         );
       }
 
-      renderLanguageItem(lang, isDefault, layoutConfig, isDropdown) {
+      renderLanguageItem(lang, isDefault, layoutConfig, isDropdown, showDropdownArrow = true) {
         const flagUrl = lang.flag;
         let displayName = "";
         if (layoutConfig.languageNames === "full") {
@@ -602,7 +601,7 @@
               loading: "lazy",
               alt: lang.name,
             }),
-            isDefault && isDropdown && h(
+            isDefault && isDropdown && showDropdownArrow && h(
               "svg",
               {
                 className: "lsdp-dropdown-arrow",
@@ -641,7 +640,7 @@
           "--flag-size": config.size === "large" ? "20px" : "18px",
           "--flag-radius": config.flagRadius + "px",
           "--aspect-ratio": config.flagShape === "rect" ? "4/3" : "1",
-          "--transition-duration": config.enableTransitions ? "0.2s" : "0s",
+          "--transition-duration": "0.2s",
           "--switcher-width":
             layoutConfig.width === "custom"
               ? layoutConfig.customWidth + "px"
@@ -843,8 +842,8 @@
       }
 
       renderPresetCard(preset) {
-        const { languages, showPresetConfirm } = this.state;
-        const { config } = this.state;
+        const { languages, showPresetConfirm, config } = this.state;
+        const layoutConfig = config.layoutCustomizer.desktop;
         const isDropdown = config.type === "dropdown";
         const isSideBySide = config.type === "side-by-side";
 
@@ -957,70 +956,16 @@
                 { className: "lsdp-language-switcher-inner" },
                 isSideBySide
                   ? sampleLangs.map((lang, index) =>
-                      h(
-                        "a",
-                        {
-                          className: `lsdp-language-item ${
-                            index === 0 ? "lsdp-language-item__current" : ""
-                          }`,
-                          onClick: (e) => e.preventDefault(),
-                        },
-                        h("img", {
-                          src: lang.flag,
-                          className: "lsdp-flag-image",
-                          loading: "lazy",
-                          alt: lang.name,
-                        }),
-                        h(
-                          "span",
-                          { className: "lsdp-language-item-name" },
-                          lang.name
-                        )
-                      )
+                      this.renderLanguageItem(lang, index === 0, layoutConfig, isDropdown, false)
                     )
                   : [
-                      h(
-                        "a",
-                        {
-                          className:
-                            "lsdp-language-item lsdp-language-item__default",
-                          onClick: (e) => e.preventDefault(),
-                        },
-                        h("img", {
-                          src: current.flag,
-                          className: "lsdp-flag-image",
-                          loading: "lazy",
-                          alt: current.name,
-                        }),
-                        h(
-                          "span",
-                          { className: "lsdp-language-item-name" },
-                          current.name
-                        )
-                      ),
+                      this.renderLanguageItem(current, true, layoutConfig, isDropdown, false),
                       others.length > 0 &&
                         h(
                           "div",
                           { className: "lsdp-switcher-dropdown-list" },
                           others.map((lang) =>
-                            h(
-                              "a",
-                              {
-                                className: "lsdp-language-item",
-                                onClick: (e) => e.preventDefault(),
-                              },
-                              h("img", {
-                                src: lang.flag,
-                                className: "lsdp-flag-image",
-                                loading: "lazy",
-                                alt: lang.name,
-                              }),
-                              h(
-                                "span",
-                                { className: "lsdp-language-item-name" },
-                                lang.name
-                              )
-                            )
+                            this.renderLanguageItem(lang, false, layoutConfig, isDropdown, false)
                           )
                         ),
                     ]
@@ -1105,15 +1050,6 @@
             ),
 
             this.renderBorderRadiusField(),
-
-            h("div", { className: "lsdp-separator" }),
-
-            this.renderToggleField(
-              "enableTransitions",
-              config.enableTransitions,
-              __("Switcher animations", "language-switcher-for-divi-polylang"),
-              null
-            ),
 
             h("div", { className: "lsdp-separator" }),
 
