@@ -3,6 +3,7 @@
   "d4Shortcode": "language-switcher-for-divi-polylang",
   "title": "Language Switcher",
   "titles": "Language Switchers",
+  "moduleIcon": "lsdp/language-switcher",
   "category": "module",
   "attributes": {
     "module": {

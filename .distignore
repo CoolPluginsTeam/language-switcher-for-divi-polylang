@@ -8,3 +8,13 @@ README.md
 .vscode
 .codex
 .cursor
+divi-5/visual-builder/src/modules/LanguageSwitcherModule/*.js
+divi-5/visual-builder/src/modules/LanguageSwitcherModule/*.jsx
+divi-5/visual-builder/src/module-icons.jsx
+divi-5/visual-builder/src/index.jsx
+divi-5/visual-builder/src/modules/index.jsx
+divi-5/visual-builder/node_modules
+divi-5/visual-builder/webpack.config.js
+divi-5/visual-builder/package.json
+divi-5/visual-builder/package-lock.json
+divi-5/visual-builder/scripts
