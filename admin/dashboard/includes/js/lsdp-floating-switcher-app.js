@@ -184,6 +184,10 @@
       }
 
       revertChanges() {
+        if (!this.state.hasChanges) {
+          return;
+        }
+
         const original = JSON.parse(this.state.originalConfig);
         this.setState({
           config: original,
@@ -649,6 +653,7 @@
             "button",
             {
               className: "lsdp-submit-btn",
+              type: "button",
               onClick: () => this.saveSettings(),
               disabled: !hasChanges || isSaving,
             },
@@ -664,8 +669,9 @@
             "button",
             {
               className: "lsdp-button-secondary",
+              type: "button",
               onClick: () => this.revertChanges(),
-              disabled: !hasChanges,
+              disabled: !hasChanges || isSaving,
               title: __(
                 "Revert to last saved values",
                 "language-switcher-for-divi-polylang"

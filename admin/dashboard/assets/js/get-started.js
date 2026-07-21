@@ -13,6 +13,7 @@
 	var data = config.builders;
 	var guideTitle = document.getElementById('lsdp-gs-guide-title');
 	var guideSub = document.getElementById('lsdp-gs-guide-sub');
+	var elementorNotice = document.getElementById('lsdp-gs-elementor-notice');
 	var stepsWrap = document.getElementById('lsdp-gs-steps');
 	var videoIframe = document.getElementById('lsdp-gs-video-iframe');
 	var cards = wrap.querySelectorAll('.lsdp-gs-builder-card');
@@ -43,6 +44,11 @@
 
 		guideTitle.textContent = builder.guideTitle;
 		guideSub.textContent = builder.guideSub;
+
+		if (elementorNotice) {
+			elementorNotice.hidden = key !== 'elementor';
+		}
+
 		renderOverview(builder);
 
 		if (videoIframe && builder.embedUrl) {

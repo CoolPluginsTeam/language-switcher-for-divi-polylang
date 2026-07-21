@@ -98,6 +98,11 @@ $builder_order = array_unique( array( $default_builder, 'divi', 'elementor', 'gu
 		<div class="lsdp-gs-content-header">
 			<h2 id="lsdp-gs-guide-title"></h2>
 			<p class="lsdp-gs-sub" id="lsdp-gs-guide-sub"></p>
+			<?php
+			if ( class_exists( 'LSDP_Elementor_Template_Language' ) ) {
+				LSDP_Elementor_Template_Language::render_get_started_notice();
+			}
+			?>
 		</div>
 
 		<div class="lsdp-gs-content-grid">

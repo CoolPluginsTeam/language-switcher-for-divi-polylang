@@ -42,6 +42,11 @@ class LSDP_Admin_Dashboard {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_required_scripts' ) );
 		add_action( 'in_admin_header', array( $this, 'suppress_foreign_admin_notices' ), 1000 );
 		add_action( 'wp_ajax_lsdp_save_preferred_builder', array( $this, 'ajax_save_preferred_builder' ) );
+
+		if ( class_exists( 'LSDP_Common_Helpers' ) && LSDP_Common_Helpers::is_elementor_available() ) {
+			require_once $this->addon_dir . '/includes/class-lsdp-elementor-template-language.php';
+			LSDP_Elementor_Template_Language::init();
+		}
 	}
 
 	/**

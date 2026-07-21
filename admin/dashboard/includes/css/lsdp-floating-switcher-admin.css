@@ -72,7 +72,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 20px;
+    padding: 24px 20px;
     border-bottom: 1px solid var(--lsdp-border);
     cursor: pointer;
     user-select: none;
@@ -411,6 +411,15 @@
 .lsdp-button-secondary:hover {
     border-color: var(--lsdp-primary);
     color: var(--lsdp-primary);
+}
+
+.lsdp-button-secondary:disabled,
+.lsdp-button-secondary:disabled:hover {
+    opacity: 0.6;
+    cursor: not-allowed;
+    border-color: var(--lsdp-border);
+    color: var(--lsdp-text-secondary);
+    background: transparent;
 }
 
 /* ============================================
