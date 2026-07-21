@@ -24,15 +24,25 @@
 }
 
 .lsdp-main-wrapper .lsdp-wrapper.horizontal {
-  display: flex;
-  flex-wrap: wrap;
   overflow: hidden;
 }
 
+.lsdp-main-wrapper .lsdp-wrapper.horizontal .lsdp-language-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .lsdp-main-wrapper .lsdp-wrapper.vertical {
+  overflow: hidden;
+}
+
+.lsdp-main-wrapper .lsdp-wrapper.vertical .lsdp-language-list {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  gap: 0.5rem;
 }
 
 /* Language switcher container */
@@ -54,6 +64,14 @@
 .lsdp-wrapper.horizontal .lsdp-lang-item a,
 .lsdp-wrapper.vertical .lsdp-lang-item a{
   background-color: var(--lsdp-normal-bg-color);
+}
+
+.lsdp-wrapper.horizontal .lsdp-lang-item {
+  margin-bottom: 0;
+}
+
+.lsdp-wrapper.vertical .lsdp-lang-item {
+  margin-bottom: 0;
 }
 
 
