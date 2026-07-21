@@ -1,98 +1,140 @@
-const path = require('path');
+const fs = require( 'fs' );
+const path = require( 'path' );
 
-module.exports = {
-  // Webpack starts bundling the assets from the following file.
-  // @see https://webpack.js.org/concepts/#entry
-  entry: {
-    bundle: './src/index.jsx',
-  },
+const srcDir = path.resolve( __dirname, 'src' );
+const pluginRoot = path.resolve( __dirname, '../..' );
 
-  // Divi Visual Builder use of scripts that is already enqueued by WordPress and available
-  // in global scope so those scripts don't need to be included on the bundle. For webpack
-  // to recognize those files, the global variable needs to be registered as externals.
-  // These allows global variable listed below to be imported into the module.
-  // @see https://webpack.js.org/configuration/externals/#externals
-  externals: {
-    // Third party dependencies.
-    underscore: '_',
-    react: ['vendor', 'React'],
-    'react-dom': ['vendor', 'ReactDOM'],
-    jquery: 'jQuery',
+/**
+ * Recursively collect all JS/JSX files under src/.
+ *
+ * @param {string} dir
+ * @param {string[]} files
+ * @return {string[]}
+ */
+function collectSrcFiles( dir, files = [] ) {
+	for ( const entry of fs.readdirSync( dir, { withFileTypes: true } ) ) {
+		const fullPath = path.join( dir, entry.name );
 
-    // WordPress dependencies.
-    '@wordpress/hooks': ['vendor', 'wp', 'hooks'],
-    '@wordpress/i18n': ['vendor', 'wp', 'i18n'],
-  },
+		if ( entry.isDirectory() ) {
+			collectSrcFiles( fullPath, files );
+			continue;
+		}
 
-  // This option determine how different types of module within the project will be treated.
-  // @see https://webpack.js.org/configuration/module/
-  module: {
+		if ( /\.(js|jsx)$/i.test( entry.name ) ) {
+			files.push( fullPath );
+		}
+	}
 
-    // This option sets up loaders for webpack configuration.
-    // Loaders allow webpack to process various types because by default webpack only
-    // understand JavaScript and JSON files.
-    // @see https://webpack.js.org/concepts/#loaders
-    rules: [
-      // Handle `.jsx` files.
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: [
+	return files;
+}
 
-          // Spawns multiple processes and split work between them. This makes faster build.
-          // @see https://webpack.js.org/loaders/thread-loader/
-          {
-            loader: 'thread-loader',
-            options: {
-              workers: - 1,
-            },
-          },
+const srcFiles = collectSrcFiles( srcDir ).map( ( filePath ) =>
+	'./' + path.relative( __dirname, filePath ).split( path.sep ).join( '/' )
+);
 
-          // Transpile JavaScript files using Babel. Translates newer syntax with less support
-          // into older syntax with more support so the project can use newer syntax and have
-          // them automatically translated into older syntax for compatibility support.
-          // @see https://www.npmjs.com/package/babel-loader
-          // @see https://babeljs.io/
-          {
-            loader: 'babel-loader',
-            options: {
-              compact: false,
-              presets: [
+// Keep the real bootstrap first; remaining src files are forced into the graph
+// so nothing under src/ is left out of the build even if forgotten in imports.
+const entryFiles = [
+	'./src/index.jsx',
+	...srcFiles.filter( ( filePath ) => filePath !== './src/index.jsx' ),
+];
 
-                // Preset that adds configuration for handling latest JavaScript syntax.
-                // @see https://babeljs.io/docs/en/babel-preset-env
-                ['@babel/preset-env', {
-                  modules: false,
-                  targets: '> 5%',
-                }],
+module.exports = ( env, argv ) => {
+	const isProduction = argv.mode === 'production';
 
-                // Preset that added configuration for handling react & JSX.
-                // @see https://babeljs.io/docs/en/babel-preset-react
-                '@babel/preset-react',
-              ],
-              cacheDirectory: false,
-            },
-          }
-        ]
-      },
-    ]
-  },
+	return {
+		entry: {
+			bundle: entryFiles,
+		},
 
-  // Determine how modules are resolved.
-  // @see https://webpack.js.org/configuration/resolve/
-  resolve: {
-    // Allows extension to be leave off when importing.
-    // @see https://webpack.js.org/configuration/resolve/#resolveextensions
-    extensions: ['.js', '.jsx', '.json'],
-  },
+		context: __dirname,
 
-  // Determine where the created bundles will be outputted.
-  // @see https://webpack.js.org/concepts/#output
-  output: {
-    filename: 'language-switcher-for-divi-polylang-build.js',
-    path: path.resolve(__dirname, 'build'),
-  },
-  stats: {
-    errorDetails: true,
-  },
+		externals: {
+			underscore: '_',
+			react: [ 'vendor', 'React' ],
+			'react-dom': [ 'vendor', 'ReactDOM' ],
+			jquery: 'jQuery',
+			'@wordpress/hooks': [ 'vendor', 'wp', 'hooks' ],
+			'@wordpress/i18n': [ 'vendor', 'wp', 'i18n' ],
+		},
+
+		module: {
+			rules: [
+				{
+					test: /\.jsx?$/,
+					exclude: /node_modules/,
+					use: [
+						{
+							loader: 'thread-loader',
+							options: {
+								workers: -1,
+							},
+						},
+						{
+							loader: 'babel-loader',
+							options: {
+								compact: isProduction,
+								presets: [
+									[
+										'@babel/preset-env',
+										{
+											modules: false,
+											targets: '> 5%',
+										},
+									],
+									'@babel/preset-react',
+								],
+								cacheDirectory: ! isProduction,
+							},
+						},
+					],
+				},
+				{
+					test: /\.json$/,
+					type: 'json',
+				},
+			],
+		},
+
+		resolve: {
+			extensions: [ '.js', '.jsx', '.json' ],
+			alias: {
+				'@lsdp/shared': path.join( pluginRoot, 'includes/modules/render_content' ),
+			},
+		},
+
+		output: {
+			filename: 'language-switcher-for-divi-polylang-build.js',
+			path: path.resolve( __dirname, 'build' ),
+			clean: true,
+		},
+
+		devtool: isProduction ? false : 'source-map',
+
+		stats: {
+			errorDetails: true,
+			modules: true,
+			moduleAssets: false,
+			nestedModules: false,
+			modulesSpace: 50,
+		},
+
+		plugins: [
+			{
+				apply( compiler ) {
+					compiler.hooks.done.tap( 'LSDPListSrcModules', ( stats ) => {
+						if ( stats.hasErrors() ) {
+							return;
+						}
+
+						console.log( '\nIncluded src files:' );
+						srcFiles.forEach( ( filePath ) => console.log( `  ${ filePath }` ) );
+						console.log(
+							`\nOutput: build/language-switcher-for-divi-polylang-build.js (${ srcFiles.length } src files)\n`
+						);
+					} );
+				},
+			},
+		],
+	};
 };

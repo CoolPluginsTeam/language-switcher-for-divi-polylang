@@ -99,5 +99,6 @@
       "type": "object",
       "selector": "{{selector}} .lsdp-wrapper ul li, {{selector}} .lsdp-wrapper.dropdown span"
     }
-  }
+  },
+  "customCssFields": {}
 }

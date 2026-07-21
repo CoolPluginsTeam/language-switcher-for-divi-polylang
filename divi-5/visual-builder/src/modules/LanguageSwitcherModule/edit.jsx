@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react';
 import { ModuleStyles } from './module-styles';
 import { ModuleScriptData } from './module-script-data';
 import { moduleClassnames } from './module-classnames';
-import { getAttrDataValues } from './moduleHelper';
-//use the render_content file from the includes folder divi-4
-import { CountryFlag, CountryName, CountryCode } from "../../../../../includes/modules/render_content";
+import { getAttrDataValues } from './ModuleHelper';
+import { CountryFlag, CountryName, CountryCode } from '@lsdp/shared';
 
 // Divi hooks
 const { useFetch } = window?.divi?.rest;
