@@ -53,11 +53,40 @@
         }
 
         /**
+         * Measure the natural rendered width of a language row.
+         *
+         * @since 1.2.5
+         * @param {HTMLElement} item Language item element.
+         * @return {number}
+         */
+        measureNaturalItemWidth(item) {
+            const measurer = document.createElement('div');
+            measurer.className = item.className;
+            measurer.style.cssText = 'position:absolute;left:-9999px;top:-9999px;visibility:hidden;display:flex;align-items:center;white-space:nowrap;';
+
+            const styles = window.getComputedStyle(item);
+            measurer.style.padding = styles.padding;
+            measurer.style.gap = styles.gap;
+            measurer.style.fontSize = styles.fontSize;
+            measurer.style.fontFamily = styles.fontFamily;
+            measurer.style.fontWeight = styles.fontWeight;
+            measurer.style.boxSizing = styles.boxSizing;
+            measurer.style.minHeight = styles.minHeight;
+
+            measurer.innerHTML = item.innerHTML;
+            document.body.appendChild(measurer);
+
+            const width = measurer.getBoundingClientRect().width;
+            document.body.removeChild(measurer);
+
+            return width;
+        }
+
+        /**
          * Set Fixed Width
          *
-         * Calculates and sets the switcher width based on the currently selected language.
-         * This prevents layout jerking when the dropdown opens/closes.
-         * Only applies when width is set to 'auto' - respects custom width settings.
+         * Locks switcher width to the widest language row so open and closed states
+         * match the admin preview and long names stay fully visible.
          *
          * @since 1.2.4
          */
@@ -65,71 +94,44 @@
             const mobileBreakpoint = (window.lsdpFloaterFrontend && window.lsdpFloaterFrontend.mobileBreakpoint) || 768;
             const isMobile = window.matchMedia(`(max-width: ${mobileBreakpoint - 1}px)`).matches;
             const widthVar = isMobile ? '--lsdp-mobile-width' : '--lsdp-desktop-width';
-            const currentWidth = getComputedStyle(this.switcher).getPropertyValue(widthVar).trim();
+            const configuredWidth = getComputedStyle(this.switcher).getPropertyValue(widthVar).trim();
 
-            if (currentWidth && currentWidth !== 'auto') {
-                this.switcher.style.setProperty('--switcher-width', currentWidth);
+            this.switcher.style.removeProperty('min-width');
+
+            if (configuredWidth && configuredWidth !== 'auto') {
+                this.switcher.style.width = configuredWidth;
                 return;
             }
 
-            // Get the currently active language item element
-            const currentLangItem = this.switcher.querySelector('.lsdp-language-item__current') ||
-                this.switcher.querySelector('.lsdp-language-item__default');
+            this.switcher.style.removeProperty('width');
 
-            if (!currentLangItem) return;
+            const items = this.switcher.querySelectorAll('.lsdp-language-item');
+            let maxItemWidth = 0;
 
-            try {
-                // Create a temporary hidden element to measure the exact width needed
-                const measurer = document.createElement('div');
-                measurer.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;';
-                measurer.className = 'lsdp-language-item';
-                document.body.appendChild(measurer);
+            items.forEach((item) => {
+                maxItemWidth = Math.max(maxItemWidth, this.measureNaturalItemWidth(item));
+            });
 
-                // Copy all relevant styles from the actual language item for accurate measurement
-                const styles = window.getComputedStyle(currentLangItem);
-                measurer.style.fontSize = styles.fontSize;
-                measurer.style.fontFamily = styles.fontFamily;
-                measurer.style.fontWeight = styles.fontWeight;
-                measurer.style.padding = styles.padding;
-                measurer.style.gap = styles.gap;
-
-                // Clone the current language content (text + flag icon)
-                const langName = currentLangItem.querySelector('.lsdp-language-item-name');
-                const langFlag = currentLangItem.querySelector('.lsdp-flag-image');
-
-                // Add language name if present
-                if (langName) {
-                    const nameSpan = document.createElement('span');
-                    nameSpan.className = 'lsdp-language-item-name';
-                    nameSpan.textContent = langName.textContent;
-                    measurer.appendChild(nameSpan);
-                }
-
-                // Add flag icon if present, maintaining correct position (before or after text)
-                if (langFlag) {
-                    const flagClone = langFlag.cloneNode(true);
-                    // Preserve flag position relative to text
-                    if (langFlag.parentElement.firstChild === langFlag) {
-                        measurer.insertBefore(flagClone, measurer.firstChild);
-                    } else {
-                        measurer.appendChild(flagClone);
-                    }
-                }
-
-                // Measure the actual width needed
-                // +11.5px buffer accounts for sub-pixel rendering differences across browsers
-                const calculatedWidth = measurer.offsetWidth + 11.5;
-
-                // Clean up temporary element
-                document.body.removeChild(measurer);
-
-                // Apply calculated width with additional buffer for safety
-                if (calculatedWidth > 0) {
-                    this.switcher.style.setProperty('--switcher-width', Math.ceil(calculatedWidth + 10) + 'px');
-                }
-            } catch (e) {
-                // Silently fail if measurement fails - switcher will use default width
+            if (maxItemWidth <= 0) {
+                return;
             }
+
+            const switcherStyles = window.getComputedStyle(this.switcher);
+            const horizontalBorder =
+                parseFloat(switcherStyles.borderLeftWidth || '0') +
+                parseFloat(switcherStyles.borderRightWidth || '0');
+            const horizontalPadding =
+                parseFloat(switcherStyles.paddingLeft || '0') +
+                parseFloat(switcherStyles.paddingRight || '0');
+
+            this.switcher.style.width = Math.ceil(maxItemWidth + horizontalBorder + horizontalPadding) + 'px';
+
+            const flags = this.switcher.querySelectorAll('.lsdp-flag-image');
+            flags.forEach((flag) => {
+                if (!flag.complete) {
+                    flag.addEventListener('load', () => this.setFixedWidth(), { once: true });
+                }
+            });
         }
 
         /**

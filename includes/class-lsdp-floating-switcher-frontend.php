@@ -227,7 +227,7 @@ class LSDP_Floating_Switcher_Frontend {
 			'--lsdp-' . $viewport . '-right'    => ( 'right' === $horizontal ) ? '10%' : 'auto',
 			'--lsdp-' . $viewport . '-left'     => ( 'left' === $horizontal ) ? '10%' : 'auto',
 			'--lsdp-' . $viewport . '-width'    => ( 'custom' === ( $layout['width'] ?? 'default' ) ) ? absint( $layout['customWidth'] ?? 216 ) . 'px' : 'auto',
-			'--lsdp-' . $viewport . '-padding'  => ( 'custom' === ( $layout['padding'] ?? 'default' ) ) ? absint( $layout['customPadding'] ?? 0 ) . 'px' : '0',
+			'--lsdp-' . $viewport . '-padding'  => ( 'custom' === ( $layout['padding'] ?? 'default' ) ) ? absint( $layout['customPadding'] ?? 0 ) . 'px' : '0px 0px',
 			'--lsdp-' . $viewport . '-vertical' => $vertical,
 		);
 	}
@@ -361,6 +361,9 @@ class LSDP_Floating_Switcher_Frontend {
 			<?php endif; ?>
 			data-no-translation>
 			<?php echo $this->render_responsive_language_labels( $lang, $desktop_layout, $mobile_layout ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+			<?php if ( $as_control ) : ?>
+				<?php echo $this->render_dropdown_arrow(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+			<?php endif; ?>
 		</<?php echo esc_attr( $tag ); ?>>
 		<?php
 	}
@@ -410,6 +413,18 @@ class LSDP_Floating_Switcher_Frontend {
 		);
 
 		return $html;
+	}
+
+	/**
+	 * Render dropdown chevron for the current language control.
+	 *
+	 * @since 1.2.5
+	 * @return string SVG markup.
+	 */
+	private function render_dropdown_arrow() {
+		return '<svg class="lsdp-dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true">'
+			. '<path d="M1 6.5L6 1.5L11 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>'
+			. '</svg>';
 	}
 
 	/**
