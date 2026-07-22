@@ -102,6 +102,7 @@ final class LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG {
 			require_once LSDP_DIR . 'admin/dashboard/class-lsdp-admin-dashboard.php';
 			lsdp_register_admin_dashboard();
 		} else {
+			require_once LSDP_DIR . 'floating-switcher/class-lsdp-floating-switcher-frontend.php';
 		}
 	}
 
