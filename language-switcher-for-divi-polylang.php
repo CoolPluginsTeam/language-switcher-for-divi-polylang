@@ -87,6 +87,7 @@ final class LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG {
 		// Divi builds its native module dependency tree while the theme loads.
 		// Register these hooks now, before after_setup_theme, so Divi 5 can find them.
 		$this->initialize_divi_5();
+		$this->initialize_theme_builder_conditions();
 		require_once LSDP_DIR . 'includes/class-lsdp-language-switcher-block.php';
 		LSDP_Language_Switcher_Block::get_instance();
 
@@ -104,6 +105,16 @@ final class LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG {
 		} else {
 			require_once LSDP_DIR . 'includes/class-lsdp-floating-switcher-frontend.php';
 		}
+	}
+
+	public function initialize_theme_builder_conditions() {
+		$divi_version = self::get_divi_theme_version();
+		if ( ! $divi_version || version_compare( (string) $divi_version, '4.0', '<' ) ) {
+			return;
+		}
+
+		require_once LSDP_DIR . 'theme-builder/class-lsdp-theme-builder-conditions.php';
+		new LSDP_Theme_Builder_Conditions();
 	}
 
 	/** Load the Divi 4 extension only when Divi fires its integration hook. */
