@@ -184,11 +184,30 @@ class LSDP_Widget extends Widget_Base {
 		if ( ! get_option( 'lsdp_elementor_review_notice_dismiss' ) ) {
 			$review_nonce = wp_create_nonce( 'lsdp_elementor_review' );
 			$url          = admin_url( 'admin-ajax.php' );
+			$review_url   = 'https://wordpress.org/support/plugin/language-switcher-for-divi-polylang/reviews/#new-post';
 			$html         = '<div class="lsdp_elementor_review_wrapper">';
-			$html        .= '<div id="lsdp_elementor_review_dismiss" data-url="' . esc_url( $url ) . '" data-nonce="' . esc_attr( $review_nonce ) . '">Close Notice X</div>
-                            <div class="lsdp_elementor_review_msg">' . __( 'Hope this language switcher solved your problem!', 'language-switcher-for-divi-polylang' ) . '<br><a href="https://wordpress.org/support/plugin/language-switcher-for-divi-polylang/reviews/#new-post" target="_blank">Share the love with a five-star rating.</a><br><br></div>
-                            <div class="lsdp_elementor_demo_btn"><a href="https://wordpress.org/support/plugin/language-switcher-for-divi-polylang/reviews/#new-post" target="_blank">Submit Review</a></div>
-                            </div>';
+			$html        .= '<div class="lsdp_elementor_review_msg">';
+			$html        .= '<p class="lsdp_elementor_review_intro">';
+			$html        .= sprintf(
+				/* translators: %s: plugin name in bold */
+				esc_html__( 'Thanks for using %s! If you have a moment, could you kindly leave us a review? We\'d greatly appreciate it and it helps us improve our product.', 'language-switcher-for-divi-polylang' ),
+				'<strong>' . esc_html__( 'Language Switcher for Polylang', 'language-switcher-for-divi-polylang' ) . '</strong>'
+			);
+			$html        .= '</p>';
+			$html        .= '<p class="lsdp_elementor_review_rating">';
+			$html        .= '<a href="' . esc_url( $review_url ) . '" target="_blank" rel="noopener noreferrer">';
+			$html        .= esc_html__( 'Share the love with a', 'language-switcher-for-divi-polylang' );
+			$html        .= ' <span class="lsdp_elementor_review_stars" aria-hidden="true">★★★★★</span> ';
+			$html        .= esc_html__( 'rating.', 'language-switcher-for-divi-polylang' );
+			$html        .= '</a></p>';
+			$html        .= '</div>';
+			$html        .= '<div id="lsdp_elementor_review_dismiss" data-url="' . esc_url( $url ) . '" data-nonce="' . esc_attr( $review_nonce ) . '">';
+			$html        .= esc_html__( 'Close Notice X', 'language-switcher-for-divi-polylang' );
+			$html        .= '</div>';
+			$html        .= '<div class="lsdp_elementor_demo_btn">';
+			$html        .= '<a href="' . esc_url( $review_url ) . '" target="_blank" rel="noopener noreferrer">';
+			$html        .= esc_html__( 'Submit Review', 'language-switcher-for-divi-polylang' );
+			$html        .= '</a></div></div>';
 
 			$this->add_control(
 				'lsdp_review_notice',

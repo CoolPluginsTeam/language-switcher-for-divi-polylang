@@ -194,42 +194,88 @@
 }
 
 
-.lsdp_elementor_review_notice .lsdp_elementor_review_wrapper{
-  padding: 10px; border:
-  2px solid #EDACFB;
-}
-.lsdp_elementor_review_notice #lsdp_elementor_review_dismiss{
-  position: absolute;
-  bottom: 4px;
-  background: #EDACFB;
-  color: #0C0D0E;
-  font-size: 10px;
-  padding: 5px;
-  border-radius: 3px;
-  cursor: pointer;
-}
-.lsdp_elementor_review_notice .lsdp_elementor_review_msg{
-  font-size: 12px;
-  line-height: 18px;
+.lsdp_elementor_review_notice {
+  padding-bottom: 12px;
 }
 
-.lsdp_elementor_review_notice .lsdp_elementor_review_msg a{
-  color: #EDACFB;
+.lsdp_elementor_review_notice .lsdp_elementor_review_wrapper {
+  position: relative;
+  padding: 12px 12px 22px;
+  background: #fff;
+  border: 2px solid #edacfb;
 }
-.lsdp_elementor_demo_btn{
+
+.lsdp_elementor_review_notice #lsdp_elementor_review_dismiss {
   position: absolute;
-  bottom: 4px;
-  right: 30px;
-  background: #EDACFB;
+  bottom: -11px;
+  left: 8px;
+  background: #edacfb;
+  color: #0c0d0e;
   font-size: 10px;
-  padding: 5px;
+  font-weight: 600;
+  line-height: 1.2;
+  padding: 5px 8px;
   border-radius: 3px;
   cursor: pointer;
 }
-.lsdp_elementor_demo_btn a{
-  color: black;
+
+.lsdp_elementor_review_notice .lsdp_elementor_review_msg {
+  margin: 0;
 }
-.lsdp_elementor_demo_btn a:hover{
-  color:black;
+
+.lsdp_elementor_review_notice .lsdp_elementor_review_intro {
+  margin: 0 0 8px;
+  color: #50575e;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.lsdp_elementor_review_notice .lsdp_elementor_review_intro strong {
+  font-weight: 700;
+}
+
+.lsdp_elementor_review_notice .lsdp_elementor_review_rating {
+  margin: 0;
+}
+
+.lsdp_elementor_review_notice .lsdp_elementor_review_rating a {
+  color: #edacfb;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-decoration: none;
+}
+
+.lsdp_elementor_review_notice .lsdp_elementor_review_rating a:hover {
+  color: #d98ef0;
+  text-decoration: none;
+}
+
+.lsdp_elementor_review_notice .lsdp_elementor_review_stars {
+  color: #f5a623;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.lsdp_elementor_demo_btn {
+  position: absolute;
+  bottom: -11px;
+  right: 8px;
+  background: #edacfb;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.2;
+  padding: 5px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.lsdp_elementor_demo_btn a {
+  color: #0c0d0e;
+  text-decoration: none;
+}
+
+.lsdp_elementor_demo_btn a:hover {
+  color: #0c0d0e;
   text-decoration: none;
 }
