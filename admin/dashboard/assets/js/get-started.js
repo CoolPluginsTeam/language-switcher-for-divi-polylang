@@ -28,13 +28,70 @@
 		return el.innerHTML;
 	}
 
-	function renderOverview(builder) {
-		var items = (builder.overviewItems || []).map(function (item, index) {
+	function renderSteps(items) {
+		return (items || []).map(function (item, index) {
 			return '<div class="lsdp-gs-step"><span class="lsdp-gs-step-number" aria-hidden="true">' + (index + 1) + '</span><p>' + escapeHtml(item) + '</p></div>';
+		}).join('');
+	}
+
+	function renderOverview(builder) {
+		stepsWrap.innerHTML =
+			'<h3>' + escapeHtml(builder.overviewTitle || '') + '</h3>' +
+			renderSteps(builder.overviewItems);
+	}
+
+	function activateGuideTab(tabId) {
+		var tabs = stepsWrap.querySelectorAll('.lsdp-gs-guide-tab');
+		var panels = stepsWrap.querySelectorAll('.lsdp-gs-guide-panel');
+
+		tabs.forEach(function (tab) {
+			var isActive = tab.getAttribute('data-tab') === tabId;
+			tab.classList.toggle('is-active', isActive);
+			tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+		});
+
+		panels.forEach(function (panel) {
+			var isActive = panel.getAttribute('data-panel') === tabId;
+			panel.hidden = !isActive;
+			panel.classList.toggle('is-active', isActive);
+		});
+	}
+
+	function renderTabs(builder) {
+		var tabs = builder.tabs || [];
+		if (!tabs.length) {
+			renderOverview(builder);
+			return;
+		}
+
+		var activeId = tabs[0].id;
+		var tabButtons = tabs.map(function (tab, index) {
+			var isActive = index === 0;
+			var icon = tab.icon ? '<span class="dashicons ' + escapeHtml(tab.icon) + '" aria-hidden="true"></span>' : '';
+			return '<button type="button" class="lsdp-gs-guide-tab' + (isActive ? ' is-active' : '') + '" data-tab="' + escapeHtml(tab.id) + '" role="tab" aria-selected="' + (isActive ? 'true' : 'false') + '">' +
+				icon +
+				'<span class="lsdp-gs-guide-tab-label">' + escapeHtml(tab.label) + '</span>' +
+				'</button>';
+		}).join('');
+
+		var panels = tabs.map(function (tab, index) {
+			var isActive = index === 0;
+			return '<div class="lsdp-gs-guide-panel' + (isActive ? ' is-active' : '') + '" data-panel="' + escapeHtml(tab.id) + '" role="tabpanel"' + (isActive ? '' : ' hidden') + '>' +
+				renderSteps(tab.items) +
+				'</div>';
 		}).join('');
 
 		stepsWrap.innerHTML =
-			'<h3>' + escapeHtml(builder.overviewTitle || '') + '</h3>' + items;
+			'<div class="lsdp-gs-guide-tabs" role="tablist" aria-label="' + escapeHtml(builder.guideTitle || '') + '">' + tabButtons + '</div>' +
+			panels;
+
+		stepsWrap.querySelectorAll('.lsdp-gs-guide-tab').forEach(function (tab) {
+			tab.addEventListener('click', function () {
+				activateGuideTab(tab.getAttribute('data-tab'));
+			});
+		});
+
+		activateGuideTab(activeId);
 	}
 
 	function renderBuilder(key) {
@@ -50,7 +107,11 @@
 			elementorNotice.hidden = key !== 'elementor';
 		}
 
-		renderOverview(builder);
+		if (builder.tabs && builder.tabs.length) {
+			renderTabs(builder);
+		} else {
+			renderOverview(builder);
+		}
 
 		if (videoIframe && builder.embedUrl) {
 			videoIframe.src = builder.embedUrl;

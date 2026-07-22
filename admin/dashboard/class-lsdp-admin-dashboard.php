@@ -170,16 +170,33 @@ class LSDP_Admin_Dashboard {
 
 		return array(
 			'elementor' => array(
-				'guideTitle'    => __( 'Elementor Language Switcher', 'language-switcher-for-divi-polylang' ),
-				'guideSub'      => __( 'Add a customizable Language Switcher widget to your Elementor website.', 'language-switcher-for-divi-polylang' ),
-				'overviewTitle' => __( 'Quick Overview', 'language-switcher-for-divi-polylang' ),
-				'overviewItems' => array(
-					__( 'Edit the header template with Elementor or create a new one.', 'language-switcher-for-divi-polylang' ),
-					__( 'Drag and drop the Language Switcher widget into your header.', 'language-switcher-for-divi-polylang' ),
-					__( 'Configure language display (names, flags, or both) and customize the switcher\'s appearance (color, style, typography, and more).', 'language-switcher-for-divi-polylang' ),
-					__( 'Save your changes and preview the language switcher on the frontend.', 'language-switcher-for-divi-polylang' ),
+				'guideTitle' => __( 'Elementor Language Switcher', 'language-switcher-for-divi-polylang' ),
+				'guideSub'   => __( 'Add a customizable Language Switcher widget to your Elementor website.', 'language-switcher-for-divi-polylang' ),
+				'tabs'       => array(
+					array(
+						'id'    => 'language-switcher',
+						'label' => __( 'Language Switcher', 'language-switcher-for-divi-polylang' ),
+						'icon'  => 'dashicons-translation',
+						'items' => array(
+							__( 'Edit the header template with Elementor or create a new one.', 'language-switcher-for-divi-polylang' ),
+							__( 'Drag and drop the Language Switcher widget into your header.', 'language-switcher-for-divi-polylang' ),
+							__( 'Configure language display (names, flags, or both) and customize the switcher\'s appearance (color, style, typography, and more).', 'language-switcher-for-divi-polylang' ),
+							__( 'Save your changes and preview the language switcher on the frontend.', 'language-switcher-for-divi-polylang' ),
+						),
+					),
+					array(
+						'id'    => 'template-syncing',
+						'label' => __( 'Template Syncing', 'language-switcher-for-divi-polylang' ),
+						'icon'  => 'dashicons-update',
+						'items' => array(
+							__( 'From your WordPress Dashboard, navigate to Templates > Saved Templates. Create a new Elementor template or edit an existing one.', 'language-switcher-for-divi-polylang' ),
+							__( 'Use Polylang\'s language options to add translations for the template.', 'language-switcher-for-divi-polylang' ),
+							__( 'Translate the content and save the template.', 'language-switcher-for-divi-polylang' ),
+							__( 'Each translated template will be linked automatically, ensuring the correct language version is displayed on your website.', 'language-switcher-for-divi-polylang' ),
+						),
+					),
 				),
-				'embedUrl'      => $embed_urls['elementor'],
+				'embedUrl'   => $embed_urls['elementor'],
 			),
 			'gutenberg' => array(
 				'guideTitle'    => __( 'Gutenberg Language Switcher', 'language-switcher-for-divi-polylang' ),
