@@ -34,6 +34,22 @@ class LSDP_Floating_Switcher_Frontend {
 	const MOBILE_BREAKPOINT = 768;
 
 	/**
+	 * Singleton instance.
+	 *
+	 * @since 1.2.6
+	 * @var self|null
+	 */
+	private static $instance = null;
+
+	/**
+	 * Whether the floater markup was already output in this request.
+	 *
+	 * @since 1.2.6
+	 * @var bool
+	 */
+	private static $rendered = false;
+
+	/**
 	 * Switcher configuration array
 	 *
 	 * @since 1.2.4
@@ -42,13 +58,27 @@ class LSDP_Floating_Switcher_Frontend {
 	private $config;
 
 	/**
+	 * Get singleton instance.
+	 *
+	 * @since 1.2.6
+	 * @return self
+	 */
+	public static function get_instance() {
+		if ( null === self::$instance ) {
+			self::$instance = new self();
+		}
+
+		return self::$instance;
+	}
+
+	/**
 	 * Constructor
 	 *
 	 * Registers WordPress hooks for asset enqueuing and switcher rendering.
 	 *
 	 * @since 1.2.4
 	 */
-	public function __construct() {
+	private function __construct() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 		add_action( 'wp_footer', array( $this, 'render_floater' ), 99 );
 	}
@@ -80,12 +110,30 @@ class LSDP_Floating_Switcher_Frontend {
 	}
 
 	/**
+	 * Whether the floater should load on the current frontend request.
+	 *
+	 * @since 1.2.6
+	 * @return bool
+	 */
+	private function should_display() {
+		if ( ! $this->is_enabled() ) {
+			return false;
+		}
+
+		if ( class_exists( 'LSDP_Common_Helpers' ) && LSDP_Common_Helpers::is_page_builder_preview() ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * Enqueue Frontend Assets
 	 *
 	 * @since 1.2.4
 	 */
 	public function enqueue_assets() {
-		if ( ! $this->is_enabled() ) {
+		if ( ! $this->should_display() ) {
 			return;
 		}
 
@@ -130,7 +178,7 @@ class LSDP_Floating_Switcher_Frontend {
 	 * @since 1.2.4
 	 */
 	public function render_floater() {
-		if ( ! $this->is_enabled() ) {
+		if ( self::$rendered || ! $this->should_display() ) {
 			return;
 		}
 
@@ -158,6 +206,8 @@ class LSDP_Floating_Switcher_Frontend {
 		}
 
 		$styles = $this->build_responsive_switcher_styles( $config, $desktop_layout, $mobile_layout );
+
+		self::$rendered = true;
 
 		$this->render_switcher_html(
 			$languages,
@@ -499,4 +549,4 @@ class LSDP_Floating_Switcher_Frontend {
 	}
 }
 
-new LSDP_Floating_Switcher_Frontend();
+LSDP_Floating_Switcher_Frontend::get_instance();

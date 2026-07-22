@@ -366,6 +366,36 @@ class LSDP_Common_Helpers {
 
 		return did_action( 'elementor/loaded' ) || class_exists( '\\Elementor\\Plugin' );
 	}
+
+	/**
+	 * Whether the current request is a page-builder edit or preview context.
+	 *
+	 * @since 1.2.6
+	 * @return bool
+	 */
+	public static function is_page_builder_preview() {
+		if ( function_exists( 'et_core_is_fb_enabled' ) && et_core_is_fb_enabled() ) {
+			return true;
+		}
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( ! empty( $_GET['et_fb'] ) || ! empty( $_GET['et_bfb'] ) || ! empty( $_GET['et_pb_preview'] ) ) {
+			return true;
+		}
+
+		if ( class_exists( '\Elementor\Plugin' ) ) {
+			$elementor = \Elementor\Plugin::$instance;
+			if (
+				( isset( $elementor->editor ) && $elementor->editor->is_edit_mode() )
+				|| ( isset( $elementor->preview ) && $elementor->preview->is_preview_mode() )
+			) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	/**
 	 * Get language name based on display mode.
 	 * Consolidated method to format language names consistently.
