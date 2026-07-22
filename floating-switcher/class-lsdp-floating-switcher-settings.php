@@ -7,7 +7,7 @@
  * appearance, behavior, and layout settings.
  *
  * @package    Language_Switcher_For_Elementor_Polylang
- * @subpackage Language_Switcher_For_Elementor_Polylang/admin
+ * @subpackage Language_Switcher_For_Elementor_Polylang/floating-switcher
  * @since      1.2.4
  */
 
@@ -113,7 +113,7 @@ class LSDP_Floating_Switcher_Settings {
 		// Enqueue admin stylesheet
 		wp_enqueue_style(
 			'lsdp-floating-switcher-admin',
-			$plugin_url . 'admin/dashboard/includes/css/lsdp-floating-switcher-admin.css',
+			$plugin_url . 'floating-switcher/css/lsdp-floating-switcher-admin.css',
 			array(),
 			$version
 		);
@@ -124,7 +124,7 @@ class LSDP_Floating_Switcher_Settings {
 		// Enqueue React app JavaScript
 		wp_enqueue_script(
 			'lsdp-floating-switcher-app',
-			$plugin_url . 'admin/dashboard/includes/js/lsdp-floating-switcher-app.js',
+			$plugin_url . 'floating-switcher/js/lsdp-floating-switcher-app.js',
 			array( 'wp-element', 'wp-i18n', 'lsdp-autopoly-promo' ),
 			$version,
 			true

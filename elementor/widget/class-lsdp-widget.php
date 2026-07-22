@@ -37,7 +37,7 @@ class LSDP_Widget extends Widget_Base {
 
 		wp_register_style(
 			'lsdp-style',
-			LSDP_URL . '/includes/css/language-switcher-style.css',
+			LSDP_URL . '/elementor/css/language-switcher-style.css',
 			array(),
 			LSDP
 		);

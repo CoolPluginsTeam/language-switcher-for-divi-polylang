@@ -88,22 +88,21 @@ final class LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG {
 		// Register these hooks now, before after_setup_theme, so Divi 5 can find them.
 		$this->initialize_divi_5();
 		$this->initialize_theme_builder_conditions();
-		require_once LSDP_DIR . 'includes/class-lsdp-language-switcher-block.php';
+		require_once LSDP_DIR . 'gutenberg/class-lsdp-language-switcher-block.php';
 		LSDP_Language_Switcher_Block::get_instance();
 
 		if ( LSDP_Common_Helpers::is_elementor_available() ) {
-			require_once LSDP_DIR . 'includes/class-lsdp-manager.php';
-			require_once LSDP_DIR . 'includes/class-lsdp-register-widget.php';
+			require_once LSDP_DIR . 'elementor/class-lsdp-manager.php';
+			require_once LSDP_DIR . 'elementor/class-lsdp-register-widget.php';
 		}
 
 		if ( is_admin() ) {
-			require_once LSDP_DIR . 'admin/class-lsdp-floating-switcher-settings.php';
+			require_once LSDP_DIR . 'floating-switcher/class-lsdp-floating-switcher-settings.php';
 			LSDP_Floating_Switcher_Settings::get_instance();
 			require_once LSDP_DIR . 'admin/feedback/class-lsdp-feedback.php';
 			require_once LSDP_DIR . 'admin/dashboard/class-lsdp-admin-dashboard.php';
 			lsdp_register_admin_dashboard();
 		} else {
-			require_once LSDP_DIR . 'includes/class-lsdp-floating-switcher-frontend.php';
 		}
 	}
 

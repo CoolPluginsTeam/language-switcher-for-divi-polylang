@@ -5,7 +5,7 @@
  * settings in the admin dashboard.
  *
  * @package    Language_Switcher_For_Elementor_Polylang
- * @subpackage Language_Switcher_For_Elementor_Polylang/admin/dashboard/includes/js
+ * @subpackage Language_Switcher_For_Elementor_Polylang/floating-switcher/js
  * @since     1.2.4
  */
 

@@ -7,7 +7,7 @@
  * integration with Polylang for language data.
  *
  * @package    Language_Switcher_For_Elementor_Polylang
- * @subpackage Language_Switcher_For_Elementor_Polylang/includes
+ * @subpackage Language_Switcher_For_Elementor_Polylang/floating-switcher
  * @since      1.2.4
  */
 
@@ -142,7 +142,7 @@ class LSDP_Floating_Switcher_Frontend {
 
 		wp_enqueue_style(
 			'lsdp-floating-switcher-frontend',
-			$plugin_url . 'includes/css/lsdp-floating-switcher-frontend.css',
+			$plugin_url . 'floating-switcher/css/lsdp-floating-switcher-frontend.css',
 			array(),
 			$version
 		);
@@ -157,7 +157,7 @@ class LSDP_Floating_Switcher_Frontend {
 
 		wp_enqueue_script(
 			'lsdp-floating-switcher-js',
-			$plugin_url . 'includes/js/lsdp-floating-switcher-frontend.js',
+			$plugin_url . 'floating-switcher/js/lsdp-floating-switcher-frontend.js',
 			array(),
 			$version,
 			true

@@ -43,12 +43,12 @@ class LSDP_Register_Widget {
 	 * @return void
 	 */
 	public function lsdp_register_widgets() {
-		require_once LSDP_DIR . 'includes/widget/class-lsdp-widget.php';
+		require_once LSDP_DIR . 'elementor/widget/class-lsdp-widget.php';
 		\Elementor\Plugin::instance()->widgets_manager->register( new LSDP\LanguageSwitcherPolylangElementorWidget\LSDP_Widget() );
 	}
 
 	public function add_editor_js() {
-		wp_enqueue_script( 'lsdp-editor-js', LSDP_URL . 'includes/js/lsdp-editor.js', array( 'jquery' ), LSDP, true );
+		wp_enqueue_script( 'lsdp-editor-js', LSDP_URL . 'elementor/js/lsdp-editor.js', array( 'jquery' ), LSDP, true );
 	}
 
 	// Elementor Review notice ajax request function
