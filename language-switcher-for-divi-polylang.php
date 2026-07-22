@@ -108,16 +108,21 @@ final class LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG {
 
 	/** Load the Divi 4 extension only when Divi fires its integration hook. */
 	public function initialize_divi_4() {
-		if ( file_exists( LSDP_DIR . 'includes/LanguageSwitcherForDiviPolylang.php' ) ) {
-			require_once LSDP_DIR . 'includes/LanguageSwitcherForDiviPolylang.php';
+		$divi_version = self::get_divi_theme_version();
+		if ( $divi_version && version_compare( (string) $divi_version, '5.0', '<' ) ) {
+			if ( file_exists( LSDP_DIR . 'includes/LanguageSwitcherForDiviPolylang.php' ) ) {
+				require_once LSDP_DIR . 'includes/LanguageSwitcherForDiviPolylang.php';
+			}
 		}
 	}
 
 	/** Register optional Divi 5 support before the theme builds its module tree. */
 	public function initialize_divi_5() {
-
-		require_once LSDP_DIR . 'divi-5/divi-5.php';
-		new LSDP_Divi5();
+		$divi_version = self::get_divi_theme_version();
+		if ( $divi_version && version_compare( (string) $divi_version, '5.0', '>=' ) ) {
+			require_once LSDP_DIR . 'divi-5/divi-5.php';
+			new LSDP_Divi5();
+		}
 	}
 
 	/**
@@ -191,6 +196,51 @@ final class LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG {
 			self::$instance = new self();
 		}
 		return self::$instance;
+	}
+
+	/**
+	 * Get Divi theme version.
+	 *
+	 * @since 1.2.4
+	 * @return string Divi theme version.
+	 */
+	public static function get_divi_theme_version() {
+		if ( ! self::is_divi_theme_active( 'Divi' ) ) {
+			return 0;
+		}
+
+		$theme = wp_get_theme();
+
+		// When active theme is a child of Divi, use the parent (Divi) theme version.
+		if ( $theme->parent() ) {
+			return $theme->parent()->get( 'Version' );
+		}
+
+		return $theme->get( 'Version' );
+	}
+
+	/**
+	 * Check if Divi theme is active.
+	 *
+	 * @since 1.2.4
+	 * @return bool True if Divi theme is active.
+	 */
+	public static function is_divi_theme_active( $target ) {
+		$theme = wp_get_theme();
+
+		if (
+			$theme->get( 'Name' ) === $target ||
+			stripos( $theme->get( 'Template' ), $target ) !== false ||
+			( $theme->parent() && stripos( $theme->parent()->get( 'Name' ), $target ) !== false )
+		) {
+			return true;
+		}
+
+		if ( apply_filters( 'divi_ghoster_ghosted_theme', '' ) === $target ) {
+			return true;
+		}
+
+		return false;
 	}
 }
 
