@@ -782,7 +782,12 @@
     display: flex !important;
     align-items: center;
     flex-direction: row !important;
+    flex-wrap: wrap;
     gap: 0;
+}
+
+.lsdp-preset-switcher-preview.lsdp-ls-inline .lsdp-language-switcher-inner {
+    flex-wrap: wrap;
 }
 
 .lsdp-language-switcher-preview-box .lsdp-ls-inline .lsdp-language-item,
