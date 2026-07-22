@@ -1,5 +1,5 @@
 <?php
-/**
+/*
 Plugin Name: Language Switcher for Polylang – Elementor, Gutenberg, & Divi
 Plugin URI:  https://wordpress.org/plugins/language-switcher-for-divi-polylang
 Description: Language Switcher for Polylang – Elementor, Gutenberg, & Divi to use added language switcher in your page or divi header menu
@@ -25,9 +25,8 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with Language Switcher for Polylang – Elementor, Gutenberg, & Divi. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
-
- * @package LanguageSwitcherForDiviPolylang
- */
+* @package LanguageSwitcherForDiviPolylang
+*/
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
