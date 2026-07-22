@@ -34,6 +34,8 @@
           config = { ...config, type: "dropdown" };
         }
 
+        config = this.normalizeLayoutCustomizerConfig(config);
+
         // Initialize component state
         this.state = {
           config: config,
@@ -52,6 +54,36 @@
       getSideBySideMaxLanguages() {
         const data = window.lsdpFloaterData || {};
         return data.sideBySideMaxLanguages || 3;
+      }
+
+      normalizeLayoutCustomizerConfig(config) {
+        if (!config.layoutCustomizer) {
+          return config;
+        }
+
+        const layoutCustomizer = { ...config.layoutCustomizer };
+
+        ["desktop", "mobile"].forEach((device) => {
+          if (!layoutCustomizer[device]) {
+            return;
+          }
+
+          const layout = { ...layoutCustomizer[device] };
+
+          if (
+            layout.flagIconPosition === "hide" &&
+            layout.languageNames === "none"
+          ) {
+            layout.languageNames = "full";
+          }
+
+          layoutCustomizer[device] = layout;
+        });
+
+        return {
+          ...config,
+          layoutCustomizer,
+        };
       }
 
       isSideBySideAllowed() {
@@ -159,14 +191,28 @@
 
       updateLayoutConfig(device, updates) {
         this.setState((prevState) => {
+          const currentLayout = prevState.config.layoutCustomizer[device];
+          const nextLayout = {
+            ...currentLayout,
+            ...updates,
+          };
+
+          if (
+            nextLayout.flagIconPosition === "hide" &&
+            nextLayout.languageNames === "none"
+          ) {
+            if (updates.flagIconPosition === "hide") {
+              nextLayout.languageNames = "full";
+            } else {
+              nextLayout.flagIconPosition = "before";
+            }
+          }
+
           const newConfig = {
             ...prevState.config,
             layoutCustomizer: {
               ...prevState.config.layoutCustomizer,
-              [device]: {
-                ...prevState.config.layoutCustomizer[device],
-                ...updates,
-              },
+              [device]: nextLayout,
             },
           };
           return {
@@ -1260,51 +1306,53 @@
                       )
                     ),
 
-                  h(
-                    "div",
-                    { className: "lsdp-lc-subfield" },
-                    this.renderLayoutRadioGroup(
-                      "flagIconPosition",
-                      [
-                        {
-                          value: "before",
-                          label: __("Before Language", "language-switcher-for-divi-polylang"),
-                        },
-                        {
-                          value: "after",
-                          label: __("After Language", "language-switcher-for-divi-polylang"),
-                        },
-                        {
-                          value: "hide",
-                          label: __("Hide Icons", "language-switcher-for-divi-polylang"),
-                        },
-                      ],
-                      __("Flag Icons Position", "language-switcher-for-divi-polylang")
-                    )
-                  ),
+                  layoutConfig.languageNames !== "none" &&
+                    h(
+                      "div",
+                      { className: "lsdp-lc-subfield" },
+                      this.renderLayoutRadioGroup(
+                        "flagIconPosition",
+                        [
+                          {
+                            value: "before",
+                            label: __("Before Language", "language-switcher-for-divi-polylang"),
+                          },
+                          {
+                            value: "after",
+                            label: __("After Language", "language-switcher-for-divi-polylang"),
+                          },
+                          {
+                            value: "hide",
+                            label: __("Hide Icons", "language-switcher-for-divi-polylang"),
+                          },
+                        ],
+                        __("Flag Icons Position", "language-switcher-for-divi-polylang")
+                      )
+                    ),
 
-                  h(
-                    "div",
-                    { className: "lsdp-lc-subfield" },
-                    this.renderLayoutRadioGroup(
-                      "languageNames",
-                      [
-                        {
-                          value: "full",
-                          label: __("Full Names", "language-switcher-for-divi-polylang"),
-                        },
-                        {
-                          value: "short",
-                          label: __("Short Names", "language-switcher-for-divi-polylang"),
-                        },
-                        {
-                          value: "none",
-                          label: __("No Names", "language-switcher-for-divi-polylang"),
-                        },
-                      ],
-                      __("Language Names", "language-switcher-for-divi-polylang")
+                  layoutConfig.flagIconPosition !== "hide" &&
+                    h(
+                      "div",
+                      { className: "lsdp-lc-subfield" },
+                      this.renderLayoutRadioGroup(
+                        "languageNames",
+                        [
+                          {
+                            value: "full",
+                            label: __("Full Names", "language-switcher-for-divi-polylang"),
+                          },
+                          {
+                            value: "short",
+                            label: __("Short Names", "language-switcher-for-divi-polylang"),
+                          },
+                          {
+                            value: "none",
+                            label: __("No Names", "language-switcher-for-divi-polylang"),
+                          },
+                        ],
+                        __("Language Names", "language-switcher-for-divi-polylang")
+                      )
                     )
-                  )
                 )
               )
             )
