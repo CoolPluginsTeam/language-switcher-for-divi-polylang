@@ -437,7 +437,20 @@ class LSDP_Widget extends Widget_Base {
 				'label'     => __( 'Switcher Text Color', 'language-switcher-for-divi-polylang' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown .lsdp-active-language,{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown .lsdp-lang-item a, {{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.horizontal .lsdp-lang-item a, {{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.vertical .lsdp-lang-item a' => '--lsdp-normal-text-color: {{VALUE}};',
+					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown' => '--lsdp-normal-text-color: {{VALUE}};',
+					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.horizontal' => '--lsdp-normal-text-color: {{VALUE}};',
+					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.vertical' => '--lsdp-normal-text-color: {{VALUE}};',
+					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown .lsdp-active-language' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown .lsdp-active-language a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown .lsdp-lang-item a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown .lsdp-lang-name' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown .lsdp-lang-code' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.horizontal .lsdp-lang-item a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.horizontal .lsdp-lang-name' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.horizontal .lsdp-lang-code' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.vertical .lsdp-lang-item a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.vertical .lsdp-lang-name' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.vertical .lsdp-lang-code' => 'color: {{VALUE}};',
 				),
 			)
 		);
@@ -477,7 +490,18 @@ class LSDP_Widget extends Widget_Base {
 				'label'     => __( 'Switcher Text Color', 'language-switcher-for-divi-polylang' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown:hover .lsdp-active-language,{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown .lsdp-lang-item:hover a, {{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.horizontal .lsdp-lang-item a:hover, {{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.vertical .lsdp-lang-item a:hover' => '--lsdp-normal-text-color: {{VALUE}};',
+					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown:hover' => '--lsdp-normal-text-color: {{VALUE}};',
+					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown:hover .lsdp-active-language' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown:hover .lsdp-active-language a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown .lsdp-lang-item:hover a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown .lsdp-lang-item:hover .lsdp-lang-name' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown .lsdp-lang-item:hover .lsdp-lang-code' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.horizontal .lsdp-lang-item a:hover' => '--lsdp-normal-text-color: {{VALUE}}; color: {{VALUE}};',
+					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.horizontal .lsdp-lang-item a:hover .lsdp-lang-name' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.horizontal .lsdp-lang-item a:hover .lsdp-lang-code' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.vertical .lsdp-lang-item a:hover' => '--lsdp-normal-text-color: {{VALUE}}; color: {{VALUE}};',
+					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.vertical .lsdp-lang-item a:hover .lsdp-lang-name' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.vertical .lsdp-lang-item a:hover .lsdp-lang-code' => 'color: {{VALUE}};',
 				),
 			)
 		);

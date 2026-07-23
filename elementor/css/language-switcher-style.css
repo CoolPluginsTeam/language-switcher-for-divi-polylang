@@ -32,7 +32,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0;
 }
 
 .lsdp-main-wrapper .lsdp-wrapper.vertical {
@@ -40,9 +40,13 @@
 }
 
 .lsdp-main-wrapper .lsdp-wrapper.vertical .lsdp-language-list {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
-  gap: 0.5rem;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  width: max-content;
+  max-width: 100%;
+  gap: 0;
 }
 
 /* Language switcher container */
@@ -68,10 +72,18 @@
 
 .lsdp-wrapper.horizontal .lsdp-lang-item {
   margin-bottom: 0;
+  padding: 0;
 }
 
 .lsdp-wrapper.vertical .lsdp-lang-item {
   margin-bottom: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.lsdp-wrapper.vertical .lsdp-lang-item a {
+  width: 100%;
+  box-sizing: border-box;
 }
 
 
@@ -113,6 +125,20 @@
     cursor: pointer;
     padding: 6px 8px;
     border-radius: 4px;
+    color: var(--lsdp-normal-text-color);
+}
+
+.lsdp-main-wrapper .lsdp-wrapper .lsdp-lang-name,
+.lsdp-main-wrapper .lsdp-wrapper .lsdp-lang-code {
+    color: inherit;
+}
+
+.lsdp-main-wrapper .lsdp-wrapper.horizontal .lsdp-lang-item a,
+.lsdp-main-wrapper .lsdp-wrapper.vertical .lsdp-lang-item a,
+.lsdp-main-wrapper .lsdp-wrapper.horizontal .lsdp-lang-name,
+.lsdp-main-wrapper .lsdp-wrapper.horizontal .lsdp-lang-code,
+.lsdp-main-wrapper .lsdp-wrapper.vertical .lsdp-lang-name,
+.lsdp-main-wrapper .lsdp-wrapper.vertical .lsdp-lang-code {
     color: var(--lsdp-normal-text-color);
 }
 
@@ -170,8 +196,13 @@
   background: var(--lsdp-normal-bg-color);
   display: block
 }
-.lsdp-wrapper.dropdown li a{
+.lsdp-wrapper.dropdown li a,
+.lsdp-wrapper.dropdown li a .lsdp-lang-name,
+.lsdp-wrapper.dropdown li a .lsdp-lang-code {
   color: var(--lsdp-normal-text-color);
+}
+
+.lsdp-wrapper.dropdown li a{
   padding: 5px 15px;
   -webkit-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
