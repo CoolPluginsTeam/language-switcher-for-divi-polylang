@@ -24,6 +24,7 @@ ul.wp-block-lsdp-language-switcher {
 ul.wp-block-lsdp-language-switcher li {
     margin: 0;
     padding: 0;
+    list-style: none;
 }
 
 /* Layout Variants */
@@ -63,8 +64,6 @@ ul.wp-block-lsdp-language-switcher.lsdp-layout-vertical > li {
     width: var(--switcher-width, 115px);
     max-width: 100%;
     padding: 0.5em 1em;
-    background: #fff;
-    border: 1px solid #ddd;
     border-radius: 0 !important;
     box-shadow: none !important;
     overflow: visible;
@@ -81,7 +80,6 @@ ul.wp-block-lsdp-language-switcher.lsdp-layout-vertical > li {
     box-shadow: none !important;
     cursor: pointer;
     font-size: 1em;
-    text-align: left;
     color: inherit !important;
     transition: all 0.2s ease;
 }
@@ -116,24 +114,16 @@ ul.wp-block-lsdp-language-switcher.lsdp-layout-vertical > li {
     min-width: 100%;
     width: max-content;
     max-width: min(100vw - 2rem, max-content);
+    border: none !important;
+    box-shadow: none !important;
     margin: 0;
     padding: 0;
-    list-style: none;
-    background: #fff;
-    border: 1px solid #ddd;
+    list-style: none !important;
     color: inherit;
     border-top: none;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     overflow: hidden;
     box-sizing: border-box;
-}
-
-.lsdp-dropdown-item {
-    margin: 0;
-    padding: 0;
 }
 
 .lsdp-dropdown-item a {
