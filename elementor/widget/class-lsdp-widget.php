@@ -42,6 +42,14 @@ class LSDP_Widget extends Widget_Base {
 			LSDP
 		);
 
+		wp_register_script(
+			'lsep-dropdown',
+			LSDP_URL . 'elementor/js/lsdp-dropdown.js',
+			array(),
+			LSDP,
+			true
+		);
+
 		add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'lsep_language_switcher_icon_css' ) );
 	}
 
@@ -108,6 +116,15 @@ class LSDP_Widget extends Widget_Base {
 	 */
 	public function get_style_depends() {
 		return array( 'lsep-style' );
+	}
+
+	/**
+	 * Get widget script dependencies.
+	 *
+	 * @return array Widget script dependencies.
+	 */
+	public function get_script_depends() {
+		return array( 'lsep-dropdown' );
 	}
 
 	/**

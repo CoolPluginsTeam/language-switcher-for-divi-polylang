@@ -18,6 +18,7 @@ ul.wp-block-lsdp-language-switcher {
     padding: 0.5em !important;
     display: flex;
     flex-wrap: wrap;
+    background: #fff;
 }
 
 .wp-block-lsdp-language-switcher ul li,
@@ -63,7 +64,7 @@ ul.wp-block-lsdp-language-switcher.lsdp-layout-vertical > li {
     display: inline-block;
     width: var(--switcher-width, 115px);
     max-width: 100%;
-    padding: 0.5em 1em;
+    padding: 0.5em;
     border-radius: 0 !important;
     box-shadow: none !important;
     overflow: visible;
@@ -108,9 +109,9 @@ ul.wp-block-lsdp-language-switcher.lsdp-layout-vertical > li {
     position: absolute;
     top: 100%;
     left: 0;
+    width: 100%;
     min-width: 100%;
-    width: max-content;
-    max-width: min(100vw - 2rem, max-content);
+    max-width: min(100vw - 2rem, 100%);
     margin: 0;
     padding: 0;
     list-style: none !important;
@@ -133,7 +134,7 @@ ul.wp-block-lsdp-language-switcher.lsdp-layout-vertical > li {
     align-items: center !important;
     gap: 0.5em;
     width: 100% !important;
-    padding: 6px 8px !important;
+    padding: 6px 0 !important;
     white-space: nowrap !important;
     text-decoration: none !important;
     color: inherit;
