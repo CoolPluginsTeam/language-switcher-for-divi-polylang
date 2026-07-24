@@ -55,7 +55,7 @@
             },
             show_flags: {
                 type: 'boolean',
-                default: false
+                default: true
             },
             show_language_codes: {
                 type: 'boolean',

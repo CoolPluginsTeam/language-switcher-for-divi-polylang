@@ -194,7 +194,7 @@ class LSDP_Language_Switcher_Block {
 			),
 			'show_flags'             => array(
 				'label'   => __( 'Displays flags', 'language-switcher-for-divi-polylang' ),
-				'default' => 0,
+				'default' => 1,
 			),
 			'show_language_codes'    => array(
 				'label'   => __( 'Show Language Codes', 'language-switcher-for-divi-polylang' ),
@@ -602,8 +602,9 @@ class LSDP_Language_Switcher_Block {
 		}
 
 		if ( $style_context['has_padding'] ) {
+			// Apply to the flex link (not the <li>) so the flag/name/code row stays centered.
 			$rules[] = $this->build_css_rule(
-				array( '.' . $block_class . '.lsdp-layout-dropdown .lsdp-dropdown-item' ),
+				array( '.' . $block_class . '.lsdp-layout-dropdown .lsdp-dropdown-item a' ),
 				$this->get_spacing_declarations( $style_context['padding'], 'padding', true, true )
 			);
 		}
@@ -1228,13 +1229,11 @@ class LSDP_Language_Switcher_Block {
 		}
 
 		if ( $show_names && ! empty( $current_lang['name'] ) ) {
-			$output .= '<div class="lsdp-dropdown-button-name">' . esc_html( $current_lang['name'] );
-			if ( $show_language_codes && ! empty( $current_lang['slug'] ) ) {
-				$output .= ' <span class="lsdp-language-code">' . esc_html( $current_lang['slug'] ) . '</span>';
-			}
-			$output .= '</div>';
-		} elseif ( $show_language_codes && ! empty( $current_lang['slug'] ) ) {
-			$output .= '<div class="lsdp-dropdown-button-name"><span class="lsdp-language-code">' . esc_html( $current_lang['slug'] ) . '</span></div>';
+			$output .= '<div class="lsdp-lang-name">' . esc_html( $current_lang['name'] ) . '</div>';
+		}
+
+		if ( $show_language_codes && ! empty( $current_lang['slug'] ) ) {
+			$output .= '<div class="lsdp-lang-code">' . esc_html( $current_lang['slug'] ) . '</div>';
 		}
 
 		$output .= '<span class="lsdp-dropdown-arrow" aria-hidden="true">&#9660;</span>';
@@ -1260,13 +1259,11 @@ class LSDP_Language_Switcher_Block {
 			}
 
 			if ( $show_names && ! empty( $lang['name'] ) ) {
-				$output .= '<div class="lsdp-dropdown-item-name">' . esc_html( $lang['name'] );
-				if ( $show_language_codes && ! empty( $lang['slug'] ) ) {
-					$output .= ' <span class="lsdp-language-code">' . esc_html( $lang['slug'] ) . '</span>';
-				}
-				$output .= '</div>';
-			} elseif ( $show_language_codes && ! empty( $lang['slug'] ) ) {
-				$output .= '<div class="lsdp-dropdown-item-name"><span class="lsdp-language-code">' . esc_html( $lang['slug'] ) . '</span></div>';
+				$output .= '<div class="lsdp-lang-name">' . esc_html( $lang['name'] ) . '</div>';
+			}
+
+			if ( $show_language_codes && ! empty( $lang['slug'] ) ) {
+				$output .= '<div class="lsdp-lang-code">' . esc_html( $lang['slug'] ) . '</div>';
 			}
 
 			$output .= '</a></li>';

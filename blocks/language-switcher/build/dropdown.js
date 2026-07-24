@@ -38,7 +38,7 @@
                 }
             }
 
-            var calculatedWidth = measurer.offsetWidth + 11.5;
+            var calculatedWidth = measurer.offsetWidth;
             doc.body.removeChild(measurer);
 
             var containerStyles = doc.defaultView.getComputedStyle(container);
@@ -48,10 +48,12 @@
                 (parseFloat(containerStyles.borderLeftWidth) || 0) +
                 (parseFloat(containerStyles.borderRightWidth) || 0);
 
+            // Small rounding buffer only; the container's own padding already
+            // provides the visual breathing room around the content.
             if (calculatedWidth > 0) {
                 container.style.setProperty(
                     '--switcher-width',
-                    Math.ceil(calculatedWidth + horizontalExtras + 10) + 'px'
+                    Math.ceil(calculatedWidth + horizontalExtras) + 'px'
                 );
             }
         } catch (e) {
