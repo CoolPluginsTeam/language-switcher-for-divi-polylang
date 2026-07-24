@@ -71,6 +71,9 @@ final class LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG {
 		if ( ! get_option( 'lsdp-installDate' ) ) {
 			add_option( 'lsdp-installDate', gmdate( 'Y-m-d H:i:s' ) );
 		}
+
+		// Elementor CSS/element cache still points at the old LSEP plugin URLs after migration.
+		update_option( 'lsdp_need_elementor_cache_clear', '1' );
 	}
 
 	/** Load builder-independent features and optional integrations. */
@@ -93,6 +96,7 @@ final class LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG {
 		if ( LSDP_Common_Helpers::is_elementor_available() ) {
 			require_once LSDP_DIR . 'elementor/class-lsdp-manager.php';
 			require_once LSDP_DIR . 'elementor/class-lsdp-register-widget.php';
+			$this->maybe_clear_elementor_cache();
 		}
 
 		if ( is_admin() ) {
@@ -114,6 +118,135 @@ final class LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG {
 
 		require_once LSDP_DIR . 'theme-builder/class-lsdp-theme-builder-conditions.php';
 		new LSDP_Theme_Builder_Conditions();
+	}
+
+	/**
+	 * Schedule Elementor cache clear after LSEP → LSDP migration / activation.
+	 *
+	 * Editor re-renders live, but frontend pages/templates that use the switcher
+	 * keep stale Elementor CSS / element cache until those posts are regenerated.
+	 */
+	public function maybe_clear_elementor_cache() {
+		$needs_clear = ( '1' === (string) get_option( 'lsdp_need_elementor_cache_clear', '' ) );
+
+		if ( ! $needs_clear && ! get_option( 'lsdp_elementor_cache_cleared' ) ) {
+			// Existing sites that already activated after migrating from LSEP.
+			$needs_clear = (bool) (
+				get_option( 'lsep-v' )
+				|| get_option( 'lsep_initial_save_version' )
+			);
+		}
+
+		if ( ! $needs_clear ) {
+			return;
+		}
+
+		if ( ! did_action( 'elementor/loaded' ) ) {
+			add_action( 'elementor/loaded', array( $this, 'clear_elementor_cache' ), 99 );
+			return;
+		}
+
+		$this->clear_elementor_cache();
+	}
+
+	/**
+	 * Clear Elementor CSS/element cache only on posts that use the language switcher widget.
+	 */
+	public function clear_elementor_cache() {
+		if ( ! class_exists( '\Elementor\Plugin' ) ) {
+			return;
+		}
+
+		$post_ids = $this->get_elementor_posts_using_switcher();
+		foreach ( $post_ids as $post_id ) {
+			$this->clear_elementor_cache_for_post( (int) $post_id );
+		}
+
+		delete_option( 'lsdp_need_elementor_cache_clear' );
+		update_option( 'lsdp_elementor_cache_cleared', '1', false );
+	}
+
+	/**
+	 * Find Elementor posts/templates that contain the language switcher widget.
+	 *
+	 * Uses Elementor's compact `_elementor_controls_usage` meta (not full `_elementor_data` JSON).
+	 *
+	 * @return int[]
+	 */
+	private function get_elementor_posts_using_switcher() {
+		global $wpdb;
+
+		// Narrow candidates via the small controls-usage index + Elementor-built posts only.
+		$candidate_ids = $wpdb->get_col(
+			$wpdb->prepare(
+				"SELECT DISTINCT cu.post_id
+				FROM {$wpdb->postmeta} cu
+				INNER JOIN {$wpdb->postmeta} em
+					ON em.post_id = cu.post_id
+					AND em.meta_key = '_elementor_edit_mode'
+					AND em.meta_value = 'builder'
+				WHERE cu.meta_key = '_elementor_controls_usage'
+					AND cu.meta_value LIKE %s",
+				'%' . $wpdb->esc_like( 'lsep_widget' ) . '%'
+			)
+		);
+
+		$post_ids = array();
+
+		foreach ( (array) $candidate_ids as $post_id ) {
+			$post_id = (int) $post_id;
+			if ( $post_id <= 0 ) {
+				continue;
+			}
+
+			$usage = get_post_meta( $post_id, '_elementor_controls_usage', true );
+			if ( is_array( $usage ) && isset( $usage['lsep_widget'] ) ) {
+				$post_ids[] = $post_id;
+			}
+		}
+
+		/**
+		 * Filter Elementor post IDs whose switcher-related cache should be cleared.
+		 *
+		 * @param int[] $post_ids Post IDs containing the language switcher widget.
+		 */
+		return apply_filters( 'lsdp_elementor_switcher_cache_post_ids', $post_ids );
+	}
+
+	/**
+	 * Clear Elementor CSS and element cache for a single post/template.
+	 *
+	 * @param int $post_id Post ID.
+	 */
+	private function clear_elementor_cache_for_post( $post_id ) {
+		if ( $post_id <= 0 ) {
+			return;
+		}
+
+		delete_post_meta( $post_id, '_elementor_css' );
+		delete_post_meta( $post_id, '_elementor_element_cache' );
+
+		try {
+			$elementor = \Elementor\Plugin::$instance;
+
+			if ( isset( $elementor->documents ) && method_exists( $elementor->documents, 'get' ) ) {
+				$document = $elementor->documents->get( $post_id );
+				if ( $document && method_exists( $document, 'delete_cache' ) ) {
+					$document->delete_cache();
+				}
+			}
+
+			if ( class_exists( '\Elementor\Core\Files\CSS\Post' ) ) {
+				$css_file = new \Elementor\Core\Files\CSS\Post( $post_id );
+				if ( method_exists( $css_file, 'delete' ) ) {
+					$css_file->delete();
+				}
+			}
+		} catch ( \Throwable $e ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
+			// Safe to ignore; CSS regenerates on the next frontend view.
+		}
+
+		wp_cache_delete( $post_id, 'post_meta' );
 	}
 
 	/** Load the Divi 4 extension only when Divi fires its integration hook. */

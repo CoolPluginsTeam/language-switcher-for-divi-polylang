@@ -34,7 +34,7 @@ class LSDP_Register_Widget {
 		}
 		add_action( 'elementor/widgets/register', array( $this, 'lsdp_register_widgets' ) );
 		add_action( 'elementor/editor/before_enqueue_scripts', array( $this, 'add_editor_js' ) );
-		add_action( 'wp_ajax_lsdp_elementor_review_notice', array( $this, 'lsdp_elementor_review_notice' ) );
+		add_action( 'wp_ajax_lsep_elementor_review_notice', array( $this, 'lsdp_elementor_review_notice' ) );
 	}
 
 	/**
@@ -53,13 +53,13 @@ class LSDP_Register_Widget {
 
 	// Elementor Review notice ajax request function
 	public function lsdp_elementor_review_notice() {
-		if ( ! check_ajax_referer( 'lsdp_elementor_review', 'nonce', false ) ) {
+		if ( ! check_ajax_referer( 'lsep_elementor_review', 'nonce', false ) ) {
 			wp_send_json_error( __( 'Invalid security token sent.', 'language-switcher-for-divi-polylang' ) );
 			wp_die( '0', 400 );
 		}
 
-		if ( isset( $_POST['lsdp_notice_dismiss'] ) && 'true' === sanitize_text_field( wp_unslash( $_POST['lsdp_notice_dismiss'] ) ) ) {
-			update_option( 'lsdp_elementor_review_notice_dismiss', 'yes' );
+		if ( isset( $_POST['lsep_notice_dismiss'] ) && 'true' === sanitize_text_field( wp_unslash( $_POST['lsep_notice_dismiss'] ) ) ) {
+			update_option( 'lsep_elementor_review_notice_dismiss', 'yes' );
 		}
 		exit;
 	}

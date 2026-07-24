@@ -36,20 +36,20 @@ class LSDP_Widget extends Widget_Base {
 		parent::__construct( $data, $args );
 
 		wp_register_style(
-			'lsdp-style',
+			'lsep-style',
 			LSDP_URL . '/elementor/css/language-switcher-style.css',
 			array(),
 			LSDP
 		);
 
-		add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'lsdp_language_switcher_icon_css' ) );
+		add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'lsep_language_switcher_icon_css' ) );
 	}
 
-	public function lsdp_language_switcher_icon_css() {
-		wp_enqueue_style( 'lsdp-style' );
+	public function lsep_language_switcher_icon_css() {
+		wp_enqueue_style( 'lsep-style' );
 
 		$inline_css = "
-        .lsdp-widget-icon {
+        .lsep-widget-icon {
             display: inline-block;
             width: 25px;
             height: 25px;
@@ -60,7 +60,7 @@ class LSDP_Widget extends Widget_Base {
         }
     ";
 
-		wp_add_inline_style( 'lsdp-style', $inline_css );
+		wp_add_inline_style( 'lsep-style', $inline_css );
 	}
 
 
@@ -71,7 +71,7 @@ class LSDP_Widget extends Widget_Base {
 	 * @return string Widget name.
 	 */
 	public function get_name() {
-		return 'lsdp_widget';
+		return 'lsep_widget';
 	}
 
 	/**
@@ -89,7 +89,7 @@ class LSDP_Widget extends Widget_Base {
 	 * @return string Widget icon.
 	 */
 	public function get_icon() {
-		return 'lsdp-widget-icon';
+		return 'lsep-widget-icon';
 	}
 
 	/**
@@ -107,7 +107,7 @@ class LSDP_Widget extends Widget_Base {
 	 * @return array Widget style dependencies.
 	 */
 	public function get_style_depends() {
-		return array( 'lsdp-style' );
+		return array( 'lsep-style' );
 	}
 
 	/**
@@ -123,7 +123,7 @@ class LSDP_Widget extends Widget_Base {
 		);
 
 		$this->add_control(
-			'lsdp_language_switcher_type',
+			'lsep_language_switcher_type',
 			array(
 				'label'   => __( 'Language Switcher Type', 'language-switcher-for-divi-polylang' ),
 				'type'    => Controls_Manager::SELECT,
@@ -137,7 +137,7 @@ class LSDP_Widget extends Widget_Base {
 		);
 
 		$this->add_control(
-			'lsdp_language_switcher_show_flags',
+			'lsep_language_switcher_show_flags',
 			array(
 				'label'   => __( 'Show Flags', 'language-switcher-for-divi-polylang' ),
 				'type'    => Controls_Manager::SWITCHER,
@@ -146,7 +146,7 @@ class LSDP_Widget extends Widget_Base {
 		);
 
 		$this->add_control(
-			'lsdp_language_switcher_show_names',
+			'lsep_language_switcher_show_names',
 			array(
 				'label'   => __( 'Show Language Names', 'language-switcher-for-divi-polylang' ),
 				'type'    => Controls_Manager::SWITCHER,
@@ -155,7 +155,7 @@ class LSDP_Widget extends Widget_Base {
 		);
 
 		$this->add_control(
-			'lsdp_languages_switcher_show_code',
+			'lsep_languages_switcher_show_code',
 			array(
 				'label'   => __( 'Show Language Codes', 'language-switcher-for-divi-polylang' ),
 				'type'    => Controls_Manager::SWITCHER,
@@ -164,7 +164,7 @@ class LSDP_Widget extends Widget_Base {
 		);
 
 		$this->add_control(
-			'lsdp_language_switcher_hide_current_language',
+			'lsep_language_switcher_hide_current_language',
 			array(
 				'label'   => __( 'Hide Current Language', 'language-switcher-for-divi-polylang' ),
 				'type'    => Controls_Manager::SWITCHER,
@@ -173,7 +173,7 @@ class LSDP_Widget extends Widget_Base {
 		);
 
 		$this->add_control(
-			'lsdp_language_hide_untranslated_languages',
+			'lsep_language_hide_untranslated_languages',
 			array(
 				'label'   => __( 'Hide Untranslated Languages', 'language-switcher-for-divi-polylang' ),
 				'type'    => Controls_Manager::SWITCHER,
@@ -181,41 +181,41 @@ class LSDP_Widget extends Widget_Base {
 			)
 		);
 
-		if ( ! get_option( 'lsdp_elementor_review_notice_dismiss' ) ) {
-			$review_nonce = wp_create_nonce( 'lsdp_elementor_review' );
+		if ( ! get_option( 'lsep_elementor_review_notice_dismiss' ) ) {
+			$review_nonce = wp_create_nonce( 'lsep_elementor_review' );
 			$url          = admin_url( 'admin-ajax.php' );
 			$review_url   = 'https://wordpress.org/support/plugin/language-switcher-for-divi-polylang/reviews/#new-post';
-			$html         = '<div class="lsdp_elementor_review_wrapper">';
-			$html        .= '<div class="lsdp_elementor_review_msg">';
-			$html        .= '<p class="lsdp_elementor_review_intro">';
+			$html         = '<div class="lsep_elementor_review_wrapper">';
+			$html        .= '<div class="lsep_elementor_review_msg">';
+			$html        .= '<p class="lsep_elementor_review_intro">';
 			$html        .= sprintf(
 				/* translators: %s: plugin name in bold */
 				esc_html__( 'Thanks for using %s! If you have a moment, could you kindly leave us a review? We\'d greatly appreciate it and it helps us improve our product.', 'language-switcher-for-divi-polylang' ),
 				'<strong>' . esc_html__( 'Language Switcher for Polylang', 'language-switcher-for-divi-polylang' ) . '</strong>'
 			);
 			$html        .= '</p>';
-			$html        .= '<p class="lsdp_elementor_review_rating">';
+			$html        .= '<p class="lsep_elementor_review_rating">';
 			$html        .= '<a href="' . esc_url( $review_url ) . '" target="_blank" rel="noopener noreferrer">';
 			$html        .= esc_html__( 'Share the love with a', 'language-switcher-for-divi-polylang' );
-			$html        .= ' <span class="lsdp_elementor_review_stars" aria-hidden="true">★★★★★</span> ';
+			$html        .= ' <span class="lsep_elementor_review_stars" aria-hidden="true">★★★★★</span> ';
 			$html        .= esc_html__( 'rating.', 'language-switcher-for-divi-polylang' );
 			$html        .= '</a></p>';
 			$html        .= '</div>';
-			$html        .= '<div id="lsdp_elementor_review_dismiss" data-url="' . esc_url( $url ) . '" data-nonce="' . esc_attr( $review_nonce ) . '">';
+			$html        .= '<div id="lsep_elementor_review_dismiss" data-url="' . esc_url( $url ) . '" data-nonce="' . esc_attr( $review_nonce ) . '">';
 			$html        .= esc_html__( 'Close Notice X', 'language-switcher-for-divi-polylang' );
 			$html        .= '</div>';
-			$html        .= '<div class="lsdp_elementor_demo_btn">';
+			$html        .= '<div class="lsep_elementor_demo_btn">';
 			$html        .= '<a href="' . esc_url( $review_url ) . '" target="_blank" rel="noopener noreferrer">';
 			$html        .= esc_html__( 'Submit Review', 'language-switcher-for-divi-polylang' );
 			$html        .= '</a></div></div>';
 
 			$this->add_control(
-				'lsdp_review_notice',
+				'lsep_review_notice',
 				array(
-					'name'            => 'lsdp_review_notice',
+					'name'            => 'lsep_review_notice',
 					'type'            => Controls_Manager::RAW_HTML,
 					'raw'             => $html,
-					'content_classes' => 'lsdp_elementor_review_notice',
+					'content_classes' => 'lsep_elementor_review_notice',
 				)
 			);
 		}
@@ -231,7 +231,7 @@ class LSDP_Widget extends Widget_Base {
 		);
 
 		$this->add_control(
-			'lsdp_language_switcher_alignment',
+			'lsep_language_switcher_alignment',
 			array(
 				'label'     => __( 'Switcher Alignment', 'language-switcher-for-divi-polylang' ),
 				'type'      => Controls_Manager::CHOOSE,
@@ -251,16 +251,16 @@ class LSDP_Widget extends Widget_Base {
 				),
 				'default'   => 'left',
 				'condition' => array(
-					'lsdp_language_switcher_type' => 'dropdown',
+					'lsep_language_switcher_type' => 'dropdown',
 				),
 				'selectors' => array(
-					'{{WRAPPER}} .lsdp-main-wrapper' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper' => 'text-align: {{VALUE}};',
 				),
 			)
 		);
 
 		$this->add_control(
-			'lsdp_language_swtcher_flag_ratio',
+			'lsep_language_swtcher_flag_ratio',
 			array(
 				'label'        => __( 'Flag Ratio', 'language-switcher-for-divi-polylang' ),
 				'type'         => Controls_Manager::SELECT,
@@ -268,19 +268,19 @@ class LSDP_Widget extends Widget_Base {
 					'11' => __( '1/1', 'language-switcher-for-divi-polylang' ),
 					'43' => __( '4/3', 'language-switcher-for-divi-polylang' ),
 				),
-				'prefix_class' => 'lsdp-switcher--aspect-ratio-',
+				'prefix_class' => 'lsep-switcher--aspect-ratio-',
 				'default'      => '43',
 				'selectors'    => array(
-					'{{WRAPPER}} .lsdp-lang-image' => '--lsdp-flag-ratio: {{VALUE}};',
+					'{{WRAPPER}} .lsep-lang-image' => '--lsep-flag-ratio: {{VALUE}};',
 				),
 				'condition'    => array(
-					'lsdp_language_switcher_show_flags' => 'yes',
+					'lsep_language_switcher_show_flags' => 'yes',
 				),
 			)
 		);
 
 		$this->add_control(
-			'lsdp_language_switcher_flag_width',
+			'lsep_language_switcher_flag_width',
 			array(
 				'label'      => __( 'Flag Width', 'language-switcher-for-divi-polylang' ),
 				'type'       => Controls_Manager::SLIDER,
@@ -290,17 +290,17 @@ class LSDP_Widget extends Widget_Base {
 					'size' => 20,
 				),
 				'selectors'  => array(
-					'{{WRAPPER}}.lsdp-switcher--aspect-ratio-11 .lsdp-lang-image img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}}.lsdp-switcher--aspect-ratio-43 .lsdp-lang-image img' => 'width: {{SIZE}}{{UNIT}}; height: calc({{SIZE}}{{UNIT}} * 0.75);',
+					'{{WRAPPER}}.lsep-switcher--aspect-ratio-11 .lsep-lang-image img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}}.lsep-switcher--aspect-ratio-43 .lsep-lang-image img' => 'width: {{SIZE}}{{UNIT}}; height: calc({{SIZE}}{{UNIT}} * 0.75);',
 				),
 				'condition'  => array(
-					'lsdp_language_switcher_show_flags' => 'yes',
+					'lsep_language_switcher_show_flags' => 'yes',
 				),
 			)
 		);
 
 		$this->add_control(
-			'lsdp_language_switcher_flag_radius',
+			'lsep_language_switcher_flag_radius',
 			array(
 				'label'      => __( 'Flag Radius', 'language-switcher-for-divi-polylang' ),
 				'type'       => Controls_Manager::SLIDER,
@@ -322,16 +322,16 @@ class LSDP_Widget extends Widget_Base {
 					'size' => 0,
 				),
 				'selectors'  => array(
-					'{{WRAPPER}} .lsdp-lang-image img' => '--lsdp-flag-radius: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .lsep-lang-image img' => '--lsep-flag-radius: {{SIZE}}{{UNIT}};',
 				),
 				'condition'  => array(
-					'lsdp_language_switcher_show_flags' => 'yes',
+					'lsep_language_switcher_show_flags' => 'yes',
 				),
 			)
 		);
 
 		$this->add_control(
-			'lsdp_language_switcher_margin',
+			'lsep_language_switcher_margin',
 			array(
 				'label'      => esc_html__( 'Margin', 'language-switcher-for-divi-polylang' ),
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
@@ -343,16 +343,16 @@ class LSDP_Widget extends Widget_Base {
 					'left'   => 0,
 				),
 				'selectors'  => array(
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-					// '{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown .lsdp-lang-item a' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.horizontal .lsdp-lang-item a' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.vertical .lsdp-lang-item a' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					// '{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown .lsep-lang-item a' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.horizontal .lsep-lang-item a' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.vertical .lsep-lang-item a' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);
 
 		$this->add_control(
-			'lsdp_language_switcher_padding',
+			'lsep_language_switcher_padding',
 			array(
 				'label'      => __( 'Padding', 'language-switcher-for-divi-polylang' ),
 				'type'       => Controls_Manager::DIMENSIONS,
@@ -364,10 +364,10 @@ class LSDP_Widget extends Widget_Base {
 					'left'   => 10,
 				),
 				'selectors'  => array(
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown .lsdp-lang-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.horizontal .lsdp-lang-item a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.vertical .lsdp-lang-item a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown .lsep-lang-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.horizontal .lsep-lang-item a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.vertical .lsep-lang-item a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);
@@ -375,14 +375,14 @@ class LSDP_Widget extends Widget_Base {
 		$this->add_group_control(
 			\Elementor\Group_Control_Border::get_type(),
 			array(
-				'name'     => 'lsdp_language_switcher_border',
+				'name'     => 'lsep_language_switcher_border',
 				'label'    => __( 'Border', 'language-switcher-for-divi-polylang' ),
-				'selector' => '{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown, {{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.horizontal li a, {{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.vertical li a',
+				'selector' => '{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown, {{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.horizontal li a, {{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.vertical li a',
 			)
 		);
 
 		$this->add_control(
-			'lsdp_language_switcher_border_radius',
+			'lsep_language_switcher_border_radius',
 			array(
 				'label'      => __( 'Border Radius', 'language-switcher-for-divi-polylang' ),
 				'type'       => Controls_Manager::DIMENSIONS,
@@ -394,17 +394,17 @@ class LSDP_Widget extends Widget_Base {
 					'left'   => 0,
 				),
 				'selectors'  => array(
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown .lsdp-language-list' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.horizontal li a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.vertical li a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown .lsep-language-list' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.horizontal li a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.vertical li a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 
 			)
 		);
-		$this->start_controls_tabs( 'lsdp_language_switcher_style_tabs' );
+		$this->start_controls_tabs( 'lsep_language_switcher_style_tabs' );
 		$this->start_controls_tab(
-			'lsdp_language_switcher_style_tab_normal',
+			'lsep_language_switcher_style_tab_normal',
 			array(
 				'label' => __( 'Normal', 'language-switcher-for-divi-polylang' ),
 			)
@@ -412,52 +412,52 @@ class LSDP_Widget extends Widget_Base {
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
-				'name'     => 'lsdp_language_switcher_typography',
+				'name'     => 'lsep_language_switcher_typography',
 				'label'    => __( 'Typography', 'language-switcher-for-divi-polylang' ),
-				'selector' => '{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown .lsdp-active-language a div:not(.lsdp-lang-image), {{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown .lsdp-lang-item a, {{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.horizontal .lsdp-lang-item a, {{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.vertical .lsdp-lang-item a',
+				'selector' => '{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown .lsep-active-language a div:not(.lsep-lang-image), {{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown .lsep-lang-item a, {{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.horizontal .lsep-lang-item a, {{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.vertical .lsep-lang-item a',
 			)
 		);
 		$this->add_control(
-			'lsdp_language_switcher_background_color',
+			'lsep_language_switcher_background_color',
 			array(
 				'label'     => __( 'Switcher Background Color', 'language-switcher-for-divi-polylang' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown' => '--lsdp-normal-bg-color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown ul li' => '--lsdp-normal-bg-color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.horizontal .lsdp-lang-item a' => '--lsdp-normal-bg-color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.vertical .lsdp-lang-item a' => '--lsdp-normal-bg-color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown' => '--lsep-normal-bg-color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown ul li' => '--lsep-normal-bg-color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.horizontal .lsep-lang-item a' => '--lsep-normal-bg-color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.vertical .lsep-lang-item a' => '--lsep-normal-bg-color: {{VALUE}};',
 				),
 			)
 		);
 
 		$this->add_control(
-			'lsdp_language_switcher_text_color',
+			'lsep_language_switcher_text_color',
 			array(
 				'label'     => __( 'Switcher Text Color', 'language-switcher-for-divi-polylang' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown' => '--lsdp-normal-text-color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.horizontal' => '--lsdp-normal-text-color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.vertical' => '--lsdp-normal-text-color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown .lsdp-active-language' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown .lsdp-active-language a' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown .lsdp-lang-item a' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown .lsdp-lang-name' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown .lsdp-lang-code' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.horizontal .lsdp-lang-item a' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.horizontal .lsdp-lang-name' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.horizontal .lsdp-lang-code' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.vertical .lsdp-lang-item a' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.vertical .lsdp-lang-name' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.vertical .lsdp-lang-code' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown' => '--lsep-normal-text-color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.horizontal' => '--lsep-normal-text-color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.vertical' => '--lsep-normal-text-color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown .lsep-active-language' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown .lsep-active-language a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown .lsep-lang-item a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown .lsep-lang-name' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown .lsep-lang-code' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.horizontal .lsep-lang-item a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.horizontal .lsep-lang-name' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.horizontal .lsep-lang-code' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.vertical .lsep-lang-item a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.vertical .lsep-lang-name' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.vertical .lsep-lang-code' => 'color: {{VALUE}};',
 				),
 			)
 		);
 		$this->end_controls_tab();
 
 		$this->start_controls_tab(
-			'lsdp_language_switcher_style_tab_hover',
+			'lsep_language_switcher_style_tab_hover',
 			array(
 				'label' => __( 'Hover', 'language-switcher-for-divi-polylang' ),
 			)
@@ -465,43 +465,43 @@ class LSDP_Widget extends Widget_Base {
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
-				'name'     => 'lsdp_language_switcher_typography_hover',
+				'name'     => 'lsep_language_switcher_typography_hover',
 				'label'    => __( 'Typography', 'language-switcher-for-divi-polylang' ),
-				'selector' => '{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown .lsdp-active-language:hover,{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown .lsdp-lang-item a:hover, {{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.horizontal .lsdp-lang-item a:hover, {{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.vertical .lsdp-lang-item a:hover',
+				'selector' => '{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown .lsep-active-language:hover,{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown .lsep-lang-item a:hover, {{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.horizontal .lsep-lang-item a:hover, {{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.vertical .lsep-lang-item a:hover',
 			)
 		);
 		$this->add_control(
-			'lsdp_language_switcher_background_color_hover',
+			'lsep_language_switcher_background_color_hover',
 			array(
 				'label'     => __( 'Switcher Background Color', 'language-switcher-for-divi-polylang' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown:hover' => '--lsdp-normal-bg-color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown ul li:hover' => '--lsdp-normal-bg-color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.horizontal .lsdp-lang-item a:hover' => '--lsdp-normal-bg-color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.vertical .lsdp-lang-item a:hover' => '--lsdp-normal-bg-color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown:hover' => '--lsep-normal-bg-color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown ul li:hover' => '--lsep-normal-bg-color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.horizontal .lsep-lang-item a:hover' => '--lsep-normal-bg-color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.vertical .lsep-lang-item a:hover' => '--lsep-normal-bg-color: {{VALUE}};',
 				),
 			)
 		);
 
 		$this->add_control(
-			'lsdp_language_switcher_text_color_hover',
+			'lsep_language_switcher_text_color_hover',
 			array(
 				'label'     => __( 'Switcher Text Color', 'language-switcher-for-divi-polylang' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown:hover' => '--lsdp-normal-text-color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown:hover .lsdp-active-language' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown:hover .lsdp-active-language a' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown .lsdp-lang-item:hover a' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown .lsdp-lang-item:hover .lsdp-lang-name' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown .lsdp-lang-item:hover .lsdp-lang-code' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.horizontal .lsdp-lang-item a:hover' => '--lsdp-normal-text-color: {{VALUE}}; color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.horizontal .lsdp-lang-item a:hover .lsdp-lang-name' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.horizontal .lsdp-lang-item a:hover .lsdp-lang-code' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.vertical .lsdp-lang-item a:hover' => '--lsdp-normal-text-color: {{VALUE}}; color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.vertical .lsdp-lang-item a:hover .lsdp-lang-name' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.vertical .lsdp-lang-item a:hover .lsdp-lang-code' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown:hover' => '--lsep-normal-text-color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown:hover .lsep-active-language' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown:hover .lsep-active-language a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown .lsep-lang-item:hover a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown .lsep-lang-item:hover .lsep-lang-name' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown .lsep-lang-item:hover .lsep-lang-code' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.horizontal .lsep-lang-item a:hover' => '--lsep-normal-text-color: {{VALUE}}; color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.horizontal .lsep-lang-item a:hover .lsep-lang-name' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.horizontal .lsep-lang-item a:hover .lsep-lang-code' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.vertical .lsep-lang-item a:hover' => '--lsep-normal-text-color: {{VALUE}}; color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.vertical .lsep-lang-item a:hover .lsep-lang-name' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.vertical .lsep-lang-item a:hover .lsep-lang-code' => 'color: {{VALUE}};',
 				),
 			)
 		);
@@ -517,13 +517,13 @@ class LSDP_Widget extends Widget_Base {
 				'label'     => __( 'Dropdown Style', 'language-switcher-for-divi-polylang' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array(
-					'lsdp_language_switcher_type' => 'dropdown',
+					'lsep_language_switcher_type' => 'dropdown',
 				),
 			)
 		);
 
 		$this->add_control(
-			'lsdp_language_switcher_dropown_direction',
+			'lsep_language_switcher_dropown_direction',
 			array(
 				'label'        => __( 'Dropdown Direction', 'language-switcher-for-divi-polylang' ),
 				'type'         => Controls_Manager::SELECT,
@@ -533,14 +533,14 @@ class LSDP_Widget extends Widget_Base {
 				),
 				'default'      => 'down',
 				'condition'    => array(
-					'lsdp_language_switcher_type' => 'dropdown',
+					'lsep_language_switcher_type' => 'dropdown',
 				),
-				'prefix_class' => 'lsdp-dropdown-direction-',
+				'prefix_class' => 'lsep-dropdown-direction-',
 			)
 		);
 
 		$this->add_control(
-			'lsdp_language_switcher_icon',
+			'lsep_language_switcher_icon',
 			array(
 				'label'                  => __( 'Switcher Icon', 'language-switcher-for-divi-polylang' ),
 				'type'                   => Controls_Manager::ICONS,
@@ -553,13 +553,13 @@ class LSDP_Widget extends Widget_Base {
 				'label_block'            => false,
 				'skin'                   => 'inline',
 				'condition'              => array(
-					'lsdp_language_switcher_type' => 'dropdown',
+					'lsep_language_switcher_type' => 'dropdown',
 				),
 			)
 		);
 
 		$this->add_control(
-			'lsdp_language_switcher_icon_size',
+			'lsep_language_switcher_icon_size',
 			array(
 				'label'      => __( 'Icon Size', 'language-switcher-for-divi-polylang' ),
 				'type'       => Controls_Manager::SLIDER,
@@ -577,30 +577,30 @@ class LSDP_Widget extends Widget_Base {
 					),
 				),
 				'condition'  => array(
-					'lsdp_language_switcher_type' => 'dropdown',
+					'lsep_language_switcher_type' => 'dropdown',
 				),
 				'selectors'  => array(
-					'{{WRAPPER}} .lsdp-dropdown-icon' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .lsep-dropdown-icon' => 'font-size: {{SIZE}}{{UNIT}};',
 				),
 			)
 		);
 
 		$this->add_control(
-			'lsdp_language_switcher_icon_color',
+			'lsep_language_switcher_icon_color',
 			array(
 				'label'     => __( 'Icon Color', 'language-switcher-for-divi-polylang' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => array(
-					'lsdp_language_switcher_type' => 'dropdown',
+					'lsep_language_switcher_type' => 'dropdown',
 				),
 				'selectors' => array(
-					'{{WRAPPER}} .lsdp-dropdown-icon' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-dropdown-icon' => 'color: {{VALUE}};',
 				),
 			)
 		);
 
 		$this->add_control(
-			'lsdp_language_switcher_icon_spacing',
+			'lsep_language_switcher_icon_spacing',
 			array(
 				'label'      => __( 'Icon Spacing', 'language-switcher-for-divi-polylang' ),
 				'type'       => Controls_Manager::SLIDER,
@@ -613,16 +613,16 @@ class LSDP_Widget extends Widget_Base {
 					),
 				),
 				'condition'  => array(
-					'lsdp_language_switcher_type' => 'dropdown',
+					'lsep_language_switcher_type' => 'dropdown',
 				),
 				'selectors'  => array(
-					'{{WRAPPER}} .lsdp-dropdown-icon' => 'margin-left: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .lsep-dropdown-icon' => 'margin-left: {{SIZE}}{{UNIT}};',
 				),
 			)
 		);
 
 		$this->add_control(
-			'lsdp_language_switcher_dropdwon_spacing',
+			'lsep_language_switcher_dropdwon_spacing',
 			array(
 				'label'      => __( 'Dropdown Spacing', 'language-switcher-for-divi-polylang' ),
 				'type'       => Controls_Manager::SLIDER,
@@ -639,8 +639,8 @@ class LSDP_Widget extends Widget_Base {
 					'size' => 0,
 				),
 				'selectors'  => array(
-					'{{WRAPPER}}.lsdp-dropdown-direction-down .lsdp-wrapper.dropdown ul' => 'margin-top: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}}.lsdp-dropdown-direction-up .lsdp-wrapper.dropdown ul' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}}.lsep-dropdown-direction-down .lsep-wrapper.dropdown ul' => 'margin-top: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}}.lsep-dropdown-direction-up .lsep-wrapper.dropdown ul' => 'margin-bottom: {{SIZE}}{{UNIT}};',
 				),
 			)
 		);
@@ -648,10 +648,10 @@ class LSDP_Widget extends Widget_Base {
 		$this->add_group_control(
 			\Elementor\Group_Control_Border::get_type(),
 			array(
-				'name'           => 'lsdp_language_switcher_dropdown_list_border',
+				'name'           => 'lsep_language_switcher_dropdown_list_border',
 				'label'          => __( 'Dropdown List Border', 'language-switcher-for-divi-polylang' ),
 				'separator'      => 'before',
-				'selector'       => '{{WRAPPER}} .lsdp-main-wrapper .lsdp-wrapper.dropdown ul',
+				'selector'       => '{{WRAPPER}} .lsep-main-wrapper .lsep-wrapper.dropdown ul',
 				'fields_options' => array(
 					'border' => array(
 						'label' => __( 'Dropdown List Border', 'language-switcher-for-divi-polylang' ),
@@ -667,7 +667,7 @@ class LSDP_Widget extends Widget_Base {
 		);
 
 		$this->add_control(
-			'lsdp_language_switcher_dropdown_language_item_separator',
+			'lsep_language_switcher_dropdown_language_item_separator',
 			array(
 				'label'      => __( 'Language Item Separator', 'language-switcher-for-divi-polylang' ),
 				'type'       => Controls_Manager::SLIDER,
@@ -680,18 +680,18 @@ class LSDP_Widget extends Widget_Base {
 					),
 				),
 				'selectors'  => array(
-					'{{WRAPPER}} .lsdp-wrapper.dropdown ul.lsdp-language-list li.lsdp-lang-item:not(:last-child)' => 'border-bottom: {{SIZE}}{{UNIT}} solid;',
+					'{{WRAPPER}} .lsep-wrapper.dropdown ul.lsep-language-list li.lsep-lang-item:not(:last-child)' => 'border-bottom: {{SIZE}}{{UNIT}} solid;',
 				),
 			)
 		);
 
 		$this->add_control(
-			'lsdp_language_switcher_dropdown_language_item_separator_color',
+			'lsep_language_switcher_dropdown_language_item_separator_color',
 			array(
 				'label'     => __( 'Separator Color', 'language-switcher-for-divi-polylang' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .lsdp-wrapper.dropdown ul.lsdp-language-list li.lsdp-lang-item:not(:last-child)' => 'border-bottom-color: {{VALUE}};',
+					'{{WRAPPER}} .lsep-wrapper.dropdown ul.lsep-language-list li.lsep-lang-item:not(:last-child)' => 'border-bottom-color: {{VALUE}};',
 				),
 			)
 		);
@@ -704,12 +704,12 @@ class LSDP_Widget extends Widget_Base {
 	 * @param array $data Data to be localized.
 	 * @return array Localized data.
 	 */
-	public function lsdp_localize_polylang_data( $data ) {
+	public function lsep_localize_polylang_data( $data ) {
 		// Get the global Polylang object
 		global $polylang;
-		$lsdp_polylang = $polylang;
+		$lsep_polylang = $polylang;
 		$data          = array();
-		if ( isset( $lsdp_polylang ) ) {
+		if ( isset( $lsep_polylang ) ) {
 			try {
 				require_once LSDP_DIR . 'helpers/class-lsdp-common-helpers.php';
 				if ( function_exists( 'pll_the_languages' ) && function_exists( 'pll_current_language' ) ) {
@@ -733,13 +733,13 @@ class LSDP_Widget extends Widget_Base {
 					);
 
 					$custom_data      = array(
-						'lsdpLanguageData' => $languages,
-						'lsdpCurrentLang'  => esc_html( $lang_curr ),
-						'lsdpPluginUrl'    => esc_url( LSDP_URL ),
+						'lsepLanguageData' => $languages,
+						'lsepCurrentLang'  => esc_html( $lang_curr ),
+						'lsepPluginUrl'    => esc_url( LSDP_URL ),
 					);
 					$custom_data_json = $custom_data;
 
-					$data['lsdpGlobalObj'] = $custom_data_json;
+					$data['lsepGlobalObj'] = $custom_data_json;
 				}
 			} catch ( \Exception $e ) {
 				// Handle exception if needed
@@ -755,23 +755,23 @@ class LSDP_Widget extends Widget_Base {
 		$settings = $this->get_active_settings();
 
 		// Get the localized data
-		$data      = $this->lsdp_localize_polylang_data( array() );
-		$lsdp_data = isset( $data['lsdpGlobalObj'] ) ? $data['lsdpGlobalObj'] : array();
-		if ( empty( $lsdp_data ) ) {
+		$data      = $this->lsep_localize_polylang_data( array() );
+		$lsep_data = isset( $data['lsepGlobalObj'] ) ? $data['lsepGlobalObj'] : array();
+		if ( empty( $lsep_data ) ) {
 			return;
 		}
-		if ( 'yes' !== $settings['lsdp_language_switcher_show_flags'] && 'yes' !== $settings['lsdp_language_switcher_show_names'] && 'yes' !== $settings['lsdp_languages_switcher_show_code'] ) {
+		if ( 'yes' !== $settings['lsep_language_switcher_show_flags'] && 'yes' !== $settings['lsep_language_switcher_show_names'] && 'yes' !== $settings['lsep_languages_switcher_show_code'] ) {
 			return;
 		}
 		$switcher_html  = '';
-		$switcher_html .= '<div class="lsdp-main-wrapper">';
-		if ( 'dropdown' === $settings['lsdp_language_switcher_type'] ) {
-			$switcher_html .= '<div class="lsdp-wrapper dropdown">';
-			$switcher_html .= $this->lsdp_render_dropdown_switcher( $settings, $lsdp_data );
+		$switcher_html .= '<div class="lsep-main-wrapper">';
+		if ( 'dropdown' === $settings['lsep_language_switcher_type'] ) {
+			$switcher_html .= '<div class="lsep-wrapper dropdown">';
+			$switcher_html .= $this->lsep_render_dropdown_switcher( $settings, $lsep_data );
 			$switcher_html .= '</div>';
 		} else {
-			$switcher_html .= '<div class="lsdp-wrapper ' . esc_attr( $settings['lsdp_language_switcher_type'] ) . '">';
-			$switcher_html .= $this->lsdp_render_switcher( $settings, $lsdp_data );
+			$switcher_html .= '<div class="lsep-wrapper ' . esc_attr( $settings['lsep_language_switcher_type'] ) . '">';
+			$switcher_html .= $this->lsep_render_switcher( $settings, $lsep_data );
 			$switcher_html .= '</div>';
 		}
 		$switcher_html .= '</div>';
@@ -782,22 +782,22 @@ class LSDP_Widget extends Widget_Base {
 	 * Render dropdown switcher.
 	 *
 	 * @param array $settings Widget settings.
-	 * @param array $lsdp_data Language data.
+	 * @param array $lsep_data Language data.
 	 * @return string HTML output.
 	 */
-	public function lsdp_render_dropdown_switcher( $settings, $lsdp_data ) {
-		$languages    = $lsdp_data['lsdpLanguageData'];
-		$current_lang = $lsdp_data['lsdpCurrentLang'];
+	public function lsep_render_dropdown_switcher( $settings, $lsep_data ) {
+		$languages    = $lsep_data['lsepLanguageData'];
+		$current_lang = $lsep_data['lsepCurrentLang'];
 
 		// If current language should be shown, use it as active language
-		if ( 'yes' !== $settings['lsdp_language_switcher_hide_current_language'] ) {
+		if ( 'yes' !== $settings['lsep_language_switcher_hide_current_language'] ) {
 			$active_language = isset( $languages[ $current_lang ] ) ? $languages[ $current_lang ] : null;
 		} else {
 			// Find first available language that's not the current language
 			$active_language = null;
 			foreach ( $languages as $lang ) {
 				if ( $current_lang !== $lang['slug'] &&
-					! ( $lang['no_translation'] && 'yes' === $settings['lsdp_language_hide_untranslated_languages'] ) ) {
+					! ( $lang['no_translation'] && 'yes' === $settings['lsep_language_hide_untranslated_languages'] ) ) {
 					$active_language = $lang;
 					break;
 				}
@@ -809,33 +809,33 @@ class LSDP_Widget extends Widget_Base {
 			return '';
 		}
 
-		$active_html    = self::lsdp_get_active_language_html( $active_language, $settings );
+		$active_html    = self::lsep_get_active_language_html( $active_language, $settings );
 		$languages_html = '';
 
 		foreach ( $languages as $lang ) {
 			// Skip if it's the current language (when hidden), active language, or untranslated language
-			if ( ( $current_lang === $lang['slug'] && 'yes' === $settings['lsdp_language_switcher_hide_current_language'] ) ||
+			if ( ( $current_lang === $lang['slug'] && 'yes' === $settings['lsep_language_switcher_hide_current_language'] ) ||
 				$active_language['slug'] === $lang['slug'] ||
-				( $lang['no_translation'] && 'yes' === $settings['lsdp_language_hide_untranslated_languages'] ) ) {
+				( $lang['no_translation'] && 'yes' === $settings['lsep_language_hide_untranslated_languages'] ) ) {
 				continue;
 			}
 
 			$flag_icon       = \LSDP_Common_Helpers::get_country_flag( $lang['flag'], $lang['name'] );
-			$languages_html .= '<li class="lsdp-lang-item">';
+			$languages_html .= '<li class="lsep-lang-item">';
 			$languages_html .= '<a href="' . esc_url( $lang['url'] ) . '">';
-			if ( ! empty( $settings['lsdp_language_switcher_show_flags'] ) && 'yes' === $settings['lsdp_language_switcher_show_flags'] ) {
-				$languages_html .= '<div class="lsdp-lang-image">' . $flag_icon . '</div>';
+			if ( ! empty( $settings['lsep_language_switcher_show_flags'] ) && 'yes' === $settings['lsep_language_switcher_show_flags'] ) {
+				$languages_html .= '<div class="lsep-lang-image">' . $flag_icon . '</div>';
 			}
-			if ( ! empty( $settings['lsdp_language_switcher_show_names'] ) && 'yes' === $settings['lsdp_language_switcher_show_names'] ) {
-				$languages_html .= '<div class="lsdp-lang-name">' . esc_html( $lang['name'] ) . '</div>';
+			if ( ! empty( $settings['lsep_language_switcher_show_names'] ) && 'yes' === $settings['lsep_language_switcher_show_names'] ) {
+				$languages_html .= '<div class="lsep-lang-name">' . esc_html( $lang['name'] ) . '</div>';
 			}
-			if ( ! empty( $settings['lsdp_languages_switcher_show_code'] ) && 'yes' === $settings['lsdp_languages_switcher_show_code'] ) {
-				$languages_html .= '<div class="lsdp-lang-code">' . esc_html( $lang['slug'] ) . '</div>';
+			if ( ! empty( $settings['lsep_languages_switcher_show_code'] ) && 'yes' === $settings['lsep_languages_switcher_show_code'] ) {
+				$languages_html .= '<div class="lsep-lang-code">' . esc_html( $lang['slug'] ) . '</div>';
 			}
 			$languages_html .= '</a></li>';
 		}
 
-		return $active_html . '<ul class="lsdp-language-list">' . $languages_html . '</ul>';
+		return $active_html . '<ul class="lsep-language-list">' . $languages_html . '</ul>';
 	}
 
 	/**
@@ -845,21 +845,21 @@ class LSDP_Widget extends Widget_Base {
 	 * @param array  $settings Widget settings.
 	 * @return string HTML output.
 	 */
-	public static function lsdp_get_active_language_html( $language, $settings ) {
-		$html      = '<span class="lsdp-active-language">';
+	public static function lsep_get_active_language_html( $language, $settings ) {
+		$html      = '<span class="lsep-active-language">';
 		$html     .= '<a href="' . esc_url( $language['url'] ) . '">';
 		$flag_icon = \LSDP_Common_Helpers::get_country_flag( $language['flag'], $language['name'] );
-		if ( ! empty( $settings['lsdp_language_switcher_show_flags'] ) && 'yes' === $settings['lsdp_language_switcher_show_flags'] ) {
-			$html .= '<div class="lsdp-lang-image">' . $flag_icon . '</div>';
+		if ( ! empty( $settings['lsep_language_switcher_show_flags'] ) && 'yes' === $settings['lsep_language_switcher_show_flags'] ) {
+			$html .= '<div class="lsep-lang-image">' . $flag_icon . '</div>';
 		}
-		if ( ! empty( $settings['lsdp_language_switcher_show_names'] ) && 'yes' === $settings['lsdp_language_switcher_show_names'] ) {
-			$html .= '<div class="lsdp-lang-name">' . esc_html( $language['name'] ) . '</div>';
+		if ( ! empty( $settings['lsep_language_switcher_show_names'] ) && 'yes' === $settings['lsep_language_switcher_show_names'] ) {
+			$html .= '<div class="lsep-lang-name">' . esc_html( $language['name'] ) . '</div>';
 		}
-		if ( ! empty( $settings['lsdp_languages_switcher_show_code'] ) && 'yes' === $settings['lsdp_languages_switcher_show_code'] ) {
-			$html .= '<div class="lsdp-lang-code">' . esc_html( $language['slug'] ) . '</div>';
+		if ( ! empty( $settings['lsep_languages_switcher_show_code'] ) && 'yes' === $settings['lsep_languages_switcher_show_code'] ) {
+			$html .= '<div class="lsep-lang-code">' . esc_html( $language['slug'] ) . '</div>';
 		}
-		if ( ! empty( $settings['lsdp_language_switcher_icon'] ) ) {
-			$html .= '<i class="lsdp-dropdown-icon ' . esc_attr( $settings['lsdp_language_switcher_icon']['value'] ) . '"></i>';
+		if ( ! empty( $settings['lsep_language_switcher_icon'] ) ) {
+			$html .= '<i class="lsep-dropdown-icon ' . esc_attr( $settings['lsep_language_switcher_icon']['value'] ) . '"></i>';
 		}
 		$html .= '</a></span>';
 		return $html;
@@ -869,16 +869,16 @@ class LSDP_Widget extends Widget_Base {
 	 * Render Vertcal and Horizontal switcher.
 	 *
 	 * @param array $settings Widget settings.
-	 * @param array $lsdp_data Language data.
+	 * @param array $lsep_data Language data.
 	 * @return string HTML output.
 	 */
-	public static function lsdp_render_switcher( $settings, $lsdp_data ) {
+	public static function lsep_render_switcher( $settings, $lsep_data ) {
 		$html         = '';
-		$languages    = $lsdp_data['lsdpLanguageData'];
-		$current_lang = $lsdp_data['lsdpCurrentLang'];
+		$languages    = $lsep_data['lsepLanguageData'];
+		$current_lang = $lsep_data['lsepCurrentLang'];
 		foreach ( $languages as $lang ) {
-			if ( ( $current_lang === $lang['slug'] && 'yes' === $settings['lsdp_language_switcher_hide_current_language'] ) ||
-				( $lang['no_translation'] && 'yes' === $settings['lsdp_language_hide_untranslated_languages'] ) ) {
+			if ( ( $current_lang === $lang['slug'] && 'yes' === $settings['lsep_language_switcher_hide_current_language'] ) ||
+				( $lang['no_translation'] && 'yes' === $settings['lsep_language_hide_untranslated_languages'] ) ) {
 				continue;
 			}
 
@@ -886,16 +886,16 @@ class LSDP_Widget extends Widget_Base {
 			$anchor_open  = '<a href="' . esc_url( $lang['url'] ) . '">';
 			$anchor_close = '</a>';
 
-			$html .= '<li class="lsdp-lang-item">';
+			$html .= '<li class="lsep-lang-item">';
 			$html .= $anchor_open;
-			if ( ! empty( $settings['lsdp_language_switcher_show_flags'] ) && 'yes' === $settings['lsdp_language_switcher_show_flags'] ) {
-				$html .= '<div class="lsdp-lang-image">' . ( $flag_icon ) . '</div>';
+			if ( ! empty( $settings['lsep_language_switcher_show_flags'] ) && 'yes' === $settings['lsep_language_switcher_show_flags'] ) {
+				$html .= '<div class="lsep-lang-image">' . ( $flag_icon ) . '</div>';
 			}
-			if ( ! empty( $settings['lsdp_language_switcher_show_names'] ) && 'yes' === $settings['lsdp_language_switcher_show_names'] ) {
-				$html .= '<div class="lsdp-lang-name">' . esc_html( $lang['name'] ) . '</div>';
+			if ( ! empty( $settings['lsep_language_switcher_show_names'] ) && 'yes' === $settings['lsep_language_switcher_show_names'] ) {
+				$html .= '<div class="lsep-lang-name">' . esc_html( $lang['name'] ) . '</div>';
 			}
-			if ( ! empty( $settings['lsdp_languages_switcher_show_code'] ) && 'yes' === $settings['lsdp_languages_switcher_show_code'] ) {
-				$html .= '<div class="lsdp-lang-code">' . esc_html( $lang['slug'] ) . '</div>';
+			if ( ! empty( $settings['lsep_languages_switcher_show_code'] ) && 'yes' === $settings['lsep_languages_switcher_show_code'] ) {
+				$html .= '<div class="lsep-lang-code">' . esc_html( $lang['slug'] ) . '</div>';
 			}
 			$html .= $anchor_close;
 			$html .= '</li>';
@@ -905,6 +905,6 @@ class LSDP_Widget extends Widget_Base {
 			return '';
 		}
 
-		return '<ul class="lsdp-language-list">' . $html . '</ul>';
+		return '<ul class="lsep-language-list">' . $html . '</ul>';
 	}
 }
