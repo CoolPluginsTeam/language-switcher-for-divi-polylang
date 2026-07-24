@@ -550,6 +550,7 @@ class LSDP_Language_Switcher_Block {
 			$this->build_css_rule( array( '.' . $block_class . '.lsdp-layout-dropdown' ), array( 'text-align: ' . $text . ';' ) ),
 		);
 
+		// Vertical is width:max-content; auto margins position it in the nav.
 		if ( 'center' === $style_context['alignment'] ) {
 			$rules[] = $this->build_css_rule(
 				array( '.' . $block_class . '.lsdp-layout-vertical' ),
@@ -558,7 +559,7 @@ class LSDP_Language_Switcher_Block {
 		} elseif ( 'right' === $style_context['alignment'] ) {
 			$rules[] = $this->build_css_rule(
 				array( '.' . $block_class . '.lsdp-layout-vertical' ),
-				array( 'margin-left: auto;' )
+				array( 'margin-left: auto;', 'margin-right: 0;' )
 			);
 		}
 

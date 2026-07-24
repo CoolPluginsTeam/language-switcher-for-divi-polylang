@@ -39,7 +39,8 @@ ul.wp-block-lsdp-language-switcher li {
 .lsdp-layout-vertical,
 .wp-block-lsdp-language-switcher ul.lsdp-layout-vertical,
 ul.wp-block-lsdp-language-switcher.lsdp-layout-vertical {
-    display: inline-flex;
+    /* Block-level flex so margin-left/right:auto alignment works. */
+    display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: stretch;
