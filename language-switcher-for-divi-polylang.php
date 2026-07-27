@@ -51,11 +51,11 @@ final class LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG {
 	 */
 	private static $instance = null;
 
-	/** Register hooks. */
 	private function __construct() {
 
 		add_action( 'plugins_loaded', array( $this, 'init' ), 20 );
 		add_action( 'admin_init', array( $this, 'redirect_after_activation' ) );
+		add_action( 'activate_language-switcher-for-elementor-polylang/language-switcher-for-elementor-polylang.php', array( $this, 'block_old_plugin_activation' ) );
 		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'plugin_action_links' ) );
 		add_action( 'divi_extensions_init', array( $this, 'initialize_divi_4' ) );
 		add_filter( 'et_fb_backend_helpers', array( $this, 'localize_divi_data' ) );
@@ -310,6 +310,43 @@ final class LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG {
 			return;
 		}
 		echo '<div class="notice notice-warning"><p>' . esc_html__( 'Language Switcher for Polylang requires Polylang to be installed and activated.', 'language-switcher-for-divi-polylang' ) . '</p></div>';
+	}
+
+	/** Block activation of the old Elementor plugin if it's version 1.2.5 or lower. */
+	public function block_old_plugin_activation() {
+		if ( ! current_user_can( 'activate_plugins' ) ) {
+			return;
+		}
+
+		$plugin_path = 'language-switcher-for-elementor-polylang/language-switcher-for-elementor-polylang.php';
+		
+		if ( ! function_exists( 'get_plugin_data' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+		
+		$plugin_data = get_plugin_data( WP_PLUGIN_DIR . '/' . $plugin_path );
+		$version     = isset( $plugin_data['Version'] ) ? $plugin_data['Version'] : '';
+		
+		if ( version_compare( $version, '1.2.5', '<=' ) ) {
+			deactivate_plugins( $plugin_path );
+
+			$message = sprintf(
+				/* translators: %s: successor plugin name */
+				__( 'Language Switcher for Elementor & Polylang has been deprecated and replaced by %s. Please use that plugin instead. This plugin cannot be activated while it is installed.', 'language-switcher-for-divi-polylang' ),
+				'<strong>Language Switcher for Polylang – Elementor, Gutenberg, & Divi</strong>'
+			);
+
+			wp_die(
+				wp_kses(
+					$message,
+					array(
+						'strong' => array(),
+					)
+				),
+				esc_html__( 'Plugin activation blocked', 'language-switcher-for-divi-polylang' ),
+				array( 'back_link' => true )
+			);
+		}
 	}
 
 	/** Redirect once after activation. */
