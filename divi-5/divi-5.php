@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 // Load the Divi 5 server integration.
 require_once LSDP_DIR . 'divi-5/vendor/autoload.php';
+require_once LSDP_DIR . 'divi-5/server/Conversion/AttributeConversion.php';
 require_once LSDP_DIR . 'divi-5/server/Modules/Modules.php';
 
 
