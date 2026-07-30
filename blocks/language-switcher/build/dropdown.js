@@ -67,6 +67,9 @@
             measurer.style.fontWeight = styles.fontWeight;
             measurer.style.gap = styles.gap || '0.5em';
             measurer.style.lineHeight = styles.lineHeight || '1';
+            measurer.style.textTransform = styles.textTransform || 'none';
+            measurer.style.letterSpacing = styles.letterSpacing || 'normal';
+            measurer.style.fontStyle = styles.fontStyle || 'normal';
         }
 
         doc.body.appendChild(measurer);
