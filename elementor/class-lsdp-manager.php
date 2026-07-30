@@ -221,8 +221,13 @@ class LSDP_Manager {
 		foreach ( $languages as $lang ) {
 			$lang_slug = $lang->slug;
 			if ( isset( $translations[ $lang_slug ] ) ) {
-				$translated_post_id = $translations[ $lang_slug ];
-				$edit_link          = get_edit_post_link( $translated_post_id, 'edit' );
+				$translated_post_id = (int) $translations[ $lang_slug ];
+				$edit_link          = get_edit_post_link( $translated_post_id, 'raw' );
+
+				// get_edit_post_link() can return null; esc_url( null ) triggers PHP 8.1+ ltrim deprecations.
+				if ( empty( $edit_link ) ) {
+					continue;
+				}
 
 				if ( get_post_meta( $translated_post_id, '_elementor_edit_mode', true ) ) {
 					$edit_link = add_query_arg( 'action', 'elementor', $edit_link );

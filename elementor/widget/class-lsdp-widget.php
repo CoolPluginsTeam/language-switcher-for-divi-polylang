@@ -737,13 +737,14 @@ class LSDP_Widget extends Widget_Base {
 					$lang_curr = strtolower( pll_current_language() );
 					$languages = array_map(
 						function ( $language ) {
+							$lang_url = isset( $language['url'] ) ? (string) $language['url'] : '';
 							return array(
-								'flagCode'       => esc_html( \LSDP_Common_Helpers::get_flag_code( $language['flag'] ) ),
-								'slug'           => esc_html( $language['slug'] ),
-								'name'           => esc_html( $language['name'] ),
-								'no_translation' => esc_html( $language['no_translation'] ),
-								'url'            => esc_url( $language['url'] ),
-								'flag'           => esc_html( $language['flag'] ),
+								'flagCode'       => esc_html( \LSDP_Common_Helpers::get_flag_code( $language['flag'] ?? '' ) ),
+								'slug'           => esc_html( $language['slug'] ?? '' ),
+								'name'           => esc_html( $language['name'] ?? '' ),
+								'no_translation' => esc_html( $language['no_translation'] ?? '' ),
+								'url'            => esc_url( $lang_url ),
+								'flag'           => esc_html( $language['flag'] ?? '' ),
 							);
 						},
 						$languages
@@ -839,7 +840,7 @@ class LSDP_Widget extends Widget_Base {
 
 			$flag_icon       = \LSDP_Common_Helpers::get_country_flag( $lang['flag'], $lang['name'] );
 			$languages_html .= '<li class="lsep-lang-item">';
-			$languages_html .= '<a href="' . esc_url( $lang['url'] ) . '">';
+			$languages_html .= '<a href="' . esc_url( (string) ( $lang['url'] ?? '' ) ) . '">';
 			if ( ! empty( $settings['lsep_language_switcher_show_flags'] ) && 'yes' === $settings['lsep_language_switcher_show_flags'] ) {
 				$languages_html .= '<div class="lsep-lang-image">' . $flag_icon . '</div>';
 			}
@@ -864,7 +865,7 @@ class LSDP_Widget extends Widget_Base {
 	 */
 	public static function lsep_get_active_language_html( $language, $settings ) {
 		$html      = '<span class="lsep-active-language">';
-		$html     .= '<a href="' . esc_url( $language['url'] ) . '">';
+		$html     .= '<a href="' . esc_url( (string) ( $language['url'] ?? '' ) ) . '">';
 		$flag_icon = \LSDP_Common_Helpers::get_country_flag( $language['flag'], $language['name'] );
 		if ( ! empty( $settings['lsep_language_switcher_show_flags'] ) && 'yes' === $settings['lsep_language_switcher_show_flags'] ) {
 			$html .= '<div class="lsep-lang-image">' . $flag_icon . '</div>';
@@ -900,7 +901,7 @@ class LSDP_Widget extends Widget_Base {
 			}
 
 			$flag_icon    = \LSDP_Common_Helpers::get_country_flag( $lang['flag'], $lang['name'] );
-			$anchor_open  = '<a href="' . esc_url( $lang['url'] ) . '">';
+			$anchor_open  = '<a href="' . esc_url( (string) ( $lang['url'] ?? '' ) ) . '">';
 			$anchor_close = '</a>';
 
 			$html .= '<li class="lsep-lang-item">';

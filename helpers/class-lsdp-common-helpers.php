@@ -35,6 +35,9 @@ class LSDP_Common_Helpers {
 	 * @return string|false The flag code if found, false otherwise.
 	 */
 	public static function get_flag_code( $flag_url ) {
+		if ( empty( $flag_url ) || ! is_string( $flag_url ) ) {
+			return false;
+		}
 
 		$flag_code = preg_match( '/polylang\/flags\/([a-z]+)\.(png|svg|jpg|jpeg)$/i', $flag_url, $matches ) ? $matches[1] : false;
 		return $flag_code;
