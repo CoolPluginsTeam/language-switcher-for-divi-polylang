@@ -15,7 +15,7 @@
 		}
 
 		try {
-			var maxWidth = activeLink.scrollWidth;
+			var maxWidth = Math.max(activeLink.scrollWidth, activeLink.offsetWidth);
 			var itemLinks = list.querySelectorAll('a');
 
 			// Let items size to their content while measuring (list is normally width:100%).
@@ -30,7 +30,7 @@
 			list.style.opacity = '1';
 
 			for (var i = 0; i < itemLinks.length; i++) {
-				var itemWidth = itemLinks[i].offsetWidth;
+				var itemWidth = Math.max(itemLinks[i].scrollWidth, itemLinks[i].offsetWidth);
 				if (itemWidth > maxWidth) {
 					maxWidth = itemWidth;
 				}
