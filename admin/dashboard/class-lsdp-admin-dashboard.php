@@ -186,13 +186,13 @@ class LSDP_Admin_Dashboard {
 					),
 					array(
 						'id'    => 'template-syncing',
-						'label' => __( 'Template Syncing', 'language-switcher-for-divi-polylang' ),
+						'label' => __( 'Translate & Sync Elementor Templates', 'language-switcher-for-divi-polylang' ),
 						'icon'  => 'dashicons-update',
 						'items' => array(
-							__( 'From your WordPress Dashboard, navigate to Templates > Saved Templates. Create a new Elementor template or edit an existing one.', 'language-switcher-for-divi-polylang' ),
-							__( 'Use Polylang\'s language options to add translations for the template.', 'language-switcher-for-divi-polylang' ),
-							__( 'Translate the content and save the template.', 'language-switcher-for-divi-polylang' ),
-							__( 'Each translated template will be linked automatically, ensuring the correct language version is displayed on your website.', 'language-switcher-for-divi-polylang' ),
+							__( 'Automatically assign languages to your existing Elementor templates by clicking the Apply Now button from the plugin dashboard.', 'language-switcher-for-divi-polylang' ),
+							__( 'Next, create translated versions of your templates using the Polylang language options.', 'language-switcher-for-divi-polylang' ),
+							__( 'Translate and save each template. The translated templates are automatically linked to their originals.', 'language-switcher-for-divi-polylang' ),
+							__( 'Display conditions are synced automatically, ensuring the correct translated template is shown on each language version of your website.', 'language-switcher-for-divi-polylang' ),
 						),
 					),
 				),
