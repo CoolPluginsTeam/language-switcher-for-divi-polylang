@@ -162,7 +162,7 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 
-= Version 1.1.0 | 04 August 2026 =
+= Version 1.1.0 | 05 August 2026 =
 - **Added:** Floating language switcher.
 - **Added:** Elementor language switcher widget.
 - **Added:** Syncing of Elementor templates.
