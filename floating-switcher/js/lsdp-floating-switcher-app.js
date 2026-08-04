@@ -448,7 +448,7 @@
                 )
               }),
               this.renderIconButton({
-                href: "https://www.youtube.com/watch?v=1jyQJbZPT9E",
+                href: "https://youtu.be/oRp8vmrU8yM?si=wX4_I4E8TfkQpRIT&t=513s",
                 title: __("Watch Video Tutorial", "language-switcher-for-divi-polylang"),
                 color: "#ff0000",
                 ariaLabel: __("Open video tutorial in new tab", "language-switcher-for-divi-polylang"),
