@@ -43,7 +43,7 @@ trait RenderContentTrait
             $languages_html .= '<li class="lsdp-lang-item">';
             $languages_html .= '<a href="' . esc_url($lang['url']) . '">';
             if (!empty($props['show_language_flag']) && $props['show_language_flag'] === 'on') {
-                $languages_html .= '<div class="lsdp-lang-image">' . $flag_icon . '</div>';
+                $languages_html .= '<div class="lsdp-lang-image">' . wp_kses_post($flag_icon) . '</div>';
             }
             if (!empty($props['show_language_name']) && $props['show_language_name'] === 'on') {
                 $languages_html .= '<div class="lsdp-lang-name">' . esc_html($lang['name']) . '</div>';
@@ -62,7 +62,8 @@ trait RenderContentTrait
         $html = '<span class="lsdp-active-language">';
         $html .= '<a href="' . esc_url($lang['url']) . '">';
         if (!empty($props['show_language_flag']) && $props['show_language_flag'] === 'on') {
-            $html .= '<div class="lsdp-lang-image">' . \LSDP_Common_Helpers::get_country_flag($lang['flag'], $lang['name']) . '</div>';
+            $flag_icon = \LSDP_Common_Helpers::get_country_flag($lang['flag'], $lang['name']);
+            $html .= '<div class="lsdp-lang-image">' . wp_kses_post($flag_icon) . '</div>';
         }
         if (!empty($props['show_language_name']) && $props['show_language_name'] === 'on') {
             $html .= '<div class="lsdp-lang-name">' . esc_html($lang['name']) . '</div>';
@@ -90,7 +91,7 @@ trait RenderContentTrait
             $html .= '<li class="lsdp-lang-item">';
             $html .= $anchor_open;
             if ($props['show_language_flag'] === 'on') {
-                $html .= '<div class="lsdp-lang-image">' .$flag_icon .'</div>';
+                $html .= '<div class="lsdp-lang-image">' . wp_kses_post($flag_icon) . '</div>';
             }
             if ($props['show_language_name'] === 'on') {
                 $html .= '<div class="lsdp-lang-name">' . wp_kses_post(esc_html($lang['name'])) . '</div>';

@@ -209,8 +209,7 @@ class LSDP_Module extends ET_Builder_Module {
 					if ( 'on' === $flag_display ) {
 						$active_span .= sprintf(
 							'<div class="lsdp-lang-image">%s</div>',
-							$active_flag_icon,
-							esc_url( $languages[ $lang_curr ]['flag'] )
+							wp_kses_post( $active_flag_icon )
 						);
 					}
 
@@ -249,7 +248,7 @@ class LSDP_Module extends ET_Builder_Module {
 					if ( 'on' === $flag_display ) {
 						$html .= sprintf(
 							'<div class="lsdp-lang-image">%s</div>',
-							$flag_icon
+							wp_kses_post( $flag_icon )
 						);
 					}
 

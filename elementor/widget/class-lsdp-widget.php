@@ -842,7 +842,7 @@ class LSDP_Widget extends Widget_Base {
 			$languages_html .= '<li class="lsep-lang-item">';
 			$languages_html .= '<a href="' . esc_url( (string) ( $lang['url'] ?? '' ) ) . '">';
 			if ( ! empty( $settings['lsep_language_switcher_show_flags'] ) && 'yes' === $settings['lsep_language_switcher_show_flags'] ) {
-				$languages_html .= '<div class="lsep-lang-image">' . $flag_icon . '</div>';
+				$languages_html .= '<div class="lsep-lang-image">' . wp_kses_post( $flag_icon ) . '</div>';
 			}
 			if ( ! empty( $settings['lsep_language_switcher_show_names'] ) && 'yes' === $settings['lsep_language_switcher_show_names'] ) {
 				$languages_html .= '<div class="lsep-lang-name">' . esc_html( $lang['name'] ) . '</div>';
@@ -868,7 +868,7 @@ class LSDP_Widget extends Widget_Base {
 		$html     .= '<a href="' . esc_url( (string) ( $language['url'] ?? '' ) ) . '">';
 		$flag_icon = \LSDP_Common_Helpers::get_country_flag( $language['flag'], $language['name'] );
 		if ( ! empty( $settings['lsep_language_switcher_show_flags'] ) && 'yes' === $settings['lsep_language_switcher_show_flags'] ) {
-			$html .= '<div class="lsep-lang-image">' . $flag_icon . '</div>';
+			$html .= '<div class="lsep-lang-image">' . wp_kses_post( $flag_icon ) . '</div>';
 		}
 		if ( ! empty( $settings['lsep_language_switcher_show_names'] ) && 'yes' === $settings['lsep_language_switcher_show_names'] ) {
 			$html .= '<div class="lsep-lang-name">' . esc_html( $language['name'] ) . '</div>';
@@ -907,7 +907,7 @@ class LSDP_Widget extends Widget_Base {
 			$html .= '<li class="lsep-lang-item">';
 			$html .= $anchor_open;
 			if ( ! empty( $settings['lsep_language_switcher_show_flags'] ) && 'yes' === $settings['lsep_language_switcher_show_flags'] ) {
-				$html .= '<div class="lsep-lang-image">' . ( $flag_icon ) . '</div>';
+				$html .= '<div class="lsep-lang-image">' . wp_kses_post( $flag_icon ) . '</div>';
 			}
 			if ( ! empty( $settings['lsep_language_switcher_show_names'] ) && 'yes' === $settings['lsep_language_switcher_show_names'] ) {
 				$html .= '<div class="lsep-lang-name">' . esc_html( $lang['name'] ) . '</div>';

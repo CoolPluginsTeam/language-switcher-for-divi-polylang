@@ -1093,7 +1093,7 @@ class LSDP_Language_Switcher_Block {
 			if ( $show_flags ) {
 				$custom_flag = LSDP_Common_Helpers::get_country_flag( $lang['flag'], $lang['name'] );
 				if ( $custom_flag ) {
-					$switcher_output .= '<div class="lsdp-lang-image">' . $custom_flag . '</div>';
+					$switcher_output .= '<div class="lsdp-lang-image">' . wp_kses_post( $custom_flag ) . '</div>';
 				}
 			}
 
@@ -1225,7 +1225,7 @@ class LSDP_Language_Switcher_Block {
 		if ( $show_flags ) {
 			$custom_flag = LSDP_Common_Helpers::get_country_flag( $current_lang['flag'], $current_lang['name'] );
 			if ( $custom_flag ) {
-				$output .= '<div class="lsdp-lang-image">' . $custom_flag . '</div>';
+				$output .= '<div class="lsdp-lang-image">' . wp_kses_post( $custom_flag ) . '</div>';
 			}
 		}
 
@@ -1255,7 +1255,7 @@ class LSDP_Language_Switcher_Block {
 			if ( $show_flags ) {
 				$custom_flag = LSDP_Common_Helpers::get_country_flag( $lang['flag'], $lang['name'] );
 				if ( $custom_flag ) {
-					$output .= '<div class="lsdp-lang-image">' . $custom_flag . '</div>';
+					$output .= '<div class="lsdp-lang-image">' . wp_kses_post( $custom_flag ) . '</div>';
 				}
 			}
 
