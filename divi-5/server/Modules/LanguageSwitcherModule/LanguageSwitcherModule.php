@@ -34,7 +34,7 @@ class LanguageSwitcherModule implements DependencyInterface {
    * `DependencyInterface` interface ensures class method name `load()` is executed for initialization.
    */
   public function load() {
-    $module_json_folder_path = dirname( __DIR__, 3 ) . '/visual-builder/src/modules/LanguageSwitcherModule';
+    $module_json_folder_path = dirname( __DIR__, 3 ) . '/modules-json/language-switcher';
  
     add_action(
       'init',

@@ -11,8 +11,8 @@
       "node": ">=18.0.0"
     },
     "scripts": {
-      "start": "NODE_ENV=development webpack -w --config webpack.config.js --progress",
-      "build": "NODE_ENV=production webpack --config webpack.config.js --progress"
+      "start": "webpack --mode development --watch --config webpack.config.js --progress",
+      "build": "webpack --mode production --config webpack.config.js --progress"
     },
     "devDependencies": {
       "@babel/core": "^7.24.5",

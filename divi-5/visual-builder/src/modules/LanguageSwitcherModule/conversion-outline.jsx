@@ -1,4 +1,4 @@
-const convertInlineFont = (value) => (isString(value) ? value.split(',') : []);
+const convertInlineFont = (value) => (typeof value === 'string' ? value.split(',') : []);
 
 export const conversionOutline = {
   advanced: {
