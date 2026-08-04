@@ -4,7 +4,7 @@ Tags: divi, language switcher, polylang, multilingual, languages
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.2
-Stable tag: 1.0.7
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Add a customizable language switcher to Elementor, Gutenberg, and Divi websites, including a floating language switcher for Polylang.
@@ -161,6 +161,13 @@ Yes. You don't need to recreate your templates. The plugin can connect your exis
 You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities.[Report a security vulnerability](https://patchstack.com/database/wordpress/plugin/language-switcher-for-divi-polylang/vdp)
 
 == Changelog ==
+
+= Version 1.1.0 | 05 August 2026 =
+- **Added:** Floating language switcher.
+- **Added:** Elementor language switcher widget.
+- **Added:** Syncing of Elementor templates.
+- **Added:** Block editor language switcher.
+- **Added:** Language selection options for Divi Theme Builder templates.
 
 = Version 1.0.7 | 10 June 2026 =
 - **Fixed:** Default Settings Issue with Divi 5.
