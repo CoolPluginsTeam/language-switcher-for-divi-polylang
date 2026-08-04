@@ -9,7 +9,11 @@ License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Add a customizable language switcher to Elementor, Gutenberg, and Divi websites, including a floating language switcher for Polylang.
 == Description ==
+
 **Language Switcher for Polylang** is a powerful Polylang language switcher addon that lets you add a fully customizable **WordPress language switcher** anywhere on your WordPress website.
+
+https://youtu.be/oRp8vmrU8yM
+
 Whether you build your website with **Elementor**, **Gutenberg**, or **Divi**, this plugin provides dedicated integration to add an **Elementor language switcher**, **Gutenberg language switcher**, or **Divi language switcher** quickly without any complex coding. 
 Simply insert the dedicated **Elementor widget**, **Gutenberg block**, or **Divi module**, customize its appearance, and that’s it.
 Additionally, this plugin also includes a **Floating Language Switcher**, allowing users to change languages from anywhere on your website without requiring a switcher in the header, menu, or page content.
