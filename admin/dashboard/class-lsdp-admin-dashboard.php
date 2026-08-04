@@ -163,9 +163,10 @@ class LSDP_Admin_Dashboard {
 	 */
 	private function get_started_builder_data() {
 		$embed_urls = array(
-			'elementor' => 'https://www.youtube.com/embed/HyM0woo9Cg0',
-			'gutenberg' => 'https://www.youtube.com/embed/HyM0woo9Cg0',
-			'divi'      => 'https://www.youtube.com/embed/co2xvQnUmjs',
+			'elementor'         => 'https://www.youtube.com/embed/oRp8vmrU8yM?start=110',
+			'elementor_syncing' => 'https://www.youtube.com/embed/oRp8vmrU8yM?start=253',
+			'gutenberg'         => 'https://www.youtube.com/embed/oRp8vmrU8yM?start=365',
+			'divi'              => 'https://www.youtube.com/embed/oRp8vmrU8yM?start=447',
 		);
 
 		return array(
@@ -174,10 +175,11 @@ class LSDP_Admin_Dashboard {
 				'guideSub'   => __( 'Add a customizable Language Switcher widget to your Elementor website.', 'language-switcher-for-divi-polylang' ),
 				'tabs'       => array(
 					array(
-						'id'    => 'language-switcher',
-						'label' => __( 'Language Switcher', 'language-switcher-for-divi-polylang' ),
-						'icon'  => 'dashicons-translation',
-						'items' => array(
+						'id'       => 'language-switcher',
+						'label'    => __( 'Language Switcher', 'language-switcher-for-divi-polylang' ),
+						'icon'     => 'dashicons-translation',
+						'embedUrl' => $embed_urls['elementor'],
+						'items'    => array(
 							__( 'Edit the header template with Elementor or create a new one.', 'language-switcher-for-divi-polylang' ),
 							__( 'Drag and drop the Language Switcher widget into your header.', 'language-switcher-for-divi-polylang' ),
 							__( 'Configure language display (names, flags, or both) and customize the switcher\'s appearance (color, style, typography, and more).', 'language-switcher-for-divi-polylang' ),
@@ -185,10 +187,11 @@ class LSDP_Admin_Dashboard {
 						),
 					),
 					array(
-						'id'    => 'template-syncing',
-						'label' => __( 'Translate & Sync Elementor Templates', 'language-switcher-for-divi-polylang' ),
-						'icon'  => 'dashicons-update',
-						'items' => array(
+						'id'       => 'template-syncing',
+						'label'    => __( 'Translate & Sync Elementor Templates', 'language-switcher-for-divi-polylang' ),
+						'icon'     => 'dashicons-update',
+						'embedUrl' => $embed_urls['elementor_syncing'],
+						'items'    => array(
 							__( 'Automatically assign languages to your existing Elementor templates by clicking the Apply Now button from the plugin dashboard.', 'language-switcher-for-divi-polylang' ),
 							__( 'Next, create translated versions of your templates using the Polylang language options.', 'language-switcher-for-divi-polylang' ),
 							__( 'Translate and save each template. The translated templates are automatically linked to their originals.', 'language-switcher-for-divi-polylang' ),

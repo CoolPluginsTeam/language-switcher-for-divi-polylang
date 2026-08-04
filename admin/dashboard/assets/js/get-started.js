@@ -40,9 +40,16 @@
 			renderSteps(builder.overviewItems);
 	}
 
-	function activateGuideTab(tabId) {
+	function updateVideo(embedUrl) {
+		if (videoIframe && embedUrl && videoIframe.src !== embedUrl) {
+			videoIframe.src = embedUrl;
+		}
+	}
+
+	function activateGuideTab(tabId, builder) {
 		var tabs = stepsWrap.querySelectorAll('.lsdp-gs-guide-tab');
 		var panels = stepsWrap.querySelectorAll('.lsdp-gs-guide-panel');
+		var activeTabData = null;
 
 		tabs.forEach(function (tab) {
 			var isActive = tab.getAttribute('data-tab') === tabId;
@@ -50,11 +57,19 @@
 			tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
 		});
 
+		if (builder && builder.tabs) {
+			activeTabData = builder.tabs.find(function (tab) {
+				return tab.id === tabId;
+			});
+		}
+
 		panels.forEach(function (panel) {
 			var isActive = panel.getAttribute('data-panel') === tabId;
 			panel.hidden = !isActive;
 			panel.classList.toggle('is-active', isActive);
 		});
+
+		updateVideo((activeTabData && activeTabData.embedUrl) || (builder && builder.embedUrl));
 	}
 
 	function renderTabs(builder) {
@@ -87,11 +102,11 @@
 
 		stepsWrap.querySelectorAll('.lsdp-gs-guide-tab').forEach(function (tab) {
 			tab.addEventListener('click', function () {
-				activateGuideTab(tab.getAttribute('data-tab'));
+				activateGuideTab(tab.getAttribute('data-tab'), builder);
 			});
 		});
 
-		activateGuideTab(activeId);
+		activateGuideTab(activeId, builder);
 	}
 
 	function renderBuilder(key) {
@@ -111,10 +126,7 @@
 			renderTabs(builder);
 		} else {
 			renderOverview(builder);
-		}
-
-		if (videoIframe && builder.embedUrl) {
-			videoIframe.src = builder.embedUrl;
+			updateVideo(builder.embedUrl);
 		}
 	}
 

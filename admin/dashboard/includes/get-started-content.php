@@ -10,10 +10,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $assets_url        = LSDP_URL . 'assets/images/';
-$builder_video_ids = array(
-	'elementor' => 'HyM0woo9Cg0',
-	'gutenberg' => 'HyM0woo9Cg0',
-	'divi'      => 'co2xvQnUmjs',
+$builder_video_urls = array(
+	'elementor' => 'https://www.youtube.com/embed/oRp8vmrU8yM?start=110',
+	'gutenberg' => 'https://www.youtube.com/embed/oRp8vmrU8yM?start=365',
+	'divi'      => 'https://www.youtube.com/embed/oRp8vmrU8yM?start=447',
 );
 
 $dashboard     = class_exists( 'LSDP_Admin_Dashboard' ) ? LSDP_Admin_Dashboard::init() : null;
@@ -38,7 +38,7 @@ if ( $saved_builder ) {
 	$default_builder = 'gutenberg';
 }
 
-$video_id = isset( $builder_video_ids[ $default_builder ] ) ? $builder_video_ids[ $default_builder ] : $builder_video_ids['gutenberg'];
+$video_url = isset( $builder_video_urls[ $default_builder ] ) ? $builder_video_urls[ $default_builder ] : $builder_video_urls['gutenberg'];
 
 $builder_cards = array(
 	'divi'      => array(
@@ -114,7 +114,7 @@ $builder_order = array_unique( array( $default_builder, 'divi', 'elementor', 'gu
 						id="lsdp-gs-video-iframe"
 						width="100%"
 						height="380"
-						src="<?php echo esc_url( 'https://www.youtube.com/embed/' . $video_id ); ?>"
+						src="<?php echo esc_url( $video_url ); ?>"
 						title="<?php echo esc_attr__( 'Language Switcher tutorial', 'language-switcher-for-divi-polylang' ); ?>"
 						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 						allowfullscreen>
