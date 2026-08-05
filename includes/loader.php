@@ -8,7 +8,7 @@ if ( ! class_exists( 'ET_Builder_Element' ) ) {
 	return;
 }
 
-require_once LSDP_DIR . 'helpers/class-lsdp-helpers.php';
+require_once LSDP_DIR . 'helpers/class-lsdp-common-helpers.php';
 require_once LSDP_DIR . 'helpers/class-lsdp-style-helpers.php';
 
 $lsdp_module_files = glob( __DIR__ . '/modules/*/*.php' );

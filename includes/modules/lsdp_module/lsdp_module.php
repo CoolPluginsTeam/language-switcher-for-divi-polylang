@@ -7,6 +7,7 @@ class LSDP_Module extends ET_Builder_Module {
 
 	public $slug                   = 'language-switcher-for-divi-polylang';
 	public $vb_support             = 'on';
+	public $icon_path;
 	private static $language_index = 0;
 	protected $module_credits = array(
 		'module_uri' => '',
@@ -203,13 +204,12 @@ class LSDP_Module extends ET_Builder_Module {
 				$active_span = '';
 
 				if ( $style === 'dropdown' ) {
-					$active_flag_icon = LSDP_HELPERS::get_country_flag( $languages[ $lang_curr ]['flag'], $languages[ $lang_curr ]['name'] );
+					$active_flag_icon = LSDP_Common_Helpers::get_country_flag( $languages[ $lang_curr ]['flag'], $languages[ $lang_curr ]['name'] );
 					$active_span       = '<span><a href="' . esc_url( $languages[ $lang_curr ]['url'] ) . '">';
 					if ( 'on' === $flag_display ) {
 						$active_span .= sprintf(
 							'<div class="lsdp-lang-image">%s</div>',
-							$active_flag_icon,
-							esc_url( $languages[ $lang_curr ]['flag'] )
+							wp_kses_post( $active_flag_icon )
 						);
 					}
 
@@ -242,28 +242,27 @@ class LSDP_Module extends ET_Builder_Module {
 					if ( $lang['no_translation'] && 'on' === $hide_untranslate_lang ) {
 						continue;
 					}
-					$flag_icon    = LSDP_HELPERS::get_country_flag( $lang['flag'], $lang['name'] );
+					$flag_icon    = LSDP_Common_Helpers::get_country_flag( $lang['flag'], $lang['name'] );
 					$active_class = $lang_curr === $lang['slug'] ? 'lsdp_active_lang' : '';
 					$html        .= '<li class="' . esc_attr( $active_class ) . '"><a href="' . esc_url( $lang['url'] ) . '">';
 					if ( 'on' === $flag_display ) {
 						$html .= sprintf(
 							'<div class="lsdp-lang-image">%s</div>',
-							$flag_icon,
-							
+							wp_kses_post( $flag_icon )
 						);
 					}
 
 					if ( 'on' === $name_display ) {
 						$html .= sprintf(
 							'<div class="lsdp-lang-name">%s</div>',
-							esc_html( $lang['name'] ),
+							esc_html( $lang['name'] )
 						);
 					}
 
 					if ( 'on' === $code_display ) {
 						$html .= sprintf(
 							'<div class="lsdp-lang-code">%s</div>',
-							esc_html( $lang['slug'] ),
+							esc_html( $lang['slug'] )
 						);
 					}
 					$html .='</a></li>';
@@ -278,7 +277,7 @@ class LSDP_Module extends ET_Builder_Module {
 				</div>',
 					esc_attr( $style ),
 					$html,
-					$active_span,
+					$active_span
 				);
 
 				return $output;
