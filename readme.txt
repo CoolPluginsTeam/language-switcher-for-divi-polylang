@@ -1,9 +1,9 @@
 ﻿=== Language Switcher for Polylang – Elementor, Gutenberg, & Divi ===
 Contributors: coolplugins, narinder-singh, satindersingh
-Tags: divi, language switcher, polylang, multilingual, languages
-Requires at least: 5.0
-Tested up to: 7.0
-Requires PHP: 7.2
+Tags: polylang,language switcher,multilingual,elementor,divi
+Requires at least: 6.0
+Tested up to: 7.0.2
+Requires PHP: 7.4
 Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -17,7 +17,7 @@ https://youtu.be/oRp8vmrU8yM
 Whether you build your website with **Elementor**, **Gutenberg**, or **Divi**, this plugin provides dedicated integration to add an **Elementor language switcher**, **Gutenberg language switcher**, or **Divi language switcher** quickly without any complex coding. 
 Simply insert the dedicated **Elementor widget**, **Gutenberg block**, or **Divi module**, customize its appearance, and that’s it.
 Additionally, this plugin also includes a **Floating Language Switcher**, allowing users to change languages from anywhere on your website without requiring a switcher in the header, menu, or page content.
-### Why use this Plugin?
+## Why use this Plugin?
 **Language Switcher for Polylang** is a simple and easy way to add a language switcher to your Elementor, Gutenberg or Divi pages. Here’s why you should use this plugin:
 * Dedicated Language Switcher Widget
 * Dedicated Language Switcher Block
@@ -27,8 +27,7 @@ Additionally, this plugin also includes a **Floating Language Switcher**, allowi
 * Elementor Template Language Sync
 * Add Anywhere on the Page
 * Advance Customization Options
-### Key Features 
-= Elementor Language Switcher =
+##Elementor Language Switcher for Polylang
 * **Elementor Language Switcher:** Add a language switcher to your Elementor layouts using the dedicated **Language Switcher widget**. Simply drag and drop the widget into your page or header template.
 * **Elementor Template Translation Sync:** The Elementor Template Translation Sync feature allows you to connect your **existing translated templates** with their corresponding language versions. 
 Once the templates are linked, Polylang recognizes them as **translation pairs** and displays language options for each template. It also ensures that visitors see the correct translated Elementor template based on the language they have selected, without requiring separate display conditions.
@@ -40,7 +39,7 @@ Once the templates are linked, Polylang recognizes them as **translation pairs**
  * **Language Code:** Show short codes like **EN**, **FR**, **DE**.
  * **Hide Current Language:** Hides the active language.
  * **Hide Untranslated Languages:** Hide languages if the page has no translation in that language.
-= Gutenberg Language Switcher =
+##Gutenberg Language Switcher Block
 * **Gutenberg Language Switcher:** If you're using the WordPress Block Editor, you can insert the **Language Switcher block** anywhere on your website. Add it to pages, posts, templates, or block-based headers.
 * **Layout Options:** Display the language switcher in a **Dropdown**, **Horizontal**, or **Vertical layouts** to match your website's design.
 * **Customize Switcher Elements:** Control which language information is displayed by enabling or disabling the following:
@@ -50,7 +49,7 @@ Once the templates are linked, Polylang recognizes them as **translation pairs**
  * **Hide Current Language:** Hide the currently selected language from the switcher.
  * **Hide Untranslated Languages:** Hide languages that do not have a translated version of the current page.
 * **Customize Display:** Customize the appearance of the Gutenberg Language Switcher by adjusting **background color**, **text color**, **border color**, **width**, and more.
-= Divi Language Switcher =
+##Divi Language Switcher Module
 * **Divi Language Switcher:** The plugin also includes a dedicated **Language Switcher module for Divi**. Add it to your website header using the Divi Theme Builder or place it anywhere within your layouts. 
 * **Layout Options:** The plugin offers three layout styles, **Dropdown**, **Horizontal** & **Vertical**. Choose how you want the language switcher to appear on your website.
 * **Customize Switcher Elements:** Easily customize the appearance of the language switcher elements by enabling or disabling the following:
@@ -60,7 +59,7 @@ Once the templates are linked, Polylang recognizes them as **translation pairs**
  * **Hide Current Language:** Hide the language that is currently active.
  * **Hide Untranslated Languages:** Hide specific languages if the current page has no translated version available in that language.
 * **Customize Display:** Customize the appearance of the Divi Language Switcher by adjusting **background color**, **text color**, **border color**, **width**, and more.
-= Floating Language Switcher =
+##Floating Language Switcher for Polylang
 * **Floating Language Switcher:** Enable a floating language switcher for Polylang that remains visible as visitors browse your website. This frontend language switcher for Polylang allows users to change languages from any page without placing a switcher in your header or navigation menu.  
 * **Ready-to-Use Presets:** Choose from multiple pre-made **light**, **dark**, **bordered**, and **transparent presets** according to your website's style.
 * **Layout Options:** The plugin offers two layout styles, **Dropdown**, **side by side**. Choose how you want the language switcher to appear on your website.
@@ -68,12 +67,12 @@ Once the templates are linked, Polylang recognizes them as **translation pairs**
  * **Flag Icon Position:** Choose whether you want a flag icon before language, after language, or want to hide icons.
  * **Language Names:** Choose whether you want to display full language names, short names, or none.
 * **Customize Display:** Customize the appearance of the floating switcher by adjusting **background color**, **text color**, **text hover color**, **border color**, **width**, **radius**, and more.
-= Other Features =
+##Other Features
 * **Works with Popular Page Builders:** Add a language switcher anywhere on your website using the tools you already use. The plugin includes dedicated integrations for **Elementor**, **Gutenberg**, and **Divi**, allowing you to insert a language switcher using a widget, block, or module.
 * **Built for Polylang:** This plugin is built exclusively for **Polylang** and works seamlessly with your existing language configuration. Simply install the plugin, and it will automatically recognize the languages you've added in Polylang and display them in the **Polylang language switcher**. 
 * **Easy to Use:** Get your multilingual language switcher up and running in just a few minutes. Install the plugin, choose your preferred switcher **type**, **customize** its appearance, and publish it anywhere on your website without any coding knowledge.
 * **Fully Responsive:** The language switcher is designed to work seamlessly across all screen sizes. Whether your visitors browse from a desktop, tablet, or mobile device, the switcher automatically adapts to provide a consistent and user-friendly language selection experience. 
-### Advanced Translation Plugins
+## Advanced Translation Plugins
 * **[LocoAI](https://translatexyz.com/plugin/locoai-loco-translate-ai-translation/?utm_source=lspd_plugin&utm_medium=readme&utm_campaign=get_pro&utm_content=atlt_advanced_plugins)**: Powerful translation addon that enhances the functionality of the Loco Translate plugin by enabling the automatic translation of WordPress themes and plugins. 
 This addon connects with sources like **Google**, **Yandex**, **DeepL**, or AI-powered sources like **ChatGPT**, **Gemini AI**, and **Chrome AI** to provide instant and automated translations.
 * **[AutoPoly - AI Translation for Polylang](https://translatexyz.com/plugin/autopoly-polylang-ai-translation/?utm_source=lspd_plugin&utm_medium=readme&utm_campaign=get_pro&utm_content=atfp_advanced_plugins)**: AutoPoly is an **automatic translation addon** that duplicates your page or post titles, content, images, galleries, or meta fields, and automatically translates them into the selected language. Whether you’re using **Elementor**, **Gutenberg**, or **Divi**, this addon makes the translation process easier. 
@@ -82,11 +81,6 @@ This addon connects with sources like **Google**, **Yandex**, **DeepL**, or AI-p
 Supports **OpenAI**, **Gemini AI**, **Chrome Built-in AI**, and more for fast, accurate, and cost-effective translations. 
 * **[Linguator](https://linguator.com/?utm_source=lspd_plugin&utm_medium=readme&utm_campaign=product_site&utm_content=lmat_advanced_plugins)**: Build all-in-one multilingual WordPress websites with **AI-powered translations**, **automatic language detection**, **RTL support**, **media translation**, and seamless integration with **popular page builders**. 
 * **[TranslateXYZ](https://translatexyz.com/plugin/locoai-loco-translate-ai-translation/?utm_source=lspd_plugin&utm_medium=readme&utm_campaign=product_site&utm_content=atlt_advanced_plugins)**: A complete AI translation platform for WordPress, offering powerful multilingual solutions for **Polylang**, **WPML**, **TranslatePress**, **Loco Translate**, and other popular translation plugins using powerful AI Translation models. 
-### Other Cool Plugins
-* **[Cool FormKit](https://coolformkit.com/?utm_source=lspd_plugin&utm_medium=readme&utm_campaign=product_site&utm_content=cfkef_other_plugins)**: The ultimate form builder for Elementor Free & Pro. It not only extends Elementor Pro form features using advanced fields like **conditional logic**, **range slider**, **rating field** and **25+ more**, but also provides a complete form widget for Elementor Free users.
-* **[Cool Timeline](https://cooltimeline.com/?utm_source=lspd_plugin&utm_medium=readme&utm_campaign=product_site&utm_content=ctl_other_plugins)**: Display your company’s history, product roadmaps, personal stories, or key events using the **built-in block** or via a **simple shortcode**. 
-* **[The Events Calendar Addons](https://eventscalendaraddons.com/?utm_source=lspd_plugin&utm_medium=readme&utm_campaign=product_site&utm_content=ec_other_plugins)**: Enhance your The Events Calendar website using smart event calendar addons to display customized events via **shortcode**, **widget**, **block**, or **modules**.
-
 == Screenshots == 
 1. Language Switcher For Divi Frontend Preview.
 2. Language Switcher For Divi Settings Preview.
@@ -106,7 +100,7 @@ Supports **OpenAI**, **Gemini AI**, **Chrome Built-in AI**, and more for fast, a
  * From your WordPress Dashboard, Navigate to
 **Templates > Saved Templates**.
  * Create a new Elementor template or edit an existing one.
- * Use **Polylang's language options** to add translations for the template.
+ * Use **Polylang language options** to add translations for the template.
  * Translate the content and save the template.
  * Each translated template will be linked automatically, ensuring the correct language version is displayed on your website.
 * **Add Gutenberg Language Switcher**
@@ -163,10 +157,11 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 == Changelog ==
 
 = Version 1.1.0 | 05 August 2026 =
-- **Added:** Floating language switcher.
-- **Added:** Elementor language switcher widget.
-- **Added:** Syncing of Elementor templates.
-- **Added:** Block editor language switcher.
+- **Changed:**  Transitioned from the Divi language switcher to the All-in-One language switcher with support for Elementor, Divi, and Gutenberg.
+- **Added:** Integrated Language Switcher widget for Elementor
+- **Added:** Integrated Language Switcher Block for Gutenberg
+- **Added:** Floating language switcher to use language switcher anywhere in the website
+- **Added:** Integrated new onboarding and dashboard with better explanation about plugin usages. 
 - **Added:** Language selection options for Divi Theme Builder templates.
 
 = Version 1.0.7 | 10 June 2026 =
@@ -197,4 +192,4 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 - **New:** Initial plugin release.
 
  == Upgrade Notice == 
-Initial release
+Transitioned from the Divi language switcher to the All-in-One language switcher with support for Elementor, Divi, and Gutenberg
