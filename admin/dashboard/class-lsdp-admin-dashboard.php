@@ -99,7 +99,7 @@ class LSDP_Admin_Dashboard {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- GET used only for tab display.
 		$current_tab = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'add-to-your-pages';
 		$page_url    = admin_url( 'admin.php?page=lsdp-get-started' );
-		$logo_url    = plugin_dir_url( __FILE__ ) . 'assets/images/language-switcher-for-elementor-polylang.gif';
+		$logo_url    = plugin_dir_url( __FILE__ ) . 'assets/images/language-switcher-for-elementor-polylang.svg';
 
 		echo '<div class="wrap lsdp-dashboard-wrap">';
 

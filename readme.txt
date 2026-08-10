@@ -4,7 +4,7 @@ Tags: polylang,language switcher,multilingual,elementor,divi
 Requires at least: 6.0
 Tested up to: 7.0.2
 Requires PHP: 7.4
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Add a customizable language switcher to Elementor, Gutenberg, and Divi websites, including a floating language switcher for Polylang.
@@ -82,12 +82,11 @@ Supports **OpenAI**, **Gemini AI**, **Chrome Built-in AI**, and more for fast, a
 * **[Linguator](https://linguator.com/?utm_source=lspd_plugin&utm_medium=readme&utm_campaign=product_site&utm_content=lmat_advanced_plugins)**: Build all-in-one multilingual WordPress websites with **AI-powered translations**, **automatic language detection**, **RTL support**, **media translation**, and seamless integration with **popular page builders**. 
 * **[TranslateXYZ](https://translatexyz.com/plugin/locoai-loco-translate-ai-translation/?utm_source=lspd_plugin&utm_medium=readme&utm_campaign=product_site&utm_content=atlt_advanced_plugins)**: A complete AI translation platform for WordPress, offering powerful multilingual solutions for **Polylang**, **WPML**, **TranslatePress**, **Loco Translate**, and other popular translation plugins using powerful AI Translation models. 
 == Screenshots == 
-1. Language Switcher For Divi Frontend Preview.
-2. Language Switcher For Divi Settings Preview.
-3. Floating Switcher Preview.
-5. Language Switcher For Block Preview.
-6. Language Switcher For Elementor Preview.
-
+1. Language Switcher For  Frontend Preview.
+2. Language Switcher For Elementor Preview.
+3. Language Switcher For Divi Settings Preview.
+4. Language Switcher For Block Preview.
+5. Floating Switcher Preview.
 == Installation ==
 * **Install Plugin**
  * First, make sure that you have installed and activated the Polylang plugin and Language Switcher for Polylang – Elementor, Gutenberg & Divi on your WordPress website.
@@ -151,10 +150,13 @@ Absolutely! You can add the language switcher widget in any section, including h
 If your Elementor templates were translated before installing Polylang plugin, simply open the template in the Elementor Editor, assign its language using Polylang, and save it. The Polylang Language switcher plugin automatically links the translated templates and restores the language relationships.
 = Does the plugin work with existing translated Elementor templates? =
 Yes. You don't need to recreate your templates. The plugin can connect your existing translated Elementor templates with Polylang so they behave like native multilingual templates.
-= How can I report security bugs? =
-You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities.[Report a security vulnerability](https://patchstack.com/database/wordpress/plugin/language-switcher-for-divi-polylang/vdp)
 
+= Where do I report security bugs found in this plugin? =
+Please report security bugs found in the source code of the Language Switcher for Polylang plugin through the [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/0da29e56-bc01-46c8-a6f4-363ea6c69652). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
 == Changelog ==
+
+= Version 1.1.1 | 10 August 2026 =
+- **Improved:** Minor Improvements in Dashboard.
 
 = Version 1.1.0 | 05 August 2026 =
 - **Changed:**  Transitioned from the Divi language switcher to the All-in-One language switcher with support for Elementor, Divi, and Gutenberg.
