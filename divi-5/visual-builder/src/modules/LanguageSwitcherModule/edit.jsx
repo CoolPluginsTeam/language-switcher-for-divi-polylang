@@ -14,6 +14,7 @@ export const LanguageSwitcherModuleEdit = (props) => {
   const [polylangData, setPolylangData] = useState(null);
   const [currentLang, setCurrentLang] = useState(null);
   const [pluginUrl, setPluginUrl] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const {
     attrs,
     elements,
@@ -35,6 +36,7 @@ export const LanguageSwitcherModuleEdit = (props) => {
   }, [response]);
 
   const attributes = getAttrDataValues(attrs);
+  const openOnClick = attributes?.switcher_layouts === 'dropdown' && attributes?.open_dropdown_on_click === 'on';
   const language_switcher_module_data = () => {
     fetch({
       method: 'GET',
@@ -47,6 +49,7 @@ export const LanguageSwitcherModuleEdit = (props) => {
 
   useEffect(() => {
     language_switcher_module_data();
+    setDropdownOpen(false);
     setTimeout(() => {
     const thisModule = document.querySelector('.lsdp_language_switcher_for_divi_polylang');
 
@@ -60,7 +63,23 @@ export const LanguageSwitcherModuleEdit = (props) => {
       thisModule.style.setProperty('z-index', '999'); 
     }
     }, 1000);
-  }, [attributes?.switcher_layouts]);
+  }, [attributes?.switcher_layouts, attributes?.open_dropdown_on_click]);
+
+  const handleDropdownClick = (e) => {
+    if (!openOnClick) {
+      return;
+    }
+    e.preventDefault();
+    e.stopPropagation();
+    setDropdownOpen((open) => !open);
+  };
+
+  const wrapperClass = [
+    'lsdp-wrapper',
+    attributes.switcher_layouts,
+    openOnClick ? 'lsdp-open-on-click' : '',
+    openOnClick && dropdownOpen ? 'active' : '',
+  ].filter(Boolean).join(' ');
 
   return (
     <>
@@ -80,7 +99,11 @@ export const LanguageSwitcherModuleEdit = (props) => {
          (
           polylangData && (Object.keys(polylangData).length > 0)  ? (
             <div className='lsdp-main-wrapper'>
-              <div className={`lsdp-wrapper ${attributes.switcher_layouts}`}>
+              <div
+                className={wrapperClass}
+                data-lsdp-open-on={openOnClick ? 'click' : 'hover'}
+                onClick={openOnClick ? handleDropdownClick : undefined}
+              >
               {attributes?.switcher_layouts === 'dropdown' && (
                 polylangData?.[currentLang] ? (
                   <span>

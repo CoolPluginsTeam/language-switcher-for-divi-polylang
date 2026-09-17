@@ -121,6 +121,16 @@ export const SettingsContent = (props) => (
         {((props?.attrs?.hide_untranslated_language?.desktop?.value?.hide_untranslated_language ?? props?.defaultSettingsAttrs?.hide_untranslated_language?.innerContent?.desktop?.value) === 'on') && (
         <div className="lsdp-settings-description" style={{color: 'red'}}><strong>Note:</strong> This setting only affects the frontend. Please check your site's frontend to see it in action.</div>
         )}
+        {((props?.attrs?.switcher_layouts?.desktop?.value?.switcher_layouts ?? props?.defaultSettingsAttrs?.switcher_layouts?.innerContent?.desktop?.value) === 'dropdown') && (
+        <LSDPFC
+          attrName="open_dropdown_on_click"
+          subName="open_dropdown_on_click"
+          label={__('Open dropdown on click', 'language-switcher-for-divi-polylang')}
+          description={__('Open the language list on click instead of hover', 'language-switcher-for-divi-polylang')}
+        >
+          <ToggleContainer />
+        </LSDPFC>
+        )}
       </>
     </GroupContainer>
   </>
