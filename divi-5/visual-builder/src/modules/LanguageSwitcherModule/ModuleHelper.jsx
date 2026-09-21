@@ -22,5 +22,6 @@ export const getAttrDataValues = (attrs) => {
         show_language_code: getAttrValue(attrs?.show_language_code, 'off', 'show_language_code'),
         hide_current_language: getAttrValue(attrs?.hide_current_language, 'off', 'hide_current_language'),
         hide_untranslated_language: getAttrValue(attrs?.hide_untranslated_language, 'off', 'hide_untranslated_language'),
+        open_dropdown_on_click: getAttrValue(attrs?.open_dropdown_on_click, 'off', 'open_dropdown_on_click'),
     };  
 }
