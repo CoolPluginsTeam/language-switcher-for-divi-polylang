@@ -100,15 +100,23 @@ class LSDP_Admin_Dashboard {
 		$current_tab = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'add-to-your-pages';
 		$page_url    = admin_url( 'admin.php?page=lsdp-get-started' );
 		$logo_url    = plugin_dir_url( __FILE__ ) . 'assets/images/language-switcher-for-elementor-polylang.svg';
+		$hub_url     = class_exists( 'TFP_Toolkit_Hub' )
+			? admin_url( 'admin.php?page=' . TFP_Toolkit_Hub::PAGE )
+			: admin_url( 'admin.php?page=toolkit-for-polylang' );
 
 		echo '<div class="wrap lsdp-dashboard-wrap">';
 
 		echo '<div class="lsdp-dashboard-header">';
 		echo '<div class="lsdp-header-content">';
 		echo '<div class="lsdp-header-logo">';
+		echo '<a href="' . esc_url( $hub_url ) . '" class="lsdp-header-logo-link">';
 		echo '<img src="' . esc_url( $logo_url ) . '" alt="" />';
-		echo '<h1 class="lsdp-header-title">' . esc_html__( 'Language Switcher for Polylang', 'language-switcher-for-divi-polylang' ) . '</h1>';
+		echo '<h1 class="lsdp-header-title">' . esc_html__( 'Toolkit for Polylang', 'language-switcher-for-divi-polylang' ) . '</h1>';
+		echo '</a>';
 		echo '</div>';
+		if ( class_exists( 'TFP_Toolkit_Hub' ) ) {
+			TFP_Toolkit_Hub::render_nav( 'switcher' );
+		}
 		echo '<div class="lsdp-header-actions">';
 		echo '<a href="' . esc_url( 'https://wordpress.org/support/plugin/language-switcher-for-divi-polylang/#new-topic-0' ) . '" class="button button-secondary lsdp-header-btn lsdp-header-btn-support" target="_blank" rel="noopener noreferrer" title="' . esc_attr__( 'Get Support', 'language-switcher-for-divi-polylang' ) . '"><span class="dashicons dashicons-editor-help lsdp-header-btn-question-icon" aria-hidden="true"></span><span class="lsdp-header-btn-label">' . esc_html__( 'Get Support', 'language-switcher-for-divi-polylang' ) . '</span></a>';
 		echo '<a href="' . esc_url( 'https://docs.coolplugins.net/doc/language-switcher-for-elementor-polylang/?utm_source=lsdp_plugin&utm_medium=inside&utm_campaign=docs&utm_content=dashboard_header' ) . '" class="button button-secondary lsdp-header-btn" target="_blank" rel="noopener noreferrer" title="' . esc_attr__( 'Documentation', 'language-switcher-for-divi-polylang' ) . '"><span class="dashicons dashicons-book" aria-hidden="true"></span><span class="lsdp-header-btn-label">' . esc_html__( 'Documentation', 'language-switcher-for-divi-polylang' ) . '</span></a>';

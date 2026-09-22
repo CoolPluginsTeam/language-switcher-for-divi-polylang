@@ -19,10 +19,12 @@
     padding: 0;
 }
 
-/* Header Section */
+/* Header Section — matches AutoPoly's dashboard header (admin-styles.css
+   .atfp-dashboard-header) so every tool's header reads as the same
+   "Toolkit for Polylang" brand. */
 .lsdp-dashboard-header {
-    background: #fff;
-    border-bottom: 1px solid #dcdcde;
+    background: #f8f9fa;
+    border-bottom: 1px solid #ddd;
     padding: 12px 30px;
 }
 
@@ -33,12 +35,23 @@
 }
 
 .lsdp-header-logo {
+    min-width: 0;
+}
+
+.lsdp-header-logo-link {
     display: flex;
     align-items: center;
     gap: 10px;
+    text-decoration: none;
 }
+
+.lsdp-header-logo-link:focus,
+.lsdp-header-logo-link:hover {
+    box-shadow: none;
+}
+
 .lsdp-header-logo img {
-    max-height: 50px;
+    max-height: 42px;
     width: auto;
     display: block;
 }
@@ -71,8 +84,8 @@
     padding: 10px 16px;
     font-size: 14px;
     font-weight: 600;
-    color: #0b67f0;
-    border-color: #0b67f0;
+    color: #2563eb;
+    border-color: #2563eb;
     border-radius: 6px;
     background: #fff;
     white-space: nowrap;
@@ -80,9 +93,9 @@
 
 .lsdp-header-actions .button.lsdp-header-btn:hover,
 .lsdp-header-actions .button.lsdp-header-btn:focus {
-    color: #0758cc;
-    border-color: #0758cc;
-    background: #f3f7ff;
+    color: #1d4ed8;
+    border-color: #1d4ed8;
+    background: #eff6ff;
 }
 
 .lsdp-header-actions .lsdp-header-btn .dashicons,

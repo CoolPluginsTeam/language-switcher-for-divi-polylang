@@ -105,8 +105,36 @@ final class LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG {
 			require_once LSDP_DIR . 'admin/feedback/class-lsdp-feedback.php';
 			require_once LSDP_DIR . 'admin/dashboard/class-lsdp-admin-dashboard.php';
 			lsdp_register_admin_dashboard();
+			$this->init_toolkit_hub();
 		} else {
 			require_once LSDP_DIR . 'floating-switcher/class-lsdp-floating-switcher-frontend.php';
+		}
+	}
+
+	/**
+	 * Load the shared "Toolkit for Polylang" hub.
+	 *
+	 * This file ships identically in this plugin, AutoPoly, and Translation
+	 * Inspector. The class_exists() guard means only the copy that loads
+	 * first actually runs — whichever of the three plugins happens to boot
+	 * first on a given site — so having more than one of these plugins
+	 * active never registers the hub twice.
+	 *
+	 * @return void
+	 */
+	public function init_toolkit_hub() {
+		if ( ! class_exists( 'TFP_Toolkit_Hub' ) ) {
+			require_once LSDP_DIR . 'admin/toolkit-hub/class-tfp-toolkit-hub.php';
+		}
+
+		if ( class_exists( 'TFP_Toolkit_Hub' ) ) {
+			TFP_Toolkit_Hub::instance(
+				array(
+					'text_domain' => 'language-switcher-for-divi-polylang',
+					'support_url' => 'https://wordpress.org/support/plugin/language-switcher-for-divi-polylang/#new-topic-0',
+					'docs_url'    => 'https://docs.coolplugins.net/doc/language-switcher-for-elementor-polylang/?utm_source=lsdp_plugin&utm_medium=inside&utm_campaign=docs&utm_content=dashboard_header',
+				)
+			);
 		}
 	}
 
