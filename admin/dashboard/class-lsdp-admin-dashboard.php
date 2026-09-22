@@ -118,8 +118,8 @@ class LSDP_Admin_Dashboard {
 			TFP_Toolkit_Hub::render_nav( 'switcher' );
 		}
 		echo '<div class="lsdp-header-actions">';
-		echo '<a href="' . esc_url( 'https://wordpress.org/support/plugin/language-switcher-for-divi-polylang/#new-topic-0' ) . '" class="button button-secondary lsdp-header-btn lsdp-header-btn-support" target="_blank" rel="noopener noreferrer" title="' . esc_attr__( 'Get Support', 'language-switcher-for-divi-polylang' ) . '"><span class="dashicons dashicons-editor-help lsdp-header-btn-question-icon" aria-hidden="true"></span><span class="lsdp-header-btn-label">' . esc_html__( 'Get Support', 'language-switcher-for-divi-polylang' ) . '</span></a>';
-		echo '<a href="' . esc_url( 'https://docs.coolplugins.net/doc/language-switcher-for-elementor-polylang/?utm_source=lsdp_plugin&utm_medium=inside&utm_campaign=docs&utm_content=dashboard_header' ) . '" class="button button-secondary lsdp-header-btn" target="_blank" rel="noopener noreferrer" title="' . esc_attr__( 'Documentation', 'language-switcher-for-divi-polylang' ) . '"><span class="dashicons dashicons-book" aria-hidden="true"></span><span class="lsdp-header-btn-label">' . esc_html__( 'Documentation', 'language-switcher-for-divi-polylang' ) . '</span></a>';
+		echo '<a href="' . esc_url( 'https://wordpress.org/support/plugin/language-switcher-for-divi-polylang/#new-topic-0' ) . '" class="tfp-header-btn tfp-header-btn-support" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Get Support', 'language-switcher-for-divi-polylang' ) . '</a>';
+		echo '<a href="' . esc_url( 'https://docs.coolplugins.net/doc/language-switcher-for-elementor-polylang/?utm_source=lsdp_plugin&utm_medium=inside&utm_campaign=docs&utm_content=dashboard_header' ) . '" class="tfp-header-btn tfp-header-btn-docs" target="_blank" rel="noopener noreferrer"><span class="dashicons dashicons-media-document tfp-header-btn-icon" aria-hidden="true"></span>' . esc_html__( 'Check Docs', 'language-switcher-for-divi-polylang' ) . '</a>';
 				echo '</div>';
 				echo '</div>';
 				echo '</div>';
