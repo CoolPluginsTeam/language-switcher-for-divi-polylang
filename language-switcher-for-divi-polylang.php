@@ -123,19 +123,16 @@ final class LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG {
 	 * @return void
 	 */
 	public function init_toolkit_hub() {
-		if ( ! class_exists( 'TFP_Toolkit_Hub' ) ) {
-			require_once LSDP_DIR . 'admin/toolkit-hub/class-tfp-toolkit-hub.php';
-		}
-
-		if ( class_exists( 'TFP_Toolkit_Hub' ) ) {
-			TFP_Toolkit_Hub::instance(
-				array(
-					'text_domain' => 'language-switcher-for-divi-polylang',
-					'support_url' => 'https://wordpress.org/support/plugin/language-switcher-for-divi-polylang/#new-topic-0',
-					'docs_url'    => 'https://docs.coolplugins.net/doc/language-switcher-for-elementor-polylang/?utm_source=lsdp_plugin&utm_medium=inside&utm_campaign=docs&utm_content=dashboard_header',
-				)
-			);
-		}
+		require_once LSDP_DIR . 'admin/toolkit-hub/load-tfp-toolkit-hub.php';
+		tfp_toolkit_hub_register(
+			'1.2.1',
+			LSDP_DIR . 'admin/toolkit-hub/class-tfp-toolkit-hub.php',
+			array(
+				'text_domain' => 'language-switcher-for-divi-polylang',
+				'support_url' => 'https://wordpress.org/support/plugin/language-switcher-for-divi-polylang/#new-topic-0',
+				'docs_url'    => 'https://docs.coolplugins.net/doc/language-switcher-for-elementor-polylang/?utm_source=lsdp_plugin&utm_medium=inside&utm_campaign=docs&utm_content=dashboard_header',
+			)
+		);
 	}
 
 	public function initialize_theme_builder_conditions() {
@@ -454,3 +451,22 @@ final class LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG {
 
 register_activation_hook( __FILE__, array( 'LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG', 'activate' ) );
 LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG::get_instance();
+
+// Register Toolkit Hub as early as file load so a newer copy boots before
+// older siblings that still require the class on plugins_loaded 10/20.
+if ( is_admin() && defined( 'LSDP_DIR' ) ) {
+	$tfp_hub_load = LSDP_DIR . 'admin/toolkit-hub/load-tfp-toolkit-hub.php';
+	if ( file_exists( $tfp_hub_load ) ) {
+		require_once $tfp_hub_load;
+		tfp_toolkit_hub_register(
+			'1.2.1',
+			LSDP_DIR . 'admin/toolkit-hub/class-tfp-toolkit-hub.php',
+			array(
+				'text_domain' => 'language-switcher-for-divi-polylang',
+				'support_url' => 'https://wordpress.org/support/plugin/language-switcher-for-divi-polylang/#new-topic-0',
+				'docs_url'    => 'https://docs.coolplugins.net/doc/language-switcher-for-elementor-polylang/?utm_source=lsdp_plugin&utm_medium=inside&utm_campaign=docs&utm_content=dashboard_header',
+			)
+		);
+	}
+}
+
