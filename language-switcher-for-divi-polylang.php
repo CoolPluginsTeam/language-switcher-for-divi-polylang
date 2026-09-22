@@ -125,7 +125,7 @@ final class LANGUAGE_SWITCHER_FOR_DIVI_POLYLANG {
 	public function init_toolkit_hub() {
 		require_once LSDP_DIR . 'admin/toolkit-hub/load-tfp-toolkit-hub.php';
 		tfp_toolkit_hub_register(
-			'1.2.1',
+			'1.0.0',
 			LSDP_DIR . 'admin/toolkit-hub/class-tfp-toolkit-hub.php',
 			array(
 				'text_domain' => 'language-switcher-for-divi-polylang',
@@ -459,7 +459,7 @@ if ( is_admin() && defined( 'LSDP_DIR' ) ) {
 	if ( file_exists( $tfp_hub_load ) ) {
 		require_once $tfp_hub_load;
 		tfp_toolkit_hub_register(
-			'1.2.1',
+			'1.0.0',
 			LSDP_DIR . 'admin/toolkit-hub/class-tfp-toolkit-hub.php',
 			array(
 				'text_domain' => 'language-switcher-for-divi-polylang',
