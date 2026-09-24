@@ -161,6 +161,7 @@ class LSDP_Admin_Dashboard {
 	 */
 	public function get_started_content() {
 		require_once $this->addon_dir . '/includes/autopoly-promo.php';
+		require_once $this->addon_dir . '/includes/inspector-promo.php';
 		require $this->addon_dir . '/includes/get-started-content.php';
 	}
 
@@ -261,6 +262,8 @@ class LSDP_Admin_Dashboard {
 
 		require_once $this->addon_dir . '/includes/autopoly-promo.php';
 		lsdp_enqueue_autopoly_promo_script();
+		require_once $this->addon_dir . '/includes/inspector-promo.php';
+		lsdp_enqueue_inspector_promo_script();
 
 		if ( 'floating-switcher' === $tab ) {
 			return;
@@ -269,7 +272,7 @@ class LSDP_Admin_Dashboard {
 		wp_enqueue_script(
 			'lsdp-get-started',
 			plugin_dir_url( __FILE__ ) . 'assets/js/get-started.js',
-			array( 'lsdp-autopoly-promo' ),
+			array( 'lsdp-autopoly-promo', 'lsdp-inspector-promo' ),
 			LSDP,
 			true
 		);
