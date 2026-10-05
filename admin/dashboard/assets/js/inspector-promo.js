@@ -1,10 +1,10 @@
 /**
- * Shared AutoPoly promo install/activate handler.
+ * Shared Translation Inspector promo install/activate handler.
  */
 (function () {
 	'use strict';
 
-	var config = window.lsdpAutopolyPromo;
+	var config = window.lsdpInspectorPromo;
 	if (!config) {
 		return;
 	}
@@ -53,7 +53,7 @@
 		}
 
 		var formData = new FormData();
-		formData.append('action', 'lsdp_install_autopoly');
+		formData.append('action', 'lsdp_install_inspector');
 		formData.append('nonce', config.installNonce || '');
 
 		fetch(config.ajaxUrl, {
@@ -67,7 +67,7 @@
 			.then(function (data) {
 				if (data.success) {
 					var settingsLink = document.createElement('a');
-					settingsLink.href = (data.data && data.data.settingsUrl) || config.settingsUrl || 'admin.php?page=polylang-atfp-dashboard';
+					settingsLink.href = (data.data && data.data.settingsUrl) || config.settingsUrl || 'admin.php?page=translation-inspector-polylang';
 					settingsLink.className = 'button button-primary lsdp-promo-button';
 					settingsLink.target = '_blank';
 					settingsLink.rel = 'noopener noreferrer';
@@ -94,7 +94,7 @@
 	}
 
 	document.addEventListener('click', function (event) {
-		var button = event.target.closest('.lsdp-autopoly-action-btn');
+		var button = event.target.closest('.lsdp-inspector-action-btn');
 		if (!button) {
 			return;
 		}
