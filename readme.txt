@@ -4,7 +4,7 @@ Tags: polylang,language switcher,multilingual,elementor,divi
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Add a customizable language switcher to Elementor, Gutenberg, and Divi websites, including a floating language switcher for Polylang.
@@ -155,6 +155,9 @@ Yes. You don't need to recreate your templates. The plugin can connect your exis
 = Where do I report security bugs found in this plugin? =
 Please report security bugs found in the source code of the Language Switcher for Polylang plugin through the [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/0da29e56-bc01-46c8-a6f4-363ea6c69652). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
 == Changelog ==
+
+= Version 1.1.4 | 27 October 2026 =
+- **Tested Up to**: Polylang 3.9.1.
 
 = Version 1.1.3 | 05 October 2026 =
 - **Added:** Introduced a unified Toolkit for Polylang dashboard to manage Polylang addons.
