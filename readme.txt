@@ -157,7 +157,7 @@ Please report security bugs found in the source code of the Language Switcher fo
 == Changelog ==
 
 = Version 1.1.5 | 25 November 2026 =
-- **Fixed:** Addressed a security vulnerability in language switcher links.
+- **Fixed:** Improved URL handling in the Language Switcher block to prevent unintended shortcode execution.
 
 = Version 1.1.4 | 27 October 2026 =
 - **Tested Up to**: Polylang 3.9.1.
